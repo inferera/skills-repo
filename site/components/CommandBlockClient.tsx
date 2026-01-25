@@ -18,7 +18,7 @@ export function CommandBlockClient({ command }: { command: string }) {
 
   return (
     <div className="commandWrap">
-      <pre className="codeBlock" aria-label="Command">
+      <pre className="codeBlock command" aria-label="Command">
         <code>{command}</code>
       </pre>
       <button className="btn small" type="button" onClick={() => void onCopy()}>
@@ -27,4 +27,3 @@ export function CommandBlockClient({ command }: { command: string }) {
     </div>
   );
 }
-

@@ -490,6 +490,12 @@ a {
   margin: 0;
 }
 
+.codeBlock.command {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: hidden;
+}
+
 .csvTableWrap {
   overflow: auto;
   border: 1px solid rgba(15, 23, 42, 0.14);
@@ -582,11 +588,10 @@ a {
 }
 
 .metaRow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
   gap: 12px;
-  flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .metaKey {
@@ -597,7 +602,9 @@ a {
 
 .metaVal {
   font-weight: 650;
+  min-width: 0;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .commandWrap {
