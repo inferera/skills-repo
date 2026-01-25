@@ -339,161 +339,175 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const sourceCommit = skill.source?.commit ?? "";
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-5 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-6 items-start">
       {/* Main content area */}
-      <div className="min-w-0 grid gap-4 order-2 lg:order-1 overflow-hidden">
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden">
-          <div className="flex items-start justify-between gap-3 flex-wrap">
-            <div className="min-w-[260px] flex-[1_1_520px]">
-              <div className="flex items-center gap-2.5 flex-wrap">
-                <h1 className="m-0 text-[30px] tracking-tight">{skill.title}</h1>
-                <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+      <div className="min-w-0 space-y-6 order-2 lg:order-1">
+        {/* Header card */}
+        <section className="p-6 bg-card border border-border rounded-xl overflow-hidden">
+          <div className="flex items-start justify-between gap-4 flex-wrap">
+            <div className="min-w-[260px] flex-1">
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="font-heading text-3xl font-bold text-foreground">{skill.title}</h1>
+                <span className="px-2.5 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
                   {skill.category}/{skill.subcategory}
                 </span>
               </div>
-              <p className="text-muted mt-2.5 text-base leading-relaxed">
+              <p className="text-secondary mt-3 leading-relaxed">
                 {skill.description}
               </p>
 
-              <div className="flex gap-2 flex-wrap mt-3.5">
-                {(skill.tags ?? []).map((t) => (
-                  <span
-                    key={t}
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
+              {(skill.tags ?? []).length > 0 && (
+                <div className="flex gap-2 flex-wrap mt-4">
+                  {(skill.tags ?? []).map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border"
+                    >
+                      #{t}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="flex gap-2.5 flex-wrap items-center">
+            <div className="flex gap-3 flex-wrap items-center">
               <Link
-                className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors"
                 href={`/c/${skill.category}/${skill.subcategory}`}
               >
-                Back to list
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
               </Link>
               {sourceRepo ? (
                 <a
-                  className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 font-semibold shadow-primary transition-all duration-150 hover:-translate-y-px hover:from-accent-ink hover:to-accent-ink"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-colors"
                   href={sourceRepo}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Source repo
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                  </svg>
+                  Source
                 </a>
               ) : null}
             </div>
           </div>
         </section>
 
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden">
-          <div className="flex items-baseline justify-between gap-3 flex-wrap">
-            <h2 className="m-0 text-lg">Files</h2>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+        {/* Files card */}
+        <section className="p-6 bg-card border border-border rounded-xl overflow-hidden">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <h2 className="font-heading text-xl font-semibold text-foreground">Files</h2>
+            <span className="px-2.5 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
               {filePaths.length} files
             </span>
           </div>
-          <p className="text-muted mt-2 leading-relaxed">
-            Expand to preview CSV and code files. Default collapsed for scanability.
+          <p className="text-secondary mt-2">
+            Expand to preview CSV and code files.
           </p>
-          <div className="border border-border rounded-[14px] p-3 bg-white/60 font-mono text-[13px] leading-relaxed mt-3 overflow-x-auto">
+          <div className="mt-4 p-4 rounded-lg bg-background-secondary border border-border font-mono text-sm overflow-x-auto">
             <Tree node={tree.root} toSorted={tree.toSorted} fileMeta={fileMeta} />
           </div>
         </section>
 
-        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px] overflow-hidden" id="instructions">
-          <h2 className="m-0 text-lg">Instructions</h2>
-          <div className="h-2.5" />
-          <article className="markdown min-w-0 overflow-x-auto">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
-              {markdown}
-            </ReactMarkdown>
-          </article>
+        {/* Instructions card */}
+        <section className="p-6 bg-card border border-border rounded-xl overflow-hidden" id="instructions">
+          <h2 className="font-heading text-xl font-semibold text-foreground">Instructions</h2>
+          <div className="mt-4">
+            <article className="markdown min-w-0">
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
+                {markdown}
+              </ReactMarkdown>
+            </article>
+          </div>
         </section>
       </div>
 
       {/* Sidebar - mobile first, sticky on desktop */}
-      <aside className="min-w-0 grid gap-3.5 order-1 lg:order-2 lg:sticky lg:top-[92px] lg:max-h-[calc(100vh-116px)] lg:overflow-y-auto">
-        <section className="bg-surface-strong border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-4">
-          <h2 className="m-0 text-base">Quick install</h2>
-          <p className="text-muted mt-2 leading-relaxed">
-            Install this skill into a target agent environment.
+      <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-[92px] lg:max-h-[calc(100vh-116px)] lg:overflow-y-auto">
+        {/* Quick install card */}
+        <section className="p-5 bg-card border border-border rounded-xl">
+          <h2 className="font-heading text-lg font-semibold text-foreground">Quick Install</h2>
+          <p className="text-secondary text-sm mt-2">
+            Install this skill into a target agent.
           </p>
-          <div className="h-3" />
-          <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} />
+          <div className="mt-4">
+            <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} />
+          </div>
         </section>
 
-        <section className="bg-surface-strong border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-4">
-          <h2 className="m-0 text-base">Metadata</h2>
-          <div className="h-3" />
-
-          <dl className="m-0 grid gap-2.5">
-            <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-              <dt className="font-mono text-xs text-text/62">id</dt>
-              <dd className="font-semibold min-w-0 break-words m-0">{skill.id}</dd>
+        {/* Metadata card */}
+        <section className="p-5 bg-card border border-border rounded-xl">
+          <h2 className="font-heading text-lg font-semibold text-foreground">Metadata</h2>
+          <dl className="mt-4 space-y-3">
+            <div className="flex items-baseline gap-3">
+              <dt className="font-mono text-xs text-muted w-20 shrink-0">id</dt>
+              <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.id}</dd>
             </div>
-            <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-              <dt className="font-mono text-xs text-text/62">path</dt>
-              <dd className="font-semibold min-w-0 break-words m-0">{skill.repoPath}</dd>
+            <div className="flex items-baseline gap-3">
+              <dt className="font-mono text-xs text-muted w-20 shrink-0">path</dt>
+              <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.repoPath}</dd>
             </div>
             {skill.license ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">license</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{skill.license}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">license</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.license}</dd>
               </div>
             ) : null}
             {(skill.runtime ?? []).length > 0 ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">runtime</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{(skill.runtime ?? []).join(", ")}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">runtime</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{(skill.runtime ?? []).join(", ")}</dd>
               </div>
             ) : null}
             {(skill.agents ?? []).length > 0 ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">agents</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{(skill.agents ?? []).join(", ")}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">agents</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{(skill.agents ?? []).join(", ")}</dd>
               </div>
             ) : null}
             {sourceRepo ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">source</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">
-                  <a href={sourceRepo} target="_blank" rel="noreferrer" className="underline">
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">source</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">
+                  <a href={sourceRepo} target="_blank" rel="noreferrer" className="text-accent hover:underline">
                     {stripHttps(sourceRepo)}
                   </a>
                 </dd>
               </div>
             ) : null}
             {sourcePath ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">sourcePath</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{sourcePath}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">sourcePath</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourcePath}</dd>
               </div>
             ) : null}
             {sourceRef ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">ref</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{sourceRef}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">ref</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourceRef}</dd>
               </div>
             ) : null}
             {sourceCommit ? (
-              <div className="grid grid-cols-[88px_minmax(0,1fr)] gap-3 items-baseline">
-                <dt className="font-mono text-xs text-text/62">commit</dt>
-                <dd className="font-semibold min-w-0 break-words m-0">{sourceCommit.slice(0, 10)}</dd>
+              <div className="flex items-baseline gap-3">
+                <dt className="font-mono text-xs text-muted w-20 shrink-0">commit</dt>
+                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourceCommit.slice(0, 10)}</dd>
               </div>
             ) : null}
           </dl>
         </section>
 
+        {/* Related skills card */}
         {related.length > 0 ? (
-          <section className="bg-surface-strong border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-4">
-            <h2 className="m-0 text-base">Related</h2>
-            <p className="text-muted mt-2 leading-relaxed">
+          <section className="p-5 bg-card border border-border rounded-xl">
+            <h2 className="font-heading text-lg font-semibold text-foreground">Related</h2>
+            <p className="text-secondary text-sm mt-2">
               Similar category + overlapping tags.
             </p>
-            <div className="grid gap-3 mt-3">
+            <div className="mt-4 space-y-3">
               {related.map((s) => (
                 <SkillMiniCard key={s.id} skill={s} />
               ))}
@@ -517,17 +531,17 @@ function Tree({
   const children = toSorted(node);
   if (children.length === 0) return null;
   return (
-    <ul className="m-0 pl-[18px] list-none first:pl-0">
+    <ul className="m-0 pl-4 list-none first:pl-0">
       {children.map((c) => {
         if (!c.isFile) {
           return (
             <li key={c.path} className="my-1">
               <details open={false}>
-                <summary className="cursor-pointer list-none flex items-center gap-2.5 px-2 py-1.5 rounded-[10px] min-w-0 hover:bg-black/4 before:content-['+_'] before:text-text/55 [&[open]>summary]:before:content-['-_']">
-                  <span className="text-text/76 font-semibold min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                <summary className="cursor-pointer list-none flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card before:content-['+'] before:w-4 before:text-muted [&[open]]:before:content-['-']">
+                  <span className="text-foreground font-medium min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
                     {c.name}/
                   </span>
-                  <span className="ml-auto text-text/55 text-xs shrink-0">{countFiles(c)} files</span>
+                  <span className="ml-auto text-muted text-xs shrink-0">{countFiles(c)} files</span>
                 </summary>
                 <Tree node={c} toSorted={toSorted} fileMeta={fileMeta} />
               </details>
@@ -543,16 +557,16 @@ function Tree({
         return (
           <li key={c.path} className="my-1">
             <details open={false}>
-              <summary className="cursor-pointer list-none flex items-center gap-2.5 px-2 py-1.5 rounded-[10px] min-w-0 hover:bg-black/4 before:content-['+_'] before:text-text/55 [details[open]>&]:before:content-['-_']">
-                <span className="text-text/88 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">{c.name}</span>
-                <span className="ml-auto text-text/55 text-xs shrink-0">{formatBytes(size)}</span>
+              <summary className="cursor-pointer list-none flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card before:content-['+'] before:w-4 before:text-muted [details[open]>&]:before:content-['-']">
+                <span className="text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">{c.name}</span>
+                <span className="ml-auto text-muted text-xs shrink-0">{formatBytes(size)}</span>
               </summary>
-              <div className="mt-2.5 pt-2.5 px-2.5 pb-1 border-t border-black/12">
+              <div className="mt-3 pt-3 px-2 pb-1 border-t border-border">
                 {preview?.kind === "skip" ? (
-                  <p className="text-muted m-0 leading-relaxed">
+                  <p className="text-secondary text-sm">
                     {preview.reason}{" "}
                     {c.path === "SKILL.md" ? (
-                      <a href="#instructions" className="underline">
+                      <a href="#instructions" className="text-accent hover:underline">
                         Jump to instructions.
                       </a>
                     ) : null}
@@ -560,19 +574,19 @@ function Tree({
                 ) : null}
 
                 {preview?.kind === "binary" ? (
-                  <p className="text-muted m-0 leading-relaxed">{preview.reason}</p>
+                  <p className="text-secondary text-sm">{preview.reason}</p>
                 ) : null}
 
                 {preview?.kind === "csv" ? (
-                  <div className="grid gap-2.5">
-                    <div className="overflow-auto border border-border rounded-[14px] bg-white/75">
+                  <div className="space-y-3">
+                    <div className="overflow-auto border border-border rounded-lg bg-card">
                       <table className="w-full border-collapse font-mono text-xs">
                         <thead>
                           <tr>
                             {preview.headers.slice(0, CSV_PREVIEW_MAX_COLS).map((h, i) => (
                               <th
                                 key={`${c.path}-h-${i}`}
-                                className="sticky top-0 bg-bg/96 py-2 px-2.5 border-t-0 border-b border-black/10 text-left whitespace-nowrap z-[1]"
+                                className="sticky top-0 bg-background-secondary py-2 px-3 border-b border-border text-left whitespace-nowrap text-foreground font-medium"
                               >
                                 {h || `col_${i + 1}`}
                               </th>
@@ -585,7 +599,7 @@ function Tree({
                               {preview.headers.slice(0, CSV_PREVIEW_MAX_COLS).map((_, i) => (
                                 <td
                                   key={`${c.path}-r-${idx}-c-${i}`}
-                                  className="py-2 px-2.5 border-t border-black/10 text-left whitespace-nowrap"
+                                  className="py-2 px-3 border-t border-border text-left whitespace-nowrap text-secondary"
                                 >
                                   {r[i] ?? ""}
                                 </td>
@@ -596,43 +610,46 @@ function Tree({
                       </table>
                     </div>
                     {preview.truncated ? (
-                      <p className="text-muted m-0 leading-relaxed">Preview truncated.</p>
+                      <p className="text-muted text-sm">Preview truncated.</p>
                     ) : null}
                   </div>
                 ) : null}
 
                 {preview?.kind === "markdown" ? (
-                  <div className="grid gap-2.5">
+                  <div className="space-y-3">
                     <article className="markdown">
                       <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
                         {preview.text}
                       </ReactMarkdown>
                     </article>
                     {preview.truncated ? (
-                      <p className="text-muted m-0 leading-relaxed">Preview truncated.</p>
+                      <p className="text-muted text-sm">Preview truncated.</p>
                     ) : null}
                   </div>
                 ) : null}
 
                 {preview?.kind === "text" ? (
-                  <div className="grid gap-2.5">
-                    <pre className="overflow-x-auto border border-border bg-[rgba(11,11,16,0.92)] text-white/92 rounded-[14px] p-3.5 font-mono text-[12.5px] leading-relaxed m-0">
+                  <div className="space-y-3">
+                    <pre className="overflow-x-auto bg-[#0f172a] text-[#e2e8f0] rounded-lg p-4 font-mono text-xs leading-relaxed">
                       <code>{preview.text}</code>
                     </pre>
                     {preview.truncated ? (
-                      <p className="text-muted m-0 leading-relaxed">Preview truncated.</p>
+                      <p className="text-muted text-sm">Preview truncated.</p>
                     ) : null}
                   </div>
                 ) : null}
 
-                <div className="flex gap-2.5 flex-wrap mt-2.5">
+                <div className="flex gap-2 flex-wrap mt-3">
                   {githubUrl ? (
                     <a
-                      className="inline-flex items-center justify-center gap-2.5 px-2.5 py-2 rounded-[10px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm text-[13px]"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-card text-foreground text-sm font-medium hover:border-border-hover transition-colors"
                       href={githubUrl}
                       target="_blank"
                       rel="noreferrer"
                     >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                      </svg>
                       View on GitHub
                     </a>
                   ) : null}

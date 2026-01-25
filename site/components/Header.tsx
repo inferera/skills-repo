@@ -1,46 +1,57 @@
 import Link from "next/link";
 
 import { REPO_URL, SITE_NAME } from "@/lib/config";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-[12px] bg-bg/88 border-b border-black/10">
-      <div className="max-w-[1120px] mx-auto px-5 flex items-center justify-between gap-3.5 py-3.5">
-        <Link href="/" className="flex items-baseline gap-3 min-w-0" aria-label={`${SITE_NAME} home`}>
-          <span
-            className="w-3 h-3 rounded-[4px] bg-accent shadow-[0_10px_24px_rgba(37,99,235,0.22)] shrink-0"
-            aria-hidden="true"
-          />
-          <span className="font-[850] tracking-tight whitespace-nowrap">{SITE_NAME}</span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
-            registry
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-lg">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-accent">
+              <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <span className="font-heading font-semibold text-lg tracking-tight text-foreground">{SITE_NAME}</span>
+          </Link>
 
-        <nav className="flex items-center gap-2.5 flex-wrap" aria-label="Primary">
-          <Link
-            className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm"
-            href="/categories"
-          >
-            Categories
-          </Link>
-          <Link
-            className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 font-semibold shadow-primary transition-all duration-150 hover:-translate-y-px hover:from-accent-ink hover:to-accent-ink"
-            href="/import"
-          >
-            Import
-          </Link>
-          {REPO_URL ? (
-            <a
-              className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm"
-              href={REPO_URL}
-              target="_blank"
-              rel="noreferrer"
+          {/* Navigation */}
+          <nav className="flex items-center gap-1 sm:gap-2">
+            <Link
+              href="/categories"
+              className="px-3 py-2 rounded-lg text-sm font-medium text-secondary hover:text-foreground hover:bg-card transition-colors"
             >
-              GitHub
-            </a>
-          ) : null}
-        </nav>
+              Categories
+            </Link>
+            <Link
+              href="/import"
+              className="px-3 py-2 rounded-lg text-sm font-medium bg-accent text-white hover:bg-accent-hover transition-colors"
+            >
+              Import
+            </Link>
+            {REPO_URL && (
+              <a
+                href={REPO_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-secondary hover:text-foreground hover:bg-card transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+            )}
+            <div className="ml-1 sm:ml-2">
+              <ThemeToggle />
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );

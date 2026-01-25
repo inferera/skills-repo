@@ -2,19 +2,26 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
-      <h1 className="m-0 text-[28px] tracking-tight">Not found</h1>
-      <p className="text-muted mt-2.5 leading-relaxed">
-        The page you are looking for does not exist.
-      </p>
-      <div className="mt-3.5">
-        <Link
-          className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 font-semibold shadow-primary transition-all duration-150 hover:-translate-y-px hover:from-accent-ink hover:to-accent-ink"
-          href="/"
-        >
-          Back home
-        </Link>
+    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
+      <div className="w-16 h-16 rounded-full bg-accent-muted flex items-center justify-center mb-6">
+        <svg className="w-8 h-8 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v4M12 16h.01"/>
+        </svg>
       </div>
-    </section>
+      <h1 className="font-heading text-3xl font-bold text-foreground mb-2">Page Not Found</h1>
+      <p className="text-secondary mb-6 max-w-md">
+        The page you are looking for does not exist or has been moved.
+      </p>
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-colors"
+      >
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Home
+      </Link>
+    </div>
   );
 }

@@ -45,33 +45,37 @@ export default async function CategoryPage({
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <div className="grid gap-4">
-      <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
-        <div className="flex items-start justify-between gap-3 flex-wrap">
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="p-6 bg-card border border-border rounded-xl">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 className="m-0 text-[28px] tracking-tight">
+            <h1 className="font-heading text-3xl font-bold text-foreground">
               {cat?.title ?? category} / {sub?.title ?? subcategory}
             </h1>
-            <p className="text-muted mt-2 leading-relaxed">{skills.length} skills</p>
+            <p className="text-secondary mt-2">{skills.length} skills</p>
           </div>
 
           <Link
-            className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors"
             href="/categories"
           >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
             All categories
           </Link>
         </div>
 
         {cat ? (
-          <div className="flex gap-2.5 flex-wrap mt-3.5">
+          <div className="flex gap-2 flex-wrap mt-4">
             {cat.subcategories.map((s) => (
               <Link
                 key={s.id}
-                className={`inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px ${
+                className={`px-3 py-2 rounded-lg font-medium text-sm transition-colors ${
                   s.id === subcategory
-                    ? "border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 shadow-primary hover:from-accent-ink hover:to-accent-ink"
-                    : "border-border bg-white/92 hover:border-black/28 hover:shadow-sm"
+                    ? "bg-accent text-white"
+                    : "bg-background-secondary border border-border text-foreground hover:border-border-hover hover:bg-card"
                 }`}
                 href={`/c/${cat.id}/${s.id}`}
               >
@@ -80,7 +84,7 @@ export default async function CategoryPage({
             ))}
           </div>
         ) : null}
-      </section>
+      </div>
 
       <CategoryFilterClient skills={skills} />
     </div>
