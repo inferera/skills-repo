@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
@@ -7,28 +8,39 @@
 @import "@fontsource/jetbrains-mono/600.css";
 @import "@fontsource/jetbrains-mono/700.css";
 
-:root {
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-    monospace;
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Roboto", "Helvetica", "Arial", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
 
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --muted: rgba(15, 23, 42, 0.66);
-  --border: rgba(15, 23, 42, 0.14);
-  --surface: rgba(255, 255, 255, 0.86);
-  --surface-strong: rgba(255, 255, 255, 0.96);
-
-  --accent: #2563eb;
-  --accent-ink: #1d4ed8;
+  --color-bg: #f8fafc;
+  --color-text: #0f172a;
+  --color-muted: rgba(15, 23, 42, 0.66);
+  --color-border: rgba(15, 23, 42, 0.14);
+  --color-surface: rgba(255, 255, 255, 0.86);
+  --color-surface-strong: rgba(255, 255, 255, 0.96);
+  --color-accent: #2563eb;
+  --color-accent-ink: #1d4ed8;
 
   --shadow-sm: 0 1px 0 rgba(15, 23, 42, 0.06), 0 12px 34px rgba(15, 23, 42, 0.06);
   --shadow-md: 0 1px 0 rgba(15, 23, 42, 0.06), 0 22px 60px rgba(15, 23, 42, 0.1);
+  --shadow-primary: 0 1px 0 rgba(15, 23, 42, 0.05), 0 18px 46px rgba(37, 99, 235, 0.18);
 
-  --radius: 16px;
-  --radius-sm: 12px;
-  --container: 1120px;
+  --radius-sm: 8px;
+  --radius-DEFAULT: 12px;
+  --radius-lg: 16px;
+
+  --animate-fade-up: fadeUp 520ms ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 * {
@@ -38,14 +50,10 @@
 html,
 body {
   height: 100%;
-}
-
-html,
-body {
   padding: 0;
   margin: 0;
-  color: var(--text);
-  background-color: var(--bg);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   background-image: radial-gradient(900px 520px at 12% 4%, rgba(37, 99, 235, 0.16), transparent 55%),
     radial-gradient(900px 520px at 90% 0%, rgba(71, 85, 105, 0.1), transparent 60%),
     linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
@@ -60,266 +68,7 @@ a {
   text-decoration: none;
 }
 
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.page {
-  padding: 30px 0 72px;
-  animation: fadeUp 520ms ease-out both;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.skipLink {
-  position: absolute;
-  left: 14px;
-  top: 12px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-200%);
-  transition: transform 160ms ease;
-  z-index: 100;
-}
-
-.skipLink:focus {
-  transform: translateY(0);
-  outline: none;
-}
-
-.siteHeader {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(12px);
-  background: rgba(248, 250, 252, 0.88);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
-}
-
-.headerInner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 0;
-}
-
-.brand {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  min-width: 0;
-}
-
-.brandMark {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  background: var(--accent);
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
-  flex: 0 0 auto;
-}
-
-.brandName {
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.siteFooter {
-  padding: 0 0 36px;
-  color: rgba(15, 23, 42, 0.62);
-}
-
-.footerInner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.grid {
-  display: grid;
-  gap: 14px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 14px;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: var(--radius);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
-}
-
-.card.strong {
-  background: var(--surface-strong);
-}
-
-.card.interactive {
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-  cursor: pointer;
-}
-
-.card.interactive:hover {
-  transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.26);
-  box-shadow: var(--shadow-md);
-}
-
-.card.interactive:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.5);
-  outline-offset: 2px;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  padding: 6px 10px;
-  font-family: "JetBrains Mono", ui-monospace;
-  font-size: 12px;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.chip:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.5);
-  outline-offset: 2px;
-}
-
-.chip.accent {
-  color: rgba(37, 99, 235, 0.96);
-  border-color: rgba(37, 99, 235, 0.28);
-  background: rgba(37, 99, 235, 0.09);
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.skillCard {
-  display: block;
-  padding: 16px;
-}
-
-.skillCardTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.skillCardTitle {
-  margin: 0;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-}
-
-.skillCardDesc {
-  margin: 10px 0 0;
-  line-height: 1.55;
-}
-
-.skillCardMeta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.16);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.05);
-  font-weight: 600;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-  cursor: pointer;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-  border-color: rgba(15, 23, 42, 0.28);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn.primary {
-  background: linear-gradient(180deg, rgba(37, 99, 235, 1), rgba(29, 78, 216, 1));
-  border-color: rgba(37, 99, 235, 0.95);
-  color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.05), 0 18px 46px rgba(37, 99, 235, 0.18);
-}
-
-.btn.primary:hover {
-  background: linear-gradient(180deg, rgba(29, 78, 216, 1), rgba(29, 78, 216, 1));
-  border-color: rgba(29, 78, 216, 0.95);
-}
-
-.btn:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.5);
-  outline-offset: 2px;
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn[aria-disabled="true"] {
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.input {
-  width: 100%;
-  border: 1px solid rgba(15, 23, 42, 0.16);
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: 14px;
-  padding: 12px 14px;
-  font-size: 15px;
-  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.05);
-}
-
-.input:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.45);
-  outline-offset: 2px;
-  border-color: rgba(37, 99, 235, 0.35);
-}
-
+/* Markdown rendering styles */
 .markdown {
   line-height: 1.7;
 }
@@ -359,7 +108,7 @@ a {
 
 .markdown pre {
   overflow-x: auto;
-  border: 1px solid rgba(15, 23, 42, 0.14);
+  border: 1px solid var(--color-border);
   background: rgba(11, 11, 16, 0.92);
   color: rgba(255, 255, 255, 0.92);
   border-radius: 14px;
@@ -391,21 +140,22 @@ a {
   color: rgba(15, 23, 42, 0.72);
 }
 
-.markdownTableWrap {
+/* Markdown table wrapper */
+.markdown-table-wrap {
   overflow: auto;
-  border: 1px solid rgba(15, 23, 42, 0.14);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.75);
 }
 
-.markdownTableWrap table {
+.markdown-table-wrap table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-.markdownTableWrap th,
-.markdownTableWrap td {
+.markdown-table-wrap th,
+.markdown-table-wrap td {
   padding: 8px 10px;
   border-top: 1px solid rgba(15, 23, 42, 0.1);
   text-align: left;
@@ -413,7 +163,7 @@ a {
   overflow-wrap: anywhere;
 }
 
-.markdownTableWrap th {
+.markdown-table-wrap th {
   position: sticky;
   top: 0;
   background: rgba(248, 250, 252, 0.96);
@@ -421,303 +171,9 @@ a {
   z-index: 1;
 }
 
-.fileTree {
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  border-radius: 14px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.6);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.fileTree ul {
-  margin: 0;
-  padding-left: 18px;
-  list-style: none;
-}
-
-.fileTree > ul {
-  padding-left: 0;
-}
-
-.fileTree li {
-  margin: 4px 0;
-}
-
-.fileTree details {
-  margin: 4px 0;
-}
-
-.fileTree details > summary {
-  cursor: pointer;
-  list-style: none;
-}
-
-.fileTree summary::before {
-  content: "+ ";
-  color: rgba(15, 23, 42, 0.55);
-}
-
-.fileTree details[open] > summary::before {
-  content: "- ";
-}
-
-.fileTree details > summary::-webkit-details-marker {
-  display: none;
-}
-
-.fileTree summary {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 8px;
-  border-radius: 10px;
-  min-width: 0;
-}
-
-.fileTree summary:hover {
-  background: rgba(15, 23, 42, 0.04);
-}
-
-.fileTreeFile {
-  color: rgba(15, 23, 42, 0.88);
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.fileTreeDir {
-  color: rgba(15, 23, 42, 0.76);
-  font-weight: 650;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.fileTreeMeta {
-  margin-left: auto;
-  color: rgba(15, 23, 42, 0.55);
-  font-size: 12px;
-  flex: 0 0 auto;
-}
-
-.filePreview {
-  margin-top: 10px;
-  padding: 10px 10px 4px;
-  border-top: 1px solid rgba(15, 23, 42, 0.12);
-}
-
-.filePreviewActions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.codeBlock {
-  overflow-x: auto;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(11, 11, 16, 0.92);
-  color: rgba(255, 255, 255, 0.92);
-  border-radius: 14px;
-  padding: 14px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.codeBlock.command {
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-x: hidden;
-}
-
-.csvTableWrap {
-  overflow: auto;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.75);
-}
-
-.csvTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.csvTable th,
-.csvTable td {
-  padding: 8px 10px;
-  border-top: 1px solid rgba(15, 23, 42, 0.1);
-  white-space: nowrap;
-  text-align: left;
-}
-
-.csvTable th {
-  position: sticky;
-  top: 0;
-  background: rgba(248, 250, 252, 0.96);
-  border-top: none;
-  z-index: 1;
-}
-
-.btn.small {
-  padding: 8px 10px;
-  border-radius: 10px;
-  font-size: 13px;
-}
-
-.skillDetailLayout {
-  display: grid;
-  /* Keep both columns visually "together" and prevent the helper rail from feeling oversized. */
-  grid-template-columns: minmax(0, 1fr) clamp(260px, 28vw, 320px);
-  grid-template-areas: "main aside";
-  gap: 20px;
-  align-items: start;
-}
-
-.skillMain {
-  grid-area: main;
-  display: grid;
-  gap: 16px;
-  min-width: 0;
-}
-
-.skillAside {
-  grid-area: aside;
-  display: grid;
-  gap: 14px;
-  position: static;
-  align-self: start;
-  min-width: 0;
-  overflow: visible;
-}
-
-.miniCard {
-  padding: 12px 14px;
-}
-
-.miniTop {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.miniTitle {
-  margin: 0;
-  font-size: 14px;
-  letter-spacing: -0.01em;
-}
-
-.miniDesc {
-  margin: 6px 0 0;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.metaDl {
-  margin: 0;
-  display: grid;
-  gap: 10px;
-}
-
-.metaRow {
-  display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  gap: 12px;
-  align-items: baseline;
-}
-
-.metaKey {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: rgba(15, 23, 42, 0.62);
-}
-
-.metaVal {
-  font-weight: 650;
-  min-width: 0;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.commandWrap {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.commandWrap pre {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.formGrid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr 240px;
-}
-
-.formGrid.two {
-  grid-template-columns: 1fr 1fr;
-}
-
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .page {
+  .animate-fade-up {
     animation: none;
-  }
-  .btn {
-    transition: none;
-  }
-  .card.interactive {
-    transition: none;
-  }
-}
-
-@media (max-width: 520px) {
-  .headerInner {
-    padding: 12px 0;
-  }
-  .brandName {
-    font-size: 14px;
-  }
-  .btn {
-    padding: 9px 12px;
-  }
-}
-
-@media (max-width: 720px) {
-  .formGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 980px) {
-  .skillDetailLayout {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "main"
-      "aside";
-  }
-  .skillAside {
-    position: static;
-    overflow: visible;
-  }
-}
-
-@media (min-width: 981px) {
-  .skillAside {
-    /* Avoid the sidebar becoming "infinitely tall" and feeling detached from the main content. */
-    position: sticky;
-    top: 92px;
-    max-height: calc(100vh - 92px - 24px);
-    overflow: auto;
   }
 }

@@ -14,54 +14,65 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params
 }: {
-  params: { category: string; subcategory: string };
+  params: Promise<{ category: string; subcategory: string }>;
 }): Promise<Metadata> {
+  const { category, subcategory } = await params;
   const cats = await loadRegistryCategories();
-  const cat = cats.categories.find((c) => c.id === params.category);
-  const sub = cat?.subcategories.find((s) => s.id === params.subcategory);
+  const cat = cats.categories.find((c) => c.id === category);
+  const sub = cat?.subcategories.find((s) => s.id === subcategory);
 
-  const title = sub ? `${cat?.title} / ${sub.title}` : `${params.category} / ${params.subcategory}`;
+  const title = sub ? `${cat?.title} / ${sub.title}` : `${category} / ${subcategory}`;
   return {
     title,
     description: `Browse skills in ${title}.`
   };
 }
 
-export default async function CategoryPage({ params }: { params: { category: string; subcategory: string } }) {
+export default async function CategoryPage({
+  params
+}: {
+  params: Promise<{ category: string; subcategory: string }>;
+}) {
+  const { category, subcategory } = await params;
   const index = await loadRegistryIndex();
   const cats = await loadRegistryCategories();
 
-  const cat = cats.categories.find((c) => c.id === params.category);
-  const sub = cat?.subcategories.find((s) => s.id === params.subcategory);
+  const cat = cats.categories.find((c) => c.id === category);
+  const sub = cat?.subcategories.find((s) => s.id === subcategory);
 
   const skills = index.skills
-    .filter((s) => s.category === params.category && s.subcategory === params.subcategory)
+    .filter((s) => s.category === category && s.subcategory === subcategory)
     .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-    <div className="grid" style={{ gap: 16 }}>
-      <section className="card" style={{ padding: 18 }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+    <div className="grid gap-4">
+      <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
+        <div className="flex items-start justify-between gap-3 flex-wrap">
           <div>
-            <h1 style={{ margin: 0, fontSize: 28, letterSpacing: "-0.02em" }}>
-              {cat?.title ?? params.category} / {sub?.title ?? params.subcategory}
+            <h1 className="m-0 text-[28px] tracking-tight">
+              {cat?.title ?? category} / {sub?.title ?? subcategory}
             </h1>
-            <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
-              {skills.length} skills
-            </p>
+            <p className="text-muted mt-2 leading-relaxed">{skills.length} skills</p>
           </div>
 
-          <Link className="btn" href="/categories">
+          <Link
+            className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm"
+            href="/categories"
+          >
             All categories
           </Link>
         </div>
 
         {cat ? (
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
+          <div className="flex gap-2.5 flex-wrap mt-3.5">
             {cat.subcategories.map((s) => (
               <Link
                 key={s.id}
-                className={`btn ${s.id === params.subcategory ? "primary" : ""}`}
+                className={`inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px ${
+                  s.id === subcategory
+                    ? "border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 shadow-primary hover:from-accent-ink hover:to-accent-ink"
+                    : "border-border bg-white/92 hover:border-black/28 hover:shadow-sm"
+                }`}
                 href={`/c/${cat.id}/${s.id}`}
               >
                 {s.title}

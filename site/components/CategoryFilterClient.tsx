@@ -36,34 +36,37 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
   }, [q, skills]);
 
   return (
-    <section className="card strong" style={{ padding: 16 }}>
-      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-        <div style={{ minWidth: 260, flex: "1 1 420px" }}>
-          <label style={{ display: "block", fontWeight: 800, letterSpacing: "-0.01em" }}>Filter in this category</label>
+    <section className="bg-surface-strong border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-4">
+      <div className="flex items-end justify-between gap-3 flex-wrap">
+        <div className="min-w-[260px] flex-[1_1_420px]">
+          <label className="block font-extrabold tracking-tight">Filter in this category</label>
           <input
             ref={inputRef}
-            className="input"
+            className="w-full border border-border bg-white/95 rounded-[14px] px-3.5 py-3 text-[15px] shadow-[inset_0_1px_0_rgba(15,23,42,0.05)] mt-2 focus-visible:outline-2 focus-visible:outline-accent/45 focus-visible:outline-offset-2 focus-visible:border-accent/35"
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="keyword / tag / agent…"
             aria-label="Filter skills"
-            style={{ marginTop: 8 }}
           />
         </div>
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <div className="chip">
+        <div className="flex gap-2.5 items-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
             {results.length} / {skills.length}
           </div>
           {q.trim() ? (
-            <button className="btn" onClick={() => setQ("")} type="button" style={{ padding: "9px 12px" }}>
+            <button
+              className="inline-flex items-center justify-center gap-2.5 px-3 py-2.5 rounded-[12px] border border-border bg-white/92 font-semibold shadow-[0_1px_0_rgba(15,23,42,0.05)] transition-all duration-150 hover:-translate-y-px hover:border-black/28 hover:shadow-sm text-[13px]"
+              onClick={() => setQ("")}
+              type="button"
+            >
               Clear
             </button>
           ) : null}
         </div>
       </div>
 
-      <div className="cards" style={{ marginTop: 14 }}>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-3.5 mt-3.5">
         {results.map((s) => (
           <SkillCard key={s.id} skill={s} />
         ))}

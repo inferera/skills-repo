@@ -28,11 +28,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <a className="skipLink" href="#content">
+        <a
+          className="absolute left-3.5 top-3 px-3 py-2.5 rounded-[12px] bg-surface-strong border border-border shadow-sm -translate-y-[200%] transition-transform duration-150 focus:translate-y-0 focus:outline-none z-[100]"
+          href="#content"
+        >
           Skip to content
         </a>
         <Header />
-        <main id="content" className="container page">
+        <main id="content" className="max-w-[1120px] mx-auto px-5 py-[30px] pb-[72px] animate-fade-up">
           {children}
         </main>
         <Footer />

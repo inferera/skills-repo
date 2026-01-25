@@ -49,7 +49,6 @@ function parseRepoUrl(input: string): { owner: string; repo: string } | null {
 }
 
 function encodePath(p: string) {
-  // Keep "/" but escape spaces and other URL-unsafe characters.
   return encodeURI(p);
 }
 
@@ -68,14 +67,12 @@ async function ghRepo(owner: string, repo: string): Promise<GhRepo> {
 }
 
 async function ghTree(owner: string, repo: string, ref: string): Promise<GhTreeItem[]> {
-  // Best-effort: tree endpoint sometimes accepts refs directly. If it fails, fall back to ref->commit->tree.
   try {
     const direct = await ghJson<{ tree: GhTreeItem[] }>(
       `https://api.github.com/repos/${owner}/${repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`
     );
     return direct.tree ?? [];
   } catch {
-    // heads/<ref>
     const head = await ghJson<{ object: { sha: string } }>(
       `https://api.github.com/repos/${owner}/${repo}/git/ref/heads/${encodeURIComponent(ref)}`
     );
@@ -170,7 +167,6 @@ export default function ImportPage() {
   }, [categoryOptions, targetCategory]);
 
   useEffect(() => {
-    // Keep subcategory valid when category changes.
     if (!subcategoryOptions.find((s) => s.id === targetSubcategory)) {
       setTargetSubcategory(subcategoryOptions[0]?.id ?? "");
     }
@@ -239,7 +235,6 @@ export default function ImportPage() {
         })
         .filter((c) => blobs.has(c.skillMdPath));
 
-      // Hard limit to avoid blowing up anonymous API rate limits.
       candidates = candidates.slice(0, 20);
 
       const detectedSkills: DetectedSkill[] = [];
@@ -278,72 +273,84 @@ export default function ImportPage() {
   }
 
   return (
-    <div className="grid" style={{ gap: 16 }}>
-      <section className="card" style={{ padding: 18 }}>
-        <h1 style={{ margin: 0, fontSize: 28, letterSpacing: "-0.02em" }}>Import from GitHub</h1>
-        <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+    <div className="grid gap-4">
+      <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
+        <h1 className="m-0 text-[28px] tracking-tight">Import from GitHub</h1>
+        <p className="text-muted mt-2 leading-relaxed">
           Paste a repo URL. We detect `.x_skill.yaml + SKILL.md` pairs (or legacy `skill.yaml`). You select what to import, then open a PR
           via an issue-triggered GitHub Action.
         </p>
 
-        <div className="formGrid" style={{ marginTop: 14 }}>
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-3 mt-3.5">
           <div>
-            <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Source repo</label>
+            <label className="block font-bold tracking-tight">Source repo</label>
             <input
-              className="input"
+              className="w-full border border-border bg-white/95 rounded-[14px] px-3.5 py-3 text-[15px] shadow-[inset_0_1px_0_rgba(15,23,42,0.05)] mt-2 focus-visible:outline-2 focus-visible:outline-accent/45 focus-visible:outline-offset-2 focus-visible:border-accent/35"
               value={repoInput}
               onChange={(e) => setRepoInput(e.target.value)}
               placeholder="https://github.com/owner/repo"
-              style={{ marginTop: 8 }}
             />
           </div>
           <div>
-            <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Ref (optional)</label>
+            <label className="block font-bold tracking-tight">Ref (optional)</label>
             <input
-              className="input"
+              className="w-full border border-border bg-white/95 rounded-[14px] px-3.5 py-3 text-[15px] shadow-[inset_0_1px_0_rgba(15,23,42,0.05)] mt-2 focus-visible:outline-2 focus-visible:outline-accent/45 focus-visible:outline-offset-2 focus-visible:border-accent/35"
               value={refInput}
               onChange={(e) => setRefInput(e.target.value)}
               placeholder="main"
-              style={{ marginTop: 8 }}
             />
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12, alignItems: "center" }}>
-          <button className="btn primary" onClick={() => void onParse()} disabled={loading}>
+        <div className="flex gap-2.5 flex-wrap mt-3 items-center">
+          <button
+            className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 font-semibold shadow-primary transition-all duration-150 hover:-translate-y-px hover:from-accent-ink hover:to-accent-ink disabled:opacity-55 disabled:pointer-events-none"
+            onClick={() => void onParse()}
+            disabled={loading}
+          >
             {loading ? "Parsing…" : "Parse repo"}
           </button>
-          <span className="chip">anonymous GitHub API (rate-limited)</span>
-          {!REPO_SLUG ? <span className="chip">set NEXT_PUBLIC_REPO_SLUG to enable PR flow</span> : null}
+          <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+            anonymous GitHub API (rate-limited)
+          </span>
+          {!REPO_SLUG ? (
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+              set NEXT_PUBLIC_REPO_SLUG to enable PR flow
+            </span>
+          ) : null}
         </div>
 
         {error ? (
-          <div className="card" style={{ padding: 14, marginTop: 12, borderColor: "rgba(255,45,143,0.45)" }}>
+          <div className="bg-surface border border-[rgba(255,45,143,0.45)] rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-3.5 mt-3">
             <strong>Error</strong>
-            <div style={{ height: 8 }} />
-            <pre style={{ margin: 0, whiteSpace: "pre-wrap", fontFamily: "var(--font-mono)" }}>{error}</pre>
+            <div className="h-2" />
+            <pre className="m-0 whitespace-pre-wrap font-mono">{error}</pre>
           </div>
         ) : null}
       </section>
 
       {detected.length > 0 ? (
-        <section className="card" style={{ padding: 18 }}>
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+        <section className="bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-[18px]">
+          <div className="flex items-start justify-between gap-3 flex-wrap">
             <div>
-              <h2 style={{ margin: 0, fontSize: 18 }}>Detected skills</h2>
-              <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+              <h2 className="m-0 text-lg">Detected skills</h2>
+              <p className="text-muted mt-2 leading-relaxed">
                 Select items and choose a target category/subcategory.
               </p>
             </div>
-            <span className="chip">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
               {selectedItems.length} / {detected.length} selected
             </span>
           </div>
 
-          <div className="formGrid two" style={{ marginTop: 14 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3.5">
             <div>
-              <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Target category</label>
-              <select className="input" value={targetCategory} onChange={(e) => setTargetCategory(e.target.value)} style={{ marginTop: 8 }}>
+              <label className="block font-bold tracking-tight">Target category</label>
+              <select
+                className="w-full border border-border bg-white/95 rounded-[14px] px-3.5 py-3 text-[15px] shadow-[inset_0_1px_0_rgba(15,23,42,0.05)] mt-2 focus-visible:outline-2 focus-visible:outline-accent/45 focus-visible:outline-offset-2 focus-visible:border-accent/35"
+                value={targetCategory}
+                onChange={(e) => setTargetCategory(e.target.value)}
+              >
                 {categoryOptions.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.title} ({c.id})
@@ -352,12 +359,11 @@ export default function ImportPage() {
               </select>
             </div>
             <div>
-              <label style={{ display: "block", fontWeight: 700, letterSpacing: "-0.01em" }}>Target subcategory</label>
+              <label className="block font-bold tracking-tight">Target subcategory</label>
               <select
-                className="input"
+                className="w-full border border-border bg-white/95 rounded-[14px] px-3.5 py-3 text-[15px] shadow-[inset_0_1px_0_rgba(15,23,42,0.05)] mt-2 focus-visible:outline-2 focus-visible:outline-accent/45 focus-visible:outline-offset-2 focus-visible:border-accent/35"
                 value={targetSubcategory}
                 onChange={(e) => setTargetSubcategory(e.target.value)}
-                style={{ marginTop: 8 }}
               >
                 {subcategoryOptions.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -368,41 +374,64 @@ export default function ImportPage() {
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12, alignItems: "center" }}>
-            <a className={`btn primary`} href={issueUrl || "#"} target="_blank" rel="noreferrer" aria-disabled={!issueUrl}>
+          <div className="flex gap-2.5 flex-wrap mt-3 items-center">
+            <a
+              className={`inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-accent/95 bg-gradient-to-b from-accent to-accent-ink text-white/98 font-semibold shadow-primary transition-all duration-150 hover:-translate-y-px hover:from-accent-ink hover:to-accent-ink ${!issueUrl ? "opacity-55 pointer-events-none" : ""}`}
+              href={issueUrl || "#"}
+              target="_blank"
+              rel="noreferrer"
+              aria-disabled={!issueUrl}
+            >
               Open import issue
             </a>
-            <span className="chip">maintainers label: import-approved</span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+              maintainers label: import-approved
+            </span>
           </div>
 
-          <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
+          <div className="grid gap-2.5 mt-3.5">
             {detected.map((s) => (
-              <label key={s.sourcePath} className="card" style={{ padding: 14, display: "block" }}>
-                <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+              <label
+                key={s.sourcePath}
+                className="block bg-surface border border-black/12 rounded-[16px] shadow-[0_1px_0_rgba(15,23,42,0.06)] p-3.5 cursor-pointer"
+              >
+                <div className="flex gap-3 items-start">
                   <input
                     type="checkbox"
                     checked={Boolean(selected[s.sourcePath])}
                     onChange={(e) => setSelected((prev) => ({ ...prev, [s.sourcePath]: e.target.checked }))}
-                    style={{ marginTop: 4 }}
+                    className="mt-1"
                   />
-                    <div style={{ minWidth: 0 }}>
-                      <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
-                        <strong style={{ fontSize: 16 }}>{s.title}</strong>
-                        <span className="chip">{s.id}</span>
-                        <span className="chip">{s.manifestKind === "x" ? ".x_skill.yaml" : "skill.yaml"}</span>
-                        <span className="chip">{s.sourcePath}</span>
-                      </div>
-                    <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
+                  <div className="min-w-0">
+                    <div className="flex items-baseline gap-2.5 flex-wrap">
+                      <strong className="text-base">{s.title}</strong>
+                      <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+                        {s.id}
+                      </span>
+                      <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+                        {s.manifestKind === "x" ? ".x_skill.yaml" : "skill.yaml"}
+                      </span>
+                      <span className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55">
+                        {s.sourcePath}
+                      </span>
+                    </div>
+                    <p className="text-muted mt-2 leading-relaxed">
                       {s.description || "No description"}
                     </p>
-                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
+                    <div className="flex gap-2 flex-wrap mt-2.5">
                       {s.tags.slice(0, 6).map((t) => (
-                        <span key={t} className="chip">
+                        <span
+                          key={t}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55"
+                        >
                           #{t}
                         </span>
                       ))}
                       {s.agents.slice(0, 4).map((a) => (
-                        <span key={a} className="chip">
+                        <span
+                          key={a}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-2.5 py-1.5 font-mono text-xs text-muted bg-white/55"
+                        >
                           {a}
                         </span>
                       ))}
