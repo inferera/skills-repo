@@ -528,22 +528,31 @@ a {
 
 .skillDetailLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-areas: "aside main";
   gap: 16px;
   align-items: start;
 }
 
 .skillMain {
+  grid-area: main;
   display: grid;
   gap: 16px;
+  min-width: 0;
 }
 
 .skillAside {
+  grid-area: aside;
   display: grid;
   gap: 14px;
   position: sticky;
   top: 86px;
   align-self: start;
+  min-width: 0;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
 }
 
 .miniCard {
@@ -592,6 +601,7 @@ a {
 
 .metaVal {
   font-weight: 650;
+  overflow-wrap: anywhere;
 }
 
 .commandWrap {
@@ -602,6 +612,7 @@ a {
 
 .commandWrap pre {
   flex: 1 1 auto;
+  min-width: 0;
 }
 
 .formGrid {
@@ -644,8 +655,14 @@ a {
   }
   .skillDetailLayout {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "aside";
   }
   .skillAside {
     position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 }
