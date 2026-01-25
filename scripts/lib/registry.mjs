@@ -6,7 +6,7 @@ import Ajv from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import YAML from "yaml";
 
-export const SKILL_YAML_GLOB = "skills/*/*/*/skill.yaml";
+export const SKILL_YAML_GLOB = "skills/*/*/*/.x_skill.yaml";
 
 export function splitPath(p) {
   return p.replaceAll("\\", "/").split("/").filter(Boolean);
@@ -106,7 +106,7 @@ export function parseSkillYamlPath(skillYamlPath) {
   let subcategory = parts[skillsIdx + 2];
   let skillId = parts[skillsIdx + 3];
   let fileName = parts[skillsIdx + 4];
-  if (!category || !subcategory || !skillId || fileName !== "skill.yaml") {
+  if (!category || !subcategory || !skillId || fileName !== ".x_skill.yaml") {
     throw new Error(`Invalid skill path shape: ${skillYamlPath}`);
   }
   let skillDir = parts.slice(0, skillsIdx + 4).join("/");
@@ -138,12 +138,25 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
   let schema = await loadSkillSchema();
   let validate = createValidator(schema);
 
-  let skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: false });
+  let skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: true });
   skillYamlPaths.sort((a, b) => a.localeCompare(b));
 
   let errors = [];
   let skills = [];
   let seenIds = new Map(); // id -> path
+
+  // Enforce canonical filename to avoid "invisible" skills that never get indexed.
+  let legacyYamlPaths = await fg(["skills/*/*/*/skill.yaml"], { onlyFiles: true, dot: false });
+  legacyYamlPaths.sort((a, b) => a.localeCompare(b));
+  for (let legacyPath of legacyYamlPaths) {
+    let skillDir = legacyPath.replace(/\/skill\.yaml$/, "");
+    let canonicalPath = `${skillDir}/.x_skill.yaml`;
+    if (await fileExists(canonicalPath)) {
+      errors.push(`Legacy manifest should be removed: ${legacyPath}\n- canonical: ${canonicalPath}`);
+    } else {
+      errors.push(`Legacy manifest filename is not supported: ${legacyPath}\n- rename to: ${canonicalPath}`);
+    }
+  }
 
   for (let skillYamlPath of skillYamlPaths) {
     let { category, subcategory, skillId, skillDir } = parseSkillYamlPath(skillYamlPath);
@@ -168,7 +181,7 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
     }
 
     if (meta.id !== skillId) {
-      errors.push(`Skill id mismatch: ${skillYamlPath}\n- folder: ${skillId}\n- skill.yaml: ${meta.id}`);
+      errors.push(`Skill id mismatch: ${skillYamlPath}\n- folder: ${skillId}\n- .x_skill.yaml: ${meta.id}`);
       continue;
     }
 

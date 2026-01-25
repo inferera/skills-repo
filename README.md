@@ -3,7 +3,7 @@
 Open-source repository for managing a community skills registry:
 
 - 2-level categories: `skills/<category>/<subcategory>/<skill-id>/`
-- per-skill metadata: `skill.yaml` (structured) + `SKILL.md` (human instructions)
+- per-skill registry metadata: `.x_skill.yaml` (structured, repo-managed) + `SKILL.md` (human instructions)
 - static site (Next.js static export) for browsing/searching skills + importer UI
 - importer: paste a GitHub repo URL -> select skills -> open an import issue -> GitHub Action opens a PR
 - Node.js CLI (planned) to install skills into agent CLIs (codex / claude code / gemini cli / opencode / ...)
@@ -17,7 +17,7 @@ Design + architecture spec:
 
 ```txt
 skills/      # source of truth: community skills
-schemas/     # JSON Schemas (skill.yaml)
+schemas/     # JSON Schemas (.x_skill.yaml)
 scripts/     # build/validate utilities
 site/        # Next.js static site
 docs/        # RFCs and contributor docs
@@ -31,7 +31,7 @@ Note: `.codex/` is currently a legacy folder used by local tooling; the canonica
 1. Create a folder: `skills/<category>/<subcategory>/<skill-id>/`
 2. Add:
    - `SKILL.md`
-   - `skill.yaml` (see `schemas/skill.schema.json`)
+   - `.x_skill.yaml` (see `schemas/skill.schema.json`)
 
 ## Local Dev
 

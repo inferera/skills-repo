@@ -3,7 +3,7 @@
 本仓库是一个“Skills Registry”：
 
 - skills 源码：`skills/<category>/<subcategory>/<skill-id>/`
-- 每个 skill 必须包含：`SKILL.md` + `skill.yaml`
+- 每个 skill 必须包含：`SKILL.md` + `.x_skill.yaml`
 - 自动生成索引：`registry/*.json`（CI 生成，不需要手动提交）
 - 站点：`site/`（Next.js，`output: "export"` 纯静态，SEO 友好）
 - 导入器：站点 `/import` 解析 GitHub 仓库 -> 生成“导入 Issue” -> Maintainer 打标签 -> GitHub Action 自动开 PR
@@ -118,7 +118,7 @@ Workflow：`.github/workflows/validate.yml`
 做的事情：
 
 1. `npm ci`（根目录）安装工具依赖
-2. `npm run validate`：校验每个 skill 的目录和 `skill.yaml` schema
+2. `npm run validate`：校验每个 skill 的目录和 `.x_skill.yaml` schema
 3. `npm run build:registry`：生成 `registry/*.json` + `site/public/registry/*.json`
 4. `npm ci --prefix site` + `npm run build --prefix site`：构建 Next.js 静态站点（确保能发布）
 
@@ -154,7 +154,7 @@ Workflow：`.github/workflows/deploy.yml`
 每个 skill 目录必须包含：
 
 - `SKILL.md`
-- `skill.yaml`（满足 `schemas/skill.schema.json`）
+- `.x_skill.yaml`（满足 `schemas/skill.schema.json`）
 
 ### 4.3 分类元数据（可选）
 
@@ -254,7 +254,7 @@ Importer 工作流只在 **issue 被维护者加上 `import-approved` label** �
 - 没有创建 `import-approved` label：维护者无法加标签
 - Workflow 权限是只读：无法创建分支/PR
 - sourceRepo/ref 不存在：`git clone` 或 `checkout` 失败
-- sourcePath 下缺少 `skill.yaml` / `SKILL.md`
+- sourcePath 下缺少 `.x_skill.yaml` / `SKILL.md`
 - 导入目标目录已存在（skill id 冲突）
 
 ---

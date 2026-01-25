@@ -19,7 +19,7 @@ We want an open-source repository that:
 Constraint choices confirmed:
 
 - Categories: exactly 2 levels.
-- Skill files: `SKILL.md + skill.yaml`.
+- Skill files: `SKILL.md + .x_skill.yaml`.
 - Importer: Web UI + PR.
 - Site: pure static deployment.
 
@@ -28,7 +28,7 @@ Constraint choices confirmed:
 ### Goals
 
 - **Repository convention**: `skills/<category>/<subcategory>/<skill-id>/`.
-- **Metadata**: `skill.yaml` is the single structured source of truth per skill.
+- **Registry metadata**: `.x_skill.yaml` is repo-managed structured metadata used for indexing/importer automation (not the skill spec).
 - **Indexing**: generate `registry/*.json` for site + tooling consumption.
 - **Static site**:
   - browse category list + category pages
@@ -59,7 +59,7 @@ skills/
       _category.yaml
       <skill-id>/
         SKILL.md
-        skill.yaml
+        .x_skill.yaml
         scripts/ ... (optional)
         assets/ ...  (optional)
 ```
@@ -90,7 +90,7 @@ Notes:
 ### 3.2 Required files
 
 - `SKILL.md`: human-readable instructions (rendered on the site; used by agents).
-- `skill.yaml`: structured metadata for indexing/validation.
+- `.x_skill.yaml`: registry metadata for indexing/validation and provenance (e.g. origin GitHub repo).
 
 ### 3.3 `SKILL.md` conventions (v1)
 
@@ -100,7 +100,7 @@ To keep instructions portable across installers/agents:
 - Prefer commands that work after `cd <skill-root>`.
 - Avoid hardcoding paths like `skills/...` or tool-specific paths like `~/.codex/skills/...` in command examples.
 
-### 3.4 `skill.yaml` spec (v1)
+### 3.4 `.x_skill.yaml` spec (v1)
 
 Minimal required fields:
 
@@ -140,7 +140,7 @@ Semantics:
 
 ## 4. Generated Registry Data (for site + tools)
 
-We generate machine-readable JSON from `skills/**/skill.yaml` and `skills/**/SKILL.md`.
+We generate machine-readable JSON from `skills/**/.x_skill.yaml` and `skills/**/SKILL.md`.
 
 Files:
 
@@ -278,8 +278,8 @@ Instead:
 2. Browser calls GitHub API:
    - Resolve default branch.
    - Fetch file tree recursively.
-   - Detect directories containing both `skill.yaml` and `SKILL.md`.
-   - Fetch and parse `skill.yaml` for each candidate.
+   - Detect directories containing both `.x_skill.yaml` and `SKILL.md`.
+   - Fetch and parse `.x_skill.yaml` for each candidate.
 3. Show detected skills list with checkboxes.
 4. User selects target `<category>/<subcategory>`.
 5. UI generates a link to open a new issue in this repo with a prefilled body (includes a machine-readable block).
@@ -317,10 +317,10 @@ Steps:
 - Parse issue body for `skillhub-import:v1` block.
 - Clone source repo at the requested `ref`.
 - For each item:
-  - Verify `skill.yaml` + `SKILL.md` exist.
-  - Read `skill.yaml` to get `id` (fallback to directory name).
+  - Verify `.x_skill.yaml` + `SKILL.md` exist.
+  - Read `.x_skill.yaml` to get `id` (fallback to directory name).
   - Copy directory to `skills/<category>/<subcategory>/<id>/`.
-  - Inject/merge `source` fields (repo/path/ref/commit) into imported `skill.yaml`.
+  - Inject/merge `source` fields (repo/path/ref/commit) into imported `.x_skill.yaml`.
 - Run `scripts/validate` + `scripts/build-registry` (optional) to ensure repo stays consistent.
 - Create PR (e.g. `peter-evans/create-pull-request`).
 - Comment PR link back to the issue; optionally close the issue.

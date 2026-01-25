@@ -21,6 +21,7 @@ type DetectedSkill = {
   sourcePath: string;
   skillYamlPath: string;
   skillMdPath: string;
+  manifestKind: "x" | "legacy";
   id: string;
   title: string;
   description: string;
@@ -219,14 +220,21 @@ export default function ImportPage() {
       const blobs = new Set(tree.filter((t) => t.type === "blob").map((t) => t.path));
 
       let candidates = Array.from(blobs)
-        .filter((p) => p.endsWith("/skill.yaml") || p === "skill.yaml")
+        .filter((p) => p.endsWith("/.x_skill.yaml") || p === ".x_skill.yaml" || p.endsWith("/skill.yaml") || p === "skill.yaml")
         .map((skillYamlPath) => {
-          const dir = skillYamlPath === "skill.yaml" ? "" : skillYamlPath.replace(/\/skill\.yaml$/, "");
+          const isX = skillYamlPath.endsWith("/.x_skill.yaml") || skillYamlPath === ".x_skill.yaml";
+          const dir =
+            skillYamlPath === ".x_skill.yaml" || skillYamlPath === "skill.yaml"
+              ? ""
+              : isX
+                ? skillYamlPath.replace(/\/\.x_skill\.yaml$/, "")
+                : skillYamlPath.replace(/\/skill\.yaml$/, "");
           const skillMdPath = dir ? `${dir}/SKILL.md` : "SKILL.md";
           return {
             dir,
             skillYamlPath,
-            skillMdPath
+            skillMdPath,
+            manifestKind: isX ? ("x" as const) : ("legacy" as const)
           };
         })
         .filter((c) => blobs.has(c.skillMdPath));
@@ -251,6 +259,7 @@ export default function ImportPage() {
           sourcePath: c.dir || ".",
           skillYamlPath: c.skillYamlPath,
           skillMdPath: c.skillMdPath,
+          manifestKind: c.manifestKind,
           id,
           title,
           description,
@@ -273,8 +282,8 @@ export default function ImportPage() {
       <section className="card" style={{ padding: 18 }}>
         <h1 style={{ margin: 0, fontSize: 28, letterSpacing: "-0.02em" }}>Import from GitHub</h1>
         <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
-          Paste a repo URL. We detect `skill.yaml + SKILL.md` pairs. You select what to import, then open a PR via an issue-triggered
-          GitHub Action.
+          Paste a repo URL. We detect `.x_skill.yaml + SKILL.md` pairs (or legacy `skill.yaml`). You select what to import, then open a PR
+          via an issue-triggered GitHub Action.
         </p>
 
         <div className="formGrid" style={{ marginTop: 14 }}>
@@ -376,12 +385,13 @@ export default function ImportPage() {
                     onChange={(e) => setSelected((prev) => ({ ...prev, [s.sourcePath]: e.target.checked }))}
                     style={{ marginTop: 4 }}
                   />
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
-                      <strong style={{ fontSize: 16 }}>{s.title}</strong>
-                      <span className="chip">{s.id}</span>
-                      <span className="chip">{s.sourcePath}</span>
-                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
+                        <strong style={{ fontSize: 16 }}>{s.title}</strong>
+                        <span className="chip">{s.id}</span>
+                        <span className="chip">{s.manifestKind === "x" ? ".x_skill.yaml" : "skill.yaml"}</span>
+                        <span className="chip">{s.sourcePath}</span>
+                      </div>
                     <p className="muted" style={{ margin: "8px 0 0", lineHeight: 1.6 }}>
                       {s.description || "No description"}
                     </p>

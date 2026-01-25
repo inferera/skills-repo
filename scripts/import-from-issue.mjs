@@ -131,28 +131,46 @@ async function main() {
   for (let item of req.items) {
     let srcSkillDir = item.sourcePath === "." ? srcRepoDir : path.join(srcRepoDir, item.sourcePath);
 
-    let srcSkillYaml = path.join(srcSkillDir, "skill.yaml");
+    let srcSkillYaml = path.join(srcSkillDir, ".x_skill.yaml");
+    let srcLegacyYaml = path.join(srcSkillDir, "skill.yaml");
     let srcSkillMd = path.join(srcSkillDir, "SKILL.md");
     try {
-      await fs.access(srcSkillYaml);
+      try {
+        await fs.access(srcSkillYaml);
+      } catch {
+        // Back-compat: accept legacy skill.yaml from older repos.
+        srcSkillYaml = srcLegacyYaml;
+        await fs.access(srcSkillYaml);
+      }
       await fs.access(srcSkillMd);
     } catch {
-      throw new Error(`Missing skill.yaml or SKILL.md at sourcePath: ${item.sourcePath}`);
+      throw new Error(`Missing .x_skill.yaml (or legacy skill.yaml) or SKILL.md at sourcePath: ${item.sourcePath}`);
     }
 
     let metaRaw = await fs.readFile(srcSkillYaml, "utf8");
     let meta = YAML.parse(metaRaw);
     if (!meta || typeof meta !== "object" || typeof meta.id !== "string" || !meta.id) {
-      throw new Error(`Invalid skill.yaml (missing id): ${item.sourcePath}/skill.yaml`);
+      throw new Error(`Invalid manifest (missing id): ${item.sourcePath}/${path.basename(srcSkillYaml)}`);
     }
     let skillId = meta.id;
-    assertSlug("skill.yaml id", skillId);
+    assertSlug("manifest id", skillId);
 
     let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, skillId);
     if (await pathExists(destSkillDir)) throw new Error(`Destination already exists: ${destSkillDir}`);
 
     let limits = { files: 0, bytes: 0, maxFiles: 2500, maxBytes: 50 * 1024 * 1024 };
     await copyDirChecked(srcSkillDir, destSkillDir, limits);
+
+    // Normalize metadata filename in the registry repo.
+    let destManifest = path.join(destSkillDir, ".x_skill.yaml");
+    let destLegacy = path.join(destSkillDir, "skill.yaml");
+    if (!(await pathExists(destManifest)) && (await pathExists(destLegacy))) {
+      await fs.rename(destLegacy, destManifest);
+    }
+    if (await pathExists(destLegacy)) {
+      // If both exist, or rename didn't happen for any reason, keep only the canonical filename.
+      await fs.rm(destLegacy);
+    }
 
     // Inject/overwrite source provenance.
     meta.source = {
@@ -163,7 +181,7 @@ async function main() {
       commit
     };
 
-    await fs.writeFile(path.join(destSkillDir, "skill.yaml"), YAML.stringify(meta), "utf8");
+    await fs.writeFile(destManifest, YAML.stringify(meta), "utf8");
 
     imported.push({ id: skillId, dest: destSkillDir, sourcePath: item.sourcePath });
   }

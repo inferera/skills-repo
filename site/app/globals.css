@@ -424,6 +424,15 @@ a {
   list-style: none;
 }
 
+.fileTree summary::before {
+  content: "+ ";
+  color: rgba(15, 23, 42, 0.55);
+}
+
+.fileTree details[open] > summary::before {
+  content: "- ";
+}
+
 .fileTree details > summary::-webkit-details-marker {
   display: none;
 }
@@ -453,6 +462,146 @@ a {
   margin-left: auto;
   color: rgba(15, 23, 42, 0.55);
   font-size: 12px;
+}
+
+.filePreview {
+  margin-top: 10px;
+  padding: 10px 10px 4px;
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.filePreviewActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.codeBlock {
+  overflow-x: auto;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: rgba(11, 11, 16, 0.92);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.csvTableWrap {
+  overflow: auto;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.csvTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.csvTable th,
+.csvTable td {
+  padding: 8px 10px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.csvTable th {
+  position: sticky;
+  top: 0;
+  background: rgba(248, 250, 252, 0.96);
+  border-top: none;
+  z-index: 1;
+}
+
+.btn.small {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.skillDetailLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 16px;
+  align-items: start;
+}
+
+.skillMain {
+  display: grid;
+  gap: 16px;
+}
+
+.skillAside {
+  display: grid;
+  gap: 14px;
+  position: sticky;
+  top: 86px;
+  align-self: start;
+}
+
+.miniCard {
+  padding: 12px 14px;
+}
+
+.miniTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.miniTitle {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.miniDesc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.metaDl {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.metaKey {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.62);
+}
+
+.metaVal {
+  font-weight: 650;
+}
+
+.commandWrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.commandWrap pre {
+  flex: 1 1 auto;
 }
 
 .formGrid {
@@ -492,5 +641,11 @@ a {
 @media (max-width: 720px) {
   .formGrid {
     grid-template-columns: 1fr;
+  }
+  .skillDetailLayout {
+    grid-template-columns: 1fr;
+  }
+  .skillAside {
+    position: static;
   }
 }

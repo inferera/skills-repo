@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/schemas/skill.schema.json",
-  "title": "Skill Metadata (skill.yaml)",
+  "title": "Registry Skill Metadata (.x_skill.yaml)",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
@@ -67,4 +67,3 @@
     }
   }
 }
-
