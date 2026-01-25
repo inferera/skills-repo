@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/skill.schema.json",
+  "title": "Skill Metadata (skill.yaml)",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  },
+  "required": ["specVersion", "id", "title", "description"],
+  "properties": {
+    "specVersion": { "type": "integer", "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "description": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "license": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "url": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "email": { "type": "string", "minLength": 1, "maxLength": 320 }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "agents": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "runtime": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "homepage": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "docs": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "repo": { "type": "string", "minLength": 1, "maxLength": 500 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repo": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "path": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "commit": { "type": "string", "minLength": 7, "maxLength": 64 }
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    }
+  }
+}
+

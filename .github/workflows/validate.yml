@@ -1,0 +1,51 @@
+name: Validate
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install root deps
+        run: npm ci
+
+      - name: Validate skills
+        run: npm run validate
+
+      - name: Build registry artifacts
+        run: npm run build:registry
+
+      - name: Install site deps
+        run: npm ci --prefix site
+
+      - name: Compute site env
+        run: |
+          set -euo pipefail
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+          if [[ "${REPO_NAME}" == "${OWNER}.github.io" ]]; then
+            SITE_BASE_PATH_VALUE=""
+            SITE_URL_VALUE="https://${OWNER}.github.io"
+          else
+            SITE_BASE_PATH_VALUE="${REPO_NAME}"
+            SITE_URL_VALUE="https://${OWNER}.github.io/${REPO_NAME}"
+          fi
+          echo "SITE_BASE_PATH=${SITE_BASE_PATH_VALUE}" >> "$GITHUB_ENV"
+          echo "SITE_URL=${SITE_URL_VALUE}" >> "$GITHUB_ENV"
+
+      - name: Build site (static export)
+        env:
+          NEXT_PUBLIC_REPO_SLUG: ${{ github.repository }}
+          SITE_URL: ${{ env.SITE_URL }}
+          SITE_BASE_PATH: ${{ env.SITE_BASE_PATH }}
+        run: npm run build --prefix site

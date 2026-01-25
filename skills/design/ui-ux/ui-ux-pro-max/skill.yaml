@@ -1,0 +1,16 @@
+specVersion: 1
+id: ui-ux-pro-max
+title: UI/UX Pro Max
+description: UI/UX design intelligence with searchable database
+tags:
+  - design
+  - ui
+  - ux
+  - design-system
+agents:
+  - codex
+runtime:
+  - python>=3.9
+links:
+  docs: ./SKILL.md
+

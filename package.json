@@ -1,0 +1,19 @@
+{
+  "name": "skills-registry",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build:registry": "node scripts/build-registry.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "fast-glob": "^3.3.3",
+    "yaml": "^2.7.0"
+  }
+}
+

@@ -1,0 +1,18 @@
+# Node
+node_modules/
+.npm-cache/
+
+# Next.js (site/)
+site/node_modules/
+site/.next/
+site/out/
+
+# Generated registry artifacts
+registry/*.json
+site/public/registry/*.json
+site/public/sitemap.xml
+site/public/robots.txt
+
+# macOS
+.DS_Store
+

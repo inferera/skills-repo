@@ -1,0 +1,187 @@
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+:root {
+  --bg: #fbfbf7;
+  --bg-2: #f5f5ff;
+  --text: #0b0b10;
+  --muted: rgba(11, 11, 16, 0.64);
+  --border: rgba(11, 11, 16, 0.14);
+  --card: rgba(255, 255, 255, 0.7);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+
+  --accent: #ff2d8f;
+  --accent-2: #22c55e;
+
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: var(--text);
+  background: radial-gradient(1100px 700px at 15% 15%, rgba(255, 45, 143, 0.18), transparent 60%),
+    radial-gradient(1200px 800px at 80% 0%, rgba(34, 197, 94, 0.16), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 20px 72px;
+  animation: fadeUp 520ms ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+}
+
+.grid.cards {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  font-family: "JetBrains Mono", ui-monospace;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(11, 11, 16, 0.28);
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, rgba(255, 45, 143, 0.18), rgba(255, 45, 143, 0.08));
+  border-color: rgba(255, 45, 143, 0.35);
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(255, 45, 143, 0.5);
+  outline-offset: 2px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.input:focus-visible {
+  outline: 2px solid rgba(34, 197, 94, 0.45);
+  outline-offset: 2px;
+}
+
+.markdown {
+  line-height: 1.7;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  letter-spacing: -0.01em;
+}
+
+.markdown pre {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  background: rgba(11, 11, 16, 0.92);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.markdown code {
+  font-family: "JetBrains Mono", ui-monospace;
+  font-size: 0.92em;
+}
+
+.markdown a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.markdown blockquote {
+  border-left: 4px solid rgba(255, 45, 143, 0.55);
+  padding-left: 12px;
+  margin-left: 0;
+  color: rgba(11, 11, 16, 0.72);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main {
+    animation: none;
+  }
+  .btn {
+    transition: none;
+  }
+}

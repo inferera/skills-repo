@@ -1,0 +1,62 @@
+name: Import Skills (Issue -> PR)
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  import:
+    if: github.event.label.name == 'import-approved'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install root deps
+        run: npm ci
+
+      - name: Run importer (copies files into skills/)
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/import-from-issue.mjs
+
+      - name: Validate imported skills
+        run: npm run validate
+
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: import/issue-${{ github.event.issue.number }}
+          title: Import skills (issue #${{ github.event.issue.number }})
+          commit-message: Import skills (issue #${{ github.event.issue.number }})
+          body: |
+            Automated import triggered by issue #${{ github.event.issue.number }}.
+            - Add label `import-approved` on an import request issue to run.
+
+      - name: Comment on issue with PR link
+        if: steps.cpr.outputs.pull-request-url != ''
+        uses: actions/github-script@v7
+        env:
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Opened PR: ${process.env.PR_URL}`
+            })
