@@ -1,0 +1,14 @@
+specVersion: 1
+id: pdf
+title: PDF Processing Guide
+description: Comprehensive PDF manipulation toolkit for extracting text and
+  tables, creating new PDFs, merging/splitting documents, and handling forms.
+  When Claude needs to fill in a PDF form or programmatically process, generate,
+  or analyze PDF documents at scale.
+links:
+  docs: ./SKILL.md
+source:
+  repo: https://github.com/anthropics/skills
+  path: skills/pdf
+  ref: main
+  commit: 69c0b1a0674149f27b61b2635f935524b6add202
