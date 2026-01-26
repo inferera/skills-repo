@@ -13,6 +13,9 @@ description: "UI/UX design intelligence. 50 styles, 21 palettes, 50 font
   accessibility, animation, layout, typography, font pairing, spacing, hover,
   shadow, gradient. Integrations: shadcn/ui MCP for component search and
   examples."
+tags:
+  - ui
+  - ux
 links:
   docs: ./SKILL.md
 source:
