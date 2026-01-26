@@ -901,76 +901,7 @@ export default function ImportPage() {
             </div>
           </div>
 
-          {/* Default category for batch apply */}
-          <div className="mt-5 p-4 bg-background-secondary rounded-lg border border-border">
-            <div className="flex items-center gap-2 mb-3">
-              <svg className="w-4 h-4 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 3v18M3 12h18" />
-              </svg>
-              <span className="text-sm font-medium text-foreground">Default Category</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <select
-                className="w-full h-10 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
-                value={defaultCategory}
-                onChange={(e) => setDefaultCategory(e.target.value)}
-              >
-                {categoryOptions.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.title}
-                  </option>
-                ))}
-              </select>
-              <select
-                className="w-full h-10 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
-                value={defaultSubcategory}
-                onChange={(e) => setDefaultSubcategory(e.target.value)}
-              >
-                {defaultSubcategoryOptions.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.title}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button
-              type="button"
-              className="mt-3 text-sm text-accent hover:underline"
-              onClick={() => {
-                setSkillMetadata((prev) => {
-                  const updated = { ...prev };
-                  for (const s of detected) {
-                    if (selected[s.sourcePath]) {
-                      updated[s.sourcePath] = {
-                        ...updated[s.sourcePath],
-                        category: defaultCategory,
-                        subcategory: defaultSubcategory,
-                      } as SkillMetadata;
-                    }
-                  }
-                  return updated;
-                });
-              }}
-            >
-              Apply to all selected skills
-            </button>
-          </div>
-
           <div className="flex gap-3 flex-wrap mt-5 items-center">
-            {reviewUrl && (
-              <a
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-background-secondary border border-border text-foreground font-medium hover:bg-card transition-colors"
-                href={reviewUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-                Preview
-              </a>
-            )}
             <a
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium transition-colors ${
                 !issueUrl ? "opacity-50 cursor-not-allowed" : "hover:bg-accent-hover"
