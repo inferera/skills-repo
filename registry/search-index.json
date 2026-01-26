@@ -1,7 +1,16 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:50:26.784Z",
+  "generatedAt": "2026-01-26T10:57:55.583Z",
   "docs": [
+    {
+      "id": "ask-questions-if-underspecified",
+      "category": "business",
+      "subcategory": "finance",
+      "title": "Ask Questions If Underspecified",
+      "tags": [],
+      "agents": [],
+      "text": "Ask Questions If Underspecified\nClarify requirements before implementing. Use when serious doubts araise.\n## When to Use"
+    },
     {
       "id": "react-best-practices",
       "category": "business",

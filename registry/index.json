@@ -1,7 +1,32 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T10:50:26.784Z",
+  "generatedAt": "2026-01-26T10:57:55.583Z",
   "skills": [
+    {
+      "specVersion": 1,
+      "id": "ask-questions-if-underspecified",
+      "title": "Ask Questions If Underspecified",
+      "description": "Clarify requirements before implementing. Use when serious doubts araise.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/trailofbits/skills",
+        "path": "plugins/ask-questions-if-underspecified/skills/ask-questions-if-underspecified",
+        "ref": "main",
+        "commit": "2a7b3d9cd56dab7bf622f65996bc5071fac8e015"
+      },
+      "category": "business",
+      "subcategory": "finance",
+      "repoPath": "skills/business/finance/ask-questions-if-underspecified",
+      "summary": "## When to Use",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
     {
       "specVersion": 1,
       "id": "react-best-practices",
