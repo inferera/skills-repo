@@ -1,0 +1,11 @@
+specVersion: 1
+id: template
+title: Insert instructions below
+description: Replace with description of the skill and when Claude should use it.
+links:
+  docs: ./SKILL.md
+source:
+  repo: https://github.com/anthropics/skills
+  path: template
+  ref: main
+  commit: 69c0b1a0674149f27b61b2635f935524b6add202

@@ -1,0 +1,16 @@
+specVersion: 1
+id: docx
+title: DOCX creation, editing, and analysis
+description: "Comprehensive document creation, editing, and analysis with
+  support for tracked changes, comments, formatting preservation, and text
+  extraction. When Claude needs to work with professional documents (.docx
+  files) for: (1) Creating new documents, (2) Modifying or editing content, (3)
+  Working with tracked changes, (4) Adding comments, or any other document
+  tasks"
+links:
+  docs: ./SKILL.md
+source:
+  repo: https://github.com/anthropics/skills
+  path: skills/docx
+  ref: main
+  commit: 69c0b1a0674149f27b61b2635f935524b6add202
