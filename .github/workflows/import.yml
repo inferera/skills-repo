@@ -37,25 +37,6 @@ jobs:
         id: validate
         run: npm run validate
 
-      - name: Handle validation failure
-        if: failure() && steps.validate.conclusion == 'failure'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              labels: ['import-failed']
-            });
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: '❌ Import validation failed. Please check the workflow logs for details.\n\nWorkflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-            });
-
       - name: Create pull request
         id: cpr
         uses: peter-evans/create-pull-request@v6
@@ -104,4 +85,25 @@ jobs:
               issue_number: context.issue.number,
               state: 'closed',
               state_reason: 'completed'
+            });
+
+      - name: Handle any failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Mark the issue as failed
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['import-failed']
+            });
+
+            // Comment with failure details
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '❌ Import failed. Please check the workflow logs for details.\n\nWorkflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
             });
