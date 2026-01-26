@@ -74,14 +74,23 @@ export function QuickInstallClient({
     // The skill path in the repository
     const skillPath = repoPath || `skills/${skillId}`;
 
+    // Calculate strip-components based on path depth
+    // For paths like "skills/category/subcategory/skill-name", we need to strip 5 components
+    // (repo-name/skills/category/subcategory/skill-name) to get the skill files
+    const pathParts = skillPath.split('/').filter(Boolean);
+    const stripComponents = pathParts.length + 1; // +1 for repo root directory in tarball
+
     // Generate a curl + tar command to download and extract the skill
     // This downloads only the skill directory, excludes .x_skill.yaml
+    // Using archive URL instead of API tarball for more predictable extraction
     const commands = [
       `# Install ${skillId} to ${targetDir}`,
       `mkdir -p "${targetDir}/${skillId}"`,
-      `curl -sL "https://api.github.com/repos/${repoSlug}/tarball/main" | \\`,
-      `  tar -xz --strip-components=2 -C "${targetDir}/${skillId}" \\`,
-      `  --exclude=".x_skill.yaml" "*/${skillPath}/"`,
+      `curl -sL "${REPO_URL}/archive/refs/heads/main.tar.gz" | \\`,
+      `  tar -xz --strip-components=${stripComponents} \\`,
+      `  "${repoSlug.replace('/', '-')}-main/${skillPath}" \\`,
+      `  --exclude=".x_skill.yaml" \\`,
+      `  -C "${targetDir}/${skillId}/"`,
     ];
 
     return commands.join("\n");

@@ -1,7 +1,11 @@
 {
-  "name": "skills-registry",
-  "private": true,
+  "name": "@your-org/skills-installer",
+  "version": "1.0.0",
+  "description": "CLI tool to install agent skills from the Skills Registry",
   "type": "module",
+  "bin": {
+    "install-skill": "./scripts/install-skill.mjs"
+  },
   "engines": {
     "node": ">=18"
   },
@@ -9,6 +13,7 @@
     "validate": "node scripts/validate.mjs",
     "build:registry": "node scripts/build-registry.mjs"
   },
+  "keywords": ["skills", "ai", "agents", "claude", "codex"],
   "devDependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",

@@ -60,7 +60,7 @@ const AGENTS = {
 };
 
 // Default registry URL (can be overridden via env or flag)
-const DEFAULT_REGISTRY_URL = process.env.SKILL_REGISTRY_URL || "https://github.com/anthropics/skills-repo";
+const DEFAULT_REGISTRY_URL = process.env.SKILL_REGISTRY_URL || "https://github.com/xue1213888/skills-repo";
 
 function printHelp() {
   console.log(`
