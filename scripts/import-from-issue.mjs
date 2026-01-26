@@ -243,13 +243,36 @@ async function main() {
 
     let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
 
-    // Handle update vs new
-    if (await pathExists(destSkillDir)) {
-      if (item.isUpdate) {
+    // If updating, find and remove any existing skill with the same ID (even in different category)
+    if (item.isUpdate) {
+      // Use fast-glob to find all skills with matching ID
+      const existingSkills = await fg([`skills/*/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
+
+      for (const existingPath of existingSkills) {
+        const existingDir = existingPath.replace(/\/.x_skill\.yaml$/, "");
+
+        // Only remove if it's different from the destination
+        if (existingDir !== destSkillDir) {
+          console.log(`Removing old skill location: ${existingDir}`);
+          await fs.rm(existingDir, { recursive: true });
+        }
+      }
+
+      // Also remove destination if it exists
+      if (await pathExists(destSkillDir)) {
         console.log(`Updating existing skill: ${destSkillDir}`);
         await fs.rm(destSkillDir, { recursive: true });
-      } else {
+      }
+    } else {
+      // For new skills, check if destination already exists
+      if (await pathExists(destSkillDir)) {
         throw new Error(`Destination already exists: ${destSkillDir}. Set isUpdate: true to update.`);
+      }
+
+      // Also check if this ID exists anywhere else
+      const existingSkills = await fg([`skills/*/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
+      if (existingSkills.length > 0) {
+        throw new Error(`Skill with ID "${item.id}" already exists at: ${existingSkills[0].replace(/\/.x_skill\.yaml$/, "")}. Set isUpdate: true to update.`);
       }
     }
 
