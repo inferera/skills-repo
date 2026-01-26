@@ -6,6 +6,14 @@ node_modules/
 site/node_modules/
 site/.next/
 site/out/
+site/.env.local
+
+# Local agent installs (not the registry source of truth)
+.codex/skills/
+.claude/skills/
+.cursor/skills/
+.opencode/skills/
+.antigravity/skills/
 
 # Generated site artifacts (can be regenerated)
 site/public/registry/*.json
@@ -19,4 +27,3 @@ site/public/robots.txt
 __pycache__/
 *.pyc
 *.pyo
-

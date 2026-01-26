@@ -1,17 +1,33 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T06:47:06.442Z",
+  "generatedAt": "2026-01-26T10:21:46.587Z",
   "docs": [
+    {
+      "id": "skill-creator",
+      "category": "data-ai",
+      "subcategory": "data-analysis",
+      "title": "Skill Creator",
+      "tags": [],
+      "agents": [],
+      "text": "Skill Creator\nGuide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.\nThis skill provides guidance for creating effective skills."
+    },
+    {
+      "id": "mcp-builder",
+      "category": "data-ai",
+      "subcategory": "ml-ops",
+      "title": "MCP Server Development Guide",
+      "tags": [],
+      "agents": [],
+      "text": "MCP Server Development Guide\nGuide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).\n## Overview"
+    },
     {
       "id": "algorithmic-art",
       "category": "design",
       "subcategory": "ui-ux",
       "title": "algorithmic-art",
-      "tags": [
-        "test"
-      ],
+      "tags": [],
       "agents": [],
-      "text": "algorithmic-art\nCreating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.\ntest\nAlgorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms)."
+      "text": "algorithmic-art\nCreating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.\nAlgorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms)."
     },
     {
       "id": "brand-guidelines",
@@ -32,78 +48,6 @@
       "text": "canvas-design\nCreate beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.\nThese are instructions for creating design philosophies - aesthetic movements that are then EXPRESSED VISUALLY. Output only .md files, .pdf files, and .png files."
     },
     {
-      "id": "doc-coauthoring",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "Doc Co-Authoring Workflow",
-      "tags": [],
-      "agents": [],
-      "text": "Doc Co-Authoring Workflow\nGuide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.\nThis skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing."
-    },
-    {
-      "id": "docx",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "DOCX creation, editing, and analysis",
-      "tags": [],
-      "agents": [],
-      "text": "DOCX creation, editing, and analysis\nComprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks\n## Overview"
-    },
-    {
-      "id": "frontend-design",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "frontend-design",
-      "tags": [],
-      "agents": [],
-      "text": "frontend-design\nCreate distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.\nThis skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices."
-    },
-    {
-      "id": "internal-comms",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "internal-comms",
-      "tags": [],
-      "agents": [],
-      "text": "internal-comms\nA set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports"
-    },
-    {
-      "id": "mcp-builder",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "MCP Server Development Guide",
-      "tags": [],
-      "agents": [],
-      "text": "MCP Server Development Guide\nGuide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).\n## Overview"
-    },
-    {
-      "id": "pdf",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "PDF Processing Guide",
-      "tags": [],
-      "agents": [],
-      "text": "PDF Processing Guide\nComprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.\n## Overview"
-    },
-    {
-      "id": "pptx",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "PPTX creation, editing, and analysis",
-      "tags": [],
-      "agents": [],
-      "text": "PPTX creation, editing, and analysis\nPresentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks\n## Overview"
-    },
-    {
-      "id": "skill-creator",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "Skill Creator",
-      "tags": [],
-      "agents": [],
-      "text": "Skill Creator\nGuide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.\nThis skill provides guidance for creating effective skills."
-    },
-    {
       "id": "slack-gif-creator",
       "category": "design",
       "subcategory": "ui-ux",
@@ -113,58 +57,126 @@
       "text": "Slack GIF Creator\nKnowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\nA toolkit providing utilities and knowledge for creating animated GIFs optimized for Slack."
     },
     {
-      "id": "template",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "Insert instructions below",
+      "id": "internal-comms",
+      "category": "development",
+      "subcategory": "backend",
+      "title": "internal-comms",
       "tags": [],
       "agents": [],
-      "text": "Insert instructions below\nReplace with description of the skill and when Claude should use it."
-    },
-    {
-      "id": "theme-factory",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "Theme Factory Skill",
-      "tags": [],
-      "agents": [],
-      "text": "Theme Factory Skill\nToolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.\nThis skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact."
-    },
-    {
-      "id": "ui-ux-pro-max",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "UI/UX Pro Max - Design Intelligence",
-      "tags": [],
-      "agents": [],
-      "text": "UI/UX Pro Max - Design Intelligence\nUI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.\nComprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations."
-    },
-    {
-      "id": "web-artifacts-builder",
-      "category": "design",
-      "subcategory": "ui-ux",
-      "title": "Web Artifacts Builder",
-      "tags": [],
-      "agents": [],
-      "text": "Web Artifacts Builder\nSuite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.\nTo build powerful frontend claude.ai artifacts, follow these steps:\n1. Initialize the frontend repo using `scripts/init-artifact.sh`\n2. Develop your artifact by editing the generated code\n3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`\n4. Display artifact to user\n5. (Optional) Test the artifact"
+      "text": "internal-comms\nA set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports"
     },
     {
       "id": "webapp-testing",
-      "category": "design",
-      "subcategory": "ui-ux",
+      "category": "development",
+      "subcategory": "backend",
       "title": "Web Application Testing",
       "tags": [],
       "agents": [],
       "text": "Web Application Testing\nToolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.\nTo test local web applications, write native Python Playwright scripts."
     },
     {
+      "id": "frontend-design",
+      "category": "development",
+      "subcategory": "frontend",
+      "title": "frontend-design",
+      "tags": [],
+      "agents": [],
+      "text": "frontend-design\nCreate distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.\nThis skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices."
+    },
+    {
+      "id": "ui-ux-pro-max",
+      "category": "development",
+      "subcategory": "frontend",
+      "title": "UI/UX Pro Max - Design Intelligence",
+      "tags": [
+        "ui",
+        "ux"
+      ],
+      "agents": [],
+      "text": "UI/UX Pro Max - Design Intelligence\nUI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.\nui ux\nComprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations."
+    },
+    {
+      "id": "web-artifacts-builder",
+      "category": "development",
+      "subcategory": "frontend",
+      "title": "Web Artifacts Builder",
+      "tags": [],
+      "agents": [],
+      "text": "Web Artifacts Builder\nSuite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.\nTo build powerful frontend claude.ai artifacts, follow these steps:\n1. Initialize the frontend repo using `scripts/init-artifact.sh`\n2. Develop your artifact by editing the generated code\n3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`\n4. Display artifact to user\n5. (Optional) Test the artifact"
+    },
+    {
+      "id": "create-pr",
+      "category": "devops",
+      "subcategory": "ci-cd",
+      "title": "Create Pull Request",
+      "tags": [
+        "github"
+      ],
+      "agents": [],
+      "text": "Create Pull Request\nCreates GitHub pull requests with properly formatted titles that pass the check-pr-title CI validation. Use when creating PRs, submitting changes for review, or when the user says /pr or asks to create a pull request.\ngithub\nCreates GitHub PRs with titles that pass n8n's `check-pr-title` CI validation."
+    },
+    {
+      "id": "docx",
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "title": "DOCX creation, editing, and analysis",
+      "tags": [],
+      "agents": [],
+      "text": "DOCX creation, editing, and analysis\nComprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks\n## Overview"
+    },
+    {
+      "id": "pdf",
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "title": "PDF Processing Guide",
+      "tags": [],
+      "agents": [],
+      "text": "PDF Processing Guide\nComprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.\n## Overview"
+    },
+    {
+      "id": "doc-coauthoring",
+      "category": "documentation",
+      "subcategory": "technical-docs",
+      "title": "Doc Co-Authoring Workflow",
+      "tags": [],
+      "agents": [],
+      "text": "Doc Co-Authoring Workflow\nGuide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.\nThis skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing."
+    },
+    {
+      "id": "template",
+      "category": "testing-security",
+      "subcategory": "testing",
+      "title": "Insert instructions below",
+      "tags": [],
+      "agents": [],
+      "text": "Insert instructions below\nReplace with description of the skill and when Claude should use it."
+    },
+    {
       "id": "xlsx",
-      "category": "design",
-      "subcategory": "ui-ux",
+      "category": "testing-security",
+      "subcategory": "testing",
       "title": "Requirements for Outputs",
       "tags": [],
       "agents": [],
       "text": "Requirements for Outputs\nComprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas\n## All Excel files"
+    },
+    {
+      "id": "pptx",
+      "category": "tools",
+      "subcategory": "automation",
+      "title": "PPTX creation, editing, and analysis",
+      "tags": [],
+      "agents": [],
+      "text": "PPTX creation, editing, and analysis\nPresentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks\n## Overview"
+    },
+    {
+      "id": "theme-factory",
+      "category": "tools",
+      "subcategory": "automation",
+      "title": "Theme Factory Skill",
+      "tags": [],
+      "agents": [],
+      "text": "Theme Factory Skill\nToolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.\nThis skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact."
     }
   ]
 }

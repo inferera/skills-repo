@@ -1,15 +1,10 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const DEFAULT_REGISTRY_URL = "https://github.com/xue1213888/skills-repo";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { getDefaultRegistryRef, getDefaultRegistryUrl, normalizeRegistryUrl } from "../lib/config.mjs";
+import { fetchRegistryIndex } from "../lib/registry.mjs";
 
 function parseArgs(args) {
   const result = {
-    registry: process.env.SKILL_REGISTRY_URL || DEFAULT_REGISTRY_URL,
+    registry: undefined,
+    ref: undefined,
     format: 'table', // table or json
   };
 
@@ -18,6 +13,8 @@ function parseArgs(args) {
 
     if (arg === '--registry' && i + 1 < args.length) {
       result.registry = args[++i];
+    } else if ((arg === '--ref' || arg === '--branch') && i + 1 < args.length) {
+      result.ref = args[++i];
     } else if (arg === '--json') {
       result.format = 'json';
     } else if (arg === '--help' || arg === '-h') {
@@ -36,47 +33,22 @@ List all available skills in the registry
 
 Options:
   --registry <url>     Custom registry URL
-                       Default: https://github.com/xue1213888/skills-repo
+                       Default: $SKILL_REGISTRY_URL or package repository URL
+  --ref <ref>          Git ref (branch or tag) to use
+                       Default: $SKILL_REGISTRY_REF or "main"
   --json               Output in JSON format
   --help, -h          Show this help message
 
 Examples:
   npx aiskill list
   npx aiskill list --json
+  npx aiskill list --registry https://github.com/your-org/skills-repo --ref main
 `);
 }
 
-async function fetchSkills(registry) {
-  try {
-    const registryUrl = registry.replace(/\.git$/, '');
-    const indexUrl = `${registryUrl}/raw/main/registry/index.json`;
-
-    const response = await fetch(indexUrl);
-    if (!response.ok) {
-      // Fallback to local file if fetch fails (for development)
-      const localPath = path.resolve(__dirname, '../../registry/index.json');
-      try {
-        const content = await fs.readFile(localPath, 'utf-8');
-        const index = JSON.parse(content);
-        return index.skills || [];
-      } catch (localErr) {
-        throw new Error(`Failed to fetch registry: ${response.statusText}`);
-      }
-    }
-
-    const index = await response.json();
-    return index.skills || [];
-  } catch (err) {
-    // Try local fallback for network errors
-    const localPath = path.resolve(__dirname, '../../registry/index.json');
-    try {
-      const content = await fs.readFile(localPath, 'utf-8');
-      const index = JSON.parse(content);
-      return index.skills || [];
-    } catch (localErr) {
-      throw new Error(`Failed to fetch skills: ${err.message}`);
-    }
-  }
+async function fetchSkills(registry, ref) {
+  const index = await fetchRegistryIndex(registry, ref);
+  return index.skills ?? [];
 }
 
 function printTable(skills) {
@@ -126,8 +98,14 @@ export async function listCommand(args) {
     return;
   }
 
+  const registry = normalizeRegistryUrl(parsed.registry ?? (await getDefaultRegistryUrl()));
+  if (!registry) {
+    throw new Error('Registry URL not configured. Set SKILL_REGISTRY_URL or pass --registry.');
+  }
+  const ref = (parsed.ref ?? getDefaultRegistryRef()).trim() || "main";
+
   console.log('🔍 Fetching skills from registry...');
-  const skills = await fetchSkills(parsed.registry);
+  const skills = await fetchSkills(registry, ref);
 
   if (parsed.format === 'json') {
     console.log(JSON.stringify(skills, null, 2));

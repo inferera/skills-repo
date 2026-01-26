@@ -2,12 +2,9 @@
 
 Build and validation utilities live here.
 
-Planned (RFC-0001):
-
-- `build-registry`: scan `skills/**/.x_skill.yaml` + `SKILL.md` and generate `registry/*.json`
-- `validate`: enforce path conventions, required files, unique ids, and schema validation
-
 Implemented:
 
-- `scripts/build-registry.mjs`
-- `scripts/validate.mjs`
+- `scripts/build-registry.mjs`: scan `skills/**/.x_skill.yaml` + `SKILL.md` and generate:
+  - `registry/*.json`
+  - `site/public/registry/*.json`
+- `scripts/validate.mjs`: validate skill layout + schema + unique ids

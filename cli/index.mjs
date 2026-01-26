@@ -3,6 +3,7 @@
 import { addCommand } from './commands/add.mjs';
 import { listCommand } from './commands/list.mjs';
 import { removeCommand } from './commands/remove.mjs';
+import { getPackageVersion } from "./lib/config.mjs";
 
 const COMMANDS = {
   add: addCommand,
@@ -28,7 +29,9 @@ Options:
   --scope <scope>      Installation scope (project, global)
                        Default: project
   --registry <url>     Custom registry URL
-                       Default: https://github.com/xue1213888/skills-repo
+                       Default: $SKILL_REGISTRY_URL or package repository URL
+  --ref <ref>          Git ref (branch or tag) used by some commands
+                       Default: $SKILL_REGISTRY_REF or "main"
   --help, -h          Show this help message
   --version, -v       Show version
 
@@ -49,9 +52,8 @@ For more information, visit: https://github.com/xue1213888/skills-repo
 `);
 }
 
-function printVersion() {
-  // Read version from package.json
-  const version = '1.0.0';
+async function printVersion() {
+  const version = await getPackageVersion();
   console.log(`aiskill v${version}`);
 }
 
@@ -74,7 +76,7 @@ async function main() {
 
   // Handle version flag
   if (command === '--version' || command === '-v') {
-    printVersion();
+    await printVersion();
     process.exit(0);
   }
 

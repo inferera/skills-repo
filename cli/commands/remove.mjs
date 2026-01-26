@@ -1,35 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import os from 'node:os';
 
-// Agent configurations
-const AGENTS = {
-  claude: {
-    label: "Claude Code",
-    projectDir: ".claude/skills",
-    globalDir: path.join(os.homedir(), ".claude/skills"),
-  },
-  codex: {
-    label: "Codex",
-    projectDir: ".codex/skills",
-    globalDir: path.join(os.homedir(), ".codex/skills"),
-  },
-  opencode: {
-    label: "OpenCode",
-    projectDir: ".opencode/skills",
-    globalDir: path.join(os.homedir(), ".opencode/skills"),
-  },
-  cursor: {
-    label: "Cursor",
-    projectDir: ".cursor/skills",
-    globalDir: path.join(os.homedir(), ".cursor/skills"),
-  },
-  antigravity: {
-    label: "Antigravity",
-    projectDir: ".antigravity/skills",
-    globalDir: path.join(os.homedir(), ".antigravity/skills"),
-  },
-};
+import { AGENTS } from "../lib/agents.mjs";
+import { assertSlug } from "../lib/validation.mjs";
 
 function parseArgs(args) {
   const result = {
@@ -78,6 +51,8 @@ Examples:
 }
 
 async function removeSkill(skillName, agent, scope) {
+  assertSlug("skill-name", skillName);
+
   // Validate agent
   const agentConfig = AGENTS[agent];
   if (!agentConfig) {
@@ -94,8 +69,13 @@ async function removeSkill(skillName, agent, scope) {
   console.log(`   Scope: ${scope}\n`);
 
   // Determine target directory
-  const targetBaseDir = scope === 'project' ? agentConfig.projectDir : agentConfig.globalDir;
-  const targetDir = path.join(targetBaseDir, skillName);
+  const targetBaseDir =
+    scope === "project" ? path.resolve(process.cwd(), agentConfig.projectDir) : agentConfig.globalDir;
+  const resolvedBase = path.resolve(targetBaseDir);
+  const targetDir = path.resolve(targetBaseDir, skillName);
+  if (!targetDir.startsWith(resolvedBase + path.sep)) {
+    throw new Error("Refusing to remove outside the agent skills directory");
+  }
 
   // Check if skill exists
   try {

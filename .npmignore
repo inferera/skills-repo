@@ -11,6 +11,10 @@ site/
 docs/
 skills/
 .codex/
+.claude/
+.cursor/
+.opencode/
+.antigravity/
 
 # Scripts (keep only cli/)
 scripts/
@@ -27,4 +31,4 @@ out/
 dist/
 
 # Keep only necessary files for CLI
-# Include: cli/, registry/, package.json, README.md, INSTALL.md
+# Include: cli/, registry/, package.json, README.md

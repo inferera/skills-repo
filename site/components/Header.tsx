@@ -32,7 +32,7 @@ export function Header() {
               href="/import"
               className="px-3 py-2 rounded-lg text-sm font-medium bg-accent text-white hover:bg-accent-hover transition-colors"
             >
-              Import
+              Submit
             </Link>
             {REPO_URL && (
               <a

@@ -1,39 +1,37 @@
 # Skills Registry
 
-Open-source repository for managing a community skills registry:
+Community-maintained registry of skills for AI agents:
 
-- 2-level categories: `skills/<category>/<subcategory>/<skill-id>/`
-- per-skill registry metadata: `.x_skill.yaml` (structured, repo-managed) + `SKILL.md` (human instructions)
-- static site (Next.js static export) for browsing/searching skills + importer UI
-- importer: paste a GitHub repo URL -> select skills -> open an import issue -> GitHub Action opens a PR
-- **NPX CLI tool** to install skills into agent CLIs (claude, codex, opencode, cursor, antigravity)
+- Canonical skills: `skills/<category>/<subcategory>/<skill-id>/`
+- Per-skill metadata: `.x_skill.yaml` (validated) + `SKILL.md` (instructions)
+- Static site (`site/`) for browsing/searching + an Importer UI
+- `aiskill` CLI (via `npx`) to install skills into agent directories
 
-## Quick Start
+Docs:
 
-### Install a Skill
+- English: `docs/index.md`
+- 中文：`docs/index.zh-CN.md`
+
+## Quickstart
 
 ```bash
-# Install a skill using npx from GitHub (no npm install needed)
-npx github:xue1213888/skills-repo add ui-ux-pro-max --agent claude --scope project
+# From GitHub (no npm publish needed)
+npx github:OWNER/REPO list
+npx github:OWNER/REPO add ui-ux-pro-max --agent claude --scope project
 
-# List all available skills
-npx github:xue1213888/skills-repo list
-
-# Remove a skill
-npx github:xue1213888/skills-repo remove ui-ux-pro-max
-```
-
-**Alternative:** If published to npm, you can use the shorter command:
-```bash
+# From npm (after publishing)
+npx aiskill list
 npx aiskill add ui-ux-pro-max --agent claude --scope project
 ```
 
-See [INSTALL.md](INSTALL.md) for detailed installation instructions.
+## Contribute
 
-Design + architecture spec:
+Preferred flow for contributors:
 
-- `docs/RFC-0001-skills-registry.md`
-- 部署与使用手册（中文）：`docs/DEPLOYMENT.zh-CN.md`
+- Host your skill in a public GitHub repo (must contain `SKILL.md`)
+- Use the site `/import` page to submit an import issue
+
+See `docs/contributing.md` and `docs/importer.md`.
 
 ## Repository Layout
 
@@ -41,47 +39,10 @@ Design + architecture spec:
 skills/      # source of truth: community skills
 schemas/     # JSON Schemas (.x_skill.yaml)
 scripts/     # build/validate utilities
-cli/         # npx CLI tool (aiskill command)
-site/        # Next.js static site
-docs/        # RFCs and contributor docs
-registry/    # generated indexes for the site/tooling
+cli/         # CLI tool (aiskill)
+site/        # Next.js static site (static export)
+docs/        # documentation (EN + zh-CN)
+registry/    # generated indexes for site/tooling
 ```
 
-Note: `.codex/` is currently a legacy folder used by local tooling; the canonical skill sources live under `skills/`.
-
-## Adding a Skill (v1)
-
-1. Create a folder: `skills/<category>/<subcategory>/<skill-id>/`
-2. Add:
-   - `SKILL.md`
-   - `.x_skill.yaml` (see `schemas/skill.schema.json`)
-
-## Local Dev
-
-From repo root:
-
-```bash
-# Install tooling deps
-npm install
-
-# Validate skills and build registry
-npm run validate
-npm run build:registry
-
-# Configure site environment variables
-cd site
-cp .env.example .env.local
-# Edit .env.local and set NEXT_PUBLIC_REPO_SLUG to your GitHub username/repo
-npm install
-cd ..
-
-# Run the site (automatically rebuilds registry first)
-npm run dev:site
-
-# Or build the site for production
-npm run build:site
-```
-
-The site will be available at http://localhost:3000
-
-**Note**: When you add or modify skills, run `npm run build:registry` to update the registry files, then commit them to Git.
+See `docs/contributing.md` for the contribution workflow and `docs/deployment.md` for GitHub Pages/Vercel deployment.

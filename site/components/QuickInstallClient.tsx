@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { REPO_URL, REPO_SLUG } from "@/lib/config";
+import { REPO_REF, REPO_SLUG, REPO_URL } from "@/lib/config";
 
 import { CommandBlockClient } from "@/components/CommandBlockClient";
 
@@ -71,26 +71,33 @@ export function QuickInstallClient({
     if (method === "npx") {
       // NPX method using GitHub
       const scopeFlag = scope === "global" ? " --scope global" : "";
+      const refFlag = REPO_REF && REPO_REF !== "main" ? ` --ref ${REPO_REF}` : "";
       return `# Install ${skillId} to ${targetDir}
-npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}`;
+npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
     } else {
-      // Curl + tar method
-      const repoSlugFormatted = REPO_SLUG.replace('/', '-');
-      const skillPath = repoPath || `skills/${skillId}`;
-      const pathParts = skillPath.split('/').filter(Boolean);
+      // Curl + tar method (portable across GitHub + BSD/GNU tar)
+      if (!repoPath) return `# Missing repoPath for ${skillId}`;
+
+      const repoName = REPO_SLUG.split("/")[1] ?? "";
+      const safeRef = REPO_REF.replaceAll("/", "-");
+      const archiveRoot = `${repoName}-${safeRef}`;
+      const skillPath = repoPath;
+
+      const pathParts = skillPath.split("/").filter(Boolean);
       const stripComponents = pathParts.length + 1;
 
-      const commands = [
+      const tarballUrl = `https://codeload.github.com/${REPO_SLUG}/tar.gz/${encodeURIComponent(REPO_REF)}`;
+      const memberPath = `${archiveRoot}/${skillPath}`;
+
+      return [
         `# Install ${skillId} to ${targetDir}`,
         `mkdir -p "${targetDir}/${skillId}"`,
-        `curl -sL "${REPO_URL}/archive/refs/heads/main.tar.gz" | \\`,
-        `  tar -xz --strip-components=${stripComponents} \\`,
-        `  "${repoSlugFormatted}-main/${skillPath}" \\`,
+        `curl -fsSL "${tarballUrl}" | \\`,
+        `  tar -xz -f - --strip-components=${stripComponents} \\`,
         `  --exclude=".x_skill.yaml" \\`,
-        `  -C "${targetDir}/${skillId}/"`,
-      ];
-
-      return commands.join("\n");
+        `  -C "${targetDir}/${skillId}/" \\`,
+        `  "${memberPath}"`
+      ].join("\n");
     }
   }, [skillId, repoPath, targetDir, agent, scope, method]);
 

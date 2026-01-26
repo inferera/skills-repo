@@ -1,15 +1,122 @@
 {
   "specVersion": 1,
-  "generatedAt": "2026-01-26T06:47:06.442Z",
+  "generatedAt": "2026-01-26T10:21:46.587Z",
   "skills": [
+    {
+      "specVersion": 1,
+      "id": "skill-creator",
+      "title": "Skill Creator",
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/skill-creator",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "data-ai",
+      "subcategory": "data-analysis",
+      "repoPath": "skills/data-ai/data-analysis/skill-creator",
+      "summary": "This skill provides guidance for creating effective skills.",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/output-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/init_skill.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/package_skill.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "mcp-builder",
+      "title": "MCP Server Development Guide",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/mcp-builder",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "data-ai",
+      "subcategory": "ml-ops",
+      "repoPath": "skills/data-ai/ml-ops/mcp-builder",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/evaluation.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/mcp_best_practices.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/node_mcp_server.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/python_mcp_server.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/connections.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/evaluation.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/example_evaluation.xml",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/requirements.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
     {
       "specVersion": 1,
       "id": "algorithmic-art",
       "title": "algorithmic-art",
       "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
-      "tags": [
-        "test"
-      ],
       "links": {
         "docs": "./SKILL.md"
       },
@@ -426,22 +533,371 @@
     },
     {
       "specVersion": 1,
-      "id": "doc-coauthoring",
-      "title": "Doc Co-Authoring Workflow",
-      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "id": "slack-gif-creator",
+      "title": "Slack GIF Creator",
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.",
       "links": {
         "docs": "./SKILL.md"
       },
       "source": {
         "repo": "https://github.com/anthropics/skills",
-        "path": "skills/doc-coauthoring",
+        "path": "skills/slack-gif-creator",
         "ref": "main",
         "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
       "category": "design",
       "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/doc-coauthoring",
-      "summary": "This skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing.",
+      "repoPath": "skills/design/ui-ux/slack-gif-creator",
+      "summary": "A toolkit providing utilities and knowledge for creating animated GIFs optimized for Slack.",
+      "files": [
+        {
+          "path": "core/easing.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/frame_composer.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/gif_builder.py",
+          "kind": "file"
+        },
+        {
+          "path": "core/validators.py",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "requirements.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "internal-comms",
+      "title": "internal-comms",
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/internal-comms",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "development",
+      "subcategory": "backend",
+      "repoPath": "skills/development/backend/internal-comms",
+      "summary": "To write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports",
+      "files": [
+        {
+          "path": "examples/3p-updates.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/company-newsletter.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/faq-answers.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/general-comms.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "webapp-testing",
+      "title": "Web Application Testing",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/webapp-testing",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "development",
+      "subcategory": "backend",
+      "repoPath": "skills/development/backend/webapp-testing",
+      "summary": "To test local web applications, write native Python Playwright scripts.",
+      "files": [
+        {
+          "path": "examples/console_logging.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/element_discovery.py",
+          "kind": "file"
+        },
+        {
+          "path": "examples/static_html_automation.py",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/with_server.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "frontend-design",
+      "title": "frontend-design",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/frontend-design",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "development",
+      "subcategory": "frontend",
+      "repoPath": "skills/development/frontend/frontend-design",
+      "summary": "This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "ui-ux-pro-max",
+      "title": "UI/UX Pro Max - Design Intelligence",
+      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
+      "tags": [
+        "ui",
+        "ux"
+      ],
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "path": ".claude/skills/ui-ux-pro-max",
+        "ref": "main",
+        "commit": "3eb7d99d67b6e7a33807463dbbb0d01940a96e1f"
+      },
+      "category": "development",
+      "subcategory": "frontend",
+      "repoPath": "skills/development/frontend/ui-ux-pro-max",
+      "summary": "Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations.",
+      "files": [
+        {
+          "path": "data/charts.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/colors.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/icons.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/landing.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/products.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/react-performance.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/astro.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/flutter.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/html-tailwind.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/jetpack-compose.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nextjs.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nuxt-ui.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/nuxtjs.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/react-native.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/react.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/shadcn.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/svelte.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/swiftui.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/stacks/vue.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/styles.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/typography.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/ui-reasoning.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/ux-guidelines.csv",
+          "kind": "file"
+        },
+        {
+          "path": "data/web-interface.csv",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/core.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/design_system.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/search.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "web-artifacts-builder",
+      "title": "Web Artifacts Builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/web-artifacts-builder",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "development",
+      "subcategory": "frontend",
+      "repoPath": "skills/development/frontend/web-artifacts-builder",
+      "summary": "To build powerful frontend claude.ai artifacts, follow these steps:\n1. Initialize the frontend repo using `scripts/init-artifact.sh`\n2. Develop your artifact by editing the generated code\n3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`\n4. Display artifact to user\n5. (Optional) Test the artifact",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/bundle-artifact.sh",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/init-artifact.sh",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/shadcn-components.tar.gz",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "create-pr",
+      "title": "Create Pull Request",
+      "description": "Creates GitHub pull requests with properly formatted titles that pass the check-pr-title CI validation. Use when creating PRs, submitting changes for review, or when the user says /pr or asks to create a pull request.",
+      "tags": [
+        "github"
+      ],
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/n8n-io/n8n",
+        "path": ".claude/skills/create-pr",
+        "ref": "master",
+        "commit": "cb0d2a2a52be5c01fc801d30fc3c1d120d506c98"
+      },
+      "category": "devops",
+      "subcategory": "ci-cd",
+      "repoPath": "skills/devops/ci-cd/create-pr",
+      "summary": "Creates GitHub PRs with titles that pass n8n's `check-pr-title` CI validation.",
       "files": [
         {
           "path": "SKILL.md",
@@ -463,9 +919,9 @@
         "ref": "main",
         "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/docx",
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "repoPath": "skills/documentation/knowledge-base/docx",
       "summary": "## Overview",
       "files": [
         {
@@ -708,141 +1164,6 @@
     },
     {
       "specVersion": 1,
-      "id": "frontend-design",
-      "title": "frontend-design",
-      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/frontend-design",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/frontend-design",
-      "summary": "This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.",
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "internal-comms",
-      "title": "internal-comms",
-      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/internal-comms",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/internal-comms",
-      "summary": "To write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports",
-      "files": [
-        {
-          "path": "examples/3p-updates.md",
-          "kind": "file"
-        },
-        {
-          "path": "examples/company-newsletter.md",
-          "kind": "file"
-        },
-        {
-          "path": "examples/faq-answers.md",
-          "kind": "file"
-        },
-        {
-          "path": "examples/general-comms.md",
-          "kind": "file"
-        },
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "mcp-builder",
-      "title": "MCP Server Development Guide",
-      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/mcp-builder",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/mcp-builder",
-      "summary": "## Overview",
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "reference/evaluation.md",
-          "kind": "file"
-        },
-        {
-          "path": "reference/mcp_best_practices.md",
-          "kind": "file"
-        },
-        {
-          "path": "reference/node_mcp_server.md",
-          "kind": "file"
-        },
-        {
-          "path": "reference/python_mcp_server.md",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/connections.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/evaluation.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/example_evaluation.xml",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/requirements.txt",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
       "id": "pdf",
       "title": "PDF Processing Guide",
       "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.",
@@ -855,9 +1176,9 @@
         "ref": "main",
         "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/pdf",
+      "category": "documentation",
+      "subcategory": "knowledge-base",
+      "repoPath": "skills/documentation/knowledge-base/pdf",
       "summary": "## Overview",
       "files": [
         {
@@ -912,6 +1233,89 @@
     },
     {
       "specVersion": 1,
+      "id": "doc-coauthoring",
+      "title": "Doc Co-Authoring Workflow",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/doc-coauthoring",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "documentation",
+      "subcategory": "technical-docs",
+      "repoPath": "skills/documentation/technical-docs/doc-coauthoring",
+      "summary": "This skill provides a structured workflow for guiding users through collaborative document creation. Act as an active guide, walking users through three stages: Context Gathering, Refinement & Structure, and Reader Testing.",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "template",
+      "title": "Insert instructions below",
+      "description": "Replace with description of the skill and when Claude should use it.",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "template",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "testing-security",
+      "subcategory": "testing",
+      "repoPath": "skills/testing-security/testing/template",
+      "summary": "",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
+      "id": "xlsx",
+      "title": "Requirements for Outputs",
+      "description": "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas",
+      "links": {
+        "docs": "./SKILL.md"
+      },
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/xlsx",
+        "ref": "main",
+        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
+      },
+      "category": "testing-security",
+      "subcategory": "testing",
+      "repoPath": "skills/testing-security/testing/xlsx",
+      "summary": "## All Excel files",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "recalc.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 1,
       "id": "pptx",
       "title": "PPTX creation, editing, and analysis",
       "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks",
@@ -924,9 +1328,9 @@
         "ref": "main",
         "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/pptx",
+      "category": "tools",
+      "subcategory": "automation",
+      "repoPath": "skills/tools/automation/pptx",
       "summary": "## Overview",
       "files": [
         {
@@ -1157,129 +1561,6 @@
     },
     {
       "specVersion": 1,
-      "id": "skill-creator",
-      "title": "Skill Creator",
-      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/skill-creator",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/skill-creator",
-      "summary": "This skill provides guidance for creating effective skills.",
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "references/output-patterns.md",
-          "kind": "file"
-        },
-        {
-          "path": "references/workflows.md",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/init_skill.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/package_skill.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/quick_validate.py",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "slack-gif-creator",
-      "title": "Slack GIF Creator",
-      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/slack-gif-creator",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/slack-gif-creator",
-      "summary": "A toolkit providing utilities and knowledge for creating animated GIFs optimized for Slack.",
-      "files": [
-        {
-          "path": "core/easing.py",
-          "kind": "file"
-        },
-        {
-          "path": "core/frame_composer.py",
-          "kind": "file"
-        },
-        {
-          "path": "core/gif_builder.py",
-          "kind": "file"
-        },
-        {
-          "path": "core/validators.py",
-          "kind": "file"
-        },
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "requirements.txt",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "template",
-      "title": "Insert instructions below",
-      "description": "Replace with description of the skill and when Claude should use it.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "template",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/template",
-      "summary": "",
-      "files": [
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
       "id": "theme-factory",
       "title": "Theme Factory Skill",
       "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
@@ -1292,9 +1573,9 @@
         "ref": "main",
         "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/theme-factory",
+      "category": "tools",
+      "subcategory": "automation",
+      "repoPath": "skills/tools/automation/theme-factory",
       "summary": "This skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact.",
       "files": [
         {
@@ -1347,258 +1628,6 @@
         },
         {
           "path": "themes/tech-innovation.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "ui-ux-pro-max",
-      "title": "UI/UX Pro Max - Design Intelligence",
-      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-        "path": ".claude/skills/ui-ux-pro-max",
-        "ref": "main",
-        "commit": "3eb7d99d67b6e7a33807463dbbb0d01940a96e1f"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/ui-ux-pro-max",
-      "summary": "Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations.",
-      "files": [
-        {
-          "path": "data/charts.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/colors.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/icons.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/landing.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/products.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/react-performance.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/astro.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/flutter.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/html-tailwind.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/jetpack-compose.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/nextjs.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/nuxt-ui.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/nuxtjs.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/react-native.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/react.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/shadcn.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/svelte.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/swiftui.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/stacks/vue.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/styles.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/typography.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/ui-reasoning.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/ux-guidelines.csv",
-          "kind": "file"
-        },
-        {
-          "path": "data/web-interface.csv",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/core.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/design_system.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/search.py",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "web-artifacts-builder",
-      "title": "Web Artifacts Builder",
-      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/web-artifacts-builder",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/web-artifacts-builder",
-      "summary": "To build powerful frontend claude.ai artifacts, follow these steps:\n1. Initialize the frontend repo using `scripts/init-artifact.sh`\n2. Develop your artifact by editing the generated code\n3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`\n4. Display artifact to user\n5. (Optional) Test the artifact",
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/bundle-artifact.sh",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/init-artifact.sh",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/shadcn-components.tar.gz",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "webapp-testing",
-      "title": "Web Application Testing",
-      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/webapp-testing",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/webapp-testing",
-      "summary": "To test local web applications, write native Python Playwright scripts.",
-      "files": [
-        {
-          "path": "examples/console_logging.py",
-          "kind": "file"
-        },
-        {
-          "path": "examples/element_discovery.py",
-          "kind": "file"
-        },
-        {
-          "path": "examples/static_html_automation.py",
-          "kind": "file"
-        },
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/with_server.py",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
-          "kind": "file"
-        }
-      ]
-    },
-    {
-      "specVersion": 1,
-      "id": "xlsx",
-      "title": "Requirements for Outputs",
-      "description": "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas",
-      "links": {
-        "docs": "./SKILL.md"
-      },
-      "source": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/xlsx",
-        "ref": "main",
-        "commit": "69c0b1a0674149f27b61b2635f935524b6add202"
-      },
-      "category": "design",
-      "subcategory": "ui-ux",
-      "repoPath": "skills/design/ui-ux/xlsx",
-      "summary": "## All Excel files",
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "kind": "file"
-        },
-        {
-          "path": "recalc.py",
-          "kind": "file"
-        },
-        {
-          "path": "SKILL.md",
           "kind": "file"
         }
       ]
