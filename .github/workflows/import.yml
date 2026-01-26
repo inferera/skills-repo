@@ -40,12 +40,15 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
           branch: "import/issue-${{ github.event.issue.number }}"
           title: "Import skills (issue #${{ github.event.issue.number }})"
           commit-message: "Import skills (issue #${{ github.event.issue.number }})"
           body: |
             Automated import triggered by issue #${{ github.event.issue.number }}.
             - Add label `import-approved` on an import request issue to run.
+
+            Closes #${{ github.event.issue.number }}
 
       - name: Comment on issue with PR link
         if: steps.cpr.outputs.pull-request-url != ''

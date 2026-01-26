@@ -1,0 +1,79 @@
+name: PR Lifecycle Management
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  handle-pr-closed:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+
+    steps:
+      - name: Handle rejected PR
+        if: github.event.pull_request.merged == false
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Extract issue number from PR body or branch name
+            const prBody = context.payload.pull_request.body || '';
+            const branchName = context.payload.pull_request.head.ref;
+
+            // Try to extract issue number from branch name (import/issue-123)
+            const branchMatch = branchName.match(/import\/issue-(\d+)/);
+
+            // Try to extract issue number from PR body (issue #123 or #123)
+            const bodyMatch = prBody.match(/#(\d+)/);
+
+            const issueNumber = branchMatch?.[1] || bodyMatch?.[1];
+
+            if (issueNumber) {
+              console.log(`Found related issue: #${issueNumber}`);
+
+              // Add "wontfix" label to the issue
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: parseInt(issueNumber),
+                  labels: ['wontfix']
+                });
+
+                // Add a comment explaining why
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: parseInt(issueNumber),
+                  body: `The related PR #${context.payload.pull_request.number} was closed without merging. This import request will not be processed.`
+                });
+
+                console.log(`Added "wontfix" label to issue #${issueNumber}`);
+              } catch (error) {
+                console.error(`Failed to update issue #${issueNumber}:`, error);
+              }
+            } else {
+              console.log('No related issue found for this PR');
+            }
+
+      - name: Comment on merged PR
+        if: github.event.pull_request.merged == true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prBody = context.payload.pull_request.body || '';
+            const bodyMatch = prBody.match(/#(\d+)/);
+            const issueNumber = bodyMatch?.[1];
+
+            if (issueNumber) {
+              console.log(`PR merged successfully, issue #${issueNumber} will be auto-closed by GitHub`);
+
+              // Optionally add a success comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: parseInt(issueNumber),
+                body: `✅ Skills imported successfully via PR #${context.payload.pull_request.number}`
+              });
+            }
