@@ -2,36 +2,111 @@
 
 import { useMemo, useState } from "react";
 
-import { REPO_SLUG } from "@/lib/config";
+import { REPO_URL } from "@/lib/config";
 
 import { CommandBlockClient } from "@/components/CommandBlockClient";
 
-const AGENTS: Array<{ id: string; label: string }> = [
-  { id: "codex", label: "Codex" },
-  { id: "claude-code", label: "Claude Code" },
-  { id: "gemini-cli", label: "Gemini CLI" },
-  { id: "opencode", label: "OpenCode" }
+// Agent configurations
+// Each agent has its own directory structure for skills
+const AGENTS = [
+  {
+    id: "codex",
+    label: "Codex",
+    projectDir: ".codex/skills",
+    globalDir: "~/.codex/skills",
+  },
+  {
+    id: "claude",
+    label: "Claude Code",
+    projectDir: ".claude/skills",
+    globalDir: "~/.claude/skills",
+  },
+  {
+    id: "opencode",
+    label: "OpenCode",
+    projectDir: ".opencode/skills",
+    globalDir: "~/.opencode/skills",
+  },
+  {
+    id: "cursor",
+    label: "Cursor",
+    projectDir: ".cursor/skills",
+    globalDir: "~/.cursor/skills",
+  },
+  {
+    id: "antigravity",
+    label: "Antigravity",
+    projectDir: ".antigravity/skills",
+    globalDir: "~/.antigravity/skills",
+  },
 ];
 
-export function QuickInstallClient({ skillId, declaredAgents }: { skillId: string; declaredAgents?: string[] }) {
+type InstallScope = "project" | "global";
+
+export function QuickInstallClient({
+  skillId,
+  repoPath,
+  declaredAgents
+}: {
+  skillId: string;
+  repoPath?: string;
+  declaredAgents?: string[];
+}) {
   const declared = useMemo(() => new Set((declaredAgents ?? []).filter(Boolean)), [declaredAgents]);
   const defaultAgent = declaredAgents?.find((a) => AGENTS.some((x) => x.id === a)) ?? "codex";
   const [agent, setAgent] = useState(defaultAgent);
+  const [scope, setScope] = useState<InstallScope>("project");
 
+  const agentConfig = AGENTS.find((a) => a.id === agent) ?? AGENTS[0];
+  const targetDir = scope === "project" ? agentConfig.projectDir : agentConfig.globalDir;
+
+  // Generate the installation command
+  // The command clones/downloads the skill files (excluding .x_skill.yaml) to the target directory
   const cmd = useMemo(() => {
-    const parts = ["npx", "skillhub@latest", "add", skillId, "--agent", agent];
-    if (REPO_SLUG) parts.push("--registry", REPO_SLUG);
-    return parts.join(" ");
-  }, [agent, skillId]);
+    if (!REPO_URL) {
+      return `# Registry URL not configured`;
+    }
+
+    // Extract owner/repo from REPO_URL
+    const repoMatch = REPO_URL.match(/github\.com\/([^/]+\/[^/]+)/);
+    const repoSlug = repoMatch ? repoMatch[1] : "owner/repo";
+
+    // The skill path in the repository
+    const skillPath = repoPath || `skills/${skillId}`;
+
+    // Generate a curl + tar command to download and extract the skill
+    // This downloads only the skill directory, excludes .x_skill.yaml
+    const commands = [
+      `# Install ${skillId} to ${targetDir}`,
+      `mkdir -p "${targetDir}/${skillId}"`,
+      `curl -sL "https://api.github.com/repos/${repoSlug}/tarball/main" | \\`,
+      `  tar -xz --strip-components=2 -C "${targetDir}/${skillId}" \\`,
+      `  --exclude=".x_skill.yaml" "*/${skillPath}/"`,
+    ];
+
+    return commands.join("\n");
+  }, [skillId, repoPath, targetDir]);
 
   return (
-    <div className="space-y-3">
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      {/* Agent selector */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Agent</label>
+        <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
+          Agent
+        </label>
         <select
-          className="w-full h-10 px-3 bg-background-secondary border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
           value={agent}
           onChange={(e) => setAgent(e.target.value)}
+          className="text-foreground bg-background-secondary border-border"
+          style={{
+            width: "100%",
+            height: "40px",
+            padding: "0 12px",
+            borderRadius: "8px",
+            border: "1px solid var(--color-border)",
+            fontSize: "14px",
+            cursor: "pointer",
+          }}
         >
           {AGENTS.map((a) => (
             <option key={a.id} value={a.id}>
@@ -42,10 +117,80 @@ export function QuickInstallClient({ skillId, declaredAgents }: { skillId: strin
         </select>
       </div>
 
-      <CommandBlockClient command={cmd} />
+      {/* Scope selector */}
+      <div>
+        <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
+          Scope
+        </label>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            type="button"
+            onClick={() => setScope("project")}
+            className={scope === "project" ? "bg-accent" : "bg-background-secondary border-border"}
+            style={{
+              flex: 1,
+              padding: "8px 12px",
+              borderRadius: "8px",
+              border: scope === "project" ? "none" : "1px solid var(--color-border)",
+              color: scope === "project" ? "white" : "var(--color-text)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              transition: "all 150ms",
+            }}
+          >
+            Project
+          </button>
+          <button
+            type="button"
+            onClick={() => setScope("global")}
+            className={scope === "global" ? "bg-accent" : "bg-background-secondary border-border"}
+            style={{
+              flex: 1,
+              padding: "8px 12px",
+              borderRadius: "8px",
+              border: scope === "global" ? "none" : "1px solid var(--color-border)",
+              color: scope === "global" ? "white" : "var(--color-text)",
+              fontWeight: 500,
+              fontSize: "14px",
+              cursor: "pointer",
+              transition: "all 150ms",
+            }}
+          >
+            Global
+          </button>
+        </div>
+      </div>
 
-      <p className="text-xs text-muted">
-        Uses the planned installer CLI. The <code className="px-1 py-0.5 rounded bg-accent-muted text-accent text-[0.9em]">--registry</code> flag points to this registry.
+      {/* Target directory display */}
+      <div
+        className="bg-background-secondary border-border"
+        style={{
+          padding: "12px",
+          borderRadius: "8px",
+          border: "1px solid var(--color-border)",
+        }}
+      >
+        <div className="text-muted" style={{ fontSize: "12px", marginBottom: "4px" }}>
+          Install to:
+        </div>
+        <code className="text-accent" style={{ fontSize: "13px", fontFamily: "var(--font-mono)" }}>
+          {targetDir}/{skillId}
+        </code>
+      </div>
+
+      {/* Install command */}
+      <div>
+        <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
+          Install Command
+        </label>
+        <CommandBlockClient command={cmd} />
+      </div>
+
+      {/* Note */}
+      <p className="text-muted" style={{ fontSize: "12px", margin: 0, lineHeight: 1.5 }}>
+        This copies the skill files to the {scope === "project" ? "project" : "global"} skills directory for {agentConfig.label}.
+        The <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>.x_skill.yaml</code> file is excluded (internal metadata).
       </p>
     </div>
   );

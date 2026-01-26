@@ -56,7 +56,13 @@ function parseRequest(issueBody) {
     let targetSubcategory = it.targetSubcategory;
     assertSlug(`items[${idx}].targetCategory`, targetCategory);
     assertSlug(`items[${idx}].targetSubcategory`, targetSubcategory);
-    return { sourcePath, targetCategory, targetSubcategory };
+
+    // Parse optional fields
+    let id = typeof it.id === "string" ? it.id.trim() : undefined;
+    let title = typeof it.title === "string" ? it.title.trim() : undefined;
+    let tags = Array.isArray(it.tags) ? it.tags.filter(t => typeof t === "string" && t.trim()).map(t => t.trim()) : [];
+
+    return { sourcePath, targetCategory, targetSubcategory, id, title, tags };
   });
 
   return {
@@ -172,7 +178,7 @@ async function main() {
       await fs.rm(destLegacy);
     }
 
-    // Inject/overwrite source provenance.
+    // Inject/overwrite source provenance and metadata from issue.
     meta.source = {
       ...(meta.source ?? {}),
       repo: req.sourceRepo,
@@ -180,6 +186,18 @@ async function main() {
       ref: req.ref,
       commit
     };
+
+    // Add title from issue if provided and not already set
+    if (item.title && !meta.title) {
+      meta.title = item.title;
+    }
+
+    // Add tags from issue (merge with existing)
+    if (item.tags && item.tags.length > 0) {
+      const existingTags = Array.isArray(meta.tags) ? meta.tags : [];
+      const allTags = [...new Set([...existingTags, ...item.tags])];
+      meta.tags = allTags;
+    }
 
     await fs.writeFile(destManifest, YAML.stringify(meta), "utf8");
 

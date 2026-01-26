@@ -16,10 +16,11 @@ import { getSkillById, loadRegistryIndex } from "@/lib/registry";
 
 export const dynamicParams = false;
 
-const FILE_PREVIEW_MAX_BYTES = 80 * 1024;
-const FILE_PREVIEW_MAX_CODE_LINES = 220;
-const CSV_PREVIEW_MAX_ROWS = 28;
-const CSV_PREVIEW_MAX_COLS = 12;
+// Increased limits to avoid truncation
+const FILE_PREVIEW_MAX_BYTES = 512 * 1024; // 512KB
+const FILE_PREVIEW_MAX_CODE_LINES = 2000;
+const CSV_PREVIEW_MAX_ROWS = 100;
+const CSV_PREVIEW_MAX_COLS = 20;
 
 const MARKDOWN_COMPONENTS: Components = {
   table({ node, ...props }) {
@@ -54,6 +55,55 @@ type FileMeta = {
   githubUrl: string;
   preview: FilePreview;
 };
+
+// Parse YAML frontmatter from SKILL.md
+type FrontmatterData = Record<string, string | string[] | undefined>;
+
+function parseSkillFrontmatter(content: string): { frontmatter: FrontmatterData; body: string } {
+  const lines = content.split(/\r?\n/);
+  if (lines[0]?.trim() !== "---") {
+    return { frontmatter: {}, body: content };
+  }
+
+  let endIndex = -1;
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i]?.trim() === "---") {
+      endIndex = i;
+      break;
+    }
+  }
+
+  if (endIndex === -1) {
+    return { frontmatter: {}, body: content };
+  }
+
+  const frontmatterLines = lines.slice(1, endIndex);
+  const frontmatter: FrontmatterData = {};
+
+  for (const line of frontmatterLines) {
+    const match = line.match(/^(\w+):\s*(.*)$/);
+    if (match) {
+      const key = match[1]!;
+      let value = match[2]!.trim();
+
+      // Remove quotes if present
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+
+      // Parse arrays like [a, b, c]
+      if (value.startsWith("[") && value.endsWith("]")) {
+        const arrContent = value.slice(1, -1);
+        frontmatter[key] = arrContent.split(",").map(s => s.trim().replace(/^["']|["']$/g, ""));
+      } else {
+        frontmatter[key] = value;
+      }
+    }
+  }
+
+  const body = lines.slice(endIndex + 1).join("\n");
+  return { frontmatter, body };
+}
 
 export async function generateStaticParams() {
   const index = await loadRegistryIndex();
@@ -220,6 +270,74 @@ function stripHttps(url: string) {
   return url.replace(/^https?:\/\//, "");
 }
 
+// Frontmatter table component
+function FrontmatterTable({ data }: { data: FrontmatterData }) {
+  const entries = Object.entries(data).filter(([, v]) => v !== undefined && v !== "");
+  if (entries.length === 0) return null;
+
+  return (
+    <div
+      className="bg-background-secondary border-border"
+      style={{
+        border: "1px solid var(--color-border)",
+        borderRadius: "12px",
+        overflow: "hidden",
+        marginBottom: "24px",
+      }}
+    >
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <tbody>
+          {entries.map(([key, value]) => (
+            <tr key={key} style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td
+                className="text-muted bg-card"
+                style={{
+                  padding: "10px 16px",
+                  fontWeight: 500,
+                  fontSize: "13px",
+                  width: "140px",
+                  verticalAlign: "top",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                {key}
+              </td>
+              <td
+                className="text-foreground"
+                style={{
+                  padding: "10px 16px",
+                  fontSize: "14px",
+                }}
+              >
+                {Array.isArray(value) ? (
+                  <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                    {value.map((v, i) => (
+                      <span
+                        key={i}
+                        className="text-accent bg-accent-muted"
+                        style={{
+                          padding: "2px 8px",
+                          borderRadius: "4px",
+                          fontSize: "12px",
+                          fontFamily: "var(--font-mono)",
+                        }}
+                      >
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  value
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default async function SkillPage({ params }: { params: Promise<{ skillId: string }> }) {
   const { skillId } = await params;
   const index = await loadRegistryIndex();
@@ -227,7 +345,10 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   if (!skill) notFound();
 
   const abs = path.resolve(process.cwd(), "..", skill.repoPath, "SKILL.md");
-  const markdown = await fs.readFile(abs, "utf8");
+  const rawMarkdown = await fs.readFile(abs, "utf8");
+
+  // Parse frontmatter from SKILL.md
+  const { frontmatter, body: markdownBody } = parseSkillFrontmatter(rawMarkdown);
 
   const related = index.skills
     .filter((s) => s.id !== skill.id && (s.category === skill.category || s.subcategory === skill.subcategory))
@@ -410,9 +531,14 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         <section className="p-6 bg-card border border-border rounded-xl overflow-hidden" id="instructions">
           <h2 className="font-heading text-xl font-semibold text-foreground">Instructions</h2>
           <div className="mt-4">
+            {/* Frontmatter table */}
+            {Object.keys(frontmatter).length > 0 && (
+              <FrontmatterTable data={frontmatter} />
+            )}
+            {/* Markdown body */}
             <article className="markdown min-w-0">
               <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
-                {markdown}
+                {markdownBody}
               </ReactMarkdown>
             </article>
           </div>
@@ -428,7 +554,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             Install this skill into a target agent.
           </p>
           <div className="mt-4">
-            <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} />
+            <QuickInstallClient skillId={skill.id} repoPath={skill.repoPath} declaredAgents={skill.agents} />
           </div>
         </section>
 
