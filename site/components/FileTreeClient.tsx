@@ -41,41 +41,128 @@ function countFiles(node: FileTreeNode): number {
   return total;
 }
 
-function TreeNode({
+// File icon based on extension
+function FileIcon({ ext }: { ext: string }) {
+  const e = ext?.toLowerCase() ?? "";
+  if (e === ".md") {
+    return (
+      <svg style={{ width: "16px", height: "16px", color: "#3b82f6", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+      </svg>
+    );
+  }
+  if (e === ".csv") {
+    return (
+      <svg style={{ width: "16px", height: "16px", color: "#22c55e", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <path d="M14 2v6h6M8 13h2M8 17h2M14 13h2M14 17h2" />
+      </svg>
+    );
+  }
+  if ([".js", ".ts", ".tsx", ".jsx", ".py", ".json", ".yaml", ".yml"].includes(e)) {
+    return (
+      <svg style={{ width: "16px", height: "16px", color: "#f59e0b", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <path d="M14 2v6h6M10 12l-2 2 2 2M14 12l2 2-2 2" />
+      </svg>
+    );
+  }
+  return (
+    <svg style={{ width: "16px", height: "16px", color: "var(--color-text-muted)", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+      <path d="M14 2v6h6" />
+    </svg>
+  );
+}
+
+function FolderNode({
   node,
   fileMeta,
-  onFileClick
+  onFileClick,
+  depth
 }: {
   node: FileTreeNode;
   fileMeta: Map<string, SerializedFileMeta>;
   onFileClick: (file: FileMeta) => void;
+  depth: number;
 }) {
-  if (!node.isFile) {
-    return (
-      <li className="my-1">
-        <details open={false}>
-          <summary className="cursor-pointer list-none flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card transition-colors">
-            <svg className="w-4 h-4 text-muted shrink-0 transition-transform [details[open]>&]:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-            <svg className="w-4 h-4 text-accent shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-            </svg>
-            <span className="text-foreground font-medium min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-              {node.name}
-            </span>
-            <span className="ml-auto text-muted text-xs shrink-0">{countFiles(node)} files</span>
-          </summary>
-          <ul className="m-0 pl-5 list-none">
-            {node.children.map((child) => (
-              <TreeNode key={child.path} node={child} fileMeta={fileMeta} onFileClick={onFileClick} />
-            ))}
-          </ul>
-        </details>
-      </li>
-    );
-  }
+  const [isOpen, setIsOpen] = useState(false);
 
+  return (
+    <li style={{ listStyle: "none" }}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "6px 8px",
+          paddingLeft: `${depth * 16 + 8}px`,
+          background: "transparent",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+          textAlign: "left",
+          transition: "background-color 150ms",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--color-card)"}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+      >
+        <svg
+          style={{
+            width: "14px",
+            height: "14px",
+            color: "var(--color-text-muted)",
+            flexShrink: 0,
+            transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+            transition: "transform 150ms",
+          }}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+        <svg style={{ width: "16px", height: "16px", color: "var(--color-accent)", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+        </svg>
+        <span className="text-foreground" style={{ fontWeight: 500, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {node.name}
+        </span>
+        <span className="text-muted" style={{ marginLeft: "auto", fontSize: "12px", flexShrink: 0 }}>
+          {countFiles(node)} files
+        </span>
+      </button>
+      {isOpen && (
+        <ul style={{ margin: 0, padding: 0 }}>
+          {node.children.map((child) =>
+            child.isFile ? (
+              <FileNode key={child.path} node={child} fileMeta={fileMeta} onFileClick={onFileClick} depth={depth + 1} />
+            ) : (
+              <FolderNode key={child.path} node={child} fileMeta={fileMeta} onFileClick={onFileClick} depth={depth + 1} />
+            )
+          )}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+function FileNode({
+  node,
+  fileMeta,
+  onFileClick,
+  depth
+}: {
+  node: FileTreeNode;
+  fileMeta: Map<string, SerializedFileMeta>;
+  onFileClick: (file: FileMeta) => void;
+  depth: number;
+}) {
   const meta = fileMeta.get(node.path);
   const size = meta?.size ?? 0;
   const isSkillMd = node.path === "SKILL.md";
@@ -86,74 +173,78 @@ function TreeNode({
     }
   };
 
-  // Get file icon based on extension
-  const getFileIcon = () => {
-    const ext = meta?.ext?.toLowerCase() ?? "";
-    if (ext === ".md") {
-      return (
-        <svg className="w-4 h-4 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-          <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-        </svg>
-      );
-    }
-    if (ext === ".csv") {
-      return (
-        <svg className="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-          <path d="M14 2v6h6M8 13h2M8 17h2M14 13h2M14 17h2" />
-        </svg>
-      );
-    }
-    if ([".js", ".ts", ".tsx", ".jsx", ".py", ".json", ".yaml", ".yml"].includes(ext)) {
-      return (
-        <svg className="w-4 h-4 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-          <path d="M14 2v6h6M10 12l-2 2 2 2M14 12l2 2-2 2" />
-        </svg>
-      );
-    }
-    return (
-      <svg className="w-4 h-4 text-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-        <path d="M14 2v6h6" />
-      </svg>
-    );
-  };
-
   if (isSkillMd) {
     return (
-      <li className="my-1">
+      <li style={{ listStyle: "none" }}>
         <a
           href="#instructions"
-          className="flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card transition-colors group"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "6px 8px",
+            paddingLeft: `${depth * 16 + 30}px`,
+            borderRadius: "6px",
+            textDecoration: "none",
+            transition: "background-color 150ms",
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--color-card)"}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
         >
-          <div className="w-4" />
-          {getFileIcon()}
-          <span className="text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap group-hover:text-accent transition-colors">
+          <FileIcon ext={meta?.ext ?? ""} />
+          <span className="text-foreground" style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {node.name}
           </span>
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium text-accent bg-accent-muted ml-1">
+          <span
+            style={{
+              padding: "2px 6px",
+              borderRadius: "4px",
+              fontSize: "10px",
+              fontWeight: 500,
+              color: "var(--color-accent)",
+              backgroundColor: "var(--color-accent-muted)",
+              marginLeft: "4px",
+            }}
+          >
             Instructions
           </span>
-          <span className="ml-auto text-muted text-xs shrink-0">{formatBytes(size)}</span>
+          <span className="text-muted" style={{ marginLeft: "auto", fontSize: "12px", flexShrink: 0 }}>
+            {formatBytes(size)}
+          </span>
         </a>
       </li>
     );
   }
 
   return (
-    <li className="my-1">
+    <li style={{ listStyle: "none" }}>
       <button
+        type="button"
         onClick={handleClick}
-        className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg min-w-0 hover:bg-card transition-colors text-left group"
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "6px 8px",
+          paddingLeft: `${depth * 16 + 30}px`,
+          background: "transparent",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+          textAlign: "left",
+          transition: "background-color 150ms",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--color-card)"}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
       >
-        <div className="w-4" />
-        {getFileIcon()}
-        <span className="text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap group-hover:text-accent transition-colors">
+        <FileIcon ext={meta?.ext ?? ""} />
+        <span className="text-foreground" style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {node.name}
         </span>
-        <span className="ml-auto text-muted text-xs shrink-0">{formatBytes(size)}</span>
+        <span className="text-muted" style={{ marginLeft: "auto", fontSize: "12px", flexShrink: 0 }}>
+          {formatBytes(size)}
+        </span>
       </button>
     </li>
   );
@@ -172,15 +263,14 @@ export function FileTreeClient({
 
   return (
     <>
-      <ul className="m-0 p-0 list-none font-mono text-sm">
-        {tree.map((node) => (
-          <TreeNode
-            key={node.path}
-            node={node}
-            fileMeta={fileMetaMap}
-            onFileClick={setSelectedFile}
-          />
-        ))}
+      <ul style={{ margin: 0, padding: 0, fontFamily: "var(--font-mono)", fontSize: "14px" }}>
+        {tree.map((node) =>
+          node.isFile ? (
+            <FileNode key={node.path} node={node} fileMeta={fileMetaMap} onFileClick={setSelectedFile} depth={0} />
+          ) : (
+            <FolderNode key={node.path} node={node} fileMeta={fileMetaMap} onFileClick={setSelectedFile} depth={0} />
+          )
+        )}
       </ul>
 
       <FilePreviewModal file={selectedFile} onClose={() => setSelectedFile(null)} />

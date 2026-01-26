@@ -1,7 +1,7 @@
-@import "tailwindcss";
-
-/* Google Fonts: Space Grotesk + DM Sans */
+/* Google Fonts must be first */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
 
 @theme {
   /* Typography */
@@ -35,23 +35,15 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Animation utilities */
-.animate-in {
-  animation-duration: 200ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-fill-mode: both;
-}
-
-.fade-in {
-  animation-name: fadeIn;
-}
-
-.zoom-in-95 {
-  animation-name: zoomIn;
-}
-
-.duration-200 {
-  animation-duration: 200ms;
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* Base styles */
@@ -135,6 +127,12 @@ body {
 .border-border { border-color: var(--color-border); }
 .border-border-hover { border-color: var(--color-border-hover); }
 
+.hover\:bg-accent-hover:hover { background-color: var(--color-accent-hover); }
+.hover\:border-border-hover:hover { border-color: var(--color-border-hover); }
+.hover\:bg-card:hover { background-color: var(--color-card); }
+.hover\:bg-card-hover:hover { background-color: var(--color-card-hover); }
+.hover\:text-accent:hover { color: var(--color-accent); }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -145,6 +143,15 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: -0.02em;
+}
+
+/* Modal animation */
+.modal-overlay {
+  animation: fadeIn 150ms ease-out;
+}
+
+.modal-content {
+  animation: modalIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Markdown styles */
