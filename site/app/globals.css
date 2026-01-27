@@ -58,6 +58,7 @@ html {
 /* CSS Variables for theming */
 :root {
   /* Light theme (default) */
+  --app-header-height: 64px;
   --color-bg: #ffffff;
   --color-bg-secondary: #f8fafc;
   --color-card: #ffffff;

@@ -1,9 +1,11 @@
 "use client";
 
 import { useTheme } from "./ThemeProvider";
+import { useI18n } from "@/components/I18nProvider";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const { t } = useI18n();
 
   const cycleTheme = () => {
     if (theme === "system") setTheme("light");
@@ -11,11 +13,14 @@ export function ThemeToggle() {
     else setTheme("system");
   };
 
+  const themeLabel =
+    theme === "light" ? t("theme.light") : theme === "dark" ? t("theme.dark") : t("theme.system");
+
   return (
     <button
       onClick={cycleTheme}
       className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-card border border-border hover:bg-accent/10 transition-colors duration-200"
-      aria-label={`Current theme: ${theme}. Click to change.`}
+      aria-label={t("themeToggle.ariaLabel", { theme: themeLabel })}
     >
       {/* Sun icon */}
       <svg

@@ -9,10 +9,12 @@ import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { SkillMiniCard } from "@/components/SkillMiniCard";
+import { T } from "@/components/T";
 import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import { REPO_URL } from "@/lib/config";
+import type { MessageKey } from "@/lib/i18n";
 import { loadAgentConfigs } from "@/lib/agents";
 import { getSkillById, loadRegistryIndex } from "@/lib/registry";
 
@@ -52,8 +54,8 @@ type FileTreeNode = {
 };
 
 type FilePreview =
-  | { kind: "skip"; reason: string }
-  | { kind: "binary"; reason: string }
+  | { kind: "skip"; reason: string | { key: MessageKey; params?: Record<string, string | number> } }
+  | { kind: "binary"; reason: string | { key: MessageKey; params?: Record<string, string | number> } }
   | { kind: "text"; text: string; truncated: boolean }
   | { kind: "markdown"; text: string; truncated: boolean }
   | { kind: "csv"; headers: string[]; rows: string[][]; truncated: boolean };
@@ -393,13 +395,20 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         ext,
         size: 0,
         githubUrl,
-        preview: { kind: "skip", reason: "Missing file on disk." }
+        preview: { kind: "skip", reason: { key: "filePreview.reasonMissing" } }
       });
       continue;
     }
 
     if (p === "SKILL.md") {
-      fileMetaList.push({ path: p, name, ext, size, githubUrl, preview: { kind: "skip", reason: "Rendered below." } });
+      fileMetaList.push({
+        path: p,
+        name,
+        ext,
+        size,
+        githubUrl,
+        preview: { kind: "skip", reason: { key: "filePreview.reasonRenderedBelow" } }
+      });
       continue;
     }
 
@@ -411,7 +420,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         ext,
         size,
         githubUrl,
-        preview: { kind: "binary", reason: "Binary file preview is not supported." }
+        preview: { kind: "binary", reason: { key: "filePreview.reasonBinaryUnsupported" } }
       });
       continue;
     }
@@ -502,9 +511,9 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
                 href={`/c/${skill.category}/${skill.subcategory}`}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-                Back
+                <T k="skill.back" />
               </Link>
               {sourceRepo ? (
                 <a
@@ -516,7 +525,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
                   </svg>
-                  Source
+                  <T k="skill.sourceButton" />
                 </a>
               ) : null}
             </div>
@@ -526,13 +535,13 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         {/* Files card */}
         <section className="p-6 bg-card border border-border rounded-xl overflow-hidden">
           <div className="flex items-center justify-between gap-4 flex-wrap">
-            <h2 className="font-heading text-xl font-semibold text-foreground">Files</h2>
+            <h2 className="font-heading text-xl font-semibold text-foreground"><T k="skill.files" /></h2>
             <span className="px-2.5 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
-              {filePaths.length} files
+              <T k="skill.filesCount" params={{ count: filePaths.length }} />
             </span>
           </div>
           <p className="text-secondary mt-2">
-            Click on a file to preview its contents.
+            <T k="skill.filesDescription" />
           </p>
           <div className="mt-4 p-4 rounded-lg bg-background-secondary border border-border overflow-x-auto">
             <FileTreeClient tree={tree} fileMeta={fileMetaList} />
@@ -541,7 +550,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
 
         {/* Instructions card */}
         <section className="p-6 bg-card border border-border rounded-xl overflow-hidden" id="instructions">
-          <h2 className="font-heading text-xl font-semibold text-foreground">Instructions</h2>
+          <h2 className="font-heading text-xl font-semibold text-foreground"><T k="skill.instructions" /></h2>
           <div className="mt-4">
             {/* Frontmatter table */}
             {Object.keys(frontmatter).length > 0 && (
@@ -558,12 +567,12 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
       </div>
 
       {/* Sidebar - mobile first, sticky on desktop */}
-      <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-16 lg:max-h-[calc(100vh-88px)] lg:overflow-y-auto">
+      <aside className="min-w-0 space-y-4 order-1 lg:order-2 lg:sticky lg:top-[var(--app-header-height)] lg:max-h-[calc(100vh-var(--app-header-height)-24px)] lg:overflow-y-auto">
         {/* Quick install card */}
         <section className="p-5 bg-card border border-border rounded-xl">
-          <h2 className="font-heading text-lg font-semibold text-foreground">Quick Install</h2>
+          <h2 className="font-heading text-lg font-semibold text-foreground"><T k="skill.quickInstall" /></h2>
           <p className="text-secondary text-sm mt-2">
-            Install this skill into a target agent.
+            <T k="skill.quickInstallDescription" />
           </p>
           <div className="mt-4">
             <QuickInstallClient skillId={skill.id} declaredAgents={skill.agents} agentConfigs={agentConfigs} />
@@ -572,49 +581,49 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
 
         {/* Metadata card */}
         <section className="p-5 bg-card border border-border rounded-xl">
-          <h2 className="font-heading text-lg font-semibold text-foreground">Metadata</h2>
+          <h2 className="font-heading text-lg font-semibold text-foreground"><T k="skill.metadata" /></h2>
           <dl className="mt-4 space-y-3">
             <div className="flex items-baseline gap-3">
-              <dt className="font-mono text-xs text-muted w-20 shrink-0">id</dt>
+              <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.id" /></dt>
               <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.id}</dd>
             </div>
             <div className="flex items-baseline gap-3">
-              <dt className="font-mono text-xs text-muted w-20 shrink-0">path</dt>
+              <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.path" /></dt>
               <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.repoPath}</dd>
             </div>
             {skill.createdAt ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">createdAt</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.createdAt" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.createdAt}</dd>
               </div>
             ) : null}
             {skill.updatedAt ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">updatedAt</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.updatedAt" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.updatedAt}</dd>
               </div>
             ) : null}
             {skill.license ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">license</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.license" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.license}</dd>
               </div>
             ) : null}
             {(skill.runtime ?? []).length > 0 ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">runtime</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.runtime" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{(skill.runtime ?? []).join(", ")}</dd>
               </div>
             ) : null}
             {(skill.agents ?? []).length > 0 ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">agents</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.agents" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{(skill.agents ?? []).join(", ")}</dd>
               </div>
             ) : null}
             {sourceRepo ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">source</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.source" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">
                   <a href={sourceRepo} target="_blank" rel="noreferrer" className="text-accent hover:underline">
                     {stripHttps(sourceRepo)}
@@ -624,19 +633,19 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             ) : null}
             {sourcePath ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">sourcePath</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.sourcePath" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourcePath}</dd>
               </div>
             ) : null}
             {sourceRef ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">ref</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.ref" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourceRef}</dd>
               </div>
             ) : null}
             {sourceCommit ? (
               <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0">commit</dt>
+                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.commit" /></dt>
                 <dd className="text-sm font-medium text-foreground min-w-0 break-words">{sourceCommit.slice(0, 10)}</dd>
               </div>
             ) : null}
@@ -646,9 +655,9 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
         {/* Related skills card */}
         {related.length > 0 ? (
           <section className="p-5 bg-card border border-border rounded-xl">
-            <h2 className="font-heading text-lg font-semibold text-foreground">Related</h2>
+            <h2 className="font-heading text-lg font-semibold text-foreground"><T k="skill.related" /></h2>
             <p className="text-secondary text-sm mt-2">
-              Similar category + overlapping tags.
+              <T k="skill.relatedDescription" />
             </p>
             <div className="mt-4 space-y-3">
               {related.map((s) => (

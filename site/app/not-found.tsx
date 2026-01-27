@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { T } from "@/components/T";
+
 export default function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
@@ -9,9 +11,11 @@ export default function NotFound() {
           <path d="M12 8v4M12 16h.01"/>
         </svg>
       </div>
-      <h1 className="font-heading text-3xl font-bold text-foreground mb-2">Page Not Found</h1>
+      <h1 className="font-heading text-3xl font-bold text-foreground mb-2">
+        <T k="notFound.title" />
+      </h1>
       <p className="text-secondary mb-6 max-w-md">
-        The page you are looking for does not exist or has been moved.
+        <T k="notFound.description" />
       </p>
       <Link
         href="/"
@@ -20,7 +24,7 @@ export default function NotFound() {
         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
-        Back to Home
+        <T k="notFound.backHome" />
       </Link>
     </div>
   );

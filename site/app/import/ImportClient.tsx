@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useCallback } from "react";
 
+import { useI18n } from "@/components/I18nProvider";
 import { REPO_SLUG } from "@/lib/config";
 import type { RegistryCategories, RegistryIndex, RegistrySkill } from "@/lib/types";
 
@@ -198,6 +199,7 @@ export function ImportClient({
   initialCategories: RegistryCategories;
   initialRegistryIndex: RegistryIndex;
 }) {
+  const { t } = useI18n();
   const [repoInput, setRepoInput] = useState("");
   const [refInput, setRefInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -396,7 +398,7 @@ export function ImportClient({
 
     try {
       const parsed = parseRepoUrl(repoInput);
-      if (!parsed) throw new Error("Invalid GitHub repo URL. Expected https://github.com/owner/repo");
+      if (!parsed) throw new Error(t("import.error.invalidRepoUrl"));
 
       const repo = await ghRepo(parsed.owner, parsed.repo);
       const ref = refInput.trim() || repo.default_branch;
@@ -520,12 +522,12 @@ export function ImportClient({
                 {/* Conflict badges */}
                 {isUpdateTab && (
                   <span className="px-2 py-0.5 rounded text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800">
-                    Update
+                    {t("import.skillCard.updateBadge")}
                   </span>
                 )}
                 {!isUpdateTab && s.conflict === "same-id" && (
                   <span className="px-2 py-0.5 rounded text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800">
-                    ID Conflict
+                    {t("import.skillCard.idConflictBadge")}
                   </span>
                 )}
                 {meta && meta.tags.length > 0 && (
@@ -548,17 +550,20 @@ export function ImportClient({
               {!isUpdateTab && s.conflict === "same-id" && s.existing && (
                 <div className="mt-2 p-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
                   <p className="text-xs text-amber-700 dark:text-amber-300">
-                    A skill with ID <code className="font-mono">{s.id}</code> already exists in category{" "}
-                    <code className="font-mono">{s.existing.category}/{s.existing.subcategory}</code>.
-                    You can rename this skill or it will replace the existing one.
+                    {t("import.skillCard.sameIdConflict", {
+                      id: s.id,
+                      category: `${s.existing.category}/${s.existing.subcategory}`,
+                    })}
                   </p>
                 </div>
               )}
               {isUpdateTab && s.existing && (
                 <div className="mt-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
                   <p className="text-xs text-blue-700 dark:text-blue-300">
-                    This skill will update the existing <code className="font-mono">{s.existing.id}</code> in{" "}
-                    <code className="font-mono">{s.existing.category}/{s.existing.subcategory}</code>.
+                    {t("import.skillCard.updateNotice", {
+                      id: s.existing.id,
+                      category: `${s.existing.category}/${s.existing.subcategory}`,
+                    })}
                   </p>
                 </div>
               )}
@@ -572,7 +577,7 @@ export function ImportClient({
               type="button"
               onClick={() => setExpandedSkill(isExpanded ? null : s.sourcePath)}
               className="p-2 rounded-lg hover:bg-card transition-colors"
-              title="Edit metadata"
+              title={t("import.skillCard.editMetadata")}
             >
               <svg
                 className={`w-4 h-4 text-muted transition-transform ${isExpanded ? "rotate-180" : ""}`}
@@ -595,7 +600,7 @@ export function ImportClient({
               {!isUpdateTab && s.conflict === "same-id" && (
                 <div>
                   <label className="block text-xs font-medium text-muted mb-1.5">
-                    New Skill ID (to avoid conflict)
+                    {t("import.skillCard.newSkillIdLabel")}
                   </label>
                   <input
                     type="text"
@@ -605,7 +610,7 @@ export function ImportClient({
                     onChange={(e) => updateSkillMetadata(s.sourcePath, { newId: e.target.value || undefined })}
                   />
                   <p className="text-xs text-muted mt-1">
-                    Leave empty to replace the existing skill.
+                    {t("import.skillCard.replaceExistingHint")}
                   </p>
                 </div>
               )}
@@ -613,7 +618,7 @@ export function ImportClient({
               {/* Category and Subcategory */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-muted mb-1.5">Category</label>
+                  <label className="block text-xs font-medium text-muted mb-1.5">{t("import.skillCard.categoryLabel")}</label>
                   <select
                     className="w-full h-9 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
                     value={meta.category}
@@ -634,7 +639,7 @@ export function ImportClient({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted mb-1.5">Subcategory</label>
+                  <label className="block text-xs font-medium text-muted mb-1.5">{t("import.skillCard.subcategoryLabel")}</label>
                   <select
                     className="w-full h-9 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
                     value={meta.subcategory}
@@ -651,7 +656,7 @@ export function ImportClient({
 
               {/* Tags */}
               <div>
-                <label className="block text-xs font-medium text-muted mb-1.5">Tags</label>
+                <label className="block text-xs font-medium text-muted mb-1.5">{t("import.skillCard.tagsLabel")}</label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {meta.tags.map((tag) => (
                     <span
@@ -674,7 +679,7 @@ export function ImportClient({
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Add tag..."
+                    placeholder={t("import.skillCard.addTagPlaceholder")}
                     className="flex-1 h-9 px-3 bg-card border border-border rounded-lg text-foreground text-sm placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -696,7 +701,7 @@ export function ImportClient({
                       }
                     }}
                   >
-                    Add
+                    {t("common.add")}
                   </button>
                 </div>
               </div>
@@ -704,7 +709,7 @@ export function ImportClient({
               {/* Source info (read-only) */}
               <div className="pt-3 border-t border-border/50">
                 <p className="text-xs text-muted">
-                  <span className="font-medium">Source:</span> {s.skillMdPath}
+                  <span className="font-medium">{t("import.skillCard.sourceLabel")}</span> {s.skillMdPath}
                 </p>
               </div>
             </div>
@@ -718,30 +723,30 @@ export function ImportClient({
     <div className="space-y-6">
       {/* Header section */}
       <section className="p-6 bg-card border border-border rounded-xl">
-        <h1 className="font-heading text-3xl font-bold text-foreground">Submit from GitHub</h1>
+        <h1 className="font-heading text-3xl font-bold text-foreground">{t("import.header.title")}</h1>
         <p className="text-secondary mt-3 leading-relaxed">
-          Preferred contribution flow: paste a repo URL. We detect directories with{" "}
-          <code className="px-1.5 py-0.5 rounded bg-background-secondary text-accent text-sm font-mono">SKILL.md</code>.
-          Select up to {MAX_SKILLS_PER_IMPORT} skills, then open an import issue to trigger an automated PR.
+          {t("import.header.description.beforeSkillMd")}{" "}
+          <code className="px-1.5 py-0.5 rounded bg-background-secondary text-accent text-sm font-mono">SKILL.md</code>
+          {t("import.header.description.afterSkillMd", { max: MAX_SKILLS_PER_IMPORT })}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-4 mt-6">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Source Repository</label>
+            <label className="block text-sm font-medium text-foreground mb-2">{t("import.header.sourceRepoLabel")}</label>
             <input
               className="w-full h-11 px-4 bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
               value={repoInput}
               onChange={(e) => setRepoInput(e.target.value)}
-              placeholder="https://github.com/owner/repo"
+              placeholder={t("import.header.repoPlaceholder")}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Branch/Tag (optional)</label>
+            <label className="block text-sm font-medium text-foreground mb-2">{t("import.header.branchLabel")}</label>
             <input
               className="w-full h-11 px-4 bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
               value={refInput}
               onChange={(e) => setRefInput(e.target.value)}
-              placeholder="main"
+              placeholder={t("import.header.branchPlaceholder")}
             />
           </div>
         </div>
@@ -758,7 +763,7 @@ export function ImportClient({
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
                 </svg>
-                Parsing...
+                {t("import.header.parsing")}
               </>
             ) : (
               <>
@@ -766,16 +771,16 @@ export function ImportClient({
                   <circle cx="11" cy="11" r="8"/>
                   <path d="M21 21l-4.35-4.35"/>
                 </svg>
-                Parse Repository
+                {t("import.header.parseRepository")}
               </>
             )}
           </button>
           <span className="px-3 py-1.5 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
-            Uses anonymous GitHub API (rate-limited)
+            {t("import.header.usesAnonymousApi")}
           </span>
           {!REPO_SLUG && (
             <span className="px-3 py-1.5 rounded-md text-xs font-mono text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
-              Set NEXT_PUBLIC_REPO_SLUG to enable PR flow
+              {t("import.header.setRepoSlugHint")}
             </span>
           )}
         </div>
@@ -788,7 +793,7 @@ export function ImportClient({
                 <path d="M12 8v4M12 16h.01"/>
               </svg>
               <div>
-                <p className="font-medium text-red-800 dark:text-red-200">Error</p>
+                <p className="font-medium text-red-800 dark:text-red-200">{t("common.error")}</p>
                 <pre className="mt-1 text-sm text-red-700 dark:text-red-300 whitespace-pre-wrap font-mono">{error}</pre>
               </div>
             </div>
@@ -801,9 +806,9 @@ export function ImportClient({
         <section className="p-6 bg-card border border-border rounded-xl">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <h2 className="font-heading text-xl font-semibold text-foreground">Detected Skills</h2>
+              <h2 className="font-heading text-xl font-semibold text-foreground">{t("import.detected.title")}</h2>
               <p className="text-secondary mt-2">
-                Select skills and configure their categories.
+                {t("import.detected.description")}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -812,7 +817,7 @@ export function ImportClient({
                   ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20"
                   : "text-accent bg-accent-muted"
               }`}>
-                {selectedCount} / {MAX_SKILLS_PER_IMPORT} selected
+                {t("import.detected.selectedCount", { selected: selectedCount, max: MAX_SKILLS_PER_IMPORT })}
               </span>
             </div>
           </div>
@@ -829,7 +834,7 @@ export function ImportClient({
                     : "border-transparent text-muted hover:text-foreground"
                 }`}
               >
-                New ({newSkills.length})
+                {t("import.detected.tabNew", { count: newSkills.length })}
               </button>
               <button
                 type="button"
@@ -840,7 +845,7 @@ export function ImportClient({
                     : "border-transparent text-muted hover:text-foreground"
                 }`}
               >
-                Update ({updateSkills.length})
+                {t("import.detected.tabUpdate", { count: updateSkills.length })}
               </button>
             </div>
           </div>
@@ -857,12 +862,12 @@ export function ImportClient({
               onClick={(e) => !issueUrl && e.preventDefault()}
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-              Open Submission Issue
+	              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+	            </svg>
+              {t("import.detected.openIssue")}
             </a>
             <span className="px-3 py-1.5 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
-              Maintainers label: import-approved
+              {t("import.detected.maintainersLabel")}
             </span>
           </div>
 
@@ -872,7 +877,7 @@ export function ImportClient({
               <>
                 {newSkills.length === 0 ? (
                   <div className="text-center py-8 text-muted">
-                    No new skills to add. All detected skills already exist in the registry from this source.
+                    {t("import.detected.emptyNew")}
                   </div>
                 ) : (
                   newSkills.map((s) => renderSkillCard(s, false))
@@ -883,7 +888,7 @@ export function ImportClient({
               <>
                 {updateSkills.length === 0 ? (
                   <div className="text-center py-8 text-muted">
-                    No skills to update. These are all new skills.
+                    {t("import.detected.emptyUpdate")}
                   </div>
                 ) : (
                   updateSkills.map((s) => renderSkillCard(s, true))

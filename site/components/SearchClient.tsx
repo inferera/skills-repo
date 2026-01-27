@@ -4,9 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { RegistrySkill } from "@/lib/types";
 
+import { useI18n } from "@/components/I18nProvider";
 import { SkillCard } from "@/components/SkillCard";
 
 export function SearchClient({ skills }: { skills: RegistrySkill[] }) {
+  const { t } = useI18n();
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -54,8 +56,8 @@ export function SearchClient({ skills }: { skills: RegistrySkill[] }) {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search skills by name, tag, or agent..."
-          aria-label="Search skills"
+          placeholder={t("search.placeholder")}
+          aria-label={t("search.ariaLabel")}
         />
         <div className="absolute inset-y-0 right-0 pr-4 flex items-center gap-2">
           {q.trim() && (
@@ -63,7 +65,7 @@ export function SearchClient({ skills }: { skills: RegistrySkill[] }) {
               onClick={() => setQ("")}
               className="px-2 py-1 text-xs font-medium text-muted hover:text-foreground transition-colors"
             >
-              Clear
+              {t("common.clear")}
             </button>
           )}
           <kbd className="hidden sm:inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
@@ -76,8 +78,8 @@ export function SearchClient({ skills }: { skills: RegistrySkill[] }) {
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-muted">
           {q.trim()
-            ? `${results.length} result${results.length !== 1 ? "s" : ""} found`
-            : `Showing ${results.length} of ${skills.length} skills`}
+            ? t("search.resultsFound", { count: results.length })
+            : t("search.showing", { shown: results.length, total: skills.length })}
         </p>
       </div>
 
@@ -95,12 +97,12 @@ export function SearchClient({ skills }: { skills: RegistrySkill[] }) {
             <circle cx="11" cy="11" r="8"/>
             <path d="M21 21l-4.35-4.35"/>
           </svg>
-          <p className="text-muted">No skills found for &quot;{q}&quot;</p>
+          <p className="text-muted">{t("search.noResults", { query: q })}</p>
           <button
             onClick={() => setQ("")}
             className="mt-2 text-sm text-accent hover:underline"
           >
-            Clear search
+            {t("search.clearSearch")}
           </button>
         </div>
       )}

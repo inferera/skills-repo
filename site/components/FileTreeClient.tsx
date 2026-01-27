@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useI18n } from "@/components/I18nProvider";
 import { FilePreviewModal } from "./FilePreviewModal";
 import type { FileMeta, FilePreview } from "./FilePreviewModal";
 
@@ -88,6 +89,7 @@ function FolderNode({
   depth: number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useI18n();
 
   return (
     <li style={{ listStyle: "none" }}>
@@ -134,7 +136,7 @@ function FolderNode({
           {node.name}
         </span>
         <span className="text-muted" style={{ marginLeft: "auto", fontSize: "12px", flexShrink: 0 }}>
-          {countFiles(node)} files
+          {t("fileTree.filesCount", { count: countFiles(node) })}
         </span>
       </button>
       {isOpen && (
@@ -166,6 +168,7 @@ function FileNode({
   const meta = fileMeta.get(node.path);
   const size = meta?.size ?? 0;
   const isSkillMd = node.path === "SKILL.md";
+  const { t } = useI18n();
 
   const handleClick = () => {
     if (meta && !isSkillMd) {
@@ -206,7 +209,7 @@ function FileNode({
               marginLeft: "4px",
             }}
           >
-            Instructions
+            {t("fileTree.instructions")}
           </span>
           <span className="text-muted" style={{ marginLeft: "auto", fontSize: "12px", flexShrink: 0 }}>
             {formatBytes(size)}

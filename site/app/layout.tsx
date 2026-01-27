@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { I18nProvider } from "@/components/I18nProvider";
+import { SkipToContent } from "@/components/SkipToContent";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SITE_NAME, SITE_URL } from "@/lib/config";
 
@@ -46,17 +48,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-background">
         <ThemeProvider>
-          <a
-            className="absolute left-4 top-4 px-3 py-2 rounded-lg bg-card border border-border text-sm font-medium -translate-y-[200%] transition-transform duration-150 focus:translate-y-0 z-[100]"
-            href="#content"
-          >
-            Skip to content
-          </a>
-          <Header />
-          <main id="content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8 animate-fade-up">
-            {children}
-          </main>
-          <Footer />
+          <I18nProvider>
+            <SkipToContent />
+            <Header />
+            <main id="content" className="max-w-6xl mx-auto px-4 sm:px-6 py-8 animate-fade-up">
+              {children}
+            </main>
+            <Footer />
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

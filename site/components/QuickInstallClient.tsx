@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { REPO_REF, REPO_SLUG } from "@/lib/config";
 import { DEFAULT_AGENT_CONFIGS, type AgentConfig } from "@/lib/agent-config";
+import { useI18n } from "@/components/I18nProvider";
 
 import { CommandBlockClient } from "@/components/CommandBlockClient";
 
@@ -18,6 +19,7 @@ export function QuickInstallClient({
   declaredAgents?: string[];
   agentConfigs?: AgentConfig[];
 }) {
+  const { t } = useI18n();
   const agents = useMemo(() => (agentConfigs?.length ? agentConfigs : DEFAULT_AGENT_CONFIGS), [agentConfigs]);
   const declared = useMemo(() => new Set((declaredAgents ?? []).filter(Boolean)), [declaredAgents]);
   const defaultAgent = declaredAgents?.find((a) => agents.some((x) => x.id === a)) ?? agents[0]?.id ?? "codex";
@@ -30,22 +32,67 @@ export function QuickInstallClient({
   // Generate the installation command
   const cmd = useMemo(() => {
     if (!REPO_SLUG) {
-      return `# Registry URL not configured`;
+      return t("quickInstall.registryNotConfigured");
     }
 
     // NPX method using GitHub
     const scopeFlag = scope === "global" ? " --scope global" : "";
     const refFlag = REPO_REF && REPO_REF !== "main" ? ` --ref ${REPO_REF}` : "";
-    return `# Install ${skillId} to ${targetDir}
+    const header = t("quickInstall.installComment", { skillId, targetDir });
+    return `${header}
 npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
-  }, [skillId, targetDir, agent, scope]);
+  }, [skillId, targetDir, agent, scope, t]);
+
+  const note = useMemo(() => {
+    const npxMark = "__NPX__";
+    const manifestMark = "__MANIFEST__";
+    const withMarks = t("quickInstall.note", { npx: npxMark, manifest: manifestMark });
+    const [beforeNpx, restAfterNpx] = withMarks.split(npxMark);
+    if (restAfterNpx === undefined) {
+      return <>{withMarks}</>;
+    }
+    const [between, afterManifest] = restAfterNpx.split(manifestMark);
+    if (afterManifest === undefined) {
+      return (
+        <>
+          {beforeNpx}
+          <code
+            className="text-accent"
+            style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}
+          >
+            npx
+          </code>
+          {restAfterNpx}
+        </>
+      );
+    }
+    return (
+      <>
+        {beforeNpx}
+        <code
+          className="text-accent"
+          style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}
+        >
+          npx
+        </code>
+        {between}
+        <code
+          className="text-accent"
+          style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}
+        >
+          .x_skill.yaml
+        </code>
+        {afterManifest}
+      </>
+    );
+  }, [t]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       {/* Agent selector */}
       <div>
         <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
-          Agent
+          {t("quickInstall.agentLabel")}
         </label>
         <select
           value={agent}
@@ -64,7 +111,7 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
           {agents.map((a) => (
             <option key={a.id} value={a.id}>
               {a.label}
-              {declared.size > 0 && !declared.has(a.id) ? " (not declared)" : ""}
+              {declared.size > 0 && !declared.has(a.id) ? t("quickInstall.notDeclaredSuffix") : ""}
             </option>
           ))}
         </select>
@@ -73,7 +120,7 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
       {/* Scope selector */}
       <div>
         <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
-          Scope
+          {t("quickInstall.scopeLabel")}
         </label>
         <div style={{ display: "flex", gap: "8px" }}>
           <button
@@ -92,7 +139,7 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
               transition: "all 150ms",
             }}
           >
-            Project
+            {t("quickInstall.project")}
           </button>
           <button
             type="button"
@@ -110,7 +157,7 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
               transition: "all 150ms",
             }}
           >
-            Global
+            {t("quickInstall.global")}
           </button>
         </div>
       </div>
@@ -125,7 +172,7 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
         }}
       >
         <div className="text-muted" style={{ fontSize: "12px", marginBottom: "4px" }}>
-          Install to:
+          {t("quickInstall.installTo")}
         </div>
         <code className="text-accent" style={{ fontSize: "13px", fontFamily: "var(--font-mono)" }}>
           {targetDir}/{skillId}
@@ -135,22 +182,14 @@ npx github:${REPO_SLUG} add ${skillId} --agent ${agent}${scopeFlag}${refFlag}`;
       {/* Install command */}
       <div>
         <label className="text-foreground" style={{ display: "block", fontSize: "14px", fontWeight: 500, marginBottom: "8px" }}>
-          Install Command
+          {t("quickInstall.installCommand")}
         </label>
         <CommandBlockClient command={cmd} />
       </div>
 
       {/* Note */}
       <p className="text-muted" style={{ fontSize: "12px", margin: 0, lineHeight: 1.5 }}>
-        Uses{" "}
-        <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>
-          npx
-        </code>{" "}
-        to install directly from GitHub. No npm installation required. The{" "}
-        <code className="text-accent" style={{ fontSize: "11px", padding: "1px 4px", borderRadius: "4px", backgroundColor: "var(--color-accent-muted)" }}>
-          .x_skill.yaml
-        </code>{" "}
-        file is excluded (internal metadata).
+        {note}
       </p>
     </div>
   );

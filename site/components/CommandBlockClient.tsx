@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 
+import { useI18n } from "@/components/I18nProvider";
+
 export function CommandBlockClient({ command }: { command: string }) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
+  const { t } = useI18n();
 
   async function onCopy() {
     try {
@@ -25,7 +28,7 @@ export function CommandBlockClient({ command }: { command: string }) {
         type="button"
         onClick={() => void onCopy()}
         className="flex items-center justify-center px-3 bg-card border border-border rounded-lg hover:bg-card-hover hover:border-border-hover transition-colors"
-        aria-label="Copy command"
+        aria-label={t("command.copyAria")}
       >
         {status === "copied" ? (
           <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

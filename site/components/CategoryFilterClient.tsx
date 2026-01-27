@@ -4,9 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { RegistrySkill } from "@/lib/types";
 
+import { useI18n } from "@/components/I18nProvider";
 import { SkillCard } from "@/components/SkillCard";
 
 export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
+  const { t } = useI18n();
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -51,8 +53,8 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Filter skills..."
-          aria-label="Filter skills"
+          placeholder={t("filter.placeholder")}
+          aria-label={t("filter.ariaLabel")}
         />
         <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
           {q.trim() && (
@@ -60,7 +62,7 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
               onClick={() => setQ("")}
               className="px-2 py-1 text-xs font-medium text-muted hover:text-foreground transition-colors"
             >
-              Clear
+              {t("common.clear")}
             </button>
           )}
         </div>
@@ -68,7 +70,7 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
 
       {/* Results count */}
       <p className="text-sm text-muted mb-4">
-        {results.length} of {skills.length} skills
+        {t("filter.count", { shown: results.length, total: skills.length })}
       </p>
 
       {/* Results grid */}
@@ -81,7 +83,7 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
       {/* Empty state */}
       {results.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-muted">No skills found</p>
+          <p className="text-muted">{t("filter.noResults")}</p>
         </div>
       )}
     </div>
