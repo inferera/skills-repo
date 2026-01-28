@@ -268,10 +268,26 @@ export async function scanSkills({ includeFiles = true, includeSummary = true, c
     const skillMdCachePath = path.join(skillCacheDir, 'SKILL.md');
     const skillMdLocalPath = path.join(skillDir, 'SKILL.md');
 
-    let skillMdPath = await fileExists(skillMdCachePath) ? skillMdCachePath : skillMdLocalPath;
+    let skillMdPath = null;
+    const cacheExists = await fileExists(skillMdCachePath);
+    const localExists = await fileExists(skillMdLocalPath);
 
-    if (!(await fileExists(skillMdPath))) {
-      errors.push(`Missing SKILL.md: ${skillMdPath} (checked cache and local)`);
+    if (cacheExists) {
+      skillMdPath = skillMdCachePath;
+    } else if (localExists) {
+      skillMdPath = skillMdLocalPath;
+    } else if (meta.source?.repo) {
+      // External source skill - SKILL.md will be fetched during sync
+      // Skip SKILL.md check during validation, but warn if not synced
+      if (includeSummary || includeFiles) {
+        // Building registry requires files - they should have been synced
+        errors.push(`Missing SKILL.md for external skill: ${skillId}\nRun 'npm run sync:skills' first to fetch files from ${meta.source.repo}`);
+        continue;
+      }
+      // Validation-only mode: OK to proceed without SKILL.md
+    } else {
+      // Local skill without source.repo must have SKILL.md
+      errors.push(`Missing SKILL.md: ${skillMdLocalPath}`);
       continue;
     }
 

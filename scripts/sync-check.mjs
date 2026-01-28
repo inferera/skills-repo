@@ -81,8 +81,8 @@ async function main() {
   const syncConfig = getSyncConfig(config);
   const concurrency = syncConfig.concurrency;
 
-  // 加载所有 skill
-  const skillFiles = await fg(['skills/*/.x_skill.yaml'], { dot: true });
+  // 加载所有 skill (v2: skills/{category}/{skill-id}/.x_skill.yaml)
+  const skillFiles = await fg(['skills/*/*/.x_skill.yaml'], { dot: true });
   const skills = [];
 
   for (const file of skillFiles) {
