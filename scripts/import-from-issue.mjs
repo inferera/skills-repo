@@ -120,9 +120,7 @@ function parseRequest(issueBody) {
 
     let sourcePath = normalizeSourcePath(it.sourcePath ?? ".");
     let targetCategory = it.targetCategory;
-    let targetSubcategory = it.targetSubcategory;
     assertSlug(`items[${idx}].targetCategory`, targetCategory);
-    assertSlug(`items[${idx}].targetSubcategory`, targetSubcategory);
 
     // Required fields for .x_skill.yaml generation
     let id = typeof it.id === "string" ? it.id.trim() : undefined;
@@ -135,7 +133,7 @@ function parseRequest(issueBody) {
     let tags = Array.isArray(it.tags) ? it.tags.filter(t => typeof t === "string" && t.trim()).map(t => t.trim()) : [];
     let isUpdate = it.isUpdate === true || it.isUpdate === "true";
 
-    return { sourcePath, targetCategory, targetSubcategory, id, title, tags, isUpdate };
+    return { sourcePath, targetCategory, id, title, tags, isUpdate };
   });
 
   return {
@@ -233,13 +231,13 @@ async function main() {
       description = item.title; // Fallback to title if no description found
     }
 
-    let destSkillDir = path.join("skills", item.targetCategory, item.targetSubcategory, item.id);
+    let destSkillDir = path.join("skills", item.targetCategory, item.id);
     let existingCreatedAt;
 
     // If updating, find and remove any existing skill with the same ID (even in different category)
     if (item.isUpdate) {
-      // Use fast-glob to find all skills with matching ID
-      const existingSkills = await fg([`skills/*/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
+      // Use fast-glob to find all skills with matching ID (v2: no subcategory)
+      const existingSkills = await fg([`skills/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
 
       for (const existingPath of existingSkills) {
         try {
@@ -276,7 +274,7 @@ async function main() {
       }
 
       // Also check if this ID exists anywhere else
-      const existingSkills = await fg([`skills/*/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
+      const existingSkills = await fg([`skills/*/${item.id}/.x_skill.yaml`], { onlyFiles: true, dot: true });
       if (existingSkills.length > 0) {
         throw new Error(`Skill with ID "${item.id}" already exists at: ${existingSkills[0].replace(/\/.x_skill\.yaml$/, "")}. Set isUpdate: true to update.`);
       }

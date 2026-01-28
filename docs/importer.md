@@ -13,8 +13,8 @@ Flow:
 1. Open `/import`
 2. Paste `https://github.com/owner/repo`
 3. Select one or more detected `SKILL.md` directories
-4. Pick a target `category/subcategory` for each item
-5. Click “Open import issue”
+4. Pick a target `category` for each item
+5. Click "Open import issue"
 
 ## Issue Format (v2)
 
@@ -29,7 +29,6 @@ items:
     id: your-skill-id
     title: Human readable title
     targetCategory: development
-    targetSubcategory: frontend
     tags: [tag-a, tag-b]
     isUpdate: true
 -->
@@ -37,7 +36,7 @@ items:
 
 Rules:
 
-- `items[].id`, `targetCategory`, `targetSubcategory` must be slugs
+- `items[].id`, `targetCategory` must be slugs
 - `items[].sourcePath` must not contain `..`
 - `isUpdate: true` allows replacing an existing skill with the same id
 
@@ -52,7 +51,7 @@ Script: `scripts/import-from-issue.mjs`
 For each item, it:
 
 1. Clones `sourceRepo` at `ref`
-2. Copies `sourcePath` into `skills/<category>/<subcategory>/<id>/`
+2. Copies `sourcePath` into `skills/<category>/<id>/`
 3. Generates `.x_skill.yaml` (and excludes any source `.x_skill.yaml`)
 4. Runs `npm run validate`
 5. Opens a PR with the changes

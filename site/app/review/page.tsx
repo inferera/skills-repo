@@ -12,7 +12,6 @@ type ReviewItem = {
   title: string;
   description: string;
   targetCategory: string;
-  targetSubcategory: string;
   tags: string[];
   isUpdate?: boolean;
 };
@@ -155,7 +154,7 @@ function ReviewContent() {
                   <div className="p-3 bg-background-secondary rounded-lg">
                     <div className="text-xs font-medium text-muted mb-1">{t("review.targetLocation")}</div>
                     <code className="text-accent font-mono text-sm">
-                      {item.targetCategory}/{item.targetSubcategory}
+                      {item.targetCategory}
                     </code>
                   </div>
                 </div>

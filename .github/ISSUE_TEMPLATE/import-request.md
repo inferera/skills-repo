@@ -16,7 +16,6 @@ items:
     id: your-skill-id
     title: Human readable title
     targetCategory: design
-    targetSubcategory: ui-ux
     # Optional:
     # tags: [tag1, tag2]
     # isUpdate: true

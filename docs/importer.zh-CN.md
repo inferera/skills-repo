@@ -13,8 +13,8 @@ Importer 用于从公开 GitHub 仓库导入 skills，并且不需要给站点�
 1. 打开 `/import`
 2. 粘贴 `https://github.com/owner/repo`
 3. 选择检测到的一个或多个 `SKILL.md` 目录
-4. 为每个 item 选择目标 `category/subcategory`
-5. 点击 “Open import issue”
+4. 为每个 item 选择目标 `category`
+5. 点击 "Open import issue"
 
 ## Issue 格式（v2）
 
@@ -29,7 +29,6 @@ items:
     id: your-skill-id
     title: Human readable title
     targetCategory: development
-    targetSubcategory: frontend
     tags: [tag-a, tag-b]
     isUpdate: true
 -->
@@ -37,7 +36,7 @@ items:
 
 规则：
 
-- `items[].id`、`targetCategory`、`targetSubcategory` 必须是 slug
+- `items[].id`、`targetCategory` 必须是 slug
 - `items[].sourcePath` 不允许包含 `..`
 - `isUpdate: true` 允许替换已有同名 skill（同 id）
 
@@ -52,7 +51,7 @@ Workflow：`.github/workflows/import.yml`
 对每个 item 会：
 
 1. 按 `ref` clone `sourceRepo`
-2. 把 `sourcePath` 复制到 `skills/<category>/<subcategory>/<id>/`
+2. 把 `sourcePath` 复制到 `skills/<category>/<id>/`
 3. 生成 `.x_skill.yaml`（并忽略源仓库里的 `.x_skill.yaml`）
 4. 运行 `npm run validate`
 5. 创建 PR
