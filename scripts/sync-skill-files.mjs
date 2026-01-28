@@ -47,9 +47,12 @@ function run(cmd, args, opts = {}) {
   return res.stdout;
 }
 
-async function copyDirFiltered(srcDir, destDir, ignore = []) {
+async function copyDirFiltered(srcDir, destDir, ignore = [], repoRoot = null) {
   await fs.mkdir(destDir, { recursive: true });
   const entries = await fs.readdir(srcDir, { withFileTypes: true });
+
+  // Resolve repoRoot to handle symlinked paths (e.g., /tmp -> /private/tmp on macOS)
+  const resolvedRoot = repoRoot ? await fs.realpath(repoRoot) : null;
 
   for (const e of entries) {
     // Skip ignored patterns
@@ -59,13 +62,35 @@ async function copyDirFiltered(srcDir, destDir, ignore = []) {
     const dest = path.join(destDir, e.name);
 
     const st = await fs.lstat(src);
+
     if (st.isSymbolicLink()) {
-      console.warn(`  ⚠️  Skipping symlink: ${e.name}`);
+      // Resolve symlink and copy actual content
+      try {
+        const realPath = await fs.realpath(src);
+
+        // Security check: ensure resolved path is within repo
+        if (resolvedRoot && !realPath.startsWith(resolvedRoot)) {
+          console.warn(`  ⚠️  Skipping symlink outside repo: ${e.name}`);
+          continue;
+        }
+
+        const realStat = await fs.stat(realPath);
+        if (realStat.isDirectory()) {
+          console.log(`  📁 Resolving symlink dir: ${e.name}`);
+          await copyDirFiltered(realPath, dest, ignore, repoRoot);
+        } else if (realStat.isFile()) {
+          console.log(`  📄 Resolving symlink file: ${e.name}`);
+          await fs.mkdir(path.dirname(dest), { recursive: true });
+          await fs.copyFile(realPath, dest);
+        }
+      } catch (err) {
+        console.warn(`  ⚠️  Failed to resolve symlink ${e.name}: ${err.message}`);
+      }
       continue;
     }
 
     if (st.isDirectory()) {
-      await copyDirFiltered(src, dest, ignore);
+      await copyDirFiltered(src, dest, ignore, repoRoot);
       continue;
     }
 
@@ -130,8 +155,8 @@ async function syncSkill(skillId, source, cacheDir) {
       await fs.rm(skillCacheDir, { recursive: true });
     }
 
-    // Copy files to cache
-    await copyDirFiltered(srcSkillDir, skillCacheDir, SKILL_FILE_IGNORE);
+    // Copy files to cache (pass repoDir as root for symlink resolution)
+    await copyDirFiltered(srcSkillDir, skillCacheDir, SKILL_FILE_IGNORE, repoDir);
 
     // Write cache metadata
     await fs.writeFile(cacheMetaPath, JSON.stringify({
