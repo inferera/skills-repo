@@ -120,6 +120,13 @@ function parseSkillFrontmatter(content: string): { frontmatter: FrontmatterData;
 
 export async function generateStaticParams() {
   const index = await loadRegistryIndex();
+
+  // If no skills exist, return a placeholder to satisfy Next.js static export
+  // This prevents build errors when the registry is empty
+  if (index.skills.length === 0) {
+    return [{ skillId: '_no-skills' }];
+  }
+
   return index.skills.map((s) => ({ skillId: s.id }));
 }
 

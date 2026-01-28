@@ -1,55 +1,5 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-01-28T05:41:47.104Z",
-  "docs": [
-    {
-      "id": "ui-component-builder",
-      "category": "design",
-      "title": "UI Component Builder",
-      "tags": [
-        "ui",
-        "components",
-        "react",
-        "vue",
-        "svelte",
-        "frontend"
-      ],
-      "agents": [
-        "claude",
-        "cursor"
-      ],
-      "text": "UI Component Builder\nBuild beautiful UI components with AI assistance - supports React, Vue, and Svelte frameworks.\nui components react vue svelte frontend\nBuild beautiful, accessible UI components with AI assistance across multiple frameworks."
-    },
-    {
-      "id": "hello-world",
-      "category": "development",
-      "title": "Hello World Skill",
-      "tags": [
-        "example",
-        "tutorial",
-        "beginner"
-      ],
-      "agents": [
-        "claude"
-      ],
-      "text": "Hello World Skill\nA simple example skill that demonstrates the basic structure and usage of AI agent skills.\nexample tutorial beginner\nA simple example skill that demonstrates the basic structure and usage of AI agent skills."
-    },
-    {
-      "id": "docker-optimizer",
-      "category": "devops",
-      "title": "Docker Image Optimizer",
-      "tags": [
-        "docker",
-        "containers",
-        "optimization",
-        "security",
-        "best-practices"
-      ],
-      "agents": [
-        "claude",
-        "windsurf"
-      ],
-      "text": "Docker Image Optimizer\nOptimize Docker images for size and security - reduce image size by up to 80% with best practices.\ndocker containers optimization security best-practices\nDramatically reduce Docker image sizes while improving security and build performance."
-    }
-  ]
+  "generatedAt": "2026-01-28T06:00:36.173Z",
+  "docs": []
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 import { useI18n } from "@/components/I18nProvider";
 import { getLocalizedText } from "@/lib/i18n";
