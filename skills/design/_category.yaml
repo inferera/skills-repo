@@ -1,5 +1,25 @@
-specVersion: 1
 id: design
-title: Design
-description: Design-related skills (UI/UX, branding, research, etc.)
-
+title:
+  en: Design
+  zh-CN: 设计
+  zh-TW: 設計
+  ja: デザイン
+  ko: 디자인
+  de: Design
+  es: Diseño
+  fr: Design
+  pt: Design
+  ru: Дизайн
+description:
+  en: UI/UX design, visual design, and prototyping skills for creating user experiences
+  zh-CN: UI/UX 设计、视觉设计和原型制作技能，用于创建用户体验
+  zh-TW: UI/UX 設計、視覺設計和原型製作技能，用於創建用戶體驗
+  ja: ユーザー体験を構築するための UI/UX デザイン、ビジュアルデザイン、プロトタイピングスキル
+  ko: 사용자 경험을 만들기 위한 UI/UX 디자인, 시각 디자인 및 프로토타이핑 스킬
+  de: UI/UX-Design, visuelles Design und Prototyping-Fähigkeiten zur Gestaltung von Benutzererlebnissen
+  es: Habilidades de diseño UI/UX, diseño visual y prototipado para crear experiencias de usuario
+  fr: Compétences de design UI/UX, design visuel et prototypage pour créer des expériences utilisateur
+  pt: Habilidades de design UI/UX, design visual e prototipagem para criar experiências de usuário
+  ru: Навыки UI/UX-дизайна, визуального дизайна и прототипирования для создания пользовательских впечатлений
+icon: palette
+order: 2

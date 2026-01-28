@@ -1,26 +1,50 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/skill.schema.json",
-  "title": "Registry Skill Metadata (.x_skill.yaml)",
+  "$id": "https://skills-registry.github.io/schemas/skill.schema.json",
+  "title": "Skill Metadata (.x_skill.yaml) v2",
+  "description": "Schema for skill metadata with flat category structure",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
     "^x-": {}
   },
-  "required": ["specVersion", "id", "title", "description", "createdAt", "updatedAt"],
+  "required": ["specVersion", "id", "title", "description", "category", "source"],
   "properties": {
-    "specVersion": { "type": "integer", "const": 1 },
+    "specVersion": {
+      "type": "integer",
+      "const": 2,
+      "description": "Schema version (v2 = flat categories)"
+    },
     "id": {
       "type": "string",
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Unique skill identifier (kebab-case)"
     },
-    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
-    "description": { "type": "string", "minLength": 1 },
-    "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" },
-    "license": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Skill display title"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Skill description"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Primary category ID (single level)"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "License identifier (e.g., MIT, Apache-2.0)"
+    },
     "authors": {
       "type": "array",
+      "description": "Skill authors",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -34,19 +58,23 @@
     },
     "tags": {
       "type": "array",
+      "description": "Skill tags for search and filtering",
       "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
     },
     "agents": {
       "type": "array",
+      "description": "Compatible AI agents",
       "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
     },
     "runtime": {
       "type": "array",
+      "description": "Runtime requirements",
       "items": { "type": "string", "minLength": 1, "maxLength": 64 }
     },
     "links": {
       "type": "object",
       "additionalProperties": false,
+      "description": "External links",
       "properties": {
         "homepage": { "type": "string", "minLength": 1, "maxLength": 500 },
         "docs": { "type": "string", "minLength": 1, "maxLength": 500 },
@@ -56,15 +84,38 @@
     "source": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["repo", "path", "ref"],
+      "description": "Source repository information",
       "properties": {
-        "repo": { "type": "string", "minLength": 1, "maxLength": 500 },
-        "path": { "type": "string", "minLength": 1, "maxLength": 500 },
-        "ref": { "type": "string", "minLength": 1, "maxLength": 200 },
-        "commit": { "type": "string", "minLength": 7, "maxLength": 64 }
+        "repo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "GitHub repository URL"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Path within repository"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Git ref (branch or tag)"
+        },
+        "syncedCommit": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 64,
+          "description": "Last synced commit SHA"
+        }
       }
     },
     "related": {
       "type": "array",
+      "description": "Related skill IDs",
       "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
     }
   }

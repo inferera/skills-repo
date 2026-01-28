@@ -20,6 +20,13 @@ site/public/registry/*.json
 site/public/sitemap.xml
 site/public/robots.txt
 
+# Build cache (skills content)
+.cache/
+site/.cache/
+
+# Sync results (temporary)
+.sync-result.json
+
 # macOS
 .DS_Store
 

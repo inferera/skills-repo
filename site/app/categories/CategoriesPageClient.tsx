@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import type { RegistryCategories } from "@/lib/types";
+import { getLocalizedText } from "@/lib/i18n";
 
 import { useI18n } from "@/components/I18nProvider";
 
@@ -13,7 +14,7 @@ export function CategoriesPageClient({
   cats: RegistryCategories;
   counts: Record<string, number>;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <div className="space-y-8">
@@ -25,47 +26,38 @@ export function CategoriesPageClient({
         </p>
       </div>
 
-      {/* Categories List */}
-      <div className="space-y-6">
-        {cats.categories.map((cat) => (
-          <section
-            key={cat.id}
-            className="p-6 bg-card border border-border rounded-xl"
-          >
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <div>
-                <h2 className="font-heading text-xl font-semibold text-foreground">{cat.title}</h2>
-                {cat.description && (
-                  <p className="text-secondary mt-1">{cat.description}</p>
-                )}
-              </div>
-              <span className="px-2 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary">
-                {cat.id}
-              </span>
-            </div>
+      {/* Categories Grid - v2: flat categories */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {cats.categories.map((cat) => {
+          const count = counts[cat.id] ?? 0;
+          const title = getLocalizedText(cat.title, locale);
+          const description = cat.description ? getLocalizedText(cat.description, locale) : "";
 
-            <div className="flex flex-wrap gap-2">
-              {cat.subcategories.map((sub) => {
-                const key = `${cat.id}/${sub.id}`;
-                const count = counts[key] ?? 0;
-                return (
-                  <Link
-                    key={sub.id}
-                    href={`/c/${cat.id}/${sub.id}`}
-                    className="group inline-flex items-center gap-2 px-3 py-2 bg-background-secondary border border-border rounded-lg hover:border-border-hover hover:bg-card transition-colors"
-                  >
-                    <span className="font-medium text-sm text-foreground group-hover:text-accent transition-colors">
-                      {sub.title}
-                    </span>
-                    <span className="px-1.5 py-0.5 rounded text-xs text-muted bg-card">
-                      {count}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        ))}
+          return (
+            <Link
+              key={cat.id}
+              href={`/c/${cat.id}`}
+              className="group block p-6 bg-card border border-border rounded-xl hover:border-border-hover hover:bg-background-secondary transition-all"
+            >
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-heading text-lg font-semibold text-foreground group-hover:text-accent transition-colors truncate">
+                    {title}
+                  </h2>
+                  <span className="text-xs font-mono text-muted mt-1 block">
+                    {cat.id}
+                  </span>
+                </div>
+                <span className="px-2 py-1 rounded-md text-sm font-medium text-accent bg-accent/10 shrink-0">
+                  {count}
+                </span>
+              </div>
+              {description && (
+                <p className="text-sm text-secondary line-clamp-2">{description}</p>
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

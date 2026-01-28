@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # For sync detection
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -28,6 +30,31 @@ jobs:
 
       - name: Install root deps
         run: npm ci
+
+      - name: Restore skills cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/skills
+          key: skills-cache-${{ github.sha }}
+          restore-keys: |
+            skills-cache-
+
+      - name: Check for upstream changes (optional sync)
+        id: sync_check
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Checking for upstream changes..."
+          npm run sync:check || true
+
+          if [ -f .sync-result.json ]; then
+            CHANGED_COUNT=$(jq '.skills | length' .sync-result.json 2>/dev/null || echo "0")
+            if [ "$CHANGED_COUNT" -gt 0 ]; then
+              echo "⚠️ Found $CHANGED_COUNT skills with upstream changes"
+              echo "💡 Tip: Run 'npm run sync' locally or trigger the Sync workflow"
+            fi
+          fi
 
       - name: Compute site env
         run: |
@@ -67,7 +94,10 @@ jobs:
       - name: Build registry artifacts (+ sitemap/robots when SITE_URL is set)
         env:
           SITE_URL: ${{ env.SITE_URL }}
-        run: npm run build:registry
+        run: |
+          echo "Building registry with cache-first approach..."
+          echo "Cache status: Content from .cache/skills/ will be used if available"
+          npm run build:registry
 
       - name: Install site deps
         run: npm ci --prefix site

@@ -1,0 +1,139 @@
+name: Sync Skills
+
+on:
+  # Scheduled sync: daily at 20:00 UTC (matching config/registry.yaml)
+  schedule:
+    - cron: '0 20 * * *'
+
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      force_fetch:
+        description: 'Force fetch all skills (ignore cache)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+permissions:
+  contents: write  # Need write permission to commit changes
+  pull-requests: write  # For creating PRs if needed
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for sync detection
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/skills
+          key: skills-cache-${{ github.sha }}
+          restore-keys: |
+            skills-cache-
+
+      - name: Check for changes
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Running sync check..."
+          npm run sync:check
+
+          # Check if sync result file exists and has changes
+          if [ -f .sync-result.json ]; then
+            CHANGED_COUNT=$(jq '.skills | length' .sync-result.json)
+            echo "changed_count=${CHANGED_COUNT}" >> $GITHUB_OUTPUT
+
+            if [ "$CHANGED_COUNT" -gt 0 ]; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "📦 Found ${CHANGED_COUNT} skills with changes"
+            else
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "✅ No changes detected"
+            fi
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No sync result file"
+          fi
+
+      - name: Fetch changed skills
+        if: steps.check.outputs.has_changes == 'true' || github.event.inputs.force_fetch == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Fetching changed skills..."
+          npm run sync:fetch
+
+      - name: Rebuild registry
+        if: steps.check.outputs.has_changes == 'true' || github.event.inputs.force_fetch == 'true'
+        run: |
+          echo "Rebuilding registry with updated content..."
+          npm run build:registry
+
+      - name: Save cache
+        if: steps.check.outputs.has_changes == 'true' || github.event.inputs.force_fetch == 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: .cache/skills
+          key: skills-cache-${{ github.sha }}
+
+      - name: Commit changes
+        if: steps.check.outputs.has_changes == 'true' || github.event.inputs.force_fetch == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add updated skill metadata (syncedCommit changes)
+          git add skills/**/.x_skill.yaml
+
+          # Add updated registry files
+          git add registry/*.json
+          git add site/public/registry/agents.json
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          # Create commit with details
+          CHANGED_COUNT="${{ steps.check.outputs.changed_count }}"
+          git commit -m "sync: Update ${CHANGED_COUNT} skills from upstream sources
+
+          Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.check.outputs.has_changes }}" == "true" ]; then
+            echo "✅ **Changes detected and synced**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- Skills updated: ${{ steps.check.outputs.changed_count }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Cache updated: Yes" >> $GITHUB_STEP_SUMMARY
+            echo "- Registry rebuilt: Yes" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ **No changes detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "All skills are up to date with their source repositories." >> $GITHUB_STEP_SUMMARY
+          fi

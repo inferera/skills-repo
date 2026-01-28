@@ -1,187 +1,180 @@
 {
-  "specVersion": 1,
-  "generatedAt": "2026-01-27T02:39:42.652Z",
+  "specVersion": 2,
+  "generatedAt": "2026-01-28T05:41:47.104Z",
   "categories": [
     {
-      "id": "business",
-      "title": "Business",
-      "description": "Business tools, project management, and enterprise solutions",
-      "subcategories": [
-        {
-          "id": "finance",
-          "title": "Finance",
-          "description": "Financial analysis, accounting, and business intelligence"
-        },
-        {
-          "id": "project-management",
-          "title": "Project Management",
-          "description": "Project planning, tracking, collaboration, and team management"
-        },
-        {
-          "id": "sales-marketing",
-          "title": "Sales & Marketing",
-          "description": "Marketing automation, CRM, sales tools, and customer engagement"
-        }
-      ]
-    },
-    {
-      "id": "data-ai",
-      "title": "Data & AI",
-      "description": "Data analysis, machine learning, and artificial intelligence",
-      "subcategories": [
-        {
-          "id": "data-analysis",
-          "title": "Data Analysis",
-          "description": "Data visualization, analytics, and business intelligence"
-        },
-        {
-          "id": "llm-ai",
-          "title": "LLM & AI",
-          "description": "Large language models, AI agents, and generative AI tools"
-        },
-        {
-          "id": "ml-ops",
-          "title": "ML Ops",
-          "description": "Machine learning operations, model deployment, and monitoring"
-        }
-      ]
+      "id": "development",
+      "title": {
+        "en": "Development",
+        "zh-CN": "开发",
+        "zh-TW": "開發",
+        "ja": "開発",
+        "ko": "개발",
+        "de": "Entwicklung",
+        "es": "Desarrollo",
+        "fr": "Développement",
+        "pt": "Desenvolvimento",
+        "ru": "Разработка"
+      },
+      "description": {
+        "en": "Coding, debugging, and software development skills for AI agents",
+        "zh-CN": "面向 AI Agent 的编码、调试和软件开发技能",
+        "zh-TW": "面向 AI Agent 的編碼、調試和軟體開發技能",
+        "ja": "AI エージェント向けのコーディング、デバッグ、ソフトウェア開発スキル",
+        "ko": "AI 에이전트를 위한 코딩, 디버깅 및 소프트웨어 개발 스킬",
+        "de": "Programmier-, Debug- und Softwareentwicklungsfähigkeiten für KI-Agenten",
+        "es": "Habilidades de codificación, depuración y desarrollo de software para agentes de IA",
+        "fr": "Compétences de codage, débogage et développement logiciel pour agents IA",
+        "pt": "Habilidades de codificação, depuração e desenvolvimento de software para agentes de IA",
+        "ru": "Навыки программирования, отладки и разработки программного обеспечения для ИИ-агентов"
+      },
+      "icon": "code",
+      "order": 1
     },
     {
       "id": "design",
-      "title": "Design",
-      "description": "Design-related skills (UI/UX, branding, research, etc.)",
-      "subcategories": [
-        {
-          "id": "ui-ux",
-          "title": "UI/UX",
-          "description": "User interface and user experience skills"
-        }
-      ]
-    },
-    {
-      "id": "development",
-      "title": "Development",
-      "description": "Software development, coding, and engineering skills",
-      "subcategories": [
-        {
-          "id": "architecture",
-          "title": "Architecture",
-          "description": "Software architecture, design patterns, and system design"
-        },
-        {
-          "id": "backend",
-          "title": "Backend",
-          "description": "Backend development, APIs, databases, and server-side logic"
-        },
-        {
-          "id": "cms-platforms",
-          "title": "CMS & Platforms",
-          "description": "Content management systems, platforms, and framework integration"
-        },
-        {
-          "id": "frontend",
-          "title": "Frontend",
-          "description": "Frontend development, UI components, and client-side applications"
-        },
-        {
-          "id": "mobile",
-          "title": "Mobile",
-          "description": "Mobile app development for iOS, Android, and cross-platform"
-        }
-      ]
+      "title": {
+        "en": "Design",
+        "zh-CN": "设计",
+        "zh-TW": "設計",
+        "ja": "デザイン",
+        "ko": "디자인",
+        "de": "Design",
+        "es": "Diseño",
+        "fr": "Design",
+        "pt": "Design",
+        "ru": "Дизайн"
+      },
+      "description": {
+        "en": "UI/UX design, visual design, and prototyping skills for creating user experiences",
+        "zh-CN": "UI/UX 设计、视觉设计和原型制作技能，用于创建用户体验",
+        "zh-TW": "UI/UX 設計、視覺設計和原型製作技能，用於創建用戶體驗",
+        "ja": "ユーザー体験を構築するための UI/UX デザイン、ビジュアルデザイン、プロトタイピングスキル",
+        "ko": "사용자 경험을 만들기 위한 UI/UX 디자인, 시각 디자인 및 프로토타이핑 스킬",
+        "de": "UI/UX-Design, visuelles Design und Prototyping-Fähigkeiten zur Gestaltung von Benutzererlebnissen",
+        "es": "Habilidades de diseño UI/UX, diseño visual y prototipado para crear experiencias de usuario",
+        "fr": "Compétences de design UI/UX, design visuel et prototypage pour créer des expériences utilisateur",
+        "pt": "Habilidades de design UI/UX, design visual e prototipagem para criar experiências de usuário",
+        "ru": "Навыки UI/UX-дизайна, визуального дизайна и прототипирования для создания пользовательских впечатлений"
+      },
+      "icon": "palette",
+      "order": 2
     },
     {
       "id": "devops",
-      "title": "DevOps",
-      "description": "DevOps practices, CI/CD, infrastructure, and deployment automation",
-      "subcategories": [
-        {
-          "id": "ci-cd",
-          "title": "CI/CD",
-          "description": "Continuous integration, continuous deployment, and release automation"
-        },
-        {
-          "id": "git-workflows",
-          "title": "Git Workflows",
-          "description": "Version control, branching strategies, and Git automation"
-        },
-        {
-          "id": "infrastructure",
-          "title": "Infrastructure",
-          "description": "Infrastructure as code, cloud platforms, and server management"
-        },
-        {
-          "id": "monitoring",
-          "title": "Monitoring",
-          "description": "Application monitoring, logging, and observability"
-        }
-      ]
+      "title": {
+        "en": "DevOps",
+        "zh-CN": "DevOps",
+        "zh-TW": "DevOps",
+        "ja": "DevOps",
+        "ko": "DevOps",
+        "de": "DevOps",
+        "es": "DevOps",
+        "fr": "DevOps",
+        "pt": "DevOps",
+        "ru": "DevOps"
+      },
+      "description": {
+        "en": "CI/CD, infrastructure, deployment, and monitoring skills for automating software delivery",
+        "zh-CN": "CI/CD、基础设施、部署和监控技能，用于自动化软件交付",
+        "zh-TW": "CI/CD、基礎設施、部署和監控技能，用於自動化軟體交付",
+        "ja": "ソフトウェア配信を自動化するための CI/CD、インフラ、デプロイ、モニタリングスキル",
+        "ko": "소프트웨어 전달을 자동화하기 위한 CI/CD, 인프라, 배포 및 모니터링 스킬",
+        "de": "CI/CD-, Infrastruktur-, Deployment- und Überwachungsfähigkeiten zur Automatisierung der Softwarebereitstellung",
+        "es": "Habilidades de CI/CD, infraestructura, despliegue y monitoreo para automatizar la entrega de software",
+        "fr": "Compétences CI/CD, infrastructure, déploiement et surveillance pour automatiser la livraison de logiciels",
+        "pt": "Habilidades de CI/CD, infraestrutura, implantação e monitoramento para automatizar a entrega de software",
+        "ru": "Навыки CI/CD, инфраструктуры, развертывания и мониторинга для автоматизации доставки программного обеспечения"
+      },
+      "icon": "server",
+      "order": 3
+    },
+    {
+      "id": "testing",
+      "title": {
+        "en": "Testing & Security",
+        "zh-CN": "测试与安全",
+        "zh-TW": "測試與安全",
+        "ja": "テストとセキュリティ",
+        "ko": "테스트 및 보안",
+        "de": "Testing & Sicherheit",
+        "es": "Pruebas y Seguridad",
+        "fr": "Tests et Sécurité",
+        "pt": "Testes e Segurança",
+        "ru": "Тестирование и безопасность"
+      },
+      "description": {
+        "en": "Testing, code quality, and security analysis skills for ensuring software reliability",
+        "zh-CN": "测试、代码质量和安全分析技能，用于确保软件可靠性",
+        "zh-TW": "測試、代碼質量和安全分析技能，用於確保軟體可靠性",
+        "ja": "ソフトウェアの信頼性を確保するためのテスト、コード品質、セキュリティ分析スキル",
+        "ko": "소프트웨어 신뢰성을 보장하기 위한 테스트, 코드 품질 및 보안 분석 스킬",
+        "de": "Test-, Codequalitäts- und Sicherheitsanalysefähigkeiten zur Gewährleistung der Softwarezuverlässigkeit",
+        "es": "Habilidades de prueba, calidad de código y análisis de seguridad para garantizar la confiabilidad del software",
+        "fr": "Compétences de test, qualité du code et analyse de sécurité pour garantir la fiabilité des logiciels",
+        "pt": "Habilidades de teste, qualidade de código e análise de segurança para garantir a confiabilidade do software",
+        "ru": "Навыки тестирования, качества кода и анализа безопасности для обеспечения надежности программного обеспечения"
+      },
+      "icon": "shield-check",
+      "order": 4
     },
     {
       "id": "documentation",
-      "title": "Documentation",
-      "description": "Technical writing, knowledge management, and documentation tools",
-      "subcategories": [
-        {
-          "id": "api-docs",
-          "title": "API Docs",
-          "description": "API documentation, reference guides, and OpenAPI specs"
-        },
-        {
-          "id": "knowledge-base",
-          "title": "Knowledge Base",
-          "description": "Internal wikis, knowledge repositories, and team documentation"
-        },
-        {
-          "id": "technical-docs",
-          "title": "Technical Docs",
-          "description": "User guides, tutorials, and technical documentation"
-        }
-      ]
-    },
-    {
-      "id": "testing-security",
-      "title": "Testing & Security",
-      "description": "Software testing, quality assurance, and security practices",
-      "subcategories": [
-        {
-          "id": "code-quality",
-          "title": "Code Quality",
-          "description": "Code review, linting, static analysis, and quality metrics"
-        },
-        {
-          "id": "security",
-          "title": "Security",
-          "description": "Security testing, vulnerability scanning, and secure coding practices"
-        },
-        {
-          "id": "testing",
-          "title": "Testing",
-          "description": "Unit testing, integration testing, E2E testing, and test automation"
-        }
-      ]
+      "title": {
+        "en": "Documentation",
+        "zh-CN": "文档",
+        "zh-TW": "文檔",
+        "ja": "ドキュメント",
+        "ko": "문서화",
+        "de": "Dokumentation",
+        "es": "Documentación",
+        "fr": "Documentation",
+        "pt": "Documentação",
+        "ru": "Документация"
+      },
+      "description": {
+        "en": "Technical writing, API documentation, and knowledge management skills for creating clear documentation",
+        "zh-CN": "技术写作、API 文档和知识管理技能，用于创建清晰的文档",
+        "zh-TW": "技術寫作、API 文檔和知識管理技能，用於創建清晰的文檔",
+        "ja": "明確なドキュメントを作成するためのテクニカルライティング、API ドキュメント、ナレッジマネジメントスキル",
+        "ko": "명확한 문서를 작성하기 위한 기술 문서 작성, API 문서화 및 지식 관리 스킬",
+        "de": "Technisches Schreiben, API-Dokumentation und Wissensmanagement-Fähigkeiten zur Erstellung klarer Dokumentation",
+        "es": "Habilidades de redacción técnica, documentación de API y gestión del conocimiento para crear documentación clara",
+        "fr": "Compétences de rédaction technique, documentation d'API et gestion des connaissances pour créer une documentation claire",
+        "pt": "Habilidades de redação técnica, documentação de API e gestão de conhecimento para criar documentação clara",
+        "ru": "Навыки технического письма, документирования API и управления знаниями для создания четкой документации"
+      },
+      "icon": "book",
+      "order": 5
     },
     {
       "id": "tools",
-      "title": "Tools",
-      "description": "Development tools, productivity utilities, and automation scripts",
-      "subcategories": [
-        {
-          "id": "automation",
-          "title": "Automation",
-          "description": "Task automation, scripting, and process automation tools"
-        },
-        {
-          "id": "debug",
-          "title": "Debug",
-          "description": "Debugging tools, logging utilities, and troubleshooting aids"
-        },
-        {
-          "id": "productivity",
-          "title": "Productivity",
-          "description": "Productivity tools, workflow optimization, and efficiency utilities"
-        }
-      ]
+      "title": {
+        "en": "Tools & Utilities",
+        "zh-CN": "工具与实用程序",
+        "zh-TW": "工具與實用程序",
+        "ja": "ツールとユーティリティ",
+        "ko": "도구 및 유틸리티",
+        "de": "Tools & Dienstprogramme",
+        "es": "Herramientas y Utilidades",
+        "fr": "Outils et Utilitaires",
+        "pt": "Ferramentas e Utilitários",
+        "ru": "Инструменты и утилиты"
+      },
+      "description": {
+        "en": "Productivity tools, automation scripts, and utilities to enhance development workflow",
+        "zh-CN": "提高开发工作流程的生产力工具、自动化脚本和实用程序",
+        "zh-TW": "提高開發工作流程的生產力工具、自動化腳本和實用程序",
+        "ja": "開発ワークフローを強化する生産性ツール、自動化スクリプト、ユーティリティ",
+        "ko": "개발 워크플로우를 향상시키는 생산성 도구, 자동화 스크립트 및 유틸리티",
+        "de": "Produktivitätstools, Automatisierungsskripte und Dienstprogramme zur Verbesserung des Entwicklungsworkflows",
+        "es": "Herramientas de productividad, scripts de automatización y utilidades para mejorar el flujo de trabajo de desarrollo",
+        "fr": "Outils de productivité, scripts d'automatisation et utilitaires pour améliorer le flux de travail de développement",
+        "pt": "Ferramentas de produtividade, scripts de automação e utilitários para aprimorar o fluxo de trabalho de desenvolvimento",
+        "ru": "Инструменты повышения производительности, скрипты автоматизации и утилиты для улучшения рабочего процесса разработки"
+      },
+      "icon": "wrench",
+      "order": 6
     }
   ]
 }

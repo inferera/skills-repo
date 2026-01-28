@@ -1,4 +1,25 @@
-specVersion: 1
 id: documentation
-title: Documentation
-description: Technical writing, knowledge management, and documentation tools
+title:
+  en: Documentation
+  zh-CN: 文档
+  zh-TW: 文檔
+  ja: ドキュメント
+  ko: 문서화
+  de: Dokumentation
+  es: Documentación
+  fr: Documentation
+  pt: Documentação
+  ru: Документация
+description:
+  en: Technical writing, API documentation, and knowledge management skills for creating clear documentation
+  zh-CN: 技术写作、API 文档和知识管理技能，用于创建清晰的文档
+  zh-TW: 技術寫作、API 文檔和知識管理技能，用於創建清晰的文檔
+  ja: 明確なドキュメントを作成するためのテクニカルライティング、API ドキュメント、ナレッジマネジメントスキル
+  ko: 명확한 문서를 작성하기 위한 기술 문서 작성, API 문서화 및 지식 관리 스킬
+  de: Technisches Schreiben, API-Dokumentation und Wissensmanagement-Fähigkeiten zur Erstellung klarer Dokumentation
+  es: Habilidades de redacción técnica, documentación de API y gestión del conocimiento para crear documentación clara
+  fr: Compétences de rédaction technique, documentation d'API et gestion des connaissances pour créer une documentation claire
+  pt: Habilidades de redação técnica, documentação de API e gestão de conhecimento para criar documentação clara
+  ru: Навыки технического письма, документирования API и управления знаниями для создания четкой документации
+icon: book
+order: 5

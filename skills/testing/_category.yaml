@@ -1,0 +1,25 @@
+id: testing
+title:
+  en: Testing & Security
+  zh-CN: 测试与安全
+  zh-TW: 測試與安全
+  ja: テストとセキュリティ
+  ko: 테스트 및 보안
+  de: Testing & Sicherheit
+  es: Pruebas y Seguridad
+  fr: Tests et Sécurité
+  pt: Testes e Segurança
+  ru: Тестирование и безопасность
+description:
+  en: Testing, code quality, and security analysis skills for ensuring software reliability
+  zh-CN: 测试、代码质量和安全分析技能，用于确保软件可靠性
+  zh-TW: 測試、代碼質量和安全分析技能，用於確保軟體可靠性
+  ja: ソフトウェアの信頼性を確保するためのテスト、コード品質、セキュリティ分析スキル
+  ko: 소프트웨어 신뢰성을 보장하기 위한 테스트, 코드 품질 및 보안 분석 스킬
+  de: Test-, Codequalitäts- und Sicherheitsanalysefähigkeiten zur Gewährleistung der Softwarezuverlässigkeit
+  es: Habilidades de prueba, calidad de código y análisis de seguridad para garantizar la confiabilidad del software
+  fr: Compétences de test, qualité du code et analyse de sécurité pour garantir la fiabilité des logiciels
+  pt: Habilidades de teste, qualidade de código e análise de segurança para garantir a confiabilidade do software
+  ru: Навыки тестирования, качества кода и анализа безопасности для обеспечения надежности программного обеспечения
+icon: shield-check
+order: 4

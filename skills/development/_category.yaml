@@ -1,4 +1,25 @@
-specVersion: 1
 id: development
-title: Development
-description: Software development, coding, and engineering skills
+title:
+  en: Development
+  zh-CN: 开发
+  zh-TW: 開發
+  ja: 開発
+  ko: 개발
+  de: Entwicklung
+  es: Desarrollo
+  fr: Développement
+  pt: Desenvolvimento
+  ru: Разработка
+description:
+  en: Coding, debugging, and software development skills for AI agents
+  zh-CN: 面向 AI Agent 的编码、调试和软件开发技能
+  zh-TW: 面向 AI Agent 的編碼、調試和軟體開發技能
+  ja: AI エージェント向けのコーディング、デバッグ、ソフトウェア開発スキル
+  ko: AI 에이전트를 위한 코딩, 디버깅 및 소프트웨어 개발 스킬
+  de: Programmier-, Debug- und Softwareentwicklungsfähigkeiten für KI-Agenten
+  es: Habilidades de codificación, depuración y desarrollo de software para agentes de IA
+  fr: Compétences de codage, débogage et développement logiciel pour agents IA
+  pt: Habilidades de codificação, depuração e desenvolvimento de software para agentes de IA
+  ru: Навыки программирования, отладки и разработки программного обеспечения для ИИ-агентов
+icon: code
+order: 1

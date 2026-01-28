@@ -1,0 +1,22 @@
+specVersion: 2
+id: docker-optimizer
+title: Docker Image Optimizer
+description: Optimize Docker images for size and security - reduce image size by up to 80% with best practices.
+category: devops
+tags:
+  - docker
+  - containers
+  - optimization
+  - security
+  - best-practices
+agents:
+  - claude
+  - windsurf
+runtime:
+  - docker
+license: MIT
+source:
+  repo: https://github.com/example/docker-optimizer
+  path: skills/docker-optimizer
+  ref: main
+  syncedCommit: ghi345jkl678

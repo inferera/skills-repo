@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills-registry.github.io/schemas/category.schema.json",
+  "title": "Category Metadata",
+  "description": "Schema for skill category metadata with i18n support",
+  "type": "object",
+  "required": ["id", "title", "description"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Category identifier (kebab-case)"
+    },
+    "title": {
+      "$ref": "#/$defs/i18nString",
+      "description": "Category display title (supports i18n)"
+    },
+    "description": {
+      "$ref": "#/$defs/i18nString",
+      "description": "Category description (supports i18n)"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Optional icon identifier"
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sort order (lower numbers appear first)"
+    }
+  },
+  "$defs": {
+    "i18nString": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Simple string (treated as 'en')"
+        },
+        {
+          "type": "object",
+          "required": ["en"],
+          "properties": {
+            "en": { "type": "string", "minLength": 1 },
+            "zh-CN": { "type": "string", "minLength": 1 },
+            "zh-TW": { "type": "string", "minLength": 1 },
+            "ja": { "type": "string", "minLength": 1 },
+            "ko": { "type": "string", "minLength": 1 },
+            "de": { "type": "string", "minLength": 1 },
+            "es": { "type": "string", "minLength": 1 },
+            "fr": { "type": "string", "minLength": 1 },
+            "pt": { "type": "string", "minLength": 1 },
+            "ru": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false,
+          "description": "Multi-language object with 'en' as fallback"
+        }
+      ]
+    }
+  }
+}

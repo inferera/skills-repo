@@ -1656,3 +1656,14 @@ export function formatMessage(message: string, params?: Record<string, string | 
     return String(v);
   });
 }
+
+/**
+ * Get localized text from I18nString (for registry categories)
+ * @param text - Either a plain string or an object with locale keys
+ * @param locale - The desired locale
+ * @returns The localized text, falling back to English or the plain string
+ */
+export function getLocalizedText(text: string | Record<string, string>, locale: Locale): string {
+  if (typeof text === "string") return text;
+  return text[locale] || text["en"] || text[DEFAULT_LOCALE] || Object.values(text)[0] || "";
+}

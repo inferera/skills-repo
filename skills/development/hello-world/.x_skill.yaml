@@ -1,0 +1,19 @@
+specVersion: 2
+id: hello-world
+title: Hello World Skill
+description: A simple example skill that demonstrates the basic structure and usage of AI agent skills.
+category: development
+tags:
+  - example
+  - tutorial
+  - beginner
+agents:
+  - claude
+runtime:
+  - node
+license: MIT
+source:
+  repo: https://github.com/example/hello-world-skill
+  path: skills/hello-world
+  ref: main
+  syncedCommit: abc123def456

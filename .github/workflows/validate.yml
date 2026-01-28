@@ -22,6 +22,14 @@ jobs:
       - name: Install root deps
         run: npm ci
 
+      - name: Restore skills cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/skills
+          key: skills-cache-${{ github.sha }}
+          restore-keys: |
+            skills-cache-
+
       - name: Validate skills
         run: npm run validate
 

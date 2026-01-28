@@ -1,100 +1,83 @@
+// scripts/build-registry.mjs (v2)
 import fs from "node:fs/promises";
+import { buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
+import { loadConfig } from "./lib/config.mjs";
 
-import fg from "fast-glob";
-import YAML from "yaml";
+const generatedAt = new Date().toISOString();
 
-import { SKILL_YAML_GLOB, buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
+console.log('🔨 Building registry...\n');
 
-let generatedAt = new Date().toISOString();
+// Load configuration
+const config = await loadConfig();
 
-async function backfillSkillTimestamps(now) {
-  const skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: true });
-  skillYamlPaths.sort((a, b) => a.localeCompare(b));
+// Scan skills
+console.log('📦 Scanning skills...');
+let { skills, errors } = await scanSkills({ includeFiles: true, includeSummary: true, config });
 
-  let updated = 0;
-  for (const skillYamlPath of skillYamlPaths) {
-    const raw = await fs.readFile(skillYamlPath, "utf8");
-    const meta = YAML.parse(raw);
-    if (!meta || typeof meta !== "object") continue;
-
-    const createdExisting = typeof meta.createdAt === "string" ? meta.createdAt.trim() : "";
-    const updatedExisting = typeof meta.updatedAt === "string" ? meta.updatedAt.trim() : "";
-    if (createdExisting && updatedExisting) continue;
-
-    const createdAt = createdExisting || now;
-    const updatedAt = updatedExisting || now;
-
-    const {
-      specVersion,
-      id,
-      title,
-      description,
-      createdAt: _createdAt,
-      updatedAt: _updatedAt,
-      ...rest
-    } = meta;
-
-    const next = { specVersion, id, title, description, createdAt, updatedAt, ...rest };
-    await fs.writeFile(skillYamlPath, YAML.stringify(next), "utf8");
-    updated += 1;
-  }
-
-  if (updated > 0) {
-    console.log(`Backfilled timestamps: ${updated} skill manifest(s)`);
-  }
-}
-
-await backfillSkillTimestamps(generatedAt);
-
-let { skills, errors } = await scanSkills({ includeFiles: true, includeSummary: true });
 if (errors.length > 0) {
+  console.error('\n❌ Validation errors:\n');
   console.error(errors.join("\n\n"));
   process.exit(1);
 }
 
-let categories = await loadCategoriesFromRepo(skills);
+console.log(`  ✓ Found ${skills.length} skills\n`);
 
+// Load categories
+console.log('📂 Loading categories...');
+let categories = await loadCategoriesFromRepo(skills, config);
+console.log(`  ✓ Found ${categories.length} categories\n`);
+
+// Build registry index
 let index = {
-  specVersion: 1,
+  specVersion: 2,  // v2: flat categories
   generatedAt,
   skills
 };
 
 let categoriesJson = {
-  specVersion: 1,
+  specVersion: 2,
   generatedAt,
   categories
 };
 
 let searchIndex = {
-  specVersion: 1,
+  specVersion: 2,
   generatedAt,
   docs: buildSearchDocs(skills)
 };
 
-// Canonical build outputs (tooling + CI).
+// Write canonical outputs (CLI + CI)
+console.log('💾 Writing registry files...');
 await writeJson("registry/index.json", index);
 await writeJson("registry/categories.json", categoriesJson);
 await writeJson("registry/search-index.json", searchIndex);
+console.log('  ✓ registry/index.json');
+console.log('  ✓ registry/categories.json');
+console.log('  ✓ registry/search-index.json');
 
-// Site consumes these as static public assets.
+// Copy to site public assets
+console.log('\n📋 Copying to site/public/registry/...');
 await fs.mkdir("site/public/registry", { recursive: true });
 await writeJson("site/public/registry/index.json", index);
 await writeJson("site/public/registry/categories.json", categoriesJson);
 await writeJson("site/public/registry/search-index.json", searchIndex);
+
 try {
   await fs.copyFile("registry/agents.json", "site/public/registry/agents.json");
+  console.log('  ✓ agents.json (copied)');
 } catch {
-  // Optional file (agent install directory config)
+  // Optional file
 }
 
-// SEO assets (optional; emitted when SITE_URL is configured in CI).
+// Generate SEO assets (if SITE_URL is set)
 if (process.env.SITE_URL) {
+  console.log('\n🔍 Generating SEO assets...');
   let base = process.env.SITE_URL.replace(/\/+$/, "");
   let urls = [
     `${base}/`,
     `${base}/categories/`,
-    ...categories.flatMap((c) => c.subcategories.map((s) => `${base}/c/${c.id}/${s.id}/`)),
+    // v2: flat categories (no subcategories)
+    ...categories.map((c) => `${base}/c/${c.id}/`),
     ...skills.map((s) => `${base}/s/${s.id}/`)
   ];
 
@@ -109,6 +92,11 @@ if (process.env.SITE_URL) {
   await fs.mkdir("site/public", { recursive: true });
   await fs.writeFile("site/public/sitemap.xml", xml, "utf8");
   await fs.writeFile("site/public/robots.txt", `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`, "utf8");
+  console.log('  ✓ sitemap.xml');
+  console.log('  ✓ robots.txt');
 }
 
-console.log(`OK: wrote registry (skills=${skills.length})`);
+console.log(`\n✅ Registry build complete!\n`);
+console.log(`   Skills: ${skills.length}`);
+console.log(`   Categories: ${categories.length}`);
+console.log(`   Search docs: ${searchIndex.docs.length}\n`);

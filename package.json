@@ -13,6 +13,9 @@
     "validate": "node scripts/validate.mjs",
     "check:registry": "node scripts/check-registry-up-to-date.mjs",
     "build:registry": "node scripts/build-registry.mjs",
+    "sync:check": "node scripts/sync-check.mjs",
+    "sync:fetch": "node scripts/sync-fetch.mjs",
+    "sync": "npm run sync:check && npm run sync:fetch",
     "build:site": "npm run build --prefix site",
     "dev:site": "npm run build:registry && npm run dev --prefix site"
   },

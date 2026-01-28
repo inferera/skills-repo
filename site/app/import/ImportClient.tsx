@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 
 import { useI18n } from "@/components/I18nProvider";
+import { getLocalizedText } from "@/lib/i18n";
 import { REPO_SLUG } from "@/lib/config";
 import type { RegistryCategories, RegistryIndex, RegistrySkill } from "@/lib/types";
 
@@ -31,7 +32,6 @@ type DetectedSkill = {
 // Per-skill metadata that can be edited
 type SkillMetadata = {
   category: string;
-  subcategory: string;
   tags: string[];
   // For conflict resolution
   newId?: string; // If user wants to rename
@@ -157,7 +157,6 @@ function buildIssueBody(args: {
     id: string;
     title: string;
     targetCategory: string;
-    targetSubcategory: string;
     tags: string[];
     isUpdate: boolean;
   }>;
@@ -165,14 +164,13 @@ function buildIssueBody(args: {
   const newCount = args.items.filter((it) => !it.isUpdate).length;
   const updateCount = args.items.filter((it) => it.isUpdate).length;
 
-  // Build compact YAML - only essential fields
+  // Build compact YAML - only essential fields (v2: no subcategory)
   const itemLines = args.items.map((it) => {
     const lines = [
       `  - sourcePath: ${it.sourcePath}`,
       `    id: ${it.id}`,
       `    title: ${it.title}`,
       `    targetCategory: ${it.targetCategory}`,
-      `    targetSubcategory: ${it.targetSubcategory}`,
     ];
     if (it.isUpdate) {
       lines.push(`    isUpdate: true`);
@@ -211,7 +209,7 @@ export function ImportClient({
   initialCategories: RegistryCategories;
   initialRegistryIndex: RegistryIndex;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [repoInput, setRepoInput] = useState("");
   const [refInput, setRefInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -224,7 +222,6 @@ export function ImportClient({
   const defaultCategory = firstCategory?.id ?? "";
   const [categories] = useState<RegistryCategories>(initialCategories);
   const [registryIndex] = useState<RegistryIndex>(initialRegistryIndex);
-  const [defaultSubcategory, setDefaultSubcategory] = useState<string>(firstCategory?.subcategories[0]?.id ?? "");
 
   const [detected, setDetected] = useState<DetectedSkill[]>([]);
   const [selected, setSelected] = useState<Record<string, boolean>>({});
@@ -235,19 +232,6 @@ export function ImportClient({
   const [activeTab, setActiveTab] = useState<"new" | "update">("new");
 
   const categoryOptions = useMemo(() => categories?.categories ?? [], [categories]);
-
-  const getSubcategories = useCallback((categoryId: string) => {
-    const cat = categoryOptions.find((c) => c.id === categoryId);
-    return cat?.subcategories ?? [];
-  }, [categoryOptions]);
-
-  const defaultSubcategoryOptions = useMemo(() => getSubcategories(defaultCategory), [getSubcategories, defaultCategory]);
-
-  useEffect(() => {
-    if (!defaultSubcategoryOptions.find((s) => s.id === defaultSubcategory)) {
-      setDefaultSubcategory(defaultSubcategoryOptions[0]?.id ?? "");
-    }
-  }, [defaultSubcategoryOptions, defaultSubcategory]);
 
   // Check if a skill already exists in registry
   const checkExistingSkill = useCallback((skillId: string, sourceRepo: string, sourcePath: string): { conflict: ConflictType; existing?: RegistrySkill } => {
@@ -368,20 +352,19 @@ export function ImportClient({
           title: s.title,
           description: s.description,
           targetCategory: meta?.category ?? defaultCategory,
-          targetSubcategory: meta?.subcategory ?? defaultSubcategory,
           tags: meta?.tags ?? [],
           isUpdate,
         };
       })
     };
-  }, [selectedItems, sourceRepoUrl, resolvedRef, skillMetadata, defaultCategory, defaultSubcategory, checkExistingSkill]);
+  }, [selectedItems, sourceRepoUrl, resolvedRef, skillMetadata, defaultCategory, checkExistingSkill]);
 
   const issueUrl = useMemo(() => {
     if (!REPO_SLUG) return "";
     if (!reviewData) return "";
 
-    // Check if all selected items have valid metadata
-    const allHaveMetadata = reviewData.items.every((it) => it.targetCategory && it.targetSubcategory);
+    // Check if all selected items have valid metadata (v2: no subcategory)
+    const allHaveMetadata = reviewData.items.every((it) => it.targetCategory);
     if (!allHaveMetadata) return "";
 
     let repoSlug = sourceRepoUrl;
@@ -458,7 +441,6 @@ export function ImportClient({
           const { existing } = checkExistingSkill(id, fullRepoUrl, sourcePath);
           initialMetadata[sourcePath] = {
             category: existing?.category ?? defaultCategory,
-            subcategory: existing?.subcategory ?? defaultSubcategory,
             tags: [],
           };
         } catch {
@@ -497,7 +479,6 @@ export function ImportClient({
   ) {
     const meta = skillMetadata[s.sourcePath];
     const isExpanded = expandedSkill === s.sourcePath;
-    const subcatOptions = meta ? getSubcategories(meta.category) : [];
     const isSelected = Boolean(selected[s.sourcePath]);
     const canSelect = isSelected || selectedCount < MAX_SKILLS_PER_IMPORT;
 
@@ -528,7 +509,7 @@ export function ImportClient({
                 </span>
                 {meta && (
                   <span className="px-2 py-0.5 rounded text-xs font-mono text-accent bg-accent-muted">
-                    {meta.category}/{meta.subcategory}
+                    {meta.category}
                   </span>
                 )}
                 {/* Conflict badges */}
@@ -564,7 +545,7 @@ export function ImportClient({
                   <p className="text-xs text-amber-700 dark:text-amber-300">
                     {t("import.skillCard.sameIdConflict", {
                       id: s.id,
-                      category: `${s.existing.category}/${s.existing.subcategory}`,
+                      category: s.existing.category,
                     })}
                   </p>
                 </div>
@@ -574,7 +555,7 @@ export function ImportClient({
                   <p className="text-xs text-blue-700 dark:text-blue-300">
                     {t("import.skillCard.updateNotice", {
                       id: s.existing.id,
-                      category: `${s.existing.category}/${s.existing.subcategory}`,
+                      category: s.existing.category,
                     })}
                   </p>
                 </div>
@@ -635,31 +616,14 @@ export function ImportClient({
                     className="w-full h-9 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
                     value={meta.category}
                     onChange={(e) => {
-                      const newCat = e.target.value;
-                      const newSubcats = getSubcategories(newCat);
                       updateSkillMetadata(s.sourcePath, {
-                        category: newCat,
-                        subcategory: newSubcats[0]?.id ?? "",
+                        category: e.target.value,
                       });
                     }}
                   >
                     {categoryOptions.map((c) => (
                       <option key={c.id} value={c.id}>
-                        {c.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-muted mb-1.5">{t("import.skillCard.subcategoryLabel")}</label>
-                  <select
-                    className="w-full h-9 px-3 bg-card border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-accent transition-colors"
-                    value={meta.subcategory}
-                    onChange={(e) => updateSkillMetadata(s.sourcePath, { subcategory: e.target.value })}
-                  >
-                    {subcatOptions.map((sc) => (
-                      <option key={sc.id} value={sc.id}>
-                        {sc.title}
+                        {getLocalizedText(c.title, locale)}
                       </option>
                     ))}
                   </select>

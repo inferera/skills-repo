@@ -1,3 +1,4 @@
+// scripts/lib/registry.mjs (v2 - flat categories + cache support)
 import fg from "fast-glob";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -5,8 +6,9 @@ import path from "node:path";
 import Ajv from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import YAML from "yaml";
+import { getBuildConfig } from "./config.mjs";
 
-export const SKILL_YAML_GLOB = "skills/*/*/*/.x_skill.yaml";
+export const SKILL_YAML_GLOB = "skills/*/*/.x_skill.yaml";
 
 const SKILL_FILE_IGNORE = [
   "**/.git",
@@ -77,6 +79,17 @@ export async function loadSkillSchema() {
   }
 }
 
+export async function loadCategorySchema() {
+  let schemaPath = path.join("schemas", "category.schema.json");
+  let raw = await readText(schemaPath);
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    let msg = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to parse JSON schema: ${schemaPath}\n${msg}`);
+  }
+}
+
 export function createValidator(schema) {
   let ajv = new Ajv({
     allErrors: true,
@@ -103,7 +116,6 @@ export function extractSummary(markdown) {
 
   // Drop leading title block (# ...)
   if (lines[0]?.startsWith("#")) {
-    // Remove until first blank line after the first heading line.
     lines.shift();
     while (lines.length > 0 && lines[0].trim() === "") lines.shift();
   }
@@ -116,19 +128,25 @@ export function extractSummary(markdown) {
   return para.join("\n").trim();
 }
 
+/**
+ * Parse skill YAML path (v2 - flat structure)
+ * skills/{category}/{skill-id}/.x_skill.yaml
+ */
 export function parseSkillYamlPath(skillYamlPath) {
   let parts = splitPath(skillYamlPath);
   let skillsIdx = parts.indexOf("skills");
   if (skillsIdx === -1) throw new Error(`Invalid skill path (missing skills/): ${skillYamlPath}`);
+
   let category = parts[skillsIdx + 1];
-  let subcategory = parts[skillsIdx + 2];
-  let skillId = parts[skillsIdx + 3];
-  let fileName = parts[skillsIdx + 4];
-  if (!category || !subcategory || !skillId || fileName !== ".x_skill.yaml") {
-    throw new Error(`Invalid skill path shape: ${skillYamlPath}`);
+  let skillId = parts[skillsIdx + 2];
+  let fileName = parts[skillsIdx + 3];
+
+  if (!category || !skillId || fileName !== ".x_skill.yaml") {
+    throw new Error(`Invalid skill path shape (expected skills/{category}/{id}/.x_skill.yaml): ${skillYamlPath}`);
   }
-  let skillDir = parts.slice(0, skillsIdx + 4).join("/");
-  return { category, subcategory, skillId, skillDir };
+
+  let skillDir = parts.slice(0, skillsIdx + 3).join("/");
+  return { category, skillId, skillDir };
 }
 
 export async function listSkillFiles(skillDir) {
@@ -159,15 +177,25 @@ async function findSymlinksInDir(dir) {
       const st = await fs.lstat(path.join(dir, rel));
       if (st.isSymbolicLink()) symlinks.push(rel);
     } catch {
-      // Ignore racing/missing paths; validation should be best-effort.
+      // Ignore racing/missing paths
     }
   }
   return symlinks;
 }
 
-export async function scanSkills({ includeFiles = true, includeSummary = true } = {}) {
+/**
+ * Scan all skills (v2 - with cache support)
+ */
+export async function scanSkills({ includeFiles = true, includeSummary = true, config = null } = {}) {
   let schema = await loadSkillSchema();
   let validate = createValidator(schema);
+
+  // Get cache directory from config
+  let cacheDir = '.cache/skills';
+  if (config) {
+    const buildConfig = getBuildConfig(config);
+    cacheDir = buildConfig.cacheDir;
+  }
 
   let skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: true });
   skillYamlPaths.sort((a, b) => a.localeCompare(b));
@@ -176,8 +204,8 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
   let skills = [];
   let seenIds = new Map(); // id -> path
 
-  // Enforce canonical filename to avoid "invisible" skills that never get indexed.
-  let legacyYamlPaths = await fg(["skills/*/*/*/skill.yaml"], { onlyFiles: true, dot: false });
+  // Check for legacy filenames
+  let legacyYamlPaths = await fg(["skills/*/*/skill.yaml"], { onlyFiles: true, dot: false });
   legacyYamlPaths.sort((a, b) => a.localeCompare(b));
   for (let legacyPath of legacyYamlPaths) {
     let skillDir = legacyPath.replace(/\/skill\.yaml$/, "");
@@ -190,9 +218,9 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
   }
 
   for (let skillYamlPath of skillYamlPaths) {
-    let { category, subcategory, skillId, skillDir } = parseSkillYamlPath(skillYamlPath);
-    let skillMdPath = `${skillDir}/SKILL.md`;
+    let { category, skillId, skillDir } = parseSkillYamlPath(skillYamlPath);
 
+    // Check for symlinks
     const symlinks = await findSymlinksInDir(skillDir);
     if (symlinks.length > 0) {
       errors.push(
@@ -224,14 +252,26 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
       continue;
     }
 
+    if (meta.category !== category) {
+      errors.push(`Skill category mismatch: ${skillYamlPath}\n- folder: ${category}\n- .x_skill.yaml: ${meta.category}`);
+      continue;
+    }
+
     if (seenIds.has(meta.id)) {
       errors.push(`Duplicate skill id: ${meta.id}\n- ${seenIds.get(meta.id)}\n- ${skillYamlPath}`);
       continue;
     }
     seenIds.set(meta.id, skillYamlPath);
 
+    // Try to read from cache first, fallback to skillDir
+    const skillCacheDir = path.join(cacheDir, skillId);
+    const skillMdCachePath = path.join(skillCacheDir, 'SKILL.md');
+    const skillMdLocalPath = path.join(skillDir, 'SKILL.md');
+
+    let skillMdPath = await fileExists(skillMdCachePath) ? skillMdCachePath : skillMdLocalPath;
+
     if (!(await fileExists(skillMdPath))) {
-      errors.push(`Missing SKILL.md: ${skillMdPath}`);
+      errors.push(`Missing SKILL.md: ${skillMdPath} (checked cache and local)`);
       continue;
     }
 
@@ -248,7 +288,9 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
     let files = [];
     if (includeFiles) {
       try {
-        files = await listSkillFiles(skillDir);
+        // Try cache first
+        const fileSourceDir = await fileExists(skillCacheDir) ? skillCacheDir : skillDir;
+        files = await listSkillFiles(fileSourceDir);
       } catch (err) {
         errors.push(`Failed to list files: ${skillDir}\n${String(err)}`);
         continue;
@@ -257,8 +299,6 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
 
     skills.push({
       ...meta,
-      category,
-      subcategory,
       repoPath: skillDir,
       summary,
       files
@@ -268,8 +308,13 @@ export async function scanSkills({ includeFiles = true, includeSummary = true } 
   return { skills, errors };
 }
 
-export async function loadCategoriesFromRepo(skills) {
-  let categories = new Map(); // id -> {id,title,description,subcategories: Map}
+/**
+ * Load categories (v2 - flat structure with i18n)
+ */
+export async function loadCategoriesFromRepo(skills, config = null) {
+  let categories = new Map(); // id -> {id,title,description,icon,order}
+  let categorySchema = await loadCategorySchema();
+  let validateCategory = createValidator(categorySchema);
 
   // First, populate from existing skills
   for (let s of skills) {
@@ -278,21 +323,15 @@ export async function loadCategoriesFromRepo(skills) {
         id: s.category,
         title: humanizeSlug(s.category),
         description: "",
-        subcategories: new Map()
-      });
-    }
-    let cat = categories.get(s.category);
-    if (!cat.subcategories.has(s.subcategory)) {
-      cat.subcategories.set(s.subcategory, {
-        id: s.subcategory,
-        title: humanizeSlug(s.subcategory),
-        description: ""
+        icon: null,
+        order: 999
       });
     }
   }
 
-  // Second, scan for all _category.yaml files to include empty categories
+  // Second, scan for all _category.yaml files
   const categoryFiles = await fg(["skills/*/_category.yaml"], { onlyFiles: true, dot: false });
+
   for (let categoryPath of categoryFiles) {
     const parts = splitPath(categoryPath);
     const catId = parts[1]; // skills/category-id/_category.yaml
@@ -302,81 +341,53 @@ export async function loadCategoriesFromRepo(skills) {
         id: catId,
         title: humanizeSlug(catId),
         description: "",
-        subcategories: new Map()
-      });
-    }
-  }
-
-  // Third, scan for all subcategory _category.yaml files
-  const subcategoryFiles = await fg(["skills/*/*/_category.yaml"], { onlyFiles: true, dot: false });
-  for (let subcatPath of subcategoryFiles) {
-    const parts = splitPath(subcatPath);
-    const catId = parts[1]; // skills/category-id/subcategory-id/_category.yaml
-    const subId = parts[2];
-
-    if (!categories.has(catId)) {
-      categories.set(catId, {
-        id: catId,
-        title: humanizeSlug(catId),
-        description: "",
-        subcategories: new Map()
+        icon: null,
+        order: 999
       });
     }
 
-    const cat = categories.get(catId);
-    if (!cat.subcategories.has(subId)) {
-      cat.subcategories.set(subId, {
-        id: subId,
-        title: humanizeSlug(subId),
-        description: ""
-      });
-    }
-  }
+    let cat = categories.get(catId);
 
-  // Apply overrides from _category.yaml files.
-  for (let [catId, cat] of categories) {
-    let catMetaPath = `skills/${catId}/_category.yaml`;
-    if (await fileExists(catMetaPath)) {
-      let meta = await readYamlFile(catMetaPath);
-      if (meta?.id && meta.id !== catId) {
-        throw new Error(`Category id mismatch: ${catMetaPath}\n- folder: ${catId}\n- _category.yaml: ${meta.id}`);
+    try {
+      let meta = await readYamlFile(categoryPath);
+
+      // Validate category metadata
+      if (!validateCategory(meta)) {
+        console.warn(`⚠️  Category validation failed: ${categoryPath}`);
+        console.warn(validateCategory.errors);
+        continue;
       }
-      if (meta?.title) cat.title = meta.title;
-      if (meta?.description) cat.description = meta.description;
-    }
-    for (let [subId, sub] of cat.subcategories) {
-      let subMetaPath = `skills/${catId}/${subId}/_category.yaml`;
-      if (await fileExists(subMetaPath)) {
-        let meta = await readYamlFile(subMetaPath);
-        if (meta?.id && meta.id !== subId) {
-          throw new Error(
-            `Subcategory id mismatch: ${subMetaPath}\n- folder: ${subId}\n- _category.yaml: ${meta.id}`
-          );
-        }
-        if (meta?.title) sub.title = meta.title;
-        if (meta?.description) sub.description = meta.description;
+
+      if (meta.id && meta.id !== catId) {
+        throw new Error(`Category id mismatch: ${categoryPath}\n- folder: ${catId}\n- _category.yaml: ${meta.id}`);
       }
+
+      if (meta.title) cat.title = meta.title;
+      if (meta.description) cat.description = meta.description;
+      if (meta.icon) cat.icon = meta.icon;
+      if (typeof meta.order === 'number') cat.order = meta.order;
+    } catch (err) {
+      console.warn(`⚠️  Failed to load category metadata: ${categoryPath}`, err.message);
     }
   }
 
-  // Serialize to JSON-friendly shape.
+  // Serialize to JSON-friendly shape, sorted by order then id
   let categoryList = Array.from(categories.values())
-    .map((cat) => ({
-      id: cat.id,
-      title: cat.title,
-      description: cat.description,
-      subcategories: Array.from(cat.subcategories.values()).sort((a, b) => a.id.localeCompare(b.id))
-    }))
-    .sort((a, b) => a.id.localeCompare(b.id));
+    .sort((a, b) => {
+      if (a.order !== b.order) return a.order - b.order;
+      return a.id.localeCompare(b.id);
+    });
 
   return categoryList;
 }
 
+/**
+ * Build search index (v2 - no subcategory)
+ */
 export function buildSearchDocs(skills) {
   return skills.map((s) => ({
     id: s.id,
     category: s.category,
-    subcategory: s.subcategory,
     title: s.title,
     tags: s.tags ?? [],
     agents: s.agents ?? [],

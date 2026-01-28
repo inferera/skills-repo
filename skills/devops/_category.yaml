@@ -1,4 +1,25 @@
-specVersion: 1
 id: devops
-title: DevOps
-description: DevOps practices, CI/CD, infrastructure, and deployment automation
+title:
+  en: DevOps
+  zh-CN: DevOps
+  zh-TW: DevOps
+  ja: DevOps
+  ko: DevOps
+  de: DevOps
+  es: DevOps
+  fr: DevOps
+  pt: DevOps
+  ru: DevOps
+description:
+  en: CI/CD, infrastructure, deployment, and monitoring skills for automating software delivery
+  zh-CN: CI/CD、基础设施、部署和监控技能，用于自动化软件交付
+  zh-TW: CI/CD、基礎設施、部署和監控技能，用於自動化軟體交付
+  ja: ソフトウェア配信を自動化するための CI/CD、インフラ、デプロイ、モニタリングスキル
+  ko: 소프트웨어 전달을 자동화하기 위한 CI/CD, 인프라, 배포 및 모니터링 스킬
+  de: CI/CD-, Infrastruktur-, Deployment- und Überwachungsfähigkeiten zur Automatisierung der Softwarebereitstellung
+  es: Habilidades de CI/CD, infraestructura, despliegue y monitoreo para automatizar la entrega de software
+  fr: Compétences CI/CD, infrastructure, déploiement et surveillance pour automatiser la livraison de logiciels
+  pt: Habilidades de CI/CD, infraestrutura, implantação e monitoramento para automatizar a entrega de software
+  ru: Навыки CI/CD, инфраструктуры, развертывания и мониторинга для автоматизации доставки программного обеспечения
+icon: server
+order: 3

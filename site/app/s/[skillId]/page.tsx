@@ -16,7 +16,7 @@ import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import { REPO_REF, REPO_URL } from "@/lib/config";
 import type { MessageKey } from "@/lib/i18n";
 import { loadAgentConfigs } from "@/lib/agents";
-import { getSkillById, loadRegistryIndex } from "@/lib/registry";
+import { getSkillById, loadRegistryIndex, skillCachePath, repoFilePath } from "@/lib/registry";
 
 export const dynamicParams = false;
 
@@ -357,14 +357,26 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const skill = await getSkillById(skillId);
   if (!skill) notFound();
 
-  const abs = path.resolve(process.cwd(), "..", skill.repoPath, "SKILL.md");
-  const rawMarkdown = await fs.readFile(abs, "utf8");
+  // v2: Try cache first, fall back to local repoPath
+  const cachePath = skillCachePath(skillId);
+  const cacheSkillMd = path.join(cachePath, "SKILL.md");
+  const repoSkillMd = repoFilePath(path.join(skill.repoPath, "SKILL.md"));
+
+  let skillMdPath = cacheSkillMd;
+  try {
+    await fs.access(cacheSkillMd);
+  } catch {
+    skillMdPath = repoSkillMd;
+  }
+
+  const rawMarkdown = await fs.readFile(skillMdPath, "utf8");
 
   // Parse frontmatter from SKILL.md
   const { frontmatter, body: markdownBody } = parseSkillFrontmatter(rawMarkdown);
 
+  // v2: Related skills - same category, overlapping tags (no subcategory)
   const related = index.skills
-    .filter((s) => s.id !== skill.id && (s.category === skill.category || s.subcategory === skill.subcategory))
+    .filter((s) => s.id !== skill.id && s.category === skill.category)
     .filter((s) => {
       if (!skill.tags?.length || !s.tags?.length) return false;
       const set = new Set(skill.tags);
@@ -375,7 +387,14 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const filePaths = (skill.files ?? []).map((f) => f.path);
   const tree = buildFileTree(filePaths);
 
-  const skillDir = path.resolve(process.cwd(), "..", skill.repoPath);
+  // v2: Use cache path first, fall back to repo path
+  let skillDir = cachePath;
+  try {
+    await fs.access(cachePath);
+  } catch {
+    skillDir = repoFilePath(skill.repoPath);
+  }
+
   const fileMetaList: FileMeta[] = [];
 
 	  for (const p of filePaths) {
@@ -470,7 +489,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
   const sourceRepo = skill.source?.repo ?? "";
   const sourcePath = skill.source?.path ?? "";
   const sourceRef = skill.source?.ref ?? "";
-  const sourceCommit = skill.source?.commit ?? "";
+  const sourceCommit = skill.source?.syncedCommit ?? ""; // v2: renamed from commit
   const agentConfigs = await loadAgentConfigs();
 
   return (
@@ -483,8 +502,9 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             <div className="min-w-[260px] flex-1">
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="font-heading text-3xl font-bold text-foreground">{skill.title}</h1>
+                {/* v2: Single category badge */}
                 <span className="px-2.5 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">
-                  {skill.category}/{skill.subcategory}
+                  {skill.category}
                 </span>
               </div>
               <p className="text-secondary mt-3 leading-relaxed">
@@ -506,9 +526,10 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             </div>
 
             <div className="flex gap-3 flex-wrap items-center">
+              {/* v2: Link to flat category page */}
               <Link
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors"
-                href={`/c/${skill.category}/${skill.subcategory}`}
+                href={`/c/${skill.category}`}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -591,18 +612,6 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
               <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.path" /></dt>
               <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.repoPath}</dd>
             </div>
-            {skill.createdAt ? (
-              <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.createdAt" /></dt>
-                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.createdAt}</dd>
-              </div>
-            ) : null}
-            {skill.updatedAt ? (
-              <div className="flex items-baseline gap-3">
-                <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.updatedAt" /></dt>
-                <dd className="text-sm font-medium text-foreground min-w-0 break-words">{skill.updatedAt}</dd>
-              </div>
-            ) : null}
             {skill.license ? (
               <div className="flex items-baseline gap-3">
                 <dt className="font-mono text-xs text-muted w-20 shrink-0"><T k="meta.license" /></dt>

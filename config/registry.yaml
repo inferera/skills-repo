@@ -1,0 +1,66 @@
+specVersion: 1
+
+# 支持的语言列表
+locales:
+  - id: en
+    label: English
+    default: true
+  - id: zh-CN
+    label: 简体中文
+  - id: zh-TW
+    label: 繁體中文
+  - id: ja
+    label: 日本語
+  - id: ko
+    label: 한국어
+  - id: de
+    label: Deutsch
+  - id: es
+    label: Español
+  - id: fr
+    label: Français
+  - id: pt
+    label: Português
+  - id: ru
+    label: Русский
+
+# 支持的 Agent 列表
+agents:
+  - id: claude
+    label: Claude Code
+    projectDir: .claude/skills
+    globalDir: ~/.claude/skills
+  - id: cursor
+    label: Cursor
+    projectDir: .cursor/skills
+    globalDir: ~/.cursor/skills
+  - id: codex
+    label: Codex CLI
+    projectDir: .codex/skills
+    globalDir: ~/.codex/skills
+  - id: opencode
+    label: OpenCode
+    projectDir: .opencode/skills
+    globalDir: ~/.opencode/skills
+  - id: antigravity
+    label: Antigravity
+    projectDir: .antigravity/skills
+    globalDir: ~/.antigravity/skills
+
+# 同步配置
+sync:
+  # 定时同步的 cron 表达式 (UTC)
+  schedule: "0 20 * * *"  # UTC 20:00 = 北京时间 4:00
+  # 并发检测数
+  concurrency: 10
+  # 导入限制
+  limits:
+    maxFiles: 2500
+    maxBytes: 52428800  # 50MB
+
+# 构建配置
+build:
+  # 是否在构建时拉取最新内容
+  fetchOnBuild: true
+  # 缓存目录
+  cacheDir: .cache/skills

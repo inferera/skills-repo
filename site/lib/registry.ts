@@ -1,3 +1,4 @@
+// site/lib/registry.ts (v2)
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -51,25 +52,22 @@ export async function loadRegistryCategories(): Promise<RegistryCategories> {
   const fromB = await tryReadJson<RegistryCategories>(b);
   if (fromB) return fromB;
 
-  // Categories can be derived from the index for local dev, but we keep it explicit in CI.
+  // Fallback: derive from index (v2 - no subcategories)
   const index = await loadRegistryIndex();
-  const map = new Map<string, Map<string, true>>();
+  const categorySet = new Set<string>();
   for (const s of index.skills) {
-    if (!map.has(s.category)) map.set(s.category, new Map());
-    map.get(s.category)!.set(s.subcategory, true);
+    categorySet.add(s.category);
   }
 
   return {
-    specVersion: 1,
+    specVersion: 2,
     generatedAt: index.generatedAt,
-    categories: Array.from(map.entries())
-      .sort((a, b) => a[0].localeCompare(b[0]))
-      .map(([catId, subs]) => ({
+    categories: Array.from(categorySet)
+      .sort()
+      .map((catId) => ({
         id: catId,
-        title: catId,
-        subcategories: Array.from(subs.keys())
-          .sort((a, b) => a.localeCompare(b))
-          .map((subId) => ({ id: subId, title: subId }))
+        title: catId, // Fallback: use ID as title
+        description: ""
       }))
   };
 }
@@ -82,4 +80,11 @@ export async function getSkillById(skillId: string): Promise<RegistrySkill | nul
 export function repoFilePath(repoPath: string): string {
   // Repo root is one level above `site/`.
   return path.resolve(siteRoot(), "..", repoPath);
+}
+
+/**
+ * Get skill cache directory path
+ */
+export function skillCachePath(skillId: string): string {
+  return path.resolve(siteRoot(), ".cache", "skills", skillId);
 }

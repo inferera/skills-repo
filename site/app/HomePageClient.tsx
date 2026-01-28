@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import type { RegistryCategories, RegistryIndex } from "@/lib/types";
+import { getLocalizedText } from "@/lib/i18n";
 
 import { useI18n } from "@/components/I18nProvider";
 import { SearchClient } from "@/components/SearchClient";
@@ -14,7 +15,7 @@ export function HomePageClient({
   index: RegistryIndex;
   categories: RegistryCategories;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <div className="space-y-12">
@@ -71,10 +72,11 @@ export function HomePageClient({
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {categories.categories.map((c) => {
             const skillCount = index.skills.filter((s) => s.category === c.id).length;
+            const title = getLocalizedText(c.title, locale);
             return (
               <Link
                 key={c.id}
-                href={`/c/${c.id}/${c.subcategories[0]?.id ?? ""}`.replace(/\/$/, "")}
+                href={`/c/${c.id}`}
                 className="group flex flex-col items-center p-4 bg-card border border-border rounded-xl hover:border-border-hover hover:bg-card-hover transition-all"
               >
                 <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -82,7 +84,7 @@ export function HomePageClient({
                     <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
                   </svg>
                 </div>
-                <span className="font-medium text-sm text-foreground text-center">{c.title}</span>
+                <span className="font-medium text-sm text-foreground text-center">{title}</span>
                 <span className="text-xs text-muted mt-1">{t("home.categories.skillCount", { count: skillCount })}</span>
               </Link>
             );
