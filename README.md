@@ -1,48 +1,38 @@
 # Skills Registry
 
-Community-maintained registry of skills for AI agents:
+[English](./README.md) | [简体中文](./README.zh-CN.md) | [繁體中文](./README.zh-TW.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português](./README.pt.md) | [Русский](./README.ru.md)
 
-- Canonical skills: `skills/<category>/<subcategory>/<skill-id>/`
-- Per-skill metadata: `.x_skill.yaml` (validated) + `SKILL.md` (instructions)
-- Static site (`site/`) for browsing/searching + an Importer UI
-- `aiskill` CLI (via `npx`) to install skills into agent directories
+An open, community-maintained skill registry for AI coding agents. Browse, install, and share reusable skills across [Claude Code](https://claude.ai), [Cursor](https://cursor.com), [Codex](https://openai.com/codex), [OpenCode](https://opencode.ai), and [Antigravity](https://antigravity.ai).
 
-Docs:
+## Submit a Skill
 
-- English: `docs/index.md`
-- 中文：`docs/index.zh-CN.md`
+1. Host your skill in a public GitHub repository with a `SKILL.md` file.
+2. Go to the registry website and use the **Import** page to submit.
+3. A maintainer will review and approve the import.
 
-## Quickstart
+## Repository Structure
+
+```
+skills/          Skill metadata (.x_skill.yaml) and category definitions
+schemas/         JSON Schemas for validation
+scripts/         Build, sync, and validation scripts
+cli/             CLI tool (aiskill)
+site/            Next.js website (static export)
+config/          Global configuration (registry.yaml)
+registry/        Generated registry indexes (do not edit manually)
+.github/         CI/CD workflows (validate, deploy, sync)
+```
+
+## Development
 
 ```bash
-# From GitHub (no npm publish needed)
-npx github:OWNER/REPO list
-npx github:OWNER/REPO add ui-ux-pro-max --agent claude --scope project
-
-# From npm (after publishing)
-npx aiskill list
-npx aiskill add ui-ux-pro-max --agent claude --scope project
+npm install                  # Install dependencies
+npm run validate             # Validate all skill metadata
+npm run build:registry       # Sync skill files and build registry
+npm run dev:site             # Build registry and start dev server
+npm run check:registry       # Verify registry is up to date
 ```
 
-## Contribute
+## License
 
-Preferred flow for contributors:
-
-- Host your skill in a public GitHub repo (must contain `SKILL.md`)
-- Use the site `/import` page to submit an import issue
-
-See `docs/contributing.md` and `docs/importer.md`.
-
-## Repository Layout
-
-```txt
-skills/      # source of truth: community skills
-schemas/     # JSON Schemas (.x_skill.yaml)
-scripts/     # build/validate utilities
-cli/         # CLI tool (aiskill)
-site/        # Next.js static site (static export)
-docs/        # documentation (EN + zh-CN)
-registry/    # generated indexes for site/tooling
-```
-
-See `docs/contributing.md` for the contribution workflow and `docs/deployment.md` for GitHub Pages/Vercel deployment.
+[MIT](./LICENSE)

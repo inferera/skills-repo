@@ -1,6 +1,6 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-02-04T08:07:08.785Z",
+  "generatedAt": "2026-02-04T08:38:43.821Z",
   "skills": [
     {
       "specVersion": 2,
@@ -2561,10 +2561,10 @@
         "syncedCommit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
       "repoPath": "skills/tools/pptx",
-      "summary": "## Quick Reference",
+      "summary": "## Overview",
       "files": [
         {
-          "path": "editing.md",
+          "path": "html2pptx.md",
           "kind": "file"
         },
         {
@@ -2572,223 +2572,211 @@
           "kind": "file"
         },
         {
-          "path": "pptxgenjs.md",
+          "path": "ooxml.md",
           "kind": "file"
         },
         {
-          "path": "scripts/__init__.py",
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/add_slide.py",
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/clean.py",
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/helpers/__init__.py",
+          "path": "ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/helpers/merge_runs.py",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/helpers/simplify_redlines.py",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/pack.py",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd",
+          "path": "ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+          "path": "ooxml/schemas/mce/mc.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+          "path": "ooxml/schemas/microsoft/wml-2010.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+          "path": "ooxml/schemas/microsoft/wml-2012.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+          "path": "ooxml/schemas/microsoft/wml-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+          "path": "ooxml/schemas/microsoft/wml-cex-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd",
+          "path": "ooxml/schemas/microsoft/wml-cid-2016.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd",
+          "path": "ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/mce/mc.xsd",
+          "path": "ooxml/schemas/microsoft/wml-symex-2015.xsd",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-2010.xsd",
+          "path": "ooxml/scripts/pack.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-2012.xsd",
+          "path": "ooxml/scripts/unpack.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-2018.xsd",
+          "path": "ooxml/scripts/validate.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-cex-2018.xsd",
+          "path": "ooxml/scripts/validation/__init__.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-cid-2016.xsd",
+          "path": "ooxml/scripts/validation/base.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+          "path": "ooxml/scripts/validation/docx.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/schemas/microsoft/wml-symex-2015.xsd",
+          "path": "ooxml/scripts/validation/pptx.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/soffice.py",
+          "path": "ooxml/scripts/validation/redlining.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/unpack.py",
+          "path": "scripts/html2pptx.js",
           "kind": "file"
         },
         {
-          "path": "scripts/office/validate.py",
+          "path": "scripts/inventory.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/validators/__init__.py",
+          "path": "scripts/rearrange.py",
           "kind": "file"
         },
         {
-          "path": "scripts/office/validators/base.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/office/validators/docx.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/office/validators/pptx.py",
-          "kind": "file"
-        },
-        {
-          "path": "scripts/office/validators/redlining.py",
+          "path": "scripts/replace.py",
           "kind": "file"
         },
         {

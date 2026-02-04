@@ -1,48 +1,38 @@
-# Skills Registry（技能注册表）
+# Skills Registry
 
-一个社区维护的 AI Agent skills 注册表：
+[English](./README.md) | [简体中文](./README.zh-CN.md) | [繁體中文](./README.zh-TW.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português](./README.pt.md) | [Русский](./README.ru.md)
 
-- 技能源文件：`skills/<category>/<subcategory>/<skill-id>/`
-- 每个 skill：`.x_skill.yaml`（可校验元数据）+ `SKILL.md`（使用说明）
-- 静态站点（`site/`）：浏览/搜索 + Importer 导入器
-- `aiskill` CLI（通过 `npx`）：把 skill 安装到各类 agent 的 skills 目录
+一个开放的、由社区维护的 AI 编程代理技能注册表。支持浏览、安装和分享可复用的技能，兼容 [Claude Code](https://claude.ai)、[Cursor](https://cursor.com)、[Codex](https://openai.com/codex)、[OpenCode](https://opencode.ai) 和 [Antigravity](https://antigravity.ai)。
 
-文档入口：
+## 提交技能
 
-- English：`docs/index.md`
-- 中文：`docs/index.zh-CN.md`
-
-## 快速开始
-
-```bash
-# 直接从 GitHub 运行（无需发布到 npm）
-npx github:OWNER/REPO list
-npx github:OWNER/REPO add ui-ux-pro-max --agent claude --scope project
-
-# 发布到 npm 之后
-npx aiskill list
-npx aiskill add ui-ux-pro-max --agent claude --scope project
-```
-
-## 贡献
-
-推荐贡献方式：
-
-- 将你的 skill 放到公开 GitHub 仓库中（目录内必须包含 `SKILL.md`）
-- 使用站点的 `/import` 页面生成导入 issue
-
-详见 `docs/contributing.zh-CN.md` 与 `docs/importer.zh-CN.md`。
+1. 将你的技能托管在公开的 GitHub 仓库中，确保包含 `SKILL.md` 文件。
+2. 访问注册表网站，使用 **Import** 页面提交。
+3. 维护者审核通过后将自动导入。
 
 ## 仓库结构
 
-```txt
-skills/      # source of truth: community skills
-schemas/     # JSON Schema（.x_skill.yaml）
-scripts/     # build/validate 工具脚本
-cli/         # CLI 工具（aiskill）
-site/        # Next.js 静态站点
-docs/        # 文档（EN + zh-CN）
-registry/    # 生成的索引（供站点/工具消费）
+```
+skills/          技能元数据 (.x_skill.yaml) 和分类定义
+schemas/         用于校验的 JSON Schema
+scripts/         构建、同步和校验脚本
+cli/             CLI 工具 (aiskill)
+site/            Next.js 网站 (静态导出)
+config/          全局配置 (registry.yaml)
+registry/        生成的注册表索引 (请勿手动编辑)
+.github/         CI/CD 工作流 (校验、部署、同步)
 ```
 
-贡献流程见 `docs/contributing.zh-CN.md`，部署见 `docs/deployment.zh-CN.md`。
+## 开发
+
+```bash
+npm install                  # 安装依赖
+npm run validate             # 校验所有技能元数据
+npm run build:registry       # 同步技能文件并构建注册表
+npm run dev:site             # 构建注册表并启动开发服务器
+npm run check:registry       # 验证注册表是否为最新
+```
+
+## 许可证
+
+[MIT](./LICENSE)
