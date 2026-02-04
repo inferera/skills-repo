@@ -1,7 +1,31 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-02-04T07:41:37.954Z",
+  "generatedAt": "2026-02-04T08:07:08.785Z",
   "docs": [
+    {
+      "id": "figma",
+      "category": "design",
+      "title": "Figma MCP",
+      "tags": [],
+      "agents": [],
+      "text": "Figma MCP\nUse the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.\nUse the Figma MCP server for Figma-driven implementation. For setup and debugging details (env vars, config, verification), see `references/figma-mcp-config.md`."
+    },
+    {
+      "id": "develop-web-game",
+      "category": "development",
+      "title": "Develop Web Game",
+      "tags": [],
+      "agents": [],
+      "text": "Develop Web Game\nUse when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses, inspect screenshots/text, and review console errors with render_game_to_text.\nBuild games in small steps and validate every change. Treat each iteration as: implement → act → pause → observe → adjust."
+    },
+    {
+      "id": "figma-implement-design",
+      "category": "development",
+      "title": "Implement Design",
+      "tags": [],
+      "agents": [],
+      "text": "Implement Design\nTranslate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or node IDs, or asks to implement designs or components that must match Figma specs. Requires a working Figma MCP server connection.\n## Overview"
+    },
     {
       "id": "frontend-design",
       "category": "development",
@@ -9,6 +33,14 @@
       "tags": [],
       "agents": [],
       "text": "frontend-design\nCreate distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.\nThis skill guides creation of distinctive, production-grade frontend interfaces that avoid generic \"AI slop\" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices."
+    },
+    {
+      "id": "notion-spec-to-implementation",
+      "category": "development",
+      "title": "Spec to Implementation",
+      "tags": [],
+      "agents": [],
+      "text": "Spec to Implementation\nTurn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.\nConvert a Notion spec into linked implementation plans, tasks, and ongoing status updates."
     },
     {
       "id": "ui-ux-pro-max",
@@ -19,12 +51,140 @@
       "text": "UI/UX Pro Max - Design Intelligence\nUI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.\nComprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations."
     },
     {
+      "id": "cloudflare-deploy",
+      "category": "devops",
+      "title": "Cloudflare Deploy",
+      "tags": [],
+      "agents": [],
+      "text": "Cloudflare Deploy\nDeploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.\nConsolidated skill for building on the Cloudflare platform. Use decision trees below to find the right product, then load detailed references."
+    },
+    {
+      "id": "netlify-deploy",
+      "category": "devops",
+      "title": "Netlify Deployment Skill",
+      "tags": [],
+      "agents": [],
+      "text": "Netlify Deployment Skill\nDeploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.\nDeploy web projects to Netlify using the Netlify CLI with intelligent detection of project configuration and deployment context."
+    },
+    {
+      "id": "render-deploy",
+      "category": "devops",
+      "title": "Deploy to Render",
+      "tags": [],
+      "agents": [],
+      "text": "Deploy to Render\nDeploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.\nRender supports **Git-backed** services and **prebuilt Docker image** services."
+    },
+    {
+      "id": "jupyter-notebook",
+      "category": "documentation",
+      "title": "Jupyter Notebook Skill",
+      "tags": [],
+      "agents": [],
+      "text": "Jupyter Notebook Skill\nUse when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.\nCreate clean, reproducible Jupyter notebooks for two primary modes:"
+    },
+    {
+      "id": "linear",
+      "category": "documentation",
+      "title": "Linear",
+      "tags": [],
+      "agents": [],
+      "text": "Linear\nManage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.\n## Overview"
+    },
+    {
+      "id": "notion-knowledge-capture",
+      "category": "documentation",
+      "title": "Knowledge Capture",
+      "tags": [],
+      "agents": [],
+      "text": "Knowledge Capture\nCapture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.\nConvert conversations and notes into structured, linkable Notion pages for easy reuse."
+    },
+    {
+      "id": "notion-meeting-intelligence",
+      "category": "documentation",
+      "title": "Meeting Intelligence",
+      "tags": [],
+      "agents": [],
+      "text": "Meeting Intelligence\nPrepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.\nPrep meetings by pulling Notion context, tailoring agendas/pre-reads, and enriching with Codex research."
+    },
+    {
+      "id": "notion-research-documentation",
+      "category": "documentation",
+      "title": "Research & Documentation",
+      "tags": [],
+      "agents": [],
+      "text": "Research & Documentation\nResearch across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.\nPull relevant Notion pages, synthesize findings, and publish clear briefs or reports (with citations and links to sources)."
+    },
+    {
+      "id": "openai-docs",
+      "category": "documentation",
+      "title": "OpenAI Docs",
+      "tags": [],
+      "agents": [],
+      "text": "OpenAI Docs\nUse when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model capabilities or limits); prioritize OpenAI docs MCP tools and restrict any fallback browsing to official OpenAI domains.\nProvide authoritative, current guidance from OpenAI developer docs using the developers.openai.com MCP server. Always prioritize the developer docs MCP tools over web.run for OpenAI-related questions. Only if the MCP server is installed and returns no meaningful results should you fall back to web search."
+    },
+    {
+      "id": "atlas",
+      "category": "tools",
+      "title": "Atlas Control (macOS)",
+      "tags": [],
+      "agents": [],
+      "text": "Atlas Control (macOS)\nmacOS-only AppleScript control for the ChatGPT Atlas desktop app. Use only when the user explicitly asks to control Atlas tabs/bookmarks/history on macOS and the \\\"ChatGPT Atlas\\\" app is installed; do not trigger for general browser tasks or non-macOS environments.\nUse the bundled CLI to control Atlas and inspect local browser data."
+    },
+    {
+      "id": "doc",
+      "category": "tools",
+      "title": "DOCX Skill",
+      "tags": [],
+      "agents": [],
+      "text": "DOCX Skill\nUse when the task involves reading, creating, or editing `.docx` documents, especially when formatting or layout fidelity matters; prefer `python-docx` plus the bundled `scripts/render_docx.py` for visual checks.\n## When to use\n- Read or review DOCX content where layout matters (tables, diagrams, pagination).\n- Create or edit DOCX files with professional formatting.\n- Validate visual layout before delivery."
+    },
+    {
+      "id": "gh-address-comments",
+      "category": "tools",
+      "title": "PR Comment Handler",
+      "tags": [],
+      "agents": [],
+      "text": "PR Comment Handler\nHelp address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.\nGuide to find the open PR for the current branch and address its comments with gh CLI. Run all `gh` commands with elevated network access."
+    },
+    {
+      "id": "gh-fix-ci",
+      "category": "tools",
+      "title": "Gh Pr Checks Plan Fix",
+      "tags": [],
+      "agents": [],
+      "text": "Gh Pr Checks Plan Fix\nUse when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.\n## Overview"
+    },
+    {
+      "id": "imagegen",
+      "category": "tools",
+      "title": "Image Generation Skill",
+      "tags": [],
+      "agents": [],
+      "text": "Image Generation Skill\nUse when the user asks to generate or edit images via the OpenAI Image API (for example: generate image, edit/inpaint/mask, background removal or replacement, transparent background, product shots, concept art, covers, or batch variants); run the bundled CLI (`scripts/image_gen.py`) and require `OPENAI_API_KEY` for live calls.\nGenerates or edits images for the current project (e.g., website assets, game assets, UI mockups, product mockups, wireframes, logo design, photorealistic images, infographics). Defaults to `gpt-image-1.5` and the OpenAI Image API, and prefers the bundled CLI for deterministic, reproducible runs."
+    },
+    {
+      "id": "pdf",
+      "category": "tools",
+      "title": "PDF Skill",
+      "tags": [],
+      "agents": [],
+      "text": "PDF Skill\nUse when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.\n## When to use\n- Read or review PDF content where layout and visuals matter.\n- Create PDFs programmatically with reliable formatting.\n- Validate final rendering before delivery."
+    },
+    {
+      "id": "playwright",
+      "category": "tools",
+      "title": "Playwright CLI Skill",
+      "tags": [],
+      "agents": [],
+      "text": "Playwright CLI Skill\nUse when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.\nDrive a real browser from the terminal using `playwright-cli`. Prefer the bundled wrapper script so the CLI works even when it is not globally installed.\nTreat this skill as CLI-first automation. Do not pivot to `@playwright/test` unless the user explicitly asks for test files."
+    },
+    {
       "id": "pptx",
       "category": "tools",
       "title": "PPTX creation, editing, and analysis",
       "tags": [],
       "agents": [],
-      "text": "PPTX creation, editing, and analysis\nPresentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks\n## Overview"
+      "text": "PPTX creation, editing, and analysis\nPresentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks\n## Quick Reference"
     }
   ]
 }

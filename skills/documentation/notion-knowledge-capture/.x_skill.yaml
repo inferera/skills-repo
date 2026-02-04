@@ -1,0 +1,12 @@
+specVersion: 2
+id: notion-knowledge-capture
+title: Knowledge Capture
+description: Capture conversations and decisions into structured Notion pages;
+  use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs
+  with proper linking.
+category: documentation
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/notion-knowledge-capture
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

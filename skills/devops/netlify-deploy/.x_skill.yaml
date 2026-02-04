@@ -1,0 +1,12 @@
+specVersion: 2
+id: netlify-deploy
+title: Netlify Deployment Skill
+description: Deploy web projects to Netlify using the Netlify CLI (`npx
+  netlify`). Use when the user asks to deploy, host, publish, or link a
+  site/repo on Netlify, including preview and production deploys.
+category: devops
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/netlify-deploy
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

@@ -1,0 +1,11 @@
+specVersion: 2
+id: linear
+title: Linear
+description: Manage issues, projects & team workflows in Linear. Use when the
+  user wants to read, create or updates tickets in Linear.
+category: documentation
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/linear
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

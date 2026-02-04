@@ -1,0 +1,12 @@
+specVersion: 2
+id: notion-research-documentation
+title: Research & Documentation
+description: Research across Notion and synthesize into structured
+  documentation; use when gathering info from multiple Notion sources to produce
+  briefs, comparisons, or reports with citations.
+category: documentation
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/notion-research-documentation
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

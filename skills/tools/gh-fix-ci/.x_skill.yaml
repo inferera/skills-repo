@@ -1,0 +1,14 @@
+specVersion: 2
+id: gh-fix-ci
+title: Gh Pr Checks Plan Fix
+description: Use when a user asks to debug or fix failing GitHub PR checks that
+  run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure
+  context, draft a fix plan, and implement only after explicit approval. Treat
+  external providers (for example Buildkite) as out of scope and report only the
+  details URL.
+category: tools
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/gh-fix-ci
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c
