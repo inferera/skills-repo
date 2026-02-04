@@ -4,7 +4,7 @@ import { loadRegistryCategories, loadRegistryIndex } from "@/lib/registry";
 import { LOCALE_OPTIONS, DEFAULT_LOCALE } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Claude Agent Skills",
+  title: "Skills Registry",
   description: "Discover and share reusable skills for Claude AI agents. Browse curated skills, import from GitHub, and enhance your AI workflows.",
   alternates: {
     canonical: "/",

@@ -26,16 +26,16 @@ export async function generateMetadata({
 
   // Localized metadata
   const titles: Record<Locale, string> = {
-    "en": "AI Agent Skills Registry",
-    "zh-CN": "AI Agent 技能注册表",
-    "zh-TW": "AI Agent 技能註冊表",
-    "ja": "AI エージェントスキルレジストリ",
-    "ko": "AI 에이전트 스킬 레지스트리",
-    "de": "KI-Agenten-Fähigkeiten-Register",
-    "es": "Registro de Habilidades de Agentes IA",
-    "fr": "Registre de Compétences d'Agents IA",
-    "pt": "Registro de Habilidades de Agentes IA",
-    "ru": "Реестр навыков ИИ-агентов"
+    "en": "Skills Registry",
+    "zh-CN": "技能注册表",
+    "zh-TW": "技能註冊表",
+    "ja": "スキルレジストリ",
+    "ko": "스킬 레지스트리",
+    "de": "Skills Registry",
+    "es": "Skills Registry",
+    "fr": "Skills Registry",
+    "pt": "Skills Registry",
+    "ru": "Skills Registry"
   };
 
   const descriptions: Record<Locale, string> = {
