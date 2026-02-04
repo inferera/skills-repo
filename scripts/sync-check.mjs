@@ -16,19 +16,27 @@ import { loadConfig, getSyncConfig } from './lib/config.mjs';
  * Stage 1: 获取远程最新 commit
  */
 async function getLatestCommit(repo, ref) {
-  const refPath = ref.startsWith('refs/') ? ref : `refs/heads/${ref}`;
-  const result = spawnSync('git', ['ls-remote', repo, refPath], {
-    encoding: 'utf8',
-    timeout: 30000
-  });
+  // Try branches first, then tags, then direct ref match
+  const refCandidates = ref.startsWith('refs/')
+    ? [ref]
+    : [`refs/heads/${ref}`, `refs/tags/${ref}`, ref];
 
-  if (result.status !== 0) {
-    console.warn(`⚠️  ls-remote failed for ${repo}`);
-    return null;
+  for (const refPath of refCandidates) {
+    const result = spawnSync('git', ['ls-remote', repo, refPath], {
+      encoding: 'utf8',
+      timeout: 30000
+    });
+
+    if (result.status !== 0) {
+      console.warn(`⚠️  ls-remote failed for ${repo}`);
+      return null;
+    }
+
+    const sha = result.stdout.split(/\s+/)[0];
+    if (sha) return sha;
   }
 
-  const sha = result.stdout.split(/\s+/)[0];
-  return sha || null;
+  return null;
 }
 
 /**

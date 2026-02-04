@@ -20,6 +20,11 @@ export function parseGitHubRepoSlug(registryUrl) {
   const owner = parts[0];
   const repo = parts[1];
   if (!owner || !repo) throw new Error(`Invalid GitHub repo URL: ${registryUrl}`);
+
+  const VALID_SLUG = /^[a-zA-Z0-9._-]+$/;
+  if (!VALID_SLUG.test(owner)) throw new Error(`Invalid GitHub owner: ${owner}`);
+  if (!VALID_SLUG.test(repo)) throw new Error(`Invalid GitHub repo name: ${repo}`);
+
   return { owner, repo };
 }
 

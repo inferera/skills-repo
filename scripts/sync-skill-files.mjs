@@ -9,8 +9,8 @@ import path from "node:path";
 
 import fg from "fast-glob";
 import YAML from "yaml";
+import { loadConfig, getBuildConfig } from "./lib/config.mjs";
 
-const CACHE_DIR = ".cache/skills";
 const SKILL_YAML_GLOB = "skills/*/*/.x_skill.yaml";
 
 const SKILL_FILE_IGNORE = [
@@ -69,7 +69,7 @@ async function copyDirFiltered(srcDir, destDir, ignore = [], repoRoot = null) {
         const realPath = await fs.realpath(src);
 
         // Security check: ensure resolved path is within repo
-        if (resolvedRoot && !realPath.startsWith(resolvedRoot)) {
+        if (resolvedRoot && !realPath.startsWith(resolvedRoot + path.sep) && realPath !== resolvedRoot) {
           console.warn(`  ⚠️  Skipping symlink outside repo: ${e.name}`);
           continue;
         }
@@ -183,6 +183,11 @@ async function syncSkill(skillId, source, cacheDir) {
 
 async function main() {
   console.log("🔄 Syncing skill files from source repositories...\n");
+
+  // Load config to get cache directory
+  const config = await loadConfig();
+  const buildConfig = getBuildConfig(config);
+  const CACHE_DIR = buildConfig.cacheDir;
 
   // Find all skill metadata files
   const skillYamlPaths = await fg([SKILL_YAML_GLOB], { onlyFiles: true, dot: true });

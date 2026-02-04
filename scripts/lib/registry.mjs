@@ -101,10 +101,11 @@ export function createValidator(schema) {
 
 export function stripFrontmatter(markdown) {
   // Remove a leading YAML frontmatter block ("--- ... ---") if present.
-  if (!markdown.startsWith("---\n")) return markdown;
-  let end = markdown.indexOf("\n---\n", 4);
+  if (!markdown.startsWith("---\n") && !markdown.startsWith("---\r\n")) return markdown;
+  let end = markdown.search(/\r?\n---\r?\n/);
   if (end === -1) return markdown;
-  return markdown.slice(end + "\n---\n".length);
+  let matchLen = markdown.slice(end).match(/\r?\n---\r?\n/)[0].length;
+  return markdown.slice(end + matchLen);
 }
 
 export function extractSummary(markdown) {

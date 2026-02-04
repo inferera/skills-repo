@@ -72,6 +72,11 @@ try {
 // Generate SEO assets (if SITE_URL is set)
 if (process.env.SITE_URL) {
   console.log('\n🔍 Generating SEO assets...');
+
+  function escapeXml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  }
+
   let base = process.env.SITE_URL.replace(/\/+$/, "");
   let urls = [
     `${base}/`,
@@ -85,7 +90,7 @@ if (process.env.SITE_URL) {
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls
-      .map((loc) => `  <url><loc>${loc}</loc><lastmod>${generatedAt}</lastmod></url>`)
+      .map((loc) => `  <url><loc>${escapeXml(loc)}</loc><lastmod>${escapeXml(generatedAt)}</lastmod></url>`)
       .join("\n") +
     `\n</urlset>\n`;
 

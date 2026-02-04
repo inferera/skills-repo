@@ -30,8 +30,10 @@ export async function getDefaultRegistryUrl() {
     const pkg = JSON.parse(raw);
     const repoUrl = normalizeRegistryUrl(pkg?.repository?.url ?? "");
     if (repoUrl) return repoUrl;
-  } catch {
-    // ignore
+  } catch (err) {
+    if (err?.code !== 'ENOENT' && !(err instanceof SyntaxError)) {
+      console.warn(`Warning: failed to read package.json: ${err.message}`);
+    }
   }
 
   return "";

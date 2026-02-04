@@ -99,4 +99,7 @@ async function main() {
   }
 }
 
-main();
+main().catch((err) => {
+  console.error(`\nError: ${err.message}`);
+  process.exit(1);
+});

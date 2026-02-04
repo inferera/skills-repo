@@ -3,6 +3,7 @@ import path from "node:path";
 import { deepStrictEqual } from "node:assert/strict";
 
 import { buildSearchDocs, loadCategoriesFromRepo, scanSkills } from "./lib/registry.mjs";
+import { loadConfig } from "./lib/config.mjs";
 
 function normalizeGeneratedAt(obj) {
   if (Array.isArray(obj)) return obj.map(normalizeGeneratedAt);
@@ -26,16 +27,17 @@ async function readJsonFile(relPath) {
 }
 
 async function main() {
-  let { skills, errors } = await scanSkills({ includeFiles: true, includeSummary: true });
+  let config = await loadConfig();
+  let { skills, errors } = await scanSkills({ includeFiles: true, includeSummary: true, config });
   if (errors.length > 0) {
     console.error(errors.join("\n\n"));
     process.exit(1);
   }
 
-  let categories = await loadCategoriesFromRepo(skills);
-  let expectedIndex = { specVersion: 1, generatedAt: "__IGNORED__", skills };
-  let expectedCategories = { specVersion: 1, generatedAt: "__IGNORED__", categories };
-  let expectedSearch = { specVersion: 1, generatedAt: "__IGNORED__", docs: buildSearchDocs(skills) };
+  let categories = await loadCategoriesFromRepo(skills, config);
+  let expectedIndex = { specVersion: 2, generatedAt: "__IGNORED__", skills };
+  let expectedCategories = { specVersion: 2, generatedAt: "__IGNORED__", categories };
+  let expectedSearch = { specVersion: 2, generatedAt: "__IGNORED__", docs: buildSearchDocs(skills) };
 
   let actualIndex = await readJsonFile(path.join("registry", "index.json"));
   let actualCategories = await readJsonFile(path.join("registry", "categories.json"));

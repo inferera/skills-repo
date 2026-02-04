@@ -22,10 +22,37 @@ async function copyDir(src, dest, exclude = []) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
 
-    if (entry.isDirectory()) {
+    const st = await fs.lstat(srcPath);
+
+    if (st.isSymbolicLink()) {
+      // Resolve symlink and copy actual content
+      try {
+        const realPath = await fs.realpath(srcPath);
+        const resolvedSrc = await fs.realpath(src);
+
+        // Security check: ensure resolved path is within source tree
+        if (!realPath.startsWith(resolvedSrc + path.sep) && realPath !== resolvedSrc) {
+          console.warn(`  ⚠️  Skipping symlink outside source: ${entry.name}`);
+          continue;
+        }
+
+        const realStat = await fs.stat(realPath);
+        if (realStat.isDirectory()) {
+          await fs.mkdir(destPath, { recursive: true });
+          await copyDir(realPath, destPath, exclude);
+        } else if (realStat.isFile()) {
+          await fs.copyFile(realPath, destPath);
+        }
+      } catch (err) {
+        console.warn(`  ⚠️  Failed to resolve symlink ${entry.name}: ${err.message}`);
+      }
+      continue;
+    }
+
+    if (st.isDirectory()) {
       await fs.mkdir(destPath, { recursive: true });
       await copyDir(srcPath, destPath, exclude);
-    } else if (entry.isFile()) {
+    } else if (st.isFile()) {
       await fs.copyFile(srcPath, destPath);
     }
   }

@@ -27,7 +27,7 @@ export async function loadConfig() {
  * @returns {string} Default locale ID
  */
 export function getDefaultLocale(config) {
-  return config.locales.find(l => l.default)?.id || 'en';
+  return (config.locales ?? []).find(l => l.default)?.id || 'en';
 }
 
 /**
@@ -36,7 +36,7 @@ export function getDefaultLocale(config) {
  * @returns {string[]} Array of locale IDs
  */
 export function getLocaleIds(config) {
-  return config.locales.map(l => l.id);
+  return (config.locales ?? []).map(l => l.id);
 }
 
 /**
@@ -46,7 +46,7 @@ export function getLocaleIds(config) {
  * @returns {Object|null} Agent configuration or null
  */
 export function getAgentById(config, agentId) {
-  return config.agents.find(a => a.id === agentId) || null;
+  return (config.agents ?? []).find(a => a.id === agentId) || null;
 }
 
 /**

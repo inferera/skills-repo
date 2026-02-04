@@ -63,8 +63,10 @@ async function loadAgents() {
     const json = JSON.parse(raw);
     const normalized = normalizeAgentsConfig(json);
     if (normalized) return normalized;
-  } catch {
-    // ignore and fall back
+  } catch (err) {
+    if (err?.code !== 'ENOENT' && !(err instanceof SyntaxError)) {
+      console.warn(`Warning: failed to load agents config: ${err.message}`);
+    }
   }
 
   return FALLBACK_AGENTS;

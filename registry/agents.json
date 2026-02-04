@@ -1,5 +1,5 @@
 {
-  "specVersion": 1,
+  "specVersion": 2,
   "agents": [
     {
       "id": "codex",

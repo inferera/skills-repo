@@ -74,7 +74,7 @@ async function removeSkill(skillName, agent, scope) {
     scope === "project" ? path.resolve(process.cwd(), agentConfig.projectDir) : agentConfig.globalDir;
   const resolvedBase = path.resolve(targetBaseDir);
   const targetDir = path.resolve(targetBaseDir, skillName);
-  if (!targetDir.startsWith(resolvedBase + path.sep)) {
+  if (targetDir !== resolvedBase && !targetDir.startsWith(resolvedBase + path.sep)) {
     throw new Error("Refusing to remove outside the agent skills directory");
   }
 
