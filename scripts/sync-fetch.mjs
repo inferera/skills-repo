@@ -13,7 +13,8 @@ import { loadConfig, getBuildConfig } from './lib/config.mjs';
 /**
  * 递归复制目录
  */
-async function copyDir(src, dest, exclude = []) {
+async function copyDir(src, dest, exclude = [], rootDir = null) {
+  const effectiveRoot = rootDir || src;
   const entries = await fs.readdir(src, { withFileTypes: true });
 
   for (const entry of entries) {
@@ -28,10 +29,10 @@ async function copyDir(src, dest, exclude = []) {
       // Resolve symlink and copy actual content
       try {
         const realPath = await fs.realpath(srcPath);
-        const resolvedSrc = await fs.realpath(src);
+        const resolvedRoot = await fs.realpath(effectiveRoot);
 
-        // Security check: ensure resolved path is within source tree
-        if (!realPath.startsWith(resolvedSrc + path.sep) && realPath !== resolvedSrc) {
+        // Security check: ensure resolved path is within the original clone root
+        if (!realPath.startsWith(resolvedRoot + path.sep) && realPath !== resolvedRoot) {
           console.warn(`  ⚠️  Skipping symlink outside source: ${entry.name}`);
           continue;
         }
@@ -39,7 +40,7 @@ async function copyDir(src, dest, exclude = []) {
         const realStat = await fs.stat(realPath);
         if (realStat.isDirectory()) {
           await fs.mkdir(destPath, { recursive: true });
-          await copyDir(realPath, destPath, exclude);
+          await copyDir(realPath, destPath, exclude, effectiveRoot);
         } else if (realStat.isFile()) {
           await fs.copyFile(realPath, destPath);
         }
@@ -51,7 +52,7 @@ async function copyDir(src, dest, exclude = []) {
 
     if (st.isDirectory()) {
       await fs.mkdir(destPath, { recursive: true });
-      await copyDir(srcPath, destPath, exclude);
+      await copyDir(srcPath, destPath, exclude, effectiveRoot);
     } else if (st.isFile()) {
       await fs.copyFile(srcPath, destPath);
     }
@@ -143,7 +144,7 @@ async function main() {
         await fs.mkdir(destDir, { recursive: true });
 
         // 复制所有文件（排除 .git 等）
-        await copyDir(srcDir, destDir, ['.git', 'node_modules', '.x_skill.yaml', 'skill.yaml']);
+        await copyDir(srcDir, destDir, ['.git', 'node_modules', '.x_skill.yaml', 'skill.yaml'], tmpDir);
 
         // 更新 .x_skill.yaml 的 syncedCommit
         const metaPath = skill.file;

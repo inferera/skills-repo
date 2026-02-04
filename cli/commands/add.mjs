@@ -183,7 +183,7 @@ async function installSkill(skillName, agent, scope, registry, ref) {
     scope === "project" ? path.resolve(process.cwd(), agentConfig.projectDir) : agentConfig.globalDir;
   const resolvedBase = path.resolve(targetBaseDir);
   const targetDir = path.resolve(targetBaseDir, skillName);
-  if (targetDir !== resolvedBase && !targetDir.startsWith(resolvedBase + path.sep)) {
+  if (!targetDir.startsWith(resolvedBase + path.sep)) {
     throw new Error("Refusing to write outside the agent skills directory");
   }
 

@@ -2,13 +2,13 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [繁體中文](./README.zh-TW.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português](./README.pt.md) | [Русский](./README.ru.md)
 
-Eine offene, von der Community verwaltete Skill-Registry fuer KI-Coding-Agenten. Durchsuchen, installieren und teilen Sie wiederverwendbare Skills fuer [Claude Code](https://claude.ai), [Cursor](https://cursor.com), [Codex](https://openai.com/codex), [OpenCode](https://opencode.ai) und [Antigravity](https://antigravity.ai).
+Eine offene, von der Community verwaltete Skill-Registry für KI-Coding-Agenten. Durchsuchen, installieren und teilen Sie wiederverwendbare Skills für [Claude Code](https://claude.ai), [Cursor](https://cursor.com), [Codex](https://openai.com/codex), [OpenCode](https://opencode.ai) und [Antigravity](https://antigravity.ai).
 
 ## Skill einreichen
 
-1. Hosten Sie Ihren Skill in einem oeffentlichen GitHub-Repository mit einer `SKILL.md`-Datei.
+1. Hosten Sie Ihren Skill in einem öffentlichen GitHub-Repository mit einer `SKILL.md`-Datei.
 2. Besuchen Sie die Registry-Website und nutzen Sie die **Import**-Seite zum Einreichen.
-3. Ein Maintainer prueft und genehmigt den Import.
+3. Ein Maintainer prüft und genehmigt den Import.
 
 ## Repository-Struktur
 
@@ -26,11 +26,11 @@ registry/        Generierte Registry-Indizes (nicht manuell bearbeiten)
 ## Entwicklung
 
 ```bash
-npm install                  # Abhaengigkeiten installieren
+npm install                  # Abhängigkeiten installieren
 npm run validate             # Alle Skill-Metadaten validieren
 npm run build:registry       # Skill-Dateien synchronisieren und Registry erstellen
 npm run dev:site             # Registry erstellen und Entwicklungsserver starten
-npm run check:registry       # Pruefen, ob die Registry aktuell ist
+npm run check:registry       # Prüfen, ob die Registry aktuell ist
 ```
 
 ## Lizenz

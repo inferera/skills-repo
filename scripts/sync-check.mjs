@@ -55,7 +55,7 @@ async function getChangedFiles(owner, repo, base, head) {
   const url = `https://api.github.com/repos/${owner}/${repo}/compare/${base}...${head}`;
 
   try {
-    const res = await fetch(url, { headers });
+    const res = await fetch(url, { headers, signal: AbortSignal.timeout(30000) });
 
     if (!res.ok) {
       console.warn(`⚠️  Compare API failed for ${owner}/${repo}: ${res.status}`);

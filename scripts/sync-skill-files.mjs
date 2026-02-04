@@ -1,5 +1,5 @@
 // scripts/sync-skill-files.mjs
-// Fetches skill files from source repositories into .cache/skills/<id>/
+// Fetches skill files from source repositories into the configured cache directory
 // Run this before build-registry.mjs to populate skill content
 
 import { spawnSync } from "node:child_process";

@@ -3,6 +3,9 @@ import fs from "node:fs/promises";
 import { buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
 import { loadConfig } from "./lib/config.mjs";
 
+const escapeXml = (s) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+
 const generatedAt = new Date().toISOString();
 
 console.log('🔨 Building registry...\n');
@@ -72,10 +75,6 @@ try {
 // Generate SEO assets (if SITE_URL is set)
 if (process.env.SITE_URL) {
   console.log('\n🔍 Generating SEO assets...');
-
-  function escapeXml(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-  }
 
   let base = process.env.SITE_URL.replace(/\/+$/, "");
   let urls = [
