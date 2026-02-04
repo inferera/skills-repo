@@ -1,0 +1,12 @@
+specVersion: 2
+id: notion-spec-to-implementation
+title: Spec to Implementation
+description: Turn Notion specs into implementation plans, tasks, and progress
+  tracking; use when implementing PRDs/feature specs and creating Notion plans +
+  tasks from them.
+category: development
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/notion-spec-to-implementation
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

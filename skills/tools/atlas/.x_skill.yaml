@@ -1,0 +1,13 @@
+specVersion: 2
+id: atlas
+title: Atlas Control (macOS)
+description: macOS-only AppleScript control for the ChatGPT Atlas desktop app.
+  Use only when the user explicitly asks to control Atlas tabs/bookmarks/history
+  on macOS and the \"ChatGPT Atlas\" app is installed; do not trigger for
+  general browser tasks or non-macOS environments.
+category: tools
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/atlas
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

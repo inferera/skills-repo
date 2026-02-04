@@ -1,7 +1,142 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-02-04T07:41:37.954Z",
+  "generatedAt": "2026-02-04T08:07:08.785Z",
   "skills": [
+    {
+      "specVersion": 2,
+      "id": "figma",
+      "title": "Figma MCP",
+      "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
+      "category": "design",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/figma",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/design/figma",
+      "summary": "Use the Figma MCP server for Figma-driven implementation. For setup and debugging details (env vars, config, verification), see `references/figma-mcp-config.md`.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/figma-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/figma.png",
+          "kind": "file"
+        },
+        {
+          "path": "assets/icon.svg",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/figma-mcp-config.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/figma-tools-and-prompts.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "develop-web-game",
+      "title": "Develop Web Game",
+      "description": "Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses, inspect screenshots/text, and review console errors with render_game_to_text.",
+      "category": "development",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/develop-web-game",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/development/develop-web-game",
+      "summary": "Build games in small steps and validate every change. Treat each iteration as: implement → act → pause → observe → adjust.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/game-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/game.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/action_payloads.json",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/web_game_playwright_client.js",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "figma-implement-design",
+      "title": "Implement Design",
+      "description": "Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or node IDs, or asks to implement designs or components that must match Figma specs. Requires a working Figma MCP server connection.",
+      "category": "development",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/figma-implement-design",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/development/figma-implement-design",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/figma-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/figma.png",
+          "kind": "file"
+        },
+        {
+          "path": "assets/icon.svg",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
     {
       "specVersion": 2,
       "id": "frontend-design",
@@ -19,6 +154,99 @@
       "files": [
         {
           "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "notion-spec-to-implementation",
+      "title": "Spec to Implementation",
+      "description": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
+      "category": "development",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/notion-spec-to-implementation",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/development/notion-spec-to-implementation",
+      "summary": "Convert a Notion spec into linked implementation plans, tasks, and ongoing status updates.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion.png",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/basic-spec-implementation.json",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/spec-to-tasks.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/api-feature.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/database-migration.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/ui-component.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/milestone-summary-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/progress-tracking.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/progress-update-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/quick-implementation-plan.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/spec-parsing.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/standard-implementation-plan.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/task-creation-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/task-creation.md",
           "kind": "file"
         },
         {
@@ -158,6 +386,2170 @@
     },
     {
       "specVersion": 2,
+      "id": "cloudflare-deploy",
+      "title": "Cloudflare Deploy",
+      "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+      "category": "devops",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/cloudflare-deploy",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/devops/cloudflare-deploy",
+      "summary": "Consolidated skill for building on the Cloudflare platform. Use decision trees below to find the right product, then load detailed references.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/cloudflare-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/cloudflare.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/agents-sdk/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/agents-sdk/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/agents-sdk/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/agents-sdk/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/agents-sdk/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/dynamic-routing.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/features.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/sdk-integration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-gateway/troubleshooting.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-search/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-search/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-search/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-search/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ai-search/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/analytics-engine/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/analytics-engine/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/analytics-engine/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/analytics-engine/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/analytics-engine/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api-shield/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api-shield/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api-shield/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api-shield/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api-shield/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/api/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/argo-smart-routing/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/argo-smart-routing/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/argo-smart-routing/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/argo-smart-routing/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/argo-smart-routing/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bindings/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bindings/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bindings/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bindings/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bindings/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bot-management/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bot-management/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bot-management/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bot-management/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/bot-management/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/browser-rendering/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/browser-rendering/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/browser-rendering/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/browser-rendering/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/browser-rendering/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/c3/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/c3/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/c3/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/c3/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/c3/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cache-reserve/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cache-reserve/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cache-reserve/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cache-reserve/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cache-reserve/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/containers/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/containers/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/containers/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/containers/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/containers/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cron-triggers/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cron-triggers/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cron-triggers/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cron-triggers/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/cron-triggers/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/d1/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/d1/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/d1/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/d1/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/d1/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ddos/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ddos/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ddos/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ddos/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/ddos/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/do-storage/testing.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/durable-objects/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/durable-objects/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/durable-objects/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/durable-objects/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/durable-objects/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-routing/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-routing/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-routing/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-routing/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-routing/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-workers/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-workers/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-workers/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-workers/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/email-workers/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/hyperdrive/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/hyperdrive/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/hyperdrive/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/hyperdrive/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/hyperdrive/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/images/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/images/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/images/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/images/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/images/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/kv/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/kv/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/kv/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/kv/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/kv/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/miniflare/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/miniflare/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/miniflare/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/miniflare/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/miniflare/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/network-interconnect/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/network-interconnect/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/network-interconnect/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/network-interconnect/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/network-interconnect/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/observability/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/observability/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/observability/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/observability/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/observability/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages-functions/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages-functions/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages-functions/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages-functions/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages-functions/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pages/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pipelines/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pipelines/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pipelines/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pipelines/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pipelines/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pulumi/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pulumi/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pulumi/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pulumi/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/pulumi/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/queues/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/queues/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/queues/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/queues/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/queues/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-data-catalog/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-data-catalog/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-data-catalog/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-data-catalog/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-data-catalog/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-sql/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-sql/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-sql/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-sql/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2-sql/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/r2/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtime-sfu/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtime-sfu/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtime-sfu/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtime-sfu/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtime-sfu/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtimekit/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtimekit/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtimekit/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtimekit/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/realtimekit/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sandbox/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sandbox/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sandbox/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sandbox/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sandbox/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/secrets-store/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/secrets-store/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/secrets-store/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/secrets-store/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/secrets-store/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/smart-placement/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/smart-placement/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/smart-placement/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/smart-placement/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/smart-placement/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/snippets/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/snippets/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/snippets/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/snippets/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/snippets/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/spectrum/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/spectrum/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/spectrum/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/spectrum/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/spectrum/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/static-assets/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/static-assets/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/static-assets/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/static-assets/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/static-assets/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/api-live.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/stream/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tail-workers/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tail-workers/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tail-workers/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tail-workers/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tail-workers/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/terraform/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/terraform/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/terraform/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/terraform/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/terraform/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/networking.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tunnel/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turn/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turn/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turn/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turn/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turn/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turnstile/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turnstile/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turnstile/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turnstile/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/turnstile/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/vectorize/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/vectorize/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/vectorize/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/vectorize/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/vectorize/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/waf/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/waf/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/waf/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/waf/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/waf/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/web-analytics/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/web-analytics/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/web-analytics/integration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/web-analytics/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/web-analytics/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workerd/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workerd/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workerd/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workerd/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workerd/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-ai/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-ai/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-ai/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-ai/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-ai/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-for-platforms/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-for-platforms/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-for-platforms/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-for-platforms/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-for-platforms/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-playground/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-playground/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-playground/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-playground/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-playground/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-vpc/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-vpc/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-vpc/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-vpc/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers-vpc/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/frameworks.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workers/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/auth.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/wrangler/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/configuration.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/gotchas.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/IMPLEMENTATION_SUMMARY.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/zaraz/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "netlify-deploy",
+      "title": "Netlify Deployment Skill",
+      "description": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
+      "category": "devops",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/netlify-deploy",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/devops/netlify-deploy",
+      "summary": "Deploy web projects to Netlify using the Netlify CLI with intelligent detection of project configuration and deployment context.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/netlify-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/netlify.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/cli-commands.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/deployment-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/netlify-toml.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "render-deploy",
+      "title": "Deploy to Render",
+      "description": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+      "category": "devops",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/render-deploy",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/devops/render-deploy",
+      "summary": "Render supports **Git-backed** services and **prebuilt Docker image** services.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/docker.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/go-api.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/nextjs-postgres.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/node-express.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/python-django.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/render-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/render.png",
+          "kind": "file"
+        },
+        {
+          "path": "assets/static-site.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/blueprint-spec.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/codebase-analysis.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/configuration-guide.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/deployment-details.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/direct-creation.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/error-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/post-deploy-checks.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/runtimes.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/service-types.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/troubleshooting-basics.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "jupyter-notebook",
+      "title": "Jupyter Notebook Skill",
+      "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/jupyter-notebook",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/jupyter-notebook",
+      "summary": "Create clean, reproducible Jupyter notebooks for two primary modes:",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/experiment-template.ipynb",
+          "kind": "file"
+        },
+        {
+          "path": "assets/jupyter-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/jupyter.png",
+          "kind": "file"
+        },
+        {
+          "path": "assets/tutorial-template.ipynb",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/experiment-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/notebook-structure.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/quality-checklist.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/tutorial-patterns.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/new_notebook.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "linear",
+      "title": "Linear",
+      "description": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/linear",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/linear",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/linear-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/linear.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "notion-knowledge-capture",
+      "title": "Knowledge Capture",
+      "description": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/notion-knowledge-capture",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/notion-knowledge-capture",
+      "summary": "Convert conversations and notes into structured, linkable Notion pages for easy reuse.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion.png",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/conversation-to-wiki.json",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/decision-record.json",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/conversation-to-faq.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/decision-capture.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/how-to-guide.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/database-best-practices.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/decision-log-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/documentation-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/faq-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/how-to-guide-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/learning-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/team-wiki-database.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "notion-meeting-intelligence",
+      "title": "Meeting Intelligence",
+      "description": "Prepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/notion-meeting-intelligence",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/notion-meeting-intelligence",
+      "summary": "Prep meetings by pulling Notion context, tailoring agendas/pre-reads, and enriching with Codex research.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion.png",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/decision-meeting-prep.json",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/status-meeting-prep.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/customer-meeting.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/executive-review.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/project-decision.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/sprint-planning.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/brainstorming-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/decision-meeting-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/one-on-one-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/retrospective-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/sprint-planning-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/status-update-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/template-selection-guide.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "notion-research-documentation",
+      "title": "Research & Documentation",
+      "description": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/notion-research-documentation",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/notion-research-documentation",
+      "summary": "Pull relevant Notion pages, synthesize findings, and publish clear briefs or reports (with citations and links to sources).",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/notion.png",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/basic-research.json",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "evaluations/research-to-database.json",
+          "kind": "file"
+        },
+        {
+          "path": "examples/competitor-analysis.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/market-research.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/technical-investigation.md",
+          "kind": "file"
+        },
+        {
+          "path": "examples/trip-planning.md",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "reference/advanced-search.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/citations.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/comparison-format.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/comparison-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/comprehensive-report-format.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/comprehensive-report-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/format-selection-guide.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/quick-brief-format.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/quick-brief-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/research-summary-format.md",
+          "kind": "file"
+        },
+        {
+          "path": "reference/research-summary-template.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "openai-docs",
+      "title": "OpenAI Docs",
+      "description": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model capabilities or limits); prioritize OpenAI docs MCP tools and restrict any fallback browsing to official OpenAI domains.",
+      "category": "documentation",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/openai-docs",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/documentation/openai-docs",
+      "summary": "Provide authoritative, current guidance from OpenAI developer docs using the developers.openai.com MCP server. Always prioritize the developer docs MCP tools over web.run for OpenAI-related questions. Only if the MCP server is installed and returns no meaningful results should you fall back to web search.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/openai-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/openai.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "atlas",
+      "title": "Atlas Control (macOS)",
+      "description": "macOS-only AppleScript control for the ChatGPT Atlas desktop app. Use only when the user explicitly asks to control Atlas tabs/bookmarks/history on macOS and the \\\"ChatGPT Atlas\\\" app is installed; do not trigger for general browser tasks or non-macOS environments.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/atlas",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/atlas",
+      "summary": "Use the bundled CLI to control Atlas and inspect local browser data.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/atlas-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/atlas.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/atlas-data.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/atlas_cli.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/atlas_common.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "doc",
+      "title": "DOCX Skill",
+      "description": "Use when the task involves reading, creating, or editing `.docx` documents, especially when formatting or layout fidelity matters; prefer `python-docx` plus the bundled `scripts/render_docx.py` for visual checks.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/doc",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/doc",
+      "summary": "## When to use\n- Read or review DOCX content where layout matters (tables, diagrams, pagination).\n- Create or edit DOCX files with professional formatting.\n- Validate visual layout before delivery.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/doc-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/doc.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/render_docx.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "gh-address-comments",
+      "title": "PR Comment Handler",
+      "description": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/gh-address-comments",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/gh-address-comments",
+      "summary": "Guide to find the open PR for the current branch and address its comments with gh CLI. Run all `gh` commands with elevated network access.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/github-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/github.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/fetch_comments.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "gh-fix-ci",
+      "title": "Gh Pr Checks Plan Fix",
+      "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/gh-fix-ci",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/gh-fix-ci",
+      "summary": "## Overview",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/github-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/github.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/inspect_pr_checks.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "imagegen",
+      "title": "Image Generation Skill",
+      "description": "Use when the user asks to generate or edit images via the OpenAI Image API (for example: generate image, edit/inpaint/mask, background removal or replacement, transparent background, product shots, concept art, covers, or batch variants); run the bundled CLI (`scripts/image_gen.py`) and require `OPENAI_API_KEY` for live calls.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/imagegen",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/imagegen",
+      "summary": "Generates or edits images for the current project (e.g., website assets, game assets, UI mockups, product mockups, wireframes, logo design, photorealistic images, infographics). Defaults to `gpt-image-1.5` and the OpenAI Image API, and prefers the bundled CLI for deterministic, reproducible runs.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/imagegen-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/imagegen.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/cli.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/codex-network.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/image-api.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/prompting.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/sample-prompts.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/image_gen.py",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "pdf",
+      "title": "PDF Skill",
+      "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/pdf",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/pdf",
+      "summary": "## When to use\n- Read or review PDF content where layout and visuals matter.\n- Create PDFs programmatically with reliable formatting.\n- Validate final rendering before delivery.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/pdf.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "playwright",
+      "title": "Playwright CLI Skill",
+      "description": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+      "category": "tools",
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "path": "skills/.curated/playwright",
+        "ref": "main",
+        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+      },
+      "repoPath": "skills/tools/playwright",
+      "summary": "Drive a real browser from the terminal using `playwright-cli`. Prefer the bundled wrapper script so the CLI works even when it is not globally installed.\nTreat this skill as CLI-first automation. Do not pivot to `@playwright/test` unless the user explicitly asks for test files.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "kind": "file"
+        },
+        {
+          "path": "assets/playwright-small.svg",
+          "kind": "file"
+        },
+        {
+          "path": "assets/playwright.png",
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "NOTICE.txt",
+          "kind": "file"
+        },
+        {
+          "path": "references/cli.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/workflows.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/playwright_cli.sh",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
       "id": "pptx",
       "title": "PPTX creation, editing, and analysis",
       "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks",
@@ -169,10 +2561,10 @@
         "syncedCommit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
       "repoPath": "skills/tools/pptx",
-      "summary": "## Overview",
+      "summary": "## Quick Reference",
       "files": [
         {
-          "path": "html2pptx.md",
+          "path": "editing.md",
           "kind": "file"
         },
         {
@@ -180,211 +2572,223 @@
           "kind": "file"
         },
         {
-          "path": "ooxml.md",
+          "path": "pptxgenjs.md",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+          "path": "scripts/__init__.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+          "path": "scripts/add_slide.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
+          "path": "scripts/clean.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
+          "path": "scripts/office/helpers/__init__.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+          "path": "scripts/office/helpers/merge_runs.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+          "path": "scripts/office/helpers/simplify_redlines.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+          "path": "scripts/office/pack.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/mce/mc.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2010.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2012.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2018.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-cex-2018.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-cid-2016.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-symex-2015.xsd",
+          "path": "scripts/office/schemas/mce/mc.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/pack.py",
+          "path": "scripts/office/schemas/microsoft/wml-2010.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/unpack.py",
+          "path": "scripts/office/schemas/microsoft/wml-2012.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validate.py",
+          "path": "scripts/office/schemas/microsoft/wml-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/__init__.py",
+          "path": "scripts/office/schemas/microsoft/wml-cex-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/base.py",
+          "path": "scripts/office/schemas/microsoft/wml-cid-2016.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/docx.py",
+          "path": "scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/pptx.py",
+          "path": "scripts/office/schemas/microsoft/wml-symex-2015.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/redlining.py",
+          "path": "scripts/office/soffice.py",
           "kind": "file"
         },
         {
-          "path": "scripts/html2pptx.js",
+          "path": "scripts/office/unpack.py",
           "kind": "file"
         },
         {
-          "path": "scripts/inventory.py",
+          "path": "scripts/office/validate.py",
           "kind": "file"
         },
         {
-          "path": "scripts/rearrange.py",
+          "path": "scripts/office/validators/__init__.py",
           "kind": "file"
         },
         {
-          "path": "scripts/replace.py",
+          "path": "scripts/office/validators/base.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/docx.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/pptx.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/redlining.py",
           "kind": "file"
         },
         {

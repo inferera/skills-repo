@@ -1,0 +1,12 @@
+specVersion: 2
+id: cloudflare-deploy
+title: Cloudflare Deploy
+description: Deploy applications and infrastructure to Cloudflare using Workers,
+  Pages, and related platform services. Use when the user asks to deploy, host,
+  publish, or set up a project on Cloudflare.
+category: devops
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/cloudflare-deploy
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

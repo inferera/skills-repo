@@ -1,0 +1,12 @@
+specVersion: 2
+id: playwright
+title: Playwright CLI Skill
+description: Use when the task requires automating a real browser from the
+  terminal (navigation, form filling, snapshots, screenshots, data extraction,
+  UI-flow debugging) via `playwright-cli` or the bundled wrapper script.
+category: tools
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/playwright
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

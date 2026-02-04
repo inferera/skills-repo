@@ -1,0 +1,14 @@
+specVersion: 2
+id: figma-implement-design
+title: Implement Design
+description: Translate Figma nodes into production-ready code with 1:1 visual
+  fidelity using the Figma MCP workflow (design context, screenshots, assets,
+  and project-convention translation). Trigger when the user provides Figma URLs
+  or node IDs, or asks to implement designs or components that must match Figma
+  specs. Requires a working Figma MCP server connection.
+category: development
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/figma-implement-design
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c

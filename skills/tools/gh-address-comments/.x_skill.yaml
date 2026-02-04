@@ -1,0 +1,12 @@
+specVersion: 2
+id: gh-address-comments
+title: PR Comment Handler
+description: Help address review/issue comments on the open GitHub PR for the
+  current branch using gh CLI; verify gh auth first and prompt the user to
+  authenticate if not logged in.
+category: tools
+source:
+  repo: https://github.com/openai/skills
+  path: skills/.curated/gh-address-comments
+  ref: main
+  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c
