@@ -14,7 +14,7 @@ import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import type { MessageKey } from "@/lib/i18n";
-import { LOCALE_OPTIONS, DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
+import { LOCALE_OPTIONS, DEFAULT_LOCALE, isLocale, getLocalizedText, getLocalePath } from "@/lib/i18n";
 import { getSkillById, loadRegistryIndex, skillCachePath, repoFilePath } from "@/lib/registry";
 
 export const dynamicParams = false;
@@ -139,9 +139,11 @@ export async function generateMetadata({
   const skill = await getSkillById(skillId);
   if (!skill) return { title: "Skill not found" };
 
+  const descLocale = isLocale(locale) ? locale : DEFAULT_LOCALE;
+
   return {
     title: skill.title,
-    description: skill.description,
+    description: getLocalizedText(skill.description, descLocale),
     alternates: {
       canonical: `/${locale}/s/${skillId}`,
       languages: Object.fromEntries(
@@ -153,7 +155,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: skill.title,
-      description: skill.description,
+      description: getLocalizedText(skill.description, descLocale),
       type: "article"
     }
   };
@@ -413,7 +415,7 @@ export default async function LocaleSkillPage({ params }: { params: Promise<{ lo
                 <h1 className="font-heading text-3xl font-bold text-foreground">{skill.title}</h1>
                 <span className="px-2.5 py-1 rounded-md text-xs font-mono text-muted bg-background-secondary border border-border">{skill.category}</span>
               </div>
-              <p className="text-secondary mt-3 leading-relaxed">{skill.description}</p>
+              <p className="text-secondary mt-3 leading-relaxed">{getLocalizedText(skill.description, isLocale(locale) ? locale : DEFAULT_LOCALE)}</p>
               {(skill.tags ?? []).length > 0 && (
                 <div className="flex gap-2 flex-wrap mt-4">
                   {(skill.tags ?? []).map((t) => (
@@ -423,7 +425,7 @@ export default async function LocaleSkillPage({ params }: { params: Promise<{ lo
               )}
             </div>
             <div className="flex gap-3 flex-wrap items-center">
-              <Link className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors" href={`/${locale}/c/${skill.category}`}>
+              <Link className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors" href={getLocalePath(`/c/${skill.category}`, locale)}>
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                 <T k="skill.back" />
               </Link>
@@ -530,7 +532,7 @@ export default async function LocaleSkillPage({ params }: { params: Promise<{ lo
             <h2 className="font-heading text-lg font-semibold text-foreground"><T k="skill.related" /></h2>
             <p className="text-secondary text-sm mt-2"><T k="skill.relatedDescription" /></p>
             <div className="mt-4 space-y-3">
-              {related.map((s) => <SkillMiniCard key={s.id} skill={s} />)}
+              {related.map((s) => <SkillMiniCard key={s.id} skill={s} locale={locale} />)}
             </div>
           </section>
         ) : null}

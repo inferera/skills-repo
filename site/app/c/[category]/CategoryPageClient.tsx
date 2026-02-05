@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import type { RegistryCategory, RegistrySkill } from "@/lib/types";
-import { getLocalizedText } from "@/lib/i18n";
+import { getLocalizedText, getLocalePath } from "@/lib/i18n";
 
 import { useI18n } from "@/components/I18nProvider";
 import { CategoryFilterClient } from "@/components/CategoryFilterClient";
@@ -41,7 +41,7 @@ export function CategoryPageClient({
 
           <Link
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background-secondary text-foreground font-medium hover:border-border-hover hover:bg-card transition-colors shrink-0"
-            href="/categories"
+            href={getLocalePath("/categories", locale)}
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7"/>

@@ -78,9 +78,12 @@ function printTable(skills) {
       const agents = skill.agents?.length > 0 ? ` [${skill.agents.join(', ')}]` : '';
       console.log(`  ${skill.id.padEnd(30)} ${skill.subcategory}${agents}`);
       if (skill.description) {
-        const desc = skill.description.length > 80
-          ? skill.description.slice(0, 77) + '...'
-          : skill.description;
+        const descText = typeof skill.description === "string"
+          ? skill.description
+          : (skill.description["en"] || Object.values(skill.description)[0] || "");
+        const desc = descText.length > 80
+          ? descText.slice(0, 77) + '...'
+          : descText;
         console.log(`    ${desc}`);
       }
       console.log();

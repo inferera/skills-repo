@@ -1725,5 +1725,19 @@ export function formatMessage(message: string, params?: Record<string, string | 
  */
 export function getLocalizedText(text: string | Record<string, string>, locale: Locale): string {
   if (typeof text === "string") return text;
-  return text[locale] || text["en"] || text[DEFAULT_LOCALE] || Object.values(text)[0] || "";
+  return text[locale] || text[DEFAULT_LOCALE] || Object.values(text)[0] || "";
+}
+
+/**
+ * Generate a locale-aware URL path
+ * @param path - The path without locale prefix (should start with /)
+ * @param locale - The target locale
+ * @returns The path with locale prefix for non-default locales, or the original path for default locale
+ */
+export function getLocalePath(path: string, locale: Locale): string {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  if (locale === DEFAULT_LOCALE) {
+    return normalizedPath;
+  }
+  return `/${locale}${normalizedPath}`;
 }

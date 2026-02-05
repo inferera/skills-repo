@@ -400,16 +400,21 @@ export async function loadCategoriesFromRepo(skills, config = null) {
 
 /**
  * Build search index (v2 - no subcategory)
+ * Uses only English description to avoid mixed-language search results
  */
 export function buildSearchDocs(skills) {
-  return skills.map((s) => ({
-    id: s.id,
-    category: s.category,
-    title: s.title,
-    tags: s.tags ?? [],
-    agents: s.agents ?? [],
-    text: [s.title, s.description, (s.tags ?? []).join(" "), s.summary].filter(Boolean).join("\n")
-  }));
+  return skills.map((s) => {
+    // Use English description only to avoid mixed-language search results
+    const descText = typeof s.description === "string" ? s.description : (s.description["en"] || Object.values(s.description)[0] || "");
+    return {
+      id: s.id,
+      category: s.category,
+      title: s.title,
+      tags: s.tags ?? [],
+      agents: s.agents ?? [],
+      text: [s.title, descText, (s.tags ?? []).join(" "), s.summary].filter(Boolean).join("\n")
+    };
+  });
 }
 
 export async function writeJson(filePath, data) {

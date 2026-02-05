@@ -36,7 +36,7 @@ export type RegistrySkill = {
   specVersion: number;
   id: string;
   title: string;
-  description: string;
+  description: I18nString;
   license?: string;
   authors?: Array<{ name: string; url?: string; email?: string }>;
   tags?: string[];

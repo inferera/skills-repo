@@ -1,7 +1,8 @@
 // scripts/build-registry.mjs (v2)
 import fs from "node:fs/promises";
 import { buildSearchDocs, loadCategoriesFromRepo, scanSkills, writeJson } from "./lib/registry.mjs";
-import { loadConfig } from "./lib/config.mjs";
+import { loadConfig, getBuildConfig } from "./lib/config.mjs";
+import { translateSkillDescriptions } from "./lib/translate.mjs";
 
 const escapeXml = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -24,6 +25,12 @@ if (errors.length > 0) {
 }
 
 console.log(`  ✓ Found ${skills.length} skills\n`);
+
+// Translate descriptions
+console.log('🌐 Translating descriptions...');
+const buildConfig = getBuildConfig(config);
+skills = await translateSkillDescriptions(skills, { cacheDir: buildConfig.cacheDir, config });
+console.log('');
 
 // Load categories
 console.log('📂 Loading categories...');

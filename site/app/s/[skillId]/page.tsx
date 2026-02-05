@@ -14,6 +14,7 @@ import { QuickInstallClient } from "@/components/QuickInstallClient";
 import { FileTreeClient } from "@/components/FileTreeClient";
 import { MarkdownCodeBlock } from "@/components/CodeBlock";
 import type { MessageKey } from "@/lib/i18n";
+import { getLocalizedText, DEFAULT_LOCALE } from "@/lib/i18n";
 import { getSkillById, loadRegistryIndex, skillCachePath, repoFilePath } from "@/lib/registry";
 
 export const dynamicParams = false;
@@ -138,10 +139,10 @@ export async function generateMetadata({
   if (!skill) return { title: "Skill not found" };
   return {
     title: skill.title,
-    description: skill.description,
+    description: getLocalizedText(skill.description, DEFAULT_LOCALE),
     openGraph: {
       title: skill.title,
-      description: skill.description,
+      description: getLocalizedText(skill.description, DEFAULT_LOCALE),
       type: "article"
     }
   };
@@ -522,7 +523,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
                 </span>
               </div>
               <p className="text-secondary mt-3 leading-relaxed">
-                {skill.description}
+                {getLocalizedText(skill.description, DEFAULT_LOCALE)}
               </p>
 
               {(skill.tags ?? []).length > 0 && (
@@ -679,7 +680,7 @@ export default async function SkillPage({ params }: { params: Promise<{ skillId:
             </p>
             <div className="mt-4 space-y-3">
               {related.map((s) => (
-                <SkillMiniCard key={s.id} skill={s} />
+                <SkillMiniCard key={s.id} skill={s} locale={DEFAULT_LOCALE} />
               ))}
             </div>
           </section>

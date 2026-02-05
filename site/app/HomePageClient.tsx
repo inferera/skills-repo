@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import type { RegistryCategories, RegistryIndex } from "@/lib/types";
-import { getLocalizedText } from "@/lib/i18n";
+import { getLocalizedText, getLocalePath } from "@/lib/i18n";
 
 import { useI18n } from "@/components/I18nProvider";
 import { SearchClient } from "@/components/SearchClient";
@@ -40,7 +40,7 @@ export function HomePageClient({
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="/import"
+            href={getLocalePath("/import", locale)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-colors"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -49,7 +49,7 @@ export function HomePageClient({
             {t("home.hero.submitSkill")}
           </Link>
           <Link
-            href="/categories"
+            href={getLocalePath("/categories", locale)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-card border border-border text-foreground font-medium hover:bg-card-hover hover:border-border-hover transition-colors"
           >
             {t("home.hero.browseCategories")}
@@ -64,7 +64,7 @@ export function HomePageClient({
       <section>
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-heading text-xl font-semibold text-foreground">{t("home.categories.title")}</h2>
-          <Link href="/categories" className="text-sm text-accent hover:underline">
+          <Link href={getLocalePath("/categories", locale)} className="text-sm text-accent hover:underline">
             {t("home.categories.viewAll")}
           </Link>
         </div>
@@ -76,7 +76,7 @@ export function HomePageClient({
             return (
               <Link
                 key={c.id}
-                href={`/c/${c.id}`}
+                href={getLocalePath(`/c/${c.id}`, locale)}
                 className="group flex flex-col items-center p-4 bg-card border border-border rounded-xl hover:border-border-hover hover:bg-card-hover transition-all"
               >
                 <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

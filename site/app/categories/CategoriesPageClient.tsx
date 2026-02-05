@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import type { RegistryCategories } from "@/lib/types";
-import { getLocalizedText } from "@/lib/i18n";
+import { getLocalizedText, getLocalePath } from "@/lib/i18n";
 
 import { useI18n } from "@/components/I18nProvider";
 
@@ -36,7 +36,7 @@ export function CategoriesPageClient({
           return (
             <Link
               key={cat.id}
-              href={`/c/${cat.id}`}
+              href={getLocalePath(`/c/${cat.id}`, locale)}
               className="group block p-6 bg-card border border-border rounded-xl hover:border-border-hover hover:bg-background-secondary transition-all"
             >
               <div className="flex items-start justify-between gap-3 mb-3">

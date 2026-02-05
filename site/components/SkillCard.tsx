@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import type { RegistrySkill } from "@/lib/types";
+import type { Locale } from "@/lib/i18n";
+import { getLocalizedText, getLocalePath } from "@/lib/i18n";
 
 function formatStars(stars: number): string {
   if (stars >= 1000) {
@@ -9,12 +11,12 @@ function formatStars(stars: number): string {
   return stars.toString();
 }
 
-export function SkillCard({ skill }: { skill: RegistrySkill }) {
+export function SkillCard({ skill, locale }: { skill: RegistrySkill; locale: Locale }) {
   const repo = skill.repository;
 
   return (
     <Link
-      href={`/s/${skill.id}`}
+      href={getLocalePath(`/s/${skill.id}`, locale)}
       className="group block p-4 bg-card border border-border rounded-xl transition-all duration-200 cursor-pointer hover:border-border-hover hover:bg-card-hover"
     >
       {/* Header with avatar and category */}
@@ -51,7 +53,7 @@ export function SkillCard({ skill }: { skill: RegistrySkill }) {
 
       {/* Description */}
       <p className="mt-3 text-sm text-secondary line-clamp-2 leading-relaxed">
-        {skill.description}
+        {getLocalizedText(skill.description, locale)}
       </p>
 
       {/* Tags */}

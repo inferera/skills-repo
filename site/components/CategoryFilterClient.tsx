@@ -8,7 +8,7 @@ import { useI18n } from "@/components/I18nProvider";
 import { SkillCard } from "@/components/SkillCard";
 
 export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,7 +29,8 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
     const query = q.trim().toLowerCase();
     if (!query) return skills;
     return skills.filter((s) => {
-      const haystack = [s.id, s.title, s.description, s.summary, (s.tags ?? []).join(" "), (s.agents ?? []).join(" ")]
+      const descText = typeof s.description === "string" ? s.description : Object.values(s.description).join(" ");
+      const haystack = [s.id, s.title, descText, s.summary, (s.tags ?? []).join(" "), (s.agents ?? []).join(" ")]
         .filter(Boolean)
         .join("\n")
         .toLowerCase();
@@ -76,7 +77,7 @@ export function CategoryFilterClient({ skills }: { skills: RegistrySkill[] }) {
       {/* Results grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {results.map((s) => (
-          <SkillCard key={s.id} skill={s} />
+          <SkillCard key={s.id} skill={s} locale={locale} />
         ))}
       </div>
 
