@@ -143,7 +143,36 @@ function parseRequest(issueBody) {
     throw new Error(`sourceRepo must be a https://github.com/... URL. Got: ${String(req.sourceRepo)}`);
   }
   if (typeof req.ref !== "string" || !req.ref.trim()) throw new Error("ref is required");
-  if (!/^[a-zA-Z0-9._\/-]+$/.test(req.ref)) throw new Error(`ref contains invalid characters: ${req.ref}`);
+
+  // Git refs can be:
+  // - Branch names: main, feature/foo, dev-branch
+  // - Tags: v1.0.0, release-2024
+  // - Commit SHAs: abc123def (hex chars)
+  // NOT allowed: --options, special chars that could break commands
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9._/-]*$/.test(req.ref)) {
+    throw new Error(`ref contains invalid characters or format: ${req.ref}`);
+  }
+
+  // Prevent git option injection (refs starting with -)
+  if (req.ref.startsWith('-')) {
+    throw new Error(`ref cannot start with '-': ${req.ref}`);
+  }
+
+  // Prevent refs that could be confused with options or dangerous patterns
+  const dangerousPatterns = [
+    /^-/,              // starts with dash (git option)
+    /\.\./,            // path traversal in ref
+    /^\.$/,            // current dir
+    /^~$/,             // home dir
+    /[\x00-\x1f\x7f]/, // control characters
+    /[<>"|*?]/,        // shell special chars
+  ];
+
+  for (const pattern of dangerousPatterns) {
+    if (pattern.test(req.ref)) {
+      throw new Error(`ref contains dangerous pattern: ${req.ref}`);
+    }
+  }
   if (!Array.isArray(req.items) || req.items.length === 0) throw new Error("items must be a non-empty list");
   if (req.items.length > 20) throw new Error("Too many items (max 20 per request)");
 
