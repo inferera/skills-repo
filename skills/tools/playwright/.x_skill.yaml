@@ -9,4 +9,4 @@ source:
   repo: https://github.com/openai/skills
   path: skills/.curated/playwright
   ref: main
-  syncedCommit: f46b2535abfc2ec4b383ba0da47a0357abfa198c
+  syncedCommit: a5119697b819090e00e5d11ee1d86834d7c1043a
