@@ -10,6 +10,7 @@ import {
   MAX_CACHE_ENTRIES,
   TRANSLATION_CACHE_VERSION
 } from './constants.mjs';
+import { debugApiRequest } from "./debug-logger.mjs";
 
 const CACHE_VERSION = TRANSLATION_CACHE_VERSION;
 const DEFAULT_CONCURRENCY = DEFAULT_TRANSLATION_CONCURRENCY;
@@ -202,11 +203,8 @@ async function callTranslationApi({ skillId, description, locales, apiKey, baseU
     },
   };
 
-  if (process.env.A_OPENAI_DEBUG) {
-    console.log(`\n  [DEBUG] Request for "${skillId}":`);
-    console.log(`    URL: ${baseUrl}/chat/completions`);
-    console.log(`    Body: ${JSON.stringify(body, null, 2)}`);
-  }
+  // Safe debug logging that redacts sensitive data
+  debugApiRequest(skillId, `${baseUrl}/chat/completions`, body);
 
   // Add timeout using AbortController
   const controller = new AbortController();
