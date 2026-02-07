@@ -103,11 +103,12 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # Add updated skill metadata (syncedCommit changes)
-          git add skills/**/.x_skill.yaml
+          # Use find to reliably handle nested directories
+          find skills -name '.x_skill.yaml' -exec git add {} +
 
           # Add updated registry files
-          git add registry/*.json
-          git add site/public/registry/agents.json
+          git add registry/*.json || true
+          git add site/public/registry/*.json || true
 
           # Check if there are changes to commit
           if git diff --staged --quiet; then
