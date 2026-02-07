@@ -1,23 +1,12 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-02-05T11:30:50.562Z",
+  "generatedAt": "2026-02-07T15:45:04.287Z",
   "skills": [
     {
       "specVersion": 2,
       "id": "figma",
       "title": "Figma MCP",
-      "description": {
-        "en": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
-        "zh-CN": "使用 Figma MCP 服务器从 Figma 获取设计上下文、截图、变量和资源，并将 Figma 节点转换为生产代码。当任务涉及 Figma URL、节点ID、设计到代码的实现或 Figma MCP 设置和故障排除时触发。",
-        "zh-TW": "使用 Figma MCP 伺服器從 Figma 取得設計內容、截圖、變數和資產，並將 Figma 節點轉換為生產用程式碼。當任務涉及 Figma URL、節點ID、設計轉換為程式碼的實作或 Figma MCP 設定與故障排除時觸發。",
-        "ja": "Figma MCPサーバーを使用して、Figmaからデザインコンテキスト、スクリーンショット、変数、アセットを取得し、Figmaノードを本番コードに変換します。FigmaのURL、ノードID、デザインからコードへの実装、またはFigma MCPの設定とトラブルシューティングに関するタスクをトリガーします。",
-        "ko": "Figma MCP 서버를 사용하여 Figma에서 디자인 컨텍스트, 스크린샷, 변수 및 자산을 가져오고, Figma 노드를 프로덕션 코드로 변환합니다. Figma URL, 노드 ID, 디자인-투-코드 구현 또는 Figma MCP 설정 및 문제 해결이 포함된 작업을 트리거합니다.",
-        "de": "Verwenden Sie den Figma MCP-Server, um Designkontext, Screenshots, Variablen und Assets von Figma abzurufen und Figma-Knoten in Produktionscode zu übersetzen. Triggern Sie dies, wenn eine Aufgabe Figma-URLs, Knoten-IDs, Design-zu-Code-Implementierung oder Figma MCP-Einrichtung und -Fehlerbehebung umfasst.",
-        "es": "Utilice el servidor MCP de Figma para obtener contexto de diseño, capturas de pantalla, variables y recursos de Figma, y para traducir nodos de Figma en código de producción. Active esto cuando una tarea involucre URLs de Figma, IDs de nodos, implementación de diseño a código, o configuración y resolución de problemas de Figma MCP.",
-        "fr": "Utilisez le serveur Figma MCP pour récupérer le contexte de conception, les captures d'écran, les variables et les ressources de Figma, et pour traduire les nœuds Figma en code de production. Déclenchez cela lorsqu'une tâche implique des URLs Figma, des identifiants de nœuds, la mise en œuvre de la conception en code ou la configuration et le dépannage de Figma MCP.",
-        "pt": "Use o servidor Figma MCP para buscar o contexto de design, capturas de tela, variáveis e ativos do Figma, e para traduzir os nós do Figma em código de produção. Acione quando uma tarefa envolver URLs do Figma, IDs de nós, implementação de design para código ou configuração e solução de problemas do Figma MCP.",
-        "ru": "Используйте сервер Figma MCP для получения контекста дизайна, скриншотов, переменных и ресурсов из Figma, а также для преобразования узлов Figma в производственный код. Активируйте это, когда задача связана с URL-адресами Figma, идентификаторами узлов, реализацией дизайн-в-код или настройкой и устранением неполадок Figma MCP."
-      },
+      "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
       "category": "design",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -66,18 +55,7 @@
       "specVersion": 2,
       "id": "develop-web-game",
       "title": "Develop Web Game",
-      "description": {
-        "en": "Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses, inspect screenshots/text, and review console errors with render_game_to_text.",
-        "zh-CN": "在Codex构建或迭代Web游戏（HTML/JS）并需要可靠的开发+测试循环时使用：实现小的更改，运行基于Playwright的测试脚本，短输入突发和有意暂停，检查截图/文本，并使用render_game_to_text查看控制台错误。",
-        "zh-TW": "在Codex構建或迭代Web遊戲（HTML/JS）並需要可靠的開發+測試循環時使用：實現小的更改，運行基於Playwright的測試腳本，短輸入突發和有意暫停，檢查截圖/文本，並使用render_game_to_text查看控制台錯誤。",
-        "ja": "CodexがWebゲーム（HTML/JS）の構築または反復を行っており、信頼できる開発 + テストループが必要な場合に使用します：小さな変更を実装し、短い入力バーストと意図的な一時停止を伴うPlaywrightベースのテストスクリプトを実行し、スクリーンショット/テキストを検査し、render_game_to_textでコンソールエラーをレビューします。",
-        "ko": "Codex가 웹 게임(HTML/JS)을 구축하거나 반복할 때 신뢰할 수 있는 개발 + 테스트 루프가 필요할 때 사용하세요: 작은 변경 사항을 구현하고, 짧은 입력 버스트와 의도된 일시 정지와 함께 Playwright 기반 테스트 스크립트를 실행하며, 스크린샷/텍스트를 검사하고 render_game_to_text로 콘솔 오류를 검토하세요.",
-        "de": "Verwenden Sie es, wenn Codex an einem Webspiel (HTML/JS) arbeitet oder es iteriert und eine zuverlässige Entwicklungs- und Testschleife benötigt: Implementieren Sie kleine Änderungen, führen Sie ein auf Playwright basierendes Testskript mit kurzen Eingabestößen und absichtlichen Pausen aus, inspizieren Sie Screenshots/Text und überprüfen Sie Konsolenfehler mit render_game_to_text.",
-        "es": "Úselo cuando Codex esté construyendo o iterando en un juego web (HTML/JS) y necesite un ciclo de desarrollo + prueba confiable: implemente cambios pequeños, ejecute un script de prueba basado en Playwright con ráfagas cortas de entrada y pausas intencionales, inspeccione capturas de pantalla/texto y revise errores de consola con render_game_to_text.",
-        "fr": "Utilisez lorsque Codex construit ou itère sur un jeu web (HTML/JS) et a besoin d'une boucle de développement + test fiable : apportez de petites modifications, exécutez un script de test basé sur Playwright avec de courtes rafales d'entrée et des pauses intentionnelles, inspectez les captures d'écran/texte, et examinez les erreurs de console avec render_game_to_text.",
-        "pt": "Use quando o Codex estiver construindo ou iterando em um jogo web (HTML/JS) e precisar de um ciclo de desenvolvimento + teste confiável: implemente pequenas alterações, execute um script de teste baseado em Playwright com curtos surtos de entrada e pausas intencionais, inspecione capturas de tela/texto e revise erros de console com render_game_to_text.",
-        "ru": "Используйте, когда Codex создает или итеративно работает над веб-игрой (HTML/JS) и нуждается в надежной цепочке разработки + тестирования: вносите небольшие изменения, запускайте тестовый сценарий на базе Playwright с короткими всплесками ввода и намеренными паузами, осматривайте скриншоты/текст и проверяйте ошибки консоли с помощью render_game_to_text."
-      },
+      "description": "Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses, inspect screenshots/text, and review console errors with render_game_to_text.",
       "category": "development",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -122,18 +100,7 @@
       "specVersion": 2,
       "id": "figma-implement-design",
       "title": "Implement Design",
-      "description": {
-        "en": "Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or node IDs, or asks to implement designs or components that must match Figma specs. Requires a working Figma MCP server connection.",
-        "zh-CN": "使用Figma MCP工作流程（设计背景、截图、资源和项目约定翻译）将Figma节点转换为生产就绪的代码，具有1:1的视觉保真度。当用户提供Figma URL或节点ID，或要求实现必须符合Figma规格的设计或组件时触发。需要一个正常工作的Figma MCP服务器连接。",
-        "zh-TW": "使用Figma MCP工作流程（設計背景、截圖、資源和專案慣例轉譯）將Figma節點轉換為生產就緒的程式碼，具有1:1的視覺忠實度。當用戶提供Figma URL或節點ID，或要求實作必須符合Figma規格的設計或元件時觸發。需要一個正常運作的Figma MCP伺服器連線。",
-        "ja": "Figmaのノードを、Figma MCPワークフロー（デザインコンテキスト、スクリーンショット、アセット、プロジェクト規約の翻訳）を使用して、1:1のビジュアル忠実度で本番環境向けのコードに変換します。ユーザーがFigmaのURLやノードIDを提供したり、Figmaの仕様に一致する必要があるデザインやコンポーネントの実装を依頼した場合にトリガーされます。動作するFigma MCPサーバー接続が必要です。",
-        "ko": "Figma 노드를 1:1 시각적 충실도로 프로덕션 준비된 코드로 변환하며, Figma MCP 워크플로우(디자인 컨텍스트, 스크린샷, 자산, 프로젝트 규칙 번역)를 사용합니다. 사용자가 Figma URL 또는 노드 ID를 제공하거나 Figma 사양에 일치해야 하는 디자인 또는 컴포넌트 구현을 요청할 때 트리거됩니다. 작동하는 Figma MCP 서버 연결이 필요합니다.",
-        "de": "Übersetzen Sie Figma-Knoten in produktionsbereiten Code mit 1:1 visueller Treue unter Verwendung des Figma MCP-Workflows (Design-Kontext, Screenshots, Assets und Projekt-Konventionsübersetzung). Wird ausgelöst, wenn der Benutzer Figma-URLs oder Knoten-IDs bereitstellt oder um die Implementierung von Designs oder Komponenten bittet, die den Figma-Spezifikationen entsprechen müssen. Erfordert eine funktionierende Verbindung zu einem Figma MCP-Server.",
-        "es": "Traduzca nodos de Figma en código listo para producción con fidelidad visual 1:1 utilizando el flujo de trabajo MCP de Figma (contexto de diseño, capturas de pantalla, recursos y traducción de convenciones del proyecto). Se activa cuando el usuario proporciona URLs de Figma o IDs de nodos, o solicita implementar diseños o componentes que deben coincidir con las especificaciones de Figma. Requiere una conexión funcional a un servidor MCP de Figma.",
-        "fr": "Traduisez les nœuds Figma en un code prêt pour la production avec une fidélité visuelle 1:1 en utilisant le flux de travail MCP de Figma (contexte de conception, captures d'écran, ressources et traduction des conventions du projet). Déclenche lorsque l'utilisateur fournit des URL Figma ou des identifiants de nœuds, ou demande d'implémenter des designs ou composants qui doivent correspondre aux spécifications Figma. Nécessite une connexion fonctionnelle à un serveur MCP Figma.",
-        "pt": "Converta nós do Figma em código pronto para produção com fidelidade visual 1:1 usando o fluxo de trabalho MCP do Figma (contexto de design, capturas de tela, ativos e tradução de convenções do projeto). Dispara quando o usuário fornece URLs do Figma ou IDs de nós, ou pede para implementar designs ou componentes que devem corresponder às especificações do Figma. Requer uma conexão funcional com um servidor MCP do Figma.",
-        "ru": "Преобразуйте узлы Figma в готовый к производству код с точной визуальной точностью, используя рабочий процесс MCP Figma (контекст дизайна, скриншоты, ресурсы и перевод проектных соглашений). Активируется, когда пользователь предоставляет URL-адреса Figma или идентификаторы узлов, или запрашивает реализацию дизайнов или компонентов, которые должны соответствовать спецификациям Figma. Требуется рабочее соединение с сервером MCP Figma."
-      },
+      "description": "Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or node IDs, or asks to implement designs or components that must match Figma specs. Requires a working Figma MCP server connection.",
       "category": "development",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -174,18 +141,7 @@
       "specVersion": 2,
       "id": "frontend-design",
       "title": "frontend-design",
-      "description": {
-        "en": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
-        "zh-CN": "创建具有高设计质量的特色生产级前端界面。在用户请求构建网页组件、页面、工件、海报或应用程序（包括网站、着陆页、仪表盘、React组件、HTML/CSS布局或任何网页UI的样式/美化）时使用此技能。生成具有创意、精致的代码和UI设计，避免通用的AI美学。",
-        "zh-TW": "創建具有高設計品質的特色生產級前端界面。在用戶請求建立網頁元件、頁面、工件、海報或應用程式（例如網站、著陸頁、儀表板、React元件、HTML/CSS佈局，或在樣式/美化任何網頁UI時）時使用此技能。產生具有創意、精緻的程式碼和UI設計，避免一般的AI美學。",
-        "ja": "高いデザイン品質の特徴的なプロダクショングレードのフロントエンドインターフェースを作成します。このスキルは、ユーザーがウェブコンポーネント、ページ、アーティファクト、ポスター、またはアプリケーション（例：ウェブサイト、ランディングページ、ダッシュボード、Reactコンポーネント、HTML/CSSレイアウト、または任意のWeb UIのスタイリング/美化）を構築するように求めたときに使用します。クリエイティブで洗練されたコードとUIデザインを生成し、一般的なAIの美学を避けます。",
-        "ko": "높은 디자인 품질의 독특하고 프로덕션 수준의 프론트엔드 인터페이스를 만드세요. 이 기술은 사용자가 웹 컴포넌트, 페이지, 아티팩트, 포스터 또는 애플리케이션(예: 웹사이트, 랜딩 페이지, 대시보드, React 컴포넌트, HTML/CSS 레이아웃 또는 웹 UI의 스타일링/미화)을 구축하라고 요청할 때 사용됩니다. 창의적이고 세련된 코드와 UI 디자인을 생성하여 일반적인 AI 미학을 피합니다.",
-        "de": "Erstellen Sie markante, produktionsreife Frontend-Schnittstellen mit hoher Designqualität. Verwenden Sie diese Fähigkeit, wenn der Benutzer fragt, um Web-Komponenten, Seiten, Artefakte, Poster oder Anwendungen zu erstellen (Beispiele sind Websites, Landing Pages, Dashboards, React-Komponenten, HTML/CSS-Layouts oder bei der Gestaltung/Schönmachung jeder Web-Benutzeroberfläche). Erzeugt kreative, raffinierte Codes und UI-Designs, die generische KI-Ästhetik vermeiden.",
-        "es": "Crea interfaces frontend distintivas y de calidad de producción con un alto nivel de diseño. Usa esta habilidad cuando el usuario solicite construir componentes web, páginas, artefactos, carteles o aplicaciones (ejemplos incluyen sitios web, páginas de destino, paneles, componentes React, diseños HTML/CSS o al estilizar/embellecer cualquier interfaz web). Genera código creativo y pulido y diseños de UI que evitan la estética genérica de IA.",
-        "fr": "Créez des interfaces frontend distinctives de qualité production avec une haute qualité de conception. Utilisez cette compétence lorsque l'utilisateur demande de construire des composants web, des pages, des artefacts, des posters ou des applications (exemples incluent des sites web, des pages de destination, des tableaux de bord, des composants React, des mises en page HTML/CSS ou lors du stylisme/embellissement de toute interface utilisateur web). Génère un code créatif, soigné et un design UI qui évite l'esthétique générique de l'IA.",
-        "pt": "Crie interfaces frontend distintas e de nível de produção com alta qualidade de design. Use essa habilidade quando o usuário solicitar construir componentes web, páginas, artefatos, cartazes ou aplicações (exemplos incluem sites, landing pages, dashboards, componentes React, layouts HTML/CSS ou ao estilizar/embelezar qualquer UI web). Gera código criativo, refinado e design de UI que evita estéticas genéricas de IA.",
-        "ru": "Создавайте выразительные интерфейсы фронтенда производственного уровня с высоким качеством дизайна. Используйте этот навык, когда пользователь просит создать веб-компоненты, страницы, артефакты, постеры или приложения (например, веб-сайты, лендинги, панели управления, компоненты React, макеты HTML/CSS или при стилизации/украшении любого веб-интерфейса). Генерирует креативный, отполированный код и дизайн UI, избегая стандартной эстетики ИИ."
-      },
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
       "category": "development",
       "source": {
         "repo": "https://github.com/anthropics/skills",
@@ -210,18 +166,7 @@
       "specVersion": 2,
       "id": "notion-spec-to-implementation",
       "title": "Spec to Implementation",
-      "description": {
-        "en": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
-        "zh-CN": "将Notion规格转化为实施计划、任务和进度跟踪；在实施PRD/功能规格和从中创建Notion计划+任务时使用。",
-        "zh-TW": "將Notion規格轉換為實施計劃、任務和進度追蹤；在實施PRD/功能規格和從中創建Notion計劃+任務時使用。",
-        "ja": "Notionの仕様を実装計画、タスク、進捗追跡に変換します。PRD/機能仕様の実装や、それらからNotionの計画とタスクを作成する際に使用します。",
-        "ko": "Notion 사양을 구현 계획, 작업 및 진행 상황 추적으로 전환합니다. PRD/기능 사양을 구현하거나 이를 기반으로 Notion 계획 + 작업을 생성할 때 사용하십시오.",
-        "de": "Verwandeln Sie Notion-Spezifikationen in Implementierungspläne, Aufgaben und Fortschrittsverfolgung; verwenden Sie dies bei der Umsetzung von PRDs/Feature-Spezifikationen und bei der Erstellung von Notion-Plänen + Aufgaben daraus.",
-        "es": "Convierte las especificaciones de Notion en planes de implementación, tareas y seguimiento del progreso; úsalo al implementar PRDs/especificaciones de funciones y al crear planes + tareas en Notion a partir de ellos.",
-        "fr": "Transformez les spécifications Notion en plans de mise en œuvre, tâches et suivi des progrès ; utilisez cela lors de la mise en œuvre des PRDs/spécifications de fonctionnalités et lors de la création de plans + tâches Notion à partir de celles-ci.",
-        "pt": "Transforme as especificações do Notion em planos de implementação, tarefas e acompanhamento de progresso; use ao implementar PRDs/especificações de recursos e ao criar planos + tarefas no Notion a partir delas.",
-        "ru": "Преобразуйте спецификации Notion в планы реализации, задачи и отслеживание прогресса; используйте при реализации PRD/спецификаций функций и создании планов + задач в Notion."
-      },
+      "description": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
       "category": "development",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -314,18 +259,7 @@
       "specVersion": 2,
       "id": "ui-ux-pro-max",
       "title": "UI/UX Pro Max - Design Intelligence",
-      "description": {
-        "en": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
-        "zh-CN": "UI/UX设计智能。50种风格，21种调色板，50种字体配对，20个图表，9个技术栈（React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind、shadcn/ui）。操作：规划、构建、创建、设计、实现、审查、修复、改进、优化、增强、重构、检查UI/UX代码。项目：网站、登录页面、仪表盘、管理面板、电子商务、SaaS、作品集、博客、移动应用、.html、.tsx、.vue、.svelte。元素：按钮、模态框、导航栏、侧边栏、卡片、表格、表单、图表。风格：玻璃拟态、粘土拟态、极简主义、野兽派、新拟态、便当格子、暗模式、响应式、拟物、扁平设计。主题：色彩调色板、无障碍、动画、布局、排版、字体配对、间距、悬停、阴影、渐变。集成：shadcn/ui MCP用于组件搜索和示例。",
-        "zh-TW": "UI/UX設計智慧。50種風格，21種調色板，50種字體配對，20個圖表，9個技術棧（React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind、shadcn/ui）。操作：規劃、建構、創建、設計、實作、審查、修正、改進、優化、增強、重構、檢查UI/UX程式碼。專案：網站、著陸頁、儀表板、管理面板、電子商務、SaaS、作品集、部落格、行動應用程式、.html、.tsx、.vue、.svelte。元素：按鈕、模態框、導航列、側邊欄、卡片、表格、表單、圖表。風格：玻璃態、黏土態、極簡主義、野獸派、新態、便當格子、暗模式、響應式、擬物、扁平設計。主題：色彩調色板、無障礙、動畫、佈局、排版、字體配對、間距、懸停、陰影、漸層。整合：shadcn/ui MCP用於元件搜尋和範例。",
-        "ja": "UI/UXデザインインテリジェンス。50スタイル、21パレット、50フォントペアリング、20チャート、9スタック（React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind、shadcn/ui）。アクション：計画、構築、作成、設計、実装、レビュー、修正、改善、最適化、強化、リファクタリング、UI/UXコードの確認。プロジェクト：ウェブサイト、ランディングページ、ダッシュボード、管理パネル、eコマース、SaaS、ポートフォリオ、ブログ、モバイルアプリ、.html、.tsx、.vue、.svelte。要素：ボタン、モーダル、ナビゲーションバー、サイドバー、カード、テーブル、フォーム、チャート。スタイル：グラスモルフィズム、クレイモルフィズム、ミニマリズム、ブルタリズム、ニューモルフィズム、弁当グリッド、ダークモード、レスポンシブ、スキュオモルフィズム、フラットデザイン。トピック：カラーパレット、アクセシビリティ、アニメーション、レイアウト、タイポグラフィ、フォントペアリング、スペーシング、ホバー、シャドウ、グラデーション。統合：shadcn/ui MCPによるコンポーネント検索と例。",
-        "ko": "UI/UX 디자인 인텔리전스. 50 스타일, 21 팔레트, 50 폰트 페어링, 20 차트, 9 스택 (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). 액션: 계획, 구축, 생성, 설계, 구현, 검토, 수정, 개선, 최적화, 향상, 리팩토링, UI/UX 코드 확인. 프로젝트: 웹사이트, 랜딩 페이지, 대시보드, 관리자 패널, 전자상거래, SaaS, 포트폴리오, 블로그, 모바일 앱, .html, .tsx, .vue, .svelte. 요소: 버튼, 모달, 네비게이션 바, 사이드바, 카드, 테이블, 폼, 차트. 스타일: 글래스모피즘, 클레이모피즘, 미니멀리즘, 브루탈리즘, 뉴모피즘, 벤토 그리드, 다크 모드, 반응형, 스큐모피즘, 플랫 디자인. 주제: 컬러 팔레트, 접근성, 애니메이션, 레이아웃, 타이포그래피, 폰트 페어링, 간격, 호버, 그림자, 그라데이션. 통합: shadcn/ui MCP를 통한 컴포넌트 검색 및 예제.",
-        "de": "UI/UX-Design-Intelligenz. 50 Stile, 21 Paletten, 50 Schriftpaarungen, 20 Diagramme, 9 Stapel (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Aktionen: planen, bauen, erstellen, entwerfen, implementieren, überprüfen, beheben, verbessern, optimieren, erweitern, refaktorisieren, UI/UX-Code überprüfen. Projekte: Webseite, Landing Page, Dashboard, Admin-Panel, E-Commerce, SaaS, Portfolio, Blog, mobile App, .html, .tsx, .vue, .svelte. Elemente: Button, Modal, Navbar, Sidebar, Card, Tabelle, Formular, Diagramm. Stile: Glasmorphismus, Tonmorphismus, Minimalismus, Brutalismus, Neumorphismus, Bento-Grid, Dunkelmodus, reaktionsfähig, Skeuomorphismus, Flachdesign. Themen: Farbpalette, Barrierefreiheit, Animation, Layout, Typografie, Schriftpaarung, Abstand, Hover, Schatten, Verlauf. Integrationen: shadcn/ui MCP für Komponenten-Suche und Beispiele.",
-        "es": "Inteligencia en diseño UI/UX. 50 estilos, 21 paletas, 50 combinaciones de fuentes, 20 gráficos, 9 pilas (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Acciones: planear, construir, crear, diseñar, implementar, revisar, arreglar, mejorar, optimizar, potenciar, refactorizar, verificar código UI/UX. Proyectos: sitio web, página de destino, panel de control, panel de administración, comercio electrónico, SaaS, portafolio, blog, aplicación móvil, .html, .tsx, .vue, .svelte. Elementos: botón, modal, barra de navegación, barra lateral, tarjeta, tabla, formulario, gráfico. Estilos: glassmorphism, claymorphism, minimalismo, brutalismo, neumorfismo, bento grid, modo oscuro, adaptable, skeuomorphism, diseño plano. Temas: paleta de colores, accesibilidad, animación, diseño, tipografía, combinación de fuentes, espaciado, hover, sombra, gradiente. Integraciones: shadcn/ui MCP para búsqueda de componentes y ejemplos.",
-        "fr": "Intelligence en conception UI/UX. 50 styles, 21 palettes, 50 associations de polices, 20 graphiques, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions : planifier, construire, créer, concevoir, implémenter, revoir, réparer, améliorer, optimiser, renforcer, refactoriser, vérifier le code UI/UX. Projets : site web, page de destination, tableau de bord, panneau d'administration, commerce électronique, SaaS, portfolio, blog, application mobile, .html, .tsx, .vue, .svelte. Éléments : bouton, modal, barre de navigation, barre latérale, carte, tableau, formulaire, graphique. Styles : glassmorphism, claymorphism, minimalisme, brutalism, neumorphism, bento grid, mode sombre, réactif, skeuomorphism, design plat. Sujets : palette de couleurs, accessibilité, animation, mise en page, typographie, association de polices, espacement, survol, ombre, dégradé. Intégrations : shadcn/ui MCP pour la recherche de composants et exemples.",
-        "pt": "Inteligência em design UI/UX. 50 estilos, 21 paletas, 50 combinações de fontes, 20 gráficos, 9 pilhas (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Ações: planejar, construir, criar, projetar, implementar, revisar, corrigir, melhorar, otimizar, aprimorar, refatorar, verificar código UI/UX. Projetos: website, landing page, dashboard, painel de administração, comércio eletrônico, SaaS, portfólio, blog, aplicativo móvel, .html, .tsx, .vue, .svelte. Elementos: botão, modal, barra de navegação, barra lateral, cartão, tabela, formulário, gráfico. Estilos: glassmorphism, claymorphism, minimalismo, brutalismo, neumorfismo, bento grid, modo escuro, responsivo, skeuomorphism, design flat. Tópicos: paleta de cores, acessibilidade, animação, layout, tipografia, combinação de fontes, espaçamento, hover, sombra, gradiente. Integrações: shadcn/ui MCP para busca de componentes e exemplos.",
-        "ru": "Интеллект в дизайне UI/UX. 50 стилей, 21 палитра, 50 сочетаний шрифтов, 20 графиков, 9 стеков (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Действия: планировать, строить, создавать, проектировать, реализовывать, проверять, исправлять, улучшать, оптимизировать, повышать, рефакторить, проверять UI/UX код. Проекты: сайт, лендинг, панель управления, административная панель, электронная коммерция, SaaS, портфолио, блог, мобильное приложение, .html, .tsx, .vue, .svelte. Элементы: кнопка, модальное окно, навбар, боковая панель, карта, таблица, форма, график. Стили: glassmorphism, claymorphism, минимализм, брутализм, neumorphism, Bento grid, тёмный режим, адаптивный, skeuomorphism, плоский дизайн. Темы: цветовая палитра, доступность, анимация, макет, типографика, сочетание шрифтов, интервал, ховер, тень, градиент. Интеграции: shadcn/ui MCP для поиска компонентов и примеров."
-      },
+      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
       "category": "development",
       "source": {
         "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
@@ -454,18 +388,7 @@
       "specVersion": 2,
       "id": "cloudflare-deploy",
       "title": "Cloudflare Deploy",
-      "description": {
-        "en": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
-        "zh-CN": "使用 Workers、Pages 和相关平台服务将应用程序和基础设施部署到 Cloudflare。当用户请求在 Cloudflare 上部署、托管、发布或设置项目时使用。",
-        "zh-TW": "使用 Workers、Pages 及相關平台服務將應用程式和基礎設施部署到 Cloudflare。當用戶要求在 Cloudflare 上部署、托管、發布或設置專案時使用。",
-        "ja": "Workers、Pages、および関連するプラットフォームサービスを使用して、Cloudflareにアプリケーションとインフラストラクチャを展開します。ユーザーがCloudflareにプロジェクトを展開、ホスト、公開、または設定するように求めたときに使用します。",
-        "ko": "Workers, Pages 및 관련 플랫폼 서비스를 사용하여 Cloudflare에 애플리케이션과 인프라를 배포합니다. 사용자가 Cloudflare에 프로젝트를 배포, 호스팅, 게시 또는 설정하라고 요청할 때 사용하세요.",
-        "de": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
-        "es": "Despliega aplicaciones e infraestructura en Cloudflare usando Workers, Pages y servicios relacionados de la plataforma. Úselo cuando el usuario solicite desplegar, alojar, publicar o configurar un proyecto en Cloudflare.",
-        "fr": "Déployez des applications et des infrastructures sur Cloudflare en utilisant Workers, Pages et les services de plateforme associés. Utilisez cette instruction lorsque l'utilisateur demande de déployer, héberger, publier ou configurer un projet sur Cloudflare.",
-        "pt": "Implante aplicações e infraestrutura na Cloudflare usando Workers, Pages e serviços de plataforma relacionados. Use quando o usuário solicitar implantar, hospedar, publicar ou configurar um projeto na Cloudflare.",
-        "ru": "Развертывайте приложения и инфраструктуру на Cloudflare с помощью Workers, Pages и связанных платформенных сервисов. Используйте, когда пользователь просит развернуть, разместить, опубликовать или настроить проект на Cloudflare."
-      },
+      "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
       "category": "devops",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -1730,18 +1653,7 @@
       "specVersion": 2,
       "id": "netlify-deploy",
       "title": "Netlify Deployment Skill",
-      "description": {
-        "en": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
-        "zh-CN": "使用Netlify CLI（`npx netlify`）将Web项目部署到Netlify。当用户请求在Netlify上部署、托管、发布或链接站点/仓库时使用，包括预览和生产部署。",
-        "zh-TW": "使用Netlify CLI（`npx netlify`）將Web專案部署到Netlify。當用戶要求在Netlify上部署、托管、發布或連結站點/存儲庫時使用，包括預覽和正式部署。",
-        "ja": "Netlify CLI (`npx netlify`) を使用してWebプロジェクトをNetlifyにデプロイします。ユーザーがサイト/リポジトリをNetlifyにデプロイ、ホスト、公開、リンクするように求めた場合に使用します。プレビューと本番のデプロイを含みます。",
-        "ko": "Netlify CLI (`npx netlify`)를 사용하여 웹 프로젝트를 Netlify에 배포하세요. 사용자가 사이트/리포지토리를 Netlify에 배포, 호스팅, 게시 또는 연결하라고 요청할 때 사용하며, 미리보기 및 프로덕션 배포를 포함합니다.",
-        "de": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
-        "es": "Implementa proyectos web en Netlify usando la CLI de Netlify (`npx netlify`). Úsalo cuando el usuario solicite desplegar, alojar, publicar o enlazar un sitio/repositorio en Netlify, incluyendo despliegues de vista previa y de producción.",
-        "fr": "Déployez des projets web sur Netlify en utilisant la CLI de Netlify (`npx netlify`). Utilisez cette commande lorsque l'utilisateur demande de déployer, héberger, publier ou lier un site/dépôt sur Netlify, y compris les déploiements de prévisualisation et de production.",
-        "pt": "Implante projetos web no Netlify usando o CLI do Netlify (`npx netlify`). Use quando o usuário solicitar implantar, hospedar, publicar ou vincular um site/repositório no Netlify, incluindo implantações de visualização e produção.",
-        "ru": "Разверните веб-проекты на Netlify с помощью CLI Netlify (`npx netlify`). Используйте, когда пользователь просит развернуть, разместить, опубликовать или связать сайт/репозиторий на Netlify, включая предварительные и производственные развертывания."
-      },
+      "description": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
       "category": "devops",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -1790,18 +1702,7 @@
       "specVersion": 2,
       "id": "render-deploy",
       "title": "Deploy to Render",
-      "description": {
-        "en": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
-        "zh-CN": "通过分析代码库、生成render.yaml Blueprints并提供Dashboard深度链接，将应用部署到Render。当用户希望在Render的云平台上部署、托管、发布或设置他们的应用时使用。",
-        "zh-TW": "通過分析程式碼庫、生成render.yaml Blueprints並提供Dashboard深層連結，將應用部署到Render。當用戶想在Render的雲端平台上部署、托管、發布或設定他們的應用時使用。",
-        "ja": "コードベースを分析し、render.yaml Blueprintsを生成し、Dashboardのディープリンクを提供して、Renderにアプリケーションをデプロイします。ユーザーがRenderのクラウドプラットフォームでアプリケーションをデプロイ、ホスト、公開、または設定したい場合に使用します。",
-        "ko": "코드베이스를 분석하고 render.yaml Blueprints를 생성하며 Dashboard 딥링크를 제공하여 Render에 애플리케이션을 배포합니다. 사용자가 Render의 클라우드 플랫폼에 애플리케이션을 배포, 호스팅, 게시 또는 설정하려는 경우에 사용하세요.",
-        "de": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
-        "es": "Despliega aplicaciones en Render analizando bases de código, generando render.yaml Blueprints y proporcionando enlaces profundos del panel de control. Úsalo cuando el usuario quiera desplegar, alojar, publicar o configurar su aplicación en la plataforma en la nube de Render.",
-        "fr": "Déployez des applications sur Render en analysant les bases de code, en générant des Blueprints render.yaml et en fournissant des liens profonds vers le tableau de bord. Utilisez cette fonctionnalité lorsque l'utilisateur souhaite déployer, héberger, publier ou configurer son application sur la plateforme cloud de Render.",
-        "pt": "Implante aplicações no Render analisando bases de código, gerando Blueprints render.yaml e fornecendo links profundos do Painel de Controle. Use quando o usuário desejar implantar, hospedar, publicar ou configurar sua aplicação na plataforma em nuvem do Render.",
-        "ru": "Развертывайте приложения на Render, анализируя кодовые базы, создавая Blueprints render.yaml и предоставляя глубокие ссылки на Панель управления. Используйте, когда пользователь хочет развернуть, разместить, опубликовать или настроить свое приложение на облачной платформе Render."
-      },
+      "description": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
       "category": "devops",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -1902,18 +1803,7 @@
       "specVersion": 2,
       "id": "jupyter-notebook",
       "title": "Jupyter Notebook Skill",
-      "description": {
-        "en": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
-        "zh-CN": "在用户请求为实验、探索或教程创建、搭建或编辑Jupyter notebooks（`.ipynb`）时使用；优先使用打包的模板，并运行辅助脚本 `new_notebook.py` 以生成干净的起始笔记本。",
-        "zh-TW": "在用戶要求為實驗、探索或教程創建、搭建或編輯Jupyter notebooks（`.ipynb`）時使用；偏好使用打包的模板並運行輔助腳本 `new_notebook.py` 以產生乾淨的起始筆記本。",
-        "ja": "ユーザーが実験、探索、またはチュートリアルのためにJupyterノートブック（`.ipynb`）を作成、スキャフォールド、編集する場合に使用します。バンドルされたテンプレートを優先し、補助スクリプト `new_notebook.py` を実行してクリーンな開始ノートブックを生成します。",
-        "ko": "사용자가 실험, 탐색 또는 튜토리얼을 위해 Jupyter 노트북(`.ipynb`)을 생성, 스캐폴딩 또는 편집하려고 할 때 사용합니다. 번들된 템플릿을 선호하고, 헬퍼 스크립트 `new_notebook.py`를 실행하여 깔끔한 시작 노트북을 생성하세요.",
-        "de": "Verwenden Sie dies, wenn der Benutzer Jupyter-Notebooks (`.ipynb`) für Experimente, Erkundungen oder Tutorials erstellen, skizzieren oder bearbeiten möchte; bevorzugen Sie die gebündelten Vorlagen und führen Sie das Hilfsskript `new_notebook.py` aus, um ein sauberes Ausgangs-Notebook zu erstellen.",
-        "es": "Utilice esto cuando el usuario solicite crear, esbozar o editar notebooks de Jupyter (`.ipynb`) para experimentos, exploraciones o tutoriales; prefiera las plantillas integradas y ejecute el script auxiliar `new_notebook.py` para generar un cuaderno de inicio limpio.",
-        "fr": "Utilisez cette instruction lorsque l'utilisateur demande de créer, de structurer ou de modifier des notebooks Jupyter (`.ipynb`) pour des expériences, des explorations ou des tutoriels ; privilégiez les modèles intégrés et exécutez le script d'aide `new_notebook.py` pour générer un notebook de départ propre.",
-        "pt": "Use quando o usuário solicitar criar, estruturar ou editar notebooks Jupyter (`.ipynb`) para experimentos, explorações ou tutoriais; prefira os modelos agrupados e execute o script auxiliar `new_notebook.py` para gerar um notebook de início limpo.",
-        "ru": "Используйте это, когда пользователь просит создать, скелетировать или редактировать Jupyter notebooks (`.ipynb`) для экспериментов, исследований или учебных материалов; предпочтите встроенные шаблоны и запустите вспомогательный скрипт `new_notebook.py`, чтобы сгенерировать чистый начальный ноутбук."
-      },
+      "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -1978,18 +1868,7 @@
       "specVersion": 2,
       "id": "linear",
       "title": "Linear",
-      "description": {
-        "en": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
-        "zh-CN": "在Linear中管理问题、项目和团队工作流程。当用户想要读取、创建或更新Linear中的工单时使用。",
-        "zh-TW": "在Linear中管理問題、專案與團隊工作流程。當使用者想要閱讀、建立或更新Linear中的工單時使用。",
-        "ja": "Linearで課題、プロジェクト、チームのワークフローを管理します。Linearでチケットを読む、作成するまたは更新する場合に使用します。",
-        "ko": "Linear에서 이슈, 프로젝트 및 팀 워크플로우를 관리합니다. 사용자가 Linear에서 티켓을 읽거나 생성하거나 업데이트하려는 경우에 사용하세요.",
-        "de": "Verwalten Sie Probleme, Projekte und Team-Workflows in Linear. Verwenden Sie dies, wenn der Benutzer Tickets in Linear lesen, erstellen oder aktualisieren möchte.",
-        "es": "Administra problemas, proyectos y flujos de trabajo del equipo en Linear. Úselo cuando el usuario quiera leer, crear o actualizar tickets en Linear.",
-        "fr": "Gérez les problèmes, projets et flux de travail de l'équipe dans Linear. Utilisez lorsque l'utilisateur souhaite lire, créer ou mettre à jour des tickets dans Linear.",
-        "pt": "Gerencie problemas, projetos e fluxos de trabalho da equipe no Linear. Use quando o usuário quiser ler, criar ou atualizar tickets no Linear.",
-        "ru": "Управляйте задачами, проектами и рабочими процессами команды в Linear. Используйте, когда пользователь хочет читать, создавать или обновлять билеты в Linear."
-      },
+      "description": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2026,18 +1905,7 @@
       "specVersion": 2,
       "id": "notion-knowledge-capture",
       "title": "Knowledge Capture",
-      "description": {
-        "en": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
-        "zh-CN": "将对话和决策捕获到结构化的Notion页面中；在将聊天/笔记转化为维基条目、操作指南、决策或常见问题时使用，并进行适当的链接。",
-        "zh-TW": "將對話和決策捕捉到結構化的Notion頁面中；在將聊天/筆記轉換為維基條目、操作指南、決策或常見問題時，使用適當的連結。",
-        "ja": "会話や決定を構造化されたNotionページに記録します。チャットやノートをウィキエントリ、ハウツー、決定、またはFAQに変換する際に適切なリンクを使用してください。",
-        "ko": "대화와 결정을 구조화된 Notion 페이지에 기록하세요. 채팅/노트를 위키 항목, 사용법, 결정 또는 FAQ로 전환할 때 적절한 링크를 사용하세요.",
-        "de": "Gespräche und Entscheidungen in strukturierte Notion-Seiten erfassen; verwenden Sie sie, wenn Sie Chats/Notizen in Wiki-Einträge, Anleitungen, Entscheidungen oder FAQs mit entsprechender Verlinkung umwandeln.",
-        "es": "Captura conversaciones y decisiones en páginas estructuradas de Notion; úsalas al convertir chats/notas en entradas de wiki, tutoriales, decisiones o preguntas frecuentes con enlaces adecuados.",
-        "fr": "Capturez les conversations et les décisions dans des pages Notion structurées ; utilisez-les lorsque vous transformez des discussions/notes en entrées de wiki, tutoriels, décisions ou FAQ avec des liens appropriés.",
-        "pt": "Capture conversas e decisões em páginas estruturadas do Notion; use ao transformar chats/notas em entradas de wiki, tutoriais, decisões ou FAQs com links adequados.",
-        "ru": "Записывайте разговоры и решения в структурированные страницы Notion; используйте их при превращении чатов/заметок в статьи в вики, инструкции, решения или часто задаваемые вопросы с правильными ссылками."
-      },
+      "description": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2126,18 +1994,7 @@
       "specVersion": 2,
       "id": "notion-meeting-intelligence",
       "title": "Meeting Intelligence",
-      "description": {
-        "en": "Prepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.",
-        "zh-CN": "用Notion的背景和Codex研究准备会议材料；在收集背景、起草议程/预读材料以及根据与会者调整材料时使用。",
-        "zh-TW": "使用Notion的背景和Codex研究來準備會議資料；在收集背景、起草議程/預讀資料以及根據與會者調整資料時使用。",
-        "ja": "NotionのコンテキストとCodexの研究を用いた会議資料の準備。コンテキストの収集、議題/事前資料の作成、参加者に合わせた資料の調整に使用します。",
-        "ko": "Notion 컨텍스트와 Codex 연구를 활용한 회의 자료 준비; 컨텍스트 수집, 의제/사전 읽기 초안 작성, 참석자에 맞춘 자료 조정 시 사용하십시오.",
-        "de": "Vorbereitung von Sitzungsunterlagen mit Notion-Kontext und Codex-Forschung; verwenden Sie diese beim Sammeln von Kontext, Entwerfen von Agenden/Vorablesungen und Anpassen der Materialien an die Teilnehmer.",
-        "es": "Preparar materiales para reuniones con contexto de Notion e investigación de Codex; úselos al recopilar contexto, redactar agendas/prelecturas y adaptar materiales a los asistentes.",
-        "fr": "Préparer le matériel de réunion avec le contexte Notion et la recherche Codex ; utilisez-le lors de la collecte de contexte, de la rédaction d'agendas/pré-lectures et de l'adaptation du matériel aux participants.",
-        "pt": "Prepare materiais para reuniões com contexto do Notion e pesquisa do Codex; use ao coletar contexto, elaborar agendas/leitura prévia e adaptar materiais aos participantes.",
-        "ru": "Подготовьте материалы для встречи с учетом контекста Notion и исследований Codex; используйте их при сборе контекста, составлении повестки/предварительных материалов и адаптации материалов к участникам."
-      },
+      "description": "Prepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2230,18 +2087,7 @@
       "specVersion": 2,
       "id": "notion-research-documentation",
       "title": "Research & Documentation",
-      "description": {
-        "en": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
-        "zh-CN": "在Notion中进行研究并整合成结构化的文档；在从多个Notion来源收集信息以生成简报、比较或带引用的报告时使用。",
-        "zh-TW": "在Notion中進行研究並整合成結構化的文件；在從多個Notion來源收集資訊以產生簡報、比較或帶引用的報告時使用。",
-        "ja": "Notion全体で調査し、構造化されたドキュメントに統合します。複数のNotionソースから情報を収集して、ブリーフ、比較、または引用付きレポートを作成する際に使用します。",
-        "ko": "Notion 전반에 걸친 연구를 수행하고 구조화된 문서로 통합합니다. 여러 Notion 소스에서 정보를 수집하여 브리핑, 비교 또는 인용이 포함된 보고서를 작성할 때 사용합니다.",
-        "de": "Forschung in Notion durchführen und in strukturierte Dokumentationen zusammenfassen; verwenden Sie dies beim Sammeln von Informationen aus mehreren Notion-Quellen, um Briefings, Vergleiche oder Berichte mit Zitaten zu erstellen.",
-        "es": "Investiga en Notion y sintetiza en documentación estructurada; úsalo al recopilar información de múltiples fuentes de Notion para producir informes, comparaciones o informes con citas.",
-        "fr": "Recherchez dans Notion et synthétisez en une documentation structurée ; utilisez lors de la collecte d'informations provenant de plusieurs sources Notion pour produire des briefings, des comparaisons ou des rapports avec citations.",
-        "pt": "Pesquise no Notion e sintetize em documentação estruturada; use ao coletar informações de várias fontes do Notion para produzir briefings, comparações ou relatórios com citações.",
-        "ru": "Проведите исследование в Notion и синтезируйте его в структурированную документацию; используйте при сборе информации из нескольких источников Notion для создания брифов, сравнений или отчетов с цитатами."
-      },
+      "description": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2350,18 +2196,7 @@
       "specVersion": 2,
       "id": "openai-docs",
       "title": "OpenAI Docs",
-      "description": {
-        "en": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model capabilities or limits); prioritize OpenAI docs MCP tools and restrict any fallback browsing to official OpenAI domains.",
-        "zh-CN": "当用户询问如何使用OpenAI产品或API进行构建并且需要最新的官方文档和引用（例如：Codex、Responses API、Chat Completions、Apps SDK、Agents SDK、Realtime、模型能力或限制）时使用；优先使用OpenAI文档MCP工具，并将任何备用浏览限制在官方OpenAI域名内。",
-        "zh-TW": "當使用者詢問如何使用OpenAI產品或API進行建構，並且需要最新的官方文件與引用（例如：Codex、Responses API、Chat Completions、Apps SDK、Agents SDK、Realtime、模型能力或限制）時；優先使用OpenAI文件MCP工具，並限制任何備用瀏覽僅限於官方OpenAI域名。",
-        "ja": "ユーザーがOpenAIの製品やAPIを使って構築する方法について尋ね、最新の公式ドキュメントと引用（例：Codex、Responses API、Chat Completions、Apps SDK、Agents SDK、Realtime、モデルの能力や制限）を必要とする場合に使用してください。OpenAIのドキュメントMCPツールを優先し、フォールバックのブラウジングは公式OpenAIドメインに限定してください。",
-        "ko": "사용자가 OpenAI 제품 또는 API로 구축하는 방법을 묻거나 최신 공식 문서와 인용(예: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, 모델 기능 또는 제한)이 필요할 때 사용하십시오. OpenAI 문서 MCP 도구를 우선시하고 공식 OpenAI 도메인으로 제한된 대체 검색을 수행하십시오.",
-        "de": "Verwenden Sie, wenn der Benutzer fragt, wie man mit OpenAI-Produkten oder APIs baut und aktuelle offizielle Dokumentationen mit Zitaten benötigt (zum Beispiel: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, Modellfähigkeiten oder -limits); priorisieren Sie OpenAI-Dokumente MCP-Tools und beschränken Sie jegliches Fallback-Browsing auf offizielle OpenAI-Domains.",
-        "es": "Utilice cuando el usuario pregunte cómo construir con productos o API de OpenAI y necesite documentación oficial actualizada con citas (por ejemplo: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, capacidades o límites del modelo); priorice las herramientas MCP de OpenAI y limite cualquier navegación de respaldo a dominios oficiales de OpenAI.",
-        "fr": "Utilisez lorsque l'utilisateur demande comment construire avec les produits ou API d'OpenAI et a besoin de la documentation officielle à jour avec des citations (par exemple : Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, capacités ou limites du modèle) ; privilégiez les outils MCP de la documentation OpenAI et limitez toute navigation de secours aux domaines officiels d'OpenAI.",
-        "pt": "Use quando o usuário perguntar como construir com produtos ou APIs da OpenAI e precisar de documentação oficial atualizada com citações (por exemplo: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, capacidades ou limites do modelo); priorize as ferramentas MCP da documentação da OpenAI e restrinja qualquer navegação de fallback aos domínios oficiais da OpenAI.",
-        "ru": "Используйте, когда пользователь спрашивает, как создавать с помощью продуктов или API OpenAI и нуждается в актуальной официальной документации с цитатами (например: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, возможности или ограничения модели); отдавайте предпочтение инструментам MCP документации OpenAI и ограничьте любой запасной просмотр официальными доменами OpenAI."
-      },
+      "description": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model capabilities or limits); prioritize OpenAI docs MCP tools and restrict any fallback browsing to official OpenAI domains.",
       "category": "documentation",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2398,18 +2233,7 @@
       "specVersion": 2,
       "id": "doc",
       "title": "DOCX Skill",
-      "description": {
-        "en": "Use when the task involves reading, creating, or editing `.docx` documents, especially when formatting or layout fidelity matters; prefer `python-docx` plus the bundled `scripts/render_docx.py` for visual checks.",
-        "zh-CN": "在任务涉及读取、创建或编辑 `.docx` 文档时使用，尤其是在格式或布局的忠实度很重要时；优先使用 `python-docx` 加上捆绑的 `scripts/render_docx.py` 进行视觉检查。",
-        "zh-TW": "在任務涉及閱讀、創建或編輯 `.docx` 文件時使用，尤其是在格式或佈局忠實度很重要時；偏好使用 `python-docx` 加上捆綁的 `scripts/render_docx.py` 進行視覺檢查。",
-        "ja": "タスクが `.docx` ドキュメントの読み取り、作成、編集を含む場合、特にフォーマットやレイアウトの忠実性が重要な場合は、`python-docx` とバンドルされた `scripts/render_docx.py` を使用して視覚的な確認を行います。",
-        "ko": "작업이 `.docx` 문서 읽기, 생성 또는 편집을 포함하는 경우, 특히 서식 또는 레이아웃의 충실도가 중요한 경우, `python-docx`와 번들된 `scripts/render_docx.py`를 사용하여 시각적 검사를 수행하세요.",
-        "de": "Verwenden Sie dies, wenn die Aufgabe das Lesen, Erstellen oder Bearbeiten von `.docx`-Dokumenten umfasst, insbesondere wenn Formatierung oder Layouttreue wichtig sind; bevorzugen Sie `python-docx` plus das gebündelte `scripts/render_docx.py` für visuelle Überprüfungen.",
-        "es": "Utilice cuando la tarea implique leer, crear o editar documentos `.docx`, especialmente cuando la fidelidad en el formato o el diseño sea importante; prefiera `python-docx` más el script incluido `scripts/render_docx.py` para verificaciones visuales.",
-        "fr": "Utilisez lorsque la tâche implique la lecture, la création ou la modification de documents `.docx`, en particulier lorsque la fidélité du format ou de la mise en page est importante ; privilégiez `python-docx` plus le script intégré `scripts/render_docx.py` pour les vérifications visuelles.",
-        "pt": "Use quando a tarefa envolver leitura, criação ou edição de documentos `.docx`, especialmente quando a fidelidade de formatação ou layout for importante; prefira `python-docx` mais o script incluído `scripts/render_docx.py` para verificações visuais.",
-        "ru": "Используйте, когда задача связана с чтением, созданием или редактированием документов `.docx`, особенно если важна точность форматирования или макета; предпочтительно использовать `python-docx` и встроенный скрипт `scripts/render_docx.py` для визуальной проверки."
-      },
+      "description": "Use when the task involves reading, creating, or editing `.docx` documents, especially when formatting or layout fidelity matters; prefer `python-docx` plus the bundled `scripts/render_docx.py` for visual checks.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2450,18 +2274,7 @@
       "specVersion": 2,
       "id": "gh-address-comments",
       "title": "PR Comment Handler",
-      "description": {
-        "en": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
-        "zh-CN": "使用 gh CLI 协助处理当前分支的 GitHub PR 的审查/问题评论；首先验证 gh 的认证状态，如果未登录，则提示用户进行认证。",
-        "zh-TW": "使用 gh CLI 協助處理當前分支的 GitHub PR 的審查/問題評論；首先驗證 gh 的認證狀態，如果未登入，請提示用戶進行認證。",
-        "ja": "gh CLIを使用して、現在のブランチのオープンなGitHub PRのレビュー/イシューコメントに対処します。まずghの認証を確認し、ログインしていない場合はユーザーに認証を促します。",
-        "ko": "gh CLI를 사용하여 현재 브랜치의 열린 GitHub PR에 대한 검토/이슈 코멘트에 도움을 주세요; 먼저 gh 인증을 확인하고 로그인하지 않은 경우 사용자에게 인증을 요청하세요.",
-        "de": "Helfen Sie bei der Bearbeitung von Review-/Issue-Kommentaren zum offenen GitHub PR für den aktuellen Branch mit der gh CLI; stellen Sie sicher, dass gh authentifiziert ist, und fordern Sie den Benutzer auf, sich zu authentifizieren, falls er nicht eingeloggt ist.",
-        "es": "Ayuda a abordar los comentarios de revisión/issue en el PR abierto de GitHub para la rama actual usando la CLI de gh; verifica la autenticación de gh primero y solicita al usuario que se autentique si no ha iniciado sesión.",
-        "fr": "Aidez à traiter les commentaires de revue/problème sur la PR GitHub ouverte pour la branche actuelle en utilisant gh CLI ; vérifiez d'abord l'authentification gh et invitez l'utilisateur à s'authentifier si ce n'est pas déjà fait.",
-        "pt": "Ajude a resolver comentários de revisão/issue no PR aberto do GitHub para o branch atual usando o gh CLI; verifique a autenticação do gh primeiro e solicite ao usuário que se autentique se não estiver logado.",
-        "ru": "Помогите решить комментарии по обзору/проблемам в открытом PR на GitHub для текущей ветки с помощью gh CLI; сначала проверьте аутентификацию gh и попросите пользователя пройти аутентификацию, если он не вошел в систему."
-      },
+      "description": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2502,18 +2315,7 @@
       "specVersion": 2,
       "id": "gh-fix-ci",
       "title": "Gh Pr Checks Plan Fix",
-      "description": {
-        "en": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
-        "zh-CN": "当用户请求调试或修复在GitHub Actions中运行的GitHub PR检查失败时使用；使用`gh`检查检查和日志，概述失败的上下文，起草修复计划，并在获得明确批准后实施。将外部提供商（例如Buildkite）视为范围之外，仅报告详细信息的URL。",
-        "zh-TW": "當使用者請求除錯或修復在GitHub Actions中執行的GitHub PR檢查失敗時使用；使用`gh`來檢查檢查和日誌，總結失敗的背景，起草修復計劃，並在獲得明確批准後實施。將外部提供者（例如Buildkite）視為範圍外，只報告詳細資料的URL。",
-        "ja": "ユーザーがGitHub Actionsで実行されるGitHub PRのチェックのデバッグや修正を依頼した場合に使用します。`gh`を使用してチェックとログを検査し、失敗のコンテキストを要約し、修正計画を作成し、明示的な承認後にのみ実施します。外部プロバイダー（例：Buildkite）については範囲外とし、詳細のURLのみを報告します。",
-        "ko": "사용자가 GitHub Actions에서 실행되는 GitHub PR 체크의 디버그 또는 수정 요청 시 사용합니다. `gh`를 사용하여 체크와 로그를 검사하고, 실패 맥락을 요약하며, 수정 계획을 초안하고, 명시적 승인 후에만 구현합니다. 외부 제공자(예: Buildkite)는 범위 밖으로 처리하며, 세부 정보 URL만 보고합니다.",
-        "de": "Verwenden Sie dies, wenn ein Benutzer darum bittet, fehlerhafte GitHub PR-Prüfungen zu debuggen oder zu beheben, die in GitHub Actions ausgeführt werden; verwenden Sie `gh`, um Prüfungen und Protokolle zu inspizieren, den Fehlerkontext zusammenzufassen, einen Korrekturplan zu entwerfen und erst nach ausdrücklicher Genehmigung umzusetzen. Behandeln Sie externe Anbieter (zum Beispiel Buildkite) als außerhalb des Geltungsbereichs und berichten Sie nur die URL der Details.",
-        "es": "Utilice esto cuando un usuario solicite depurar o solucionar fallos en las verificaciones de PR de GitHub que se ejecutan en GitHub Actions; use `gh` para inspeccionar verificaciones y registros, resumir el contexto de la falla, redactar un plan de corrección y realizarlo solo después de la aprobación explícita. Trate a los proveedores externos (por ejemplo, Buildkite) como fuera de alcance y reporte solo la URL de los detalles.",
-        "fr": "Utilisez cette procédure lorsqu'un utilisateur demande de déboguer ou de corriger des vérifications PR GitHub échouées qui s'exécutent dans GitHub Actions ; utilisez `gh` pour inspecter les vérifications et les journaux, résumer le contexte de l'échec, rédiger un plan de correction, et ne mettre en œuvre qu'après approbation explicite. Considérez les fournisseurs externes (par exemple Buildkite) comme hors de portée et ne rapportez que l'URL des détails.",
-        "pt": "Use quando um usuário solicitar depuração ou correção de verificações de PR do GitHub que falham e são executadas no GitHub Actions; use `gh` para inspecionar verificações e logs, resumir o contexto da falha, elaborar um plano de correção e implementar apenas após aprovação explícita. Trate provedores externos (por exemplo, Buildkite) como fora do escopo e reporte apenas a URL dos detalhes.",
-        "ru": "Используйте, когда пользователь просит отладить или исправить неудачные проверки PR GitHub, выполняющиеся в GitHub Actions; используйте `gh` для проверки проверок и журналов, суммирования контекста сбоя, разработки плана исправления и реализации только после явного одобрения. Внешние провайдеры (например, Buildkite) считаются вне области и сообщают только URL-адрес деталей."
-      },
+      "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2554,18 +2356,7 @@
       "specVersion": 2,
       "id": "imagegen",
       "title": "Image Generation Skill",
-      "description": {
-        "en": "Use when the user asks to generate or edit images via the OpenAI Image API (for example: generate image, edit/inpaint/mask, background removal or replacement, transparent background, product shots, concept art, covers, or batch variants); run the bundled CLI (`scripts/image_gen.py`) and require `OPENAI_API_KEY` for live calls.",
-        "zh-CN": "在用户请求通过OpenAI图像API生成或编辑图像时使用（例如：生成图像、编辑/inpaint/mask、背景移除或替换、透明背景、产品拍摄、概念艺术、封面或批量变体）；运行捆绑的CLI（`scripts/image_gen.py`）并在实时调用中需要`OPENAI_API_KEY`。",
-        "zh-TW": "在用戶請求通過OpenAI圖像API生成或編輯圖像時使用（例如：生成圖像、編輯/inpaint/mask、背景移除或替換、透明背景、產品拍攝、概念藝術、封面或批次變體）；運行捆綁的CLI（`scripts/image_gen.py`）並在實時調用中需要`OPENAI_API_KEY`。",
-        "ja": "ユーザーがOpenAI Image APIを使用して画像の生成または編集を要求した場合に使用します（例：画像生成、編集/inpaint/mask、背景の除去または置換、透過背景、商品写真、コンセプトアート、カバー、またはバッチバリアント）；バンドルされたCLI (`scripts/image_gen.py`) を実行し、ライブコールには `OPENAI_API_KEY` が必要です。",
-        "ko": "사용자가 OpenAI Image API를 통해 이미지를 생성하거나 편집하도록 요청할 때 사용합니다(예: 이미지 생성, 편집/inpaint/mask, 배경 제거 또는 교체, 투명 배경, 제품 촬영, 컨셉 아트, 커버 또는 배치 버전); 번들된 CLI (`scripts/image_gen.py`)를 실행하고 라이브 호출에는 `OPENAI_API_KEY`가 필요합니다.",
-        "de": "Verwenden Sie, wenn der Benutzer die Generierung oder Bearbeitung von Bildern über die OpenAI Image API anfordert (z.B.: Bild generieren, bearbeiten/inpaint/mask, Hintergrund entfernen oder ersetzen, transparenten Hintergrund, Produktaufnahmen, Konzeptkunst, Cover oder Batch-Varianten); führen Sie die integrierte CLI (`scripts/image_gen.py`) aus und benötigen Sie `OPENAI_API_KEY` für Live-Aufrufe.",
-        "es": "Utilice cuando el usuario solicite generar o editar imágenes a través de la API de Imágenes de OpenAI (por ejemplo: generar imagen, editar/inpaint/mask, eliminación o reemplazo de fondo, fondo transparente, fotos de productos, arte conceptual, portadas o variantes por lotes); ejecute la CLI integrada (`scripts/image_gen.py`) y requiera `OPENAI_API_KEY` para llamadas en vivo.",
-        "fr": "Utilisez lorsque l'utilisateur demande de générer ou de modifier des images via l'API Image d'OpenAI (par exemple : générer une image, éditer/inpaint/mask, suppression ou remplacement de fond, fond transparent, photos de produits, art conceptuel, couvertures ou variantes par lot) ; exécutez la CLI intégrée (`scripts/image_gen.py`) et nécessite `OPENAI_API_KEY` pour les appels en direct.",
-        "pt": "Use quando o usuário solicitar gerar ou editar imagens via a API de Imagens do OpenAI (por exemplo: gerar imagem, editar/inpaint/mask, remoção ou substituição de fundo, fundo transparente, fotos de produtos, arte conceitual, capas ou variantes em lote); execute o CLI integrado (`scripts/image_gen.py`) e exija `OPENAI_API_KEY` para chamadas ao vivo.",
-        "ru": "Используйте, когда пользователь просит сгенерировать или отредактировать изображения через API изображений OpenAI (например: создание изображения, редактирование/inpaint/mask, удаление или замена фона, прозрачный фон, фотографии продуктов, концепт-арт, обложки или пакетные варианты); запустите встроенный CLI (`scripts/image_gen.py`) и требуйте `OPENAI_API_KEY` для живых вызовов."
-      },
+      "description": "Use when the user asks to generate or edit images via the OpenAI Image API (for example: generate image, edit/inpaint/mask, background removal or replacement, transparent background, product shots, concept art, covers, or batch variants); run the bundled CLI (`scripts/image_gen.py`) and require `OPENAI_API_KEY` for live calls.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2626,18 +2417,7 @@
       "specVersion": 2,
       "id": "pdf",
       "title": "PDF Skill",
-      "description": {
-        "en": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
-        "zh-CN": "在涉及阅读、创建或审查PDF文件且渲染和布局很重要的任务中使用；优先通过渲染页面（Poppler）进行视觉检查，并使用Python工具如`reportlab`、`pdfplumber`和`pypdf`进行生成和提取。",
-        "zh-TW": "在涉及閱讀、創建或審查PDF文件且渲染和佈局很重要的任務中使用；優先通過渲染頁面（Poppler）進行視覺檢查，並使用Python工具如`reportlab`、`pdfplumber`和`pypdf`進行生成和提取。",
-        "ja": "レンダリングとレイアウトが重要なPDFファイルの読み取り、作成、レビューに関わるタスクには、ページのレンダリング（Poppler）による視覚的な確認を優先し、`reportlab`、`pdfplumber`、`pypdf`などのPythonツールを使用して生成と抽出を行います。",
-        "ko": "렌더링과 레이아웃이 중요한 PDF 파일을 읽기, 생성 또는 검토하는 작업에는 페이지 렌더링(Poppler)을 통한 시각적 검사를 선호하며, `reportlab`, `pdfplumber`, `pypdf`와 같은 Python 도구를 사용하여 생성 및 추출을 수행합니다.",
-        "de": "Verwenden Sie dies, wenn Aufgaben das Lesen, Erstellen oder Überprüfen von PDF-Dateien umfassen, bei denen Rendering und Layout eine Rolle spielen; bevorzugen Sie visuelle Überprüfungen durch Rendern der Seiten (Poppler) und verwenden Sie Python-Tools wie `reportlab`, `pdfplumber` und `pypdf` für die Generierung und Extraktion.",
-        "es": "Utilice cuando las tareas impliquen leer, crear o revisar archivos PDF donde el renderizado y el diseño sean importantes; prefiera verificaciones visuales renderizando las páginas (Poppler) y utilice herramientas de Python como `reportlab`, `pdfplumber` y `pypdf` para generación y extracción.",
-        "fr": "Utilisez lorsque les tâches impliquent la lecture, la création ou la révision de fichiers PDF où le rendu et la mise en page sont importants ; privilégiez les vérifications visuelles en rendant les pages (Poppler) et utilisez des outils Python tels que `reportlab`, `pdfplumber` et `pypdf` pour la génération et l'extraction.",
-        "pt": "Use quando as tarefas envolvem leitura, criação ou revisão de arquivos PDF onde renderização e layout são importantes; prefira verificações visuais renderizando páginas (Poppler) e use ferramentas Python como `reportlab`, `pdfplumber` e `pypdf` para geração e extração.",
-        "ru": "Используйте, когда задачи связаны с чтением, созданием или просмотром PDF-файлов, где важны рендеринг и макет; предпочтительно визуальные проверки путём рендеринга страниц (Poppler) и использование инструментов Python, таких как `reportlab`, `pdfplumber` и `pypdf` для генерации и извлечения."
-      },
+      "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2670,18 +2450,7 @@
       "specVersion": 2,
       "id": "playwright",
       "title": "Playwright CLI Skill",
-      "description": {
-        "en": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
-        "zh-CN": "在任务需要通过`playwright-cli`或绑定的包装脚本，从终端自动化真实浏览器（导航、填写表单、快照、截图、数据提取、UI-flow调试）时使用。",
-        "zh-TW": "在任務需要透過`playwright-cli`或內建的包裝腳本，從終端自動化真實瀏覽器（導航、填寫表單、快照、截圖、資料擷取、UI-flow除錯）時使用。",
-        "ja": "タスクが`playwright-cli`またはバンドルされたラッパースクリプトを使用して、端末から実際のブラウザを自動化する必要がある場合に使用します（ナビゲーション、フォーム入力、スナップショット、スクリーンショット、データ抽出、UIフローデバッグ）。",
-        "ko": "작업이 `playwright-cli` 또는 번들된 래퍼 스크립트를 통해 터미널에서 실제 브라우저를 자동화하는 것을 요구하는 경우에 사용하십시오 (내비게이션, 양식 작성, 스냅샷, 스크린샷, 데이터 추출, UI-플로우 디버깅).",
-        "de": "Verwenden Sie es, wenn die Aufgabe die Automatisierung eines echten Browsers vom Terminal aus erfordert (Navigation, Formular ausfüllen, Snapshots, Screenshots, Datenerfassung, UI-Flow-Debugging) über `playwright-cli` oder das integrierte Wrapper-Skript.",
-        "es": "Úselo cuando la tarea requiera automatizar un navegador real desde la terminal (navegación, llenado de formularios, instantáneas, capturas de pantalla, extracción de datos, depuración de UI-flow) mediante `playwright-cli` o el script envoltorio incluido.",
-        "fr": "Utilisez lorsque la tâche nécessite d'automatiser un vrai navigateur depuis le terminal (navigation, remplissage de formulaires, instantanés, captures d'écran, extraction de données, débogage du flux UI) via `playwright-cli` ou le script wrapper intégré.",
-        "pt": "Use quando a tarefa exigir automatizar um navegador real a partir do terminal (navegação, preenchimento de formulários, instantâneos, capturas de tela, extração de dados, depuração de UI-flow) via `playwright-cli` ou o script wrapper embutido.",
-        "ru": "Используйте, когда задача требует автоматизации реального браузера из терминала (навигация, заполнение форм, снимки, скриншоты, извлечение данных, отладка UI-flow) через `playwright-cli` или встроенный скрипт-обертку."
-      },
+      "description": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
       "category": "tools",
       "source": {
         "repo": "https://github.com/openai/skills",
@@ -2734,18 +2503,7 @@
       "specVersion": 2,
       "id": "pptx",
       "title": "PPTX creation, editing, and analysis",
-      "description": {
-        "en": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks",
-        "zh-CN": "演示文稿的创建、编辑和分析。当Claude需要处理演示文稿（.pptx文件）时：(1) 创建新演示文稿，(2) 修改或编辑内容，(3) 使用布局，(4) 添加评论或演讲者笔记，或其他任何演示任务。",
-        "zh-TW": "演示文稿的創建、編輯與分析。當Claude需要處理演示文稿（.pptx檔案）時：(1) 創建新演示文稿，(2) 修改或編輯內容，(3) 使用版面配置，(4) 添加評論或演講者筆記，或其他任何演示相關任務。",
-        "ja": "プレゼンテーションの作成、編集、分析。Claudeがプレゼンテーション（.pptxファイル）を扱う必要がある場合：（1）新しいプレゼンテーションの作成、（2）内容の修正または編集、（3）レイアウトの操作、（4）コメントやスピーカーノートの追加、またはその他のプレゼンテーション作業",
-        "ko": "프레젠테이션 생성, 편집 및 분석. Claude가 프레젠테이션(.pptx 파일)에 대해 작업해야 할 때: (1) 새 프레젠테이션 만들기, (2) 내용 수정 또는 편집, (3) 레이아웃 작업, (4) 댓글 또는 발표자 노트 추가 또는 기타 프레젠테이션 작업",
-        "de": "Präsentationserstellung, -bearbeitung und -analyse. Wenn Claude mit Präsentationen (.pptx-Dateien) arbeiten muss: (1) Neue Präsentationen erstellen, (2) Inhalte ändern oder bearbeiten, (3) Mit Layouts arbeiten, (4) Kommentare oder Sprechernotizen hinzufügen oder andere Präsentationsaufgaben ausführen.",
-        "es": "Creación, edición y análisis de presentaciones. Cuando Claude necesita trabajar con presentaciones (.pptx files) para: (1) Crear nuevas presentaciones, (2) Modificar o editar contenido, (3) Trabajar con diseños, (4) Agregar comentarios o notas del orador, o cualquier otra tarea relacionada con presentaciones.",
-        "fr": "Création, édition et analyse de présentations. Lorsque Claude doit travailler avec des présentations (.pptx files) pour : (1) Créer de nouvelles présentations, (2) Modifier ou éditer le contenu, (3) Travailler avec des mises en page, (4) Ajouter des commentaires ou des notes de l'orateur, ou toute autre tâche liée aux présentations.",
-        "pt": "Criação, edição e análise de apresentações. Quando Claude precisa trabalhar com apresentações (.pptx files) para: (1) Criar novas apresentações, (2) Modificar ou editar conteúdo, (3) Trabalhar com layouts, (4) Adicionar comentários ou notas do orador, ou qualquer outra tarefa de apresentação.",
-        "ru": "Создание, редактирование и анализ презентаций. Когда Claude нужно работать с презентациями (.pptx файлы) для: (1) Создания новых презентаций, (2) Модификации или редактирования содержимого, (3) Работы с макетами, (4) Добавления комментариев или заметок докладчика, или любых других задач презентации."
-      },
+      "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks",
       "category": "tools",
       "source": {
         "repo": "https://github.com/anthropics/skills",
@@ -2754,10 +2512,10 @@
         "syncedCommit": "69c0b1a0674149f27b61b2635f935524b6add202"
       },
       "repoPath": "skills/tools/pptx",
-      "summary": "## Overview",
+      "summary": "## Quick Reference",
       "files": [
         {
-          "path": "html2pptx.md",
+          "path": "editing.md",
           "kind": "file"
         },
         {
@@ -2765,211 +2523,223 @@
           "kind": "file"
         },
         {
-          "path": "ooxml.md",
+          "path": "pptxgenjs.md",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
+          "path": "scripts/__init__.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
+          "path": "scripts/add_slide.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-digSig.xsd",
+          "path": "scripts/clean.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ecma/fouth-edition/opc-relationships.xsd",
+          "path": "scripts/office/helpers/__init__.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
+          "path": "scripts/office/helpers/merge_runs.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
+          "path": "scripts/office/helpers/simplify_redlines.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
+          "path": "scripts/office/pack.py",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
+          "path": "scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/pml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/sml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/wml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/ISO-IEC29500-4_2016/xml.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/mce/mc.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2010.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2012.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-2018.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-cex-2018.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-cid-2016.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-sdtdatahash-2020.xsd",
+          "path": "scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/schemas/microsoft/wml-symex-2015.xsd",
+          "path": "scripts/office/schemas/mce/mc.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/pack.py",
+          "path": "scripts/office/schemas/microsoft/wml-2010.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/unpack.py",
+          "path": "scripts/office/schemas/microsoft/wml-2012.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validate.py",
+          "path": "scripts/office/schemas/microsoft/wml-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/__init__.py",
+          "path": "scripts/office/schemas/microsoft/wml-cex-2018.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/base.py",
+          "path": "scripts/office/schemas/microsoft/wml-cid-2016.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/docx.py",
+          "path": "scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/pptx.py",
+          "path": "scripts/office/schemas/microsoft/wml-symex-2015.xsd",
           "kind": "file"
         },
         {
-          "path": "ooxml/scripts/validation/redlining.py",
+          "path": "scripts/office/soffice.py",
           "kind": "file"
         },
         {
-          "path": "scripts/html2pptx.js",
+          "path": "scripts/office/unpack.py",
           "kind": "file"
         },
         {
-          "path": "scripts/inventory.py",
+          "path": "scripts/office/validate.py",
           "kind": "file"
         },
         {
-          "path": "scripts/rearrange.py",
+          "path": "scripts/office/validators/__init__.py",
           "kind": "file"
         },
         {
-          "path": "scripts/replace.py",
+          "path": "scripts/office/validators/base.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/docx.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/pptx.py",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/office/validators/redlining.py",
           "kind": "file"
         },
         {
