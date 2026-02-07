@@ -102,9 +102,35 @@ function assertSlug(label, value) {
 
 function normalizeSourcePath(p) {
   if (typeof p !== "string" || p.length === 0) return ".";
+
+  // Normalize path separators
   let v = p.replaceAll("\\", "/").replace(/^\/+|\/+$/g, "");
   if (!v) return ".";
-  if (v.includes("..")) throw new Error(`Invalid sourcePath (.. not allowed): ${p}`);
+
+  // Block multiple traversal techniques:
+  // - Direct: ".."
+  // - Encoded: "%2e%2e", "..%2f"
+  // - Double: "...."
+  // - Mixed: "./.."
+  const dangerous = [
+    /\.\./,           // any ".." sequence
+    /%2e%2e/i,        // URL encoded ..
+    /%252e/i,         // double encoded
+    /\.%2f/i,         // mixed encoding
+    /\/{2,}/,         // multiple slashes (could hide ..)
+  ];
+
+  for (const pattern of dangerous) {
+    if (pattern.test(v)) {
+      throw new Error(`Invalid sourcePath (traversal attempt detected): ${p}`);
+    }
+  }
+
+  // Additional safety: ensure path doesn't start with /
+  if (v.startsWith('/')) {
+    throw new Error(`Invalid sourcePath (absolute paths not allowed): ${p}`);
+  }
+
   return v;
 }
 
