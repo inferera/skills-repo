@@ -5,6 +5,7 @@ import { useMemo, Suspense } from "react";
 import Link from "next/link";
 
 import { useI18n } from "@/components/I18nProvider";
+import { getLocalePath } from "@/lib/i18n";
 
 type ReviewItem = {
   sourcePath: string;
@@ -33,7 +34,7 @@ function parseReviewData(encoded: string | null): ReviewData | null {
 }
 
 function ReviewContent() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const searchParams = useSearchParams();
   const dataParam = searchParams.get("data");
 
@@ -54,7 +55,7 @@ function ReviewContent() {
             {t("review.noDataDescription")}
           </p>
           <Link
-            href="/import"
+            href={getLocalePath("/import", locale)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium hover:bg-accent-hover transition-colors"
           >
             {t("review.goToImport")}
@@ -197,7 +198,7 @@ function ReviewContent() {
       {/* Back to Import */}
       <div className="pt-4">
         <Link
-          href="/import"
+          href={getLocalePath("/import", locale)}
           className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -211,7 +212,7 @@ function ReviewContent() {
 }
 
 export default function ReviewPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   return (
     <Suspense fallback={
       <div className="max-w-4xl mx-auto px-4 py-12 text-center">
