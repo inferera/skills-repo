@@ -6,6 +6,7 @@ import { getLocaleIds } from "./config.mjs";
 
 const CACHE_VERSION = 1;
 const DEFAULT_CONCURRENCY = 5;
+const MAX_CACHE_ENTRIES = 10000; // Reasonable limit for skill descriptions
 
 /**
  * Resolve translation cache directory.
@@ -98,7 +99,11 @@ export async function translateSkillDescriptions(skills, { cacheDir, config }) {
         });
 
         // Write into cache — original description stored under "_original" for cache invalidation
-        cache.entries[skill.id] = { _original: skill.description, ...translations };
+        cache.entries[skill.id] = {
+          _original: skill.description,
+          _syncedAt: Date.now(),
+          ...translations
+        };
         console.log(`    ✓ ${skill.id}`);
       } catch (err) {
         console.warn(`    ⚠ ${skill.id}: ${err.message}`);
@@ -249,6 +254,18 @@ async function loadCache(cachePath) {
     const raw = await fs.readFile(cachePath, "utf8");
     const data = JSON.parse(raw);
     if (data.version === CACHE_VERSION && data.entries && typeof data.entries === "object") {
+      // Check cache size and trim if needed
+      const entries = Object.entries(data.entries);
+      if (entries.length > MAX_CACHE_ENTRIES) {
+        console.warn(`  ⚠ Cache size (${entries.length}) exceeds limit, trimming to ${MAX_CACHE_ENTRIES}`);
+        // Keep most recently synced entries (those with syncedAt in _original)
+        const sorted = entries.sort((a, b) => {
+          const aTime = a[1]._syncedAt || 0;
+          const bTime = b[1]._syncedAt || 0;
+          return bTime - aTime; // newest first
+        });
+        data.entries = Object.fromEntries(sorted.slice(0, MAX_CACHE_ENTRIES));
+      }
       return data;
     }
     console.warn("  ⚠ Cache version mismatch, starting fresh");
