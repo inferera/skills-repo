@@ -7,13 +7,19 @@ import path from "node:path";
 const MAX_SYMLINK_DEPTH = 40; // Linux default is 40
 
 /**
- * Safely resolve a symlink using file descriptors to prevent TOCTOU attacks
+ * Safely resolve a symlink to mitigate TOCTOU attacks
+ * Uses lstat/readlink loop with path validation to minimize the race condition window
  *
  * @param {string} symlinkPath - Path to the symlink
  * @param {string} allowedRoot - Root directory that symlink targets must be within
  * @returns {Promise<{realPath: string, stat: fs.Stats} | null>} Resolved path and stats, or null if unsafe
  */
 export async function safeResolveSymlink(symlinkPath, allowedRoot) {
+  // Validate that allowedRoot is an absolute path for security
+  if (!path.isAbsolute(allowedRoot)) {
+    throw new TypeError('allowedRoot must be an absolute path');
+  }
+
   let depth = 0;
   let currentPath = symlinkPath;
   const visited = new Set();
@@ -86,5 +92,5 @@ export async function safeResolveSymlink(symlinkPath, allowedRoot) {
 function isPathWithinRoot(targetPath, allowedRoot) {
   const rel = path.relative(allowedRoot, targetPath);
   // If relative path starts with "..", it's outside the root
-  return rel && !rel.startsWith('..') && !path.isAbsolute(rel);
+  return !rel.startsWith('..') && !path.isAbsolute(rel);
 }
