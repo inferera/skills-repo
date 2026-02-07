@@ -9,7 +9,7 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const cats = await loadRegistryCategories();
-  const locales = LOCALE_OPTIONS.filter(opt => opt.locale !== DEFAULT_LOCALE);
+  const locales = LOCALE_OPTIONS;
 
   // Generate all locale + category combinations
   const params = [];

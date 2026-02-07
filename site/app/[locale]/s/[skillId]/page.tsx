@@ -115,7 +115,7 @@ function parseSkillFrontmatter(content: string): { frontmatter: FrontmatterData;
 
 export async function generateStaticParams() {
   const index = await loadRegistryIndex();
-  const locales = LOCALE_OPTIONS.filter(opt => opt.locale !== DEFAULT_LOCALE);
+  const locales = LOCALE_OPTIONS;
 
   if (index.skills.length === 0) {
     return locales.map(l => ({ locale: l.locale, skillId: '_no-skills' }));

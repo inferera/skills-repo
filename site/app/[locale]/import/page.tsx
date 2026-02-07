@@ -7,10 +7,8 @@ import { notFound } from "next/navigation";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  // Generate static pages for all locales except default (en)
-  return LOCALE_OPTIONS
-    .filter(opt => opt.locale !== DEFAULT_LOCALE)
-    .map(opt => ({ locale: opt.locale }));
+  // Generate static pages for all locales including English
+  return LOCALE_OPTIONS.map(opt => ({ locale: opt.locale }));
 }
 
 export async function generateMetadata({
