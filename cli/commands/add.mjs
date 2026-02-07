@@ -176,7 +176,7 @@ async function installSkill(skillName, agent, scope, registry, ref) {
   const skill = findSkillById(index, skillName);
   if (!skill) throw new Error(`Skill "${skillName}" not found in registry`);
   console.log(`   Found: ${skill.title}`);
-  console.log(`   Category: ${skill.category}/${skill.subcategory}\n`);
+  console.log(`   Category: ${skill.category}\n`);
 
   // Determine target directory
   const targetBaseDir =
