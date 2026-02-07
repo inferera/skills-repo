@@ -6,22 +6,33 @@
  *
  * @param {any} obj - Object to sanitize
  * @param {string[]} sensitiveFields - Field names to redact
+ * @param {number} depth - Current recursion depth
+ * @param {number} maxDepth - Maximum recursion depth
  * @returns {any} Sanitized copy of the object
  */
-export function sanitizeForLog(obj, sensitiveFields = []) {
+export function sanitizeForLog(obj, sensitiveFields = [], depth = 0, maxDepth = 10) {
   if (obj === null || obj === undefined) return obj;
   if (typeof obj !== 'object') return obj;
 
-  if (Array.isArray(obj)) {
-    return obj.map(item => sanitizeForLog(item, sensitiveFields));
+  // Prevent infinite recursion and stack overflow
+  if (depth >= maxDepth) {
+    return '[MAX_DEPTH_REACHED]';
   }
+
+  if (Array.isArray(obj)) {
+    return obj.map(item => sanitizeForLog(item, sensitiveFields, depth + 1, maxDepth));
+  }
+
+  // Convert sensitive fields to lowercase for case-insensitive matching
+  const sensitiveFieldsLower = sensitiveFields.map(f => f.toLowerCase());
 
   const sanitized = {};
   for (const [key, value] of Object.entries(obj)) {
-    if (sensitiveFields.includes(key)) {
+    // Case-insensitive field matching to prevent bypass via ApiKey, APIKEY, etc.
+    if (sensitiveFieldsLower.includes(key.toLowerCase())) {
       sanitized[key] = '[REDACTED]';
     } else if (typeof value === 'object' && value !== null) {
-      sanitized[key] = sanitizeForLog(value, sensitiveFields);
+      sanitized[key] = sanitizeForLog(value, sensitiveFields, depth + 1, maxDepth);
     } else if (typeof value === 'string' && value.length > 200) {
       // Truncate very long strings to prevent log pollution
       sanitized[key] = value.slice(0, 197) + '...';
@@ -39,7 +50,7 @@ export function sanitizeForLog(obj, sensitiveFields = []) {
  * @param {string} label - Log label/title
  * @param {any} data - Data to log
  * @param {object} options - Options for sanitization
- * @param {string[]} options.redact - Field names to redact
+ * @param {string[]} options.redact - Field names to redact (merged with defaults)
  */
 export function debugLog(label, data, options = {}) {
   const debugVar = process.env.A_OPENAI_DEBUG || process.env.DEBUG;
@@ -51,14 +62,31 @@ export function debugLog(label, data, options = {}) {
     'authorization',
     'token',
     'password',
-    'secret'
+    'secret',
+    'bearer',
+    'accessToken',
+    'access_token',
+    'privateKey',
+    'private_key',
+    'sessionId',
+    'session_id'
   ];
 
-  const redactFields = options.redact || defaultRedactFields;
+  // Merge custom redact fields with defaults instead of replacing
+  const redactFields = options.redact
+    ? [...defaultRedactFields, ...options.redact]
+    : defaultRedactFields;
+
   const sanitized = sanitizeForLog(data, redactFields);
 
-  console.log(`\n  [DEBUG] ${label}`);
-  console.log(`    ${JSON.stringify(sanitized, null, 2)}`);
+  try {
+    console.log(`\n  [DEBUG] ${label}`);
+    console.log(`    ${JSON.stringify(sanitized, null, 2)}`);
+  } catch (error) {
+    // Handle JSON.stringify errors gracefully
+    console.log(`\n  [DEBUG] ${label}`);
+    console.log(`    [ERROR: Failed to stringify data - ${error.message}]`);
+  }
 
   // Add warning about sensitive data
   if (debugVar) {
