@@ -1732,12 +1732,9 @@ export function getLocalizedText(text: string | Record<string, string>, locale: 
  * Generate a locale-aware URL path
  * @param path - The path without locale prefix (should start with /)
  * @param locale - The target locale
- * @returns The path with locale prefix for non-default locales, or the original path for default locale
+ * @returns The path with locale prefix for all locales including English
  */
 export function getLocalePath(path: string, locale: Locale): string {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  if (locale === DEFAULT_LOCALE) {
-    return normalizedPath;
-  }
   return `/${locale}${normalizedPath}`;
 }
