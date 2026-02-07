@@ -3,11 +3,16 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { getLocaleIds } from "./config.mjs";
+import {
+  DEFAULT_TRANSLATION_CONCURRENCY,
+  TRANSLATION_API_TIMEOUT_MS,
+  MAX_DESCRIPTION_LENGTH,
+  MAX_CACHE_ENTRIES,
+  TRANSLATION_CACHE_VERSION
+} from './constants.mjs';
 
-const CACHE_VERSION = 1;
-const DEFAULT_CONCURRENCY = 5;
-const MAX_CACHE_ENTRIES = 10000; // Reasonable limit for skill descriptions
-const MAX_DESCRIPTION_LENGTH = 2000; // OpenAI API has limits
+const CACHE_VERSION = TRANSLATION_CACHE_VERSION;
+const DEFAULT_CONCURRENCY = DEFAULT_TRANSLATION_CONCURRENCY;
 
 /**
  * Resolve translation cache directory.
@@ -203,9 +208,9 @@ async function callTranslationApi({ skillId, description, locales, apiKey, baseU
     console.log(`    Body: ${JSON.stringify(body, null, 2)}`);
   }
 
-  // Add timeout using AbortController (30 seconds)
+  // Add timeout using AbortController
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 30000);
+  const timeoutId = setTimeout(() => controller.abort(), TRANSLATION_API_TIMEOUT_MS);
 
   let response;
   try {

@@ -9,6 +9,7 @@ import path from "node:path";
 
 import fg from "fast-glob";
 import YAML from "yaml";
+import { MAX_ITEMS_PER_IMPORT } from './lib/constants.mjs';
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -174,7 +175,9 @@ function parseRequest(issueBody) {
     }
   }
   if (!Array.isArray(req.items) || req.items.length === 0) throw new Error("items must be a non-empty list");
-  if (req.items.length > 20) throw new Error("Too many items (max 20 per request)");
+  if (req.items.length > MAX_ITEMS_PER_IMPORT) {
+    throw new Error(`Too many items (max ${MAX_ITEMS_PER_IMPORT} per request)`);
+  }
 
   let items = req.items.map((it, idx) => {
     if (!it || typeof it !== "object") throw new Error(`items[${idx}] must be an object`);
