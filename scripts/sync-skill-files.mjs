@@ -10,6 +10,7 @@ import path from "node:path";
 import fg from "fast-glob";
 import YAML from "yaml";
 import { loadConfig, getBuildConfig } from "./lib/config.mjs";
+import { safeResolveSymlink } from "./lib/safe-symlink.mjs";
 
 const SKILL_YAML_GLOB = "skills/*/*/.x_skill.yaml";
 
@@ -64,45 +65,22 @@ async function copyDirFiltered(srcDir, destDir, ignore = [], repoRoot = null) {
     const st = await fs.lstat(src);
 
     if (st.isSymbolicLink()) {
-      // Resolve symlink target
-      let realPath;
-      try {
-        realPath = await fs.realpath(src);
-      } catch (err) {
-        console.warn(`  ⚠️  Failed to resolve symlink ${e.name}: ${err.message}`);
+      // Use safe symlink resolution to prevent TOCTOU attacks
+      const allowedRoot = resolvedRoot || repoRoot;
+      const resolved = await safeResolveSymlink(src, allowedRoot);
+
+      if (!resolved) {
+        // safeResolveSymlink already logged the warning
         continue;
       }
 
-      // Security check: ensure resolved path is within repo
-      // Use both resolvedRoot and the original srcDir as allowed bases
-      if (resolvedRoot) {
-        const normalizedReal = realPath + path.sep;
-        const normalizedRoot = resolvedRoot + path.sep;
-        const normalizedSrc = (await fs.realpath(srcDir)) + path.sep;
-
-        const isInRoot = realPath === resolvedRoot || normalizedReal.startsWith(normalizedRoot);
-        const isInSrc = realPath === await fs.realpath(srcDir) || normalizedReal.startsWith(normalizedSrc);
-
-        if (!isInRoot && !isInSrc) {
-          console.warn(`  ⚠️  Skipping symlink outside repo: ${e.name} -> ${realPath}`);
-          continue;
-        }
-      }
-
-      // Verify the target still exists and hasn't changed (mitigate TOCTOU)
-      let targetStat;
-      try {
-        targetStat = await fs.stat(realPath);
-      } catch (err) {
-        console.warn(`  ⚠️  Symlink target disappeared: ${e.name}`);
-        continue;
-      }
+      const { realPath, stat: targetStat } = resolved;
 
       if (targetStat.isDirectory()) {
-        console.log(`  📁 Resolving symlink dir: ${e.name}`);
+        console.log(`  📁 Resolving symlink dir: ${e.name} -> ${realPath}`);
         await copyDirFiltered(realPath, dest, ignore, repoRoot);
       } else if (targetStat.isFile()) {
-        console.log(`  📄 Resolving symlink file: ${e.name}`);
+        console.log(`  📄 Resolving symlink file: ${e.name} -> ${realPath}`);
         await fs.mkdir(path.dirname(dest), { recursive: true });
         await fs.copyFile(realPath, dest);
       }
