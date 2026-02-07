@@ -67,6 +67,10 @@ async function copyDirFiltered(srcDir, destDir, ignore = [], repoRoot = null) {
     if (st.isSymbolicLink()) {
       // Use safe symlink resolution to prevent TOCTOU attacks
       const allowedRoot = resolvedRoot || repoRoot;
+      if (!allowedRoot) {
+        console.warn(`  ⚠️  Cannot verify symlink safety (no repo root): ${e.name}`);
+        continue;
+      }
       const resolved = await safeResolveSymlink(src, allowedRoot);
 
       if (!resolved) {
