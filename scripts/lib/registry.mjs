@@ -177,8 +177,12 @@ async function findSymlinksInDir(dir) {
     try {
       const st = await fs.lstat(path.join(dir, rel));
       if (st.isSymbolicLink()) symlinks.push(rel);
-    } catch {
-      // Ignore racing/missing paths
+    } catch (err) {
+      // Only ignore ENOENT (racing deletion), log other errors
+      if (err.code !== 'ENOENT' && err.code !== 'ENOTDIR') {
+        console.warn(`⚠️  Error checking symlink ${rel}: ${err.message}`);
+      }
+      // Continue processing other files
     }
   }
   return symlinks;
