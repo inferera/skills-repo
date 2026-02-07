@@ -64,27 +64,47 @@ async function copyDirFiltered(srcDir, destDir, ignore = [], repoRoot = null) {
     const st = await fs.lstat(src);
 
     if (st.isSymbolicLink()) {
-      // Resolve symlink and copy actual content
+      // Resolve symlink target
+      let realPath;
       try {
-        const realPath = await fs.realpath(src);
-
-        // Security check: ensure resolved path is within repo
-        if (resolvedRoot && !realPath.startsWith(resolvedRoot + path.sep) && realPath !== resolvedRoot) {
-          console.warn(`  ⚠️  Skipping symlink outside repo: ${e.name}`);
-          continue;
-        }
-
-        const realStat = await fs.stat(realPath);
-        if (realStat.isDirectory()) {
-          console.log(`  📁 Resolving symlink dir: ${e.name}`);
-          await copyDirFiltered(realPath, dest, ignore, repoRoot);
-        } else if (realStat.isFile()) {
-          console.log(`  📄 Resolving symlink file: ${e.name}`);
-          await fs.mkdir(path.dirname(dest), { recursive: true });
-          await fs.copyFile(realPath, dest);
-        }
+        realPath = await fs.realpath(src);
       } catch (err) {
         console.warn(`  ⚠️  Failed to resolve symlink ${e.name}: ${err.message}`);
+        continue;
+      }
+
+      // Security check: ensure resolved path is within repo
+      // Use both resolvedRoot and the original srcDir as allowed bases
+      if (resolvedRoot) {
+        const normalizedReal = realPath + path.sep;
+        const normalizedRoot = resolvedRoot + path.sep;
+        const normalizedSrc = (await fs.realpath(srcDir)) + path.sep;
+
+        const isInRoot = realPath === resolvedRoot || normalizedReal.startsWith(normalizedRoot);
+        const isInSrc = realPath === await fs.realpath(srcDir) || normalizedReal.startsWith(normalizedSrc);
+
+        if (!isInRoot && !isInSrc) {
+          console.warn(`  ⚠️  Skipping symlink outside repo: ${e.name} -> ${realPath}`);
+          continue;
+        }
+      }
+
+      // Verify the target still exists and hasn't changed (mitigate TOCTOU)
+      let targetStat;
+      try {
+        targetStat = await fs.stat(realPath);
+      } catch (err) {
+        console.warn(`  ⚠️  Symlink target disappeared: ${e.name}`);
+        continue;
+      }
+
+      if (targetStat.isDirectory()) {
+        console.log(`  📁 Resolving symlink dir: ${e.name}`);
+        await copyDirFiltered(realPath, dest, ignore, repoRoot);
+      } else if (targetStat.isFile()) {
+        console.log(`  📄 Resolving symlink file: ${e.name}`);
+        await fs.mkdir(path.dirname(dest), { recursive: true });
+        await fs.copyFile(realPath, dest);
       }
       continue;
     }
