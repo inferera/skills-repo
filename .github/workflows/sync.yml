@@ -43,8 +43,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .cache/skills
-          key: skills-cache-${{ github.sha }}
+          # Use hash of skill metadata for cache key (more stable than github.sha)
+          key: skills-cache-v1-${{ hashFiles('skills/**/.x_skill.yaml') }}
           restore-keys: |
+            skills-cache-v1-
             skills-cache-
 
       - name: Check for changes
@@ -91,7 +93,8 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: .cache/skills
-          key: skills-cache-${{ github.sha }}
+          # Use same key as restore for consistency
+          key: skills-cache-v1-${{ hashFiles('skills/**/.x_skill.yaml') }}
 
       - name: Commit changes
         if: steps.check.outputs.has_changes == 'true' || github.event.inputs.force_fetch == 'true'
@@ -118,6 +121,17 @@ jobs:
 
           Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 
+          # Pull and rebase to avoid conflicts (in case of concurrent updates)
+          echo "Pulling latest changes..."
+          git pull --rebase origin main || {
+            echo "⚠️  Rebase conflict detected, aborting..."
+            git rebase --abort
+            echo "::warning::Failed to push due to conflicts. Manual intervention required."
+            exit 1
+          }
+
+          # Push changes
+          echo "Pushing changes..."
           git push
 
       - name: Summary
