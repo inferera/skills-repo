@@ -28,17 +28,30 @@ function resolveTranslationCacheDir(cacheDir) {
  */
 async function runWithConcurrency(items, limit, fn) {
   const results = [];
+  const errors = [];
   let index = 0;
 
   async function worker() {
     while (index < items.length) {
       const i = index++;
-      results[i] = await fn(items[i]);
+      try {
+        results[i] = await fn(items[i]);
+      } catch (err) {
+        // Store error but continue processing
+        errors.push({ index: i, item: items[i], error: err });
+        results[i] = null; // Mark as failed
+      }
     }
   }
 
   const workers = Array.from({ length: Math.min(limit, items.length) }, () => worker());
   await Promise.all(workers);
+
+  // Log errors summary if any occurred
+  if (errors.length > 0) {
+    console.warn(`  ⚠ ${errors.length} task(s) failed during concurrent execution`);
+  }
+
   return results;
 }
 
