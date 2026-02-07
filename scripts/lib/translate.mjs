@@ -7,6 +7,7 @@ import { getLocaleIds } from "./config.mjs";
 const CACHE_VERSION = 1;
 const DEFAULT_CONCURRENCY = 5;
 const MAX_CACHE_ENTRIES = 10000; // Reasonable limit for skill descriptions
+const MAX_DESCRIPTION_LENGTH = 2000; // OpenAI API has limits
 
 /**
  * Resolve translation cache directory.
@@ -151,6 +152,12 @@ export async function translateSkillDescriptions(skills, { cacheDir, config }) {
  * Returns { "en": "...", "zh-CN": "...", ... }
  */
 async function callTranslationApi({ skillId, description, locales, apiKey, baseUrl, model }) {
+  // Validate input length
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    console.warn(`  ⚠ Description for "${skillId}" too long (${description.length} chars), truncating to ${MAX_DESCRIPTION_LENGTH}`);
+    description = description.slice(0, MAX_DESCRIPTION_LENGTH) + '...';
+  }
+
   const localeList = locales.join(", ");
 
   const systemPrompt = [
