@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { LOCALE_OPTIONS } from './lib/i18n';
+
+const SUPPORTED_LOCALES: Set<string> = new Set(LOCALE_OPTIONS.map(o => o.locale));
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
@@ -12,6 +15,21 @@ export function middleware(request: NextRequest) {
     path.includes('.')
   ) {
     return NextResponse.next();
+  }
+
+  // Check if the first path segment looks like a locale but isn't supported
+  // Matches patterns like: xx, xxx, xx-XX, xx-XXX (e.g., it, fil, pt-BR, zh-Hant)
+  const match = path.match(/^\/([^/]+)(\/.*)?$/);
+  if (match) {
+    const firstSegment = match[1];
+    const rest = match[2] || '/';
+    if (
+      /^[a-z]{2,3}(-[a-zA-Z]{2,4})?$/i.test(firstSegment) &&
+      !SUPPORTED_LOCALES.has(firstSegment)
+    ) {
+      const newUrl = new URL(`/en${rest}`, request.url);
+      return NextResponse.redirect(newUrl, 302);
+    }
   }
 
   // Old unprefixed URLs that should redirect to /en/ versions
