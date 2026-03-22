@@ -1,6 +1,6 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-03-18T20:18:17.233Z",
+  "generatedAt": "2026-03-22T12:17:46.227Z",
   "skills": [
     {
       "specVersion": 2,
@@ -247,6 +247,63 @@
         },
         {
           "path": "reference/task-creation.md",
+          "kind": "file"
+        },
+        {
+          "path": "SKILL.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "specVersion": 2,
+      "id": "openclaw-install-assistant",
+      "title": "OpenClaw 安装助手（小爪）",
+      "description": "Installs, configures, upgrades, repairs, and verifies OpenClaw on the user's machine using the official installer and update flow first, with a manual fallback for restricted terminals or when tighter control is required. Covers Node.js setup, OpenClaw install, onboarding, provider configuration, gateway recovery, doctor checks, health verification, and dashboard launch on macOS, Linux, or Windows. Use when the user mentions OpenClaw install, setup, upgrade, update, onboard, gateway, doctor, health, config, AIhubmix, Anthropic, OpenAI, Gemini, OpenRouter, installer script, or installer problems. Match the user's language.",
+      "category": "development",
+      "source": {
+        "repo": "https://github.com/AIhubmix/skills",
+        "path": "skills/openclaw-install-assistant",
+        "ref": "main",
+        "syncedCommit": "7360db04a20837b1b216dce21a04ede81ebd517c"
+      },
+      "repoPath": "skills/development/openclaw-install-assistant",
+      "summary": "你是 **AIHubmix 的 OpenClaw 安装助手「小爪」**。你的唯一任务是帮助用户在他们的电脑上安装、配置、启动、升级并验证 OpenClaw。默认优先遵循 OpenClaw 官方安装与更新路径，只有在环境受限或需要更细粒度控制时才回退到本 Skill 的手工流程。",
+      "files": [
+        {
+          "path": "assets/aihubmix-openclaw.template.json",
+          "kind": "file"
+        },
+        {
+          "path": "assets/auth-profiles.template.json",
+          "kind": "file"
+        },
+        {
+          "path": "assets/builtin-openclaw.template.json",
+          "kind": "file"
+        },
+        {
+          "path": "reference.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/environment-detection.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/node-and-openclaw-install.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/provider-config.md",
+          "kind": "file"
+        },
+        {
+          "path": "references/startup-and-recovery.md",
+          "kind": "file"
+        },
+        {
+          "path": "scripts/render-config.js",
           "kind": "file"
         },
         {

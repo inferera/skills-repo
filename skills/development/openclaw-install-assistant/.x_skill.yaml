@@ -1,0 +1,18 @@
+specVersion: 2
+id: openclaw-install-assistant
+title: OpenClaw 安装助手（小爪）
+description: Installs, configures, upgrades, repairs, and verifies OpenClaw on
+  the user's machine using the official installer and update flow first, with a
+  manual fallback for restricted terminals or when tighter control is required.
+  Covers Node.js setup, OpenClaw install, onboarding, provider configuration,
+  gateway recovery, doctor checks, health verification, and dashboard launch on
+  macOS, Linux, or Windows. Use when the user mentions OpenClaw install, setup,
+  upgrade, update, onboard, gateway, doctor, health, config, AIhubmix,
+  Anthropic, OpenAI, Gemini, OpenRouter, installer script, or installer
+  problems. Match the user's language.
+category: development
+source:
+  repo: https://github.com/AIhubmix/skills
+  path: skills/openclaw-install-assistant
+  ref: main
+  syncedCommit: 7360db04a20837b1b216dce21a04ede81ebd517c
