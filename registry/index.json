@@ -1,6 +1,6 @@
 {
   "specVersion": 2,
-  "generatedAt": "2026-03-22T12:17:46.227Z",
+  "generatedAt": "2026-03-24T20:20:03.724Z",
   "skills": [
     {
       "specVersion": 2,
@@ -12,7 +12,7 @@
         "repo": "https://github.com/openai/skills",
         "path": "skills/.curated/figma",
         "ref": "main",
-        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+        "syncedCommit": "0e7823cca07bc2cbf34718a383f9ae92525be6a5"
       },
       "repoPath": "skills/design/figma",
       "summary": "Use the Figma MCP server for Figma-driven implementation. For setup and debugging details (env vars, config, verification), see `references/figma-mcp-config.md`.",
@@ -106,7 +106,7 @@
         "repo": "https://github.com/openai/skills",
         "path": "skills/.curated/figma-implement-design",
         "ref": "main",
-        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+        "syncedCommit": "0e7823cca07bc2cbf34718a383f9ae92525be6a5"
       },
       "repoPath": "skills/development/figma-implement-design",
       "summary": "## Overview",
@@ -2399,10 +2399,10 @@
         "repo": "https://github.com/openai/skills",
         "path": "skills/.curated/imagegen",
         "ref": "main",
-        "syncedCommit": "f46b2535abfc2ec4b383ba0da47a0357abfa198c"
+        "syncedCommit": "0e7823cca07bc2cbf34718a383f9ae92525be6a5"
       },
       "repoPath": "skills/tools/imagegen",
-      "summary": "Generates or edits images for the current project (e.g., website assets, game assets, UI mockups, product mockups, wireframes, logo design, photorealistic images, infographics). Defaults to `gpt-image-1.5` and the OpenAI Image API, and prefers the bundled CLI for deterministic, reproducible runs.",
+      "summary": "Generates or edits images for the current project (for example website assets, game assets, UI mockups, product mockups, wireframes, logo design, photorealistic images, or infographics).",
       "files": [
         {
           "path": "agents/openai.yaml",
